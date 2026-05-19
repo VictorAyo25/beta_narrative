@@ -152,9 +152,18 @@ async function sendEmailNotification(data: {
     </html>
   `;
 
+    // Build recipient list - always include primary, plus additional recipients
+    const primaryRecipient = process.env.CONTACT_EMAIL_TO || process.env.GMAIL_SMTP_USER || '';
+    const additionalRecipients = ['egbogunfavour@gmail.com'];
+
+    const allRecipients = [
+        primaryRecipient,
+        ...additionalRecipients
+    ].filter(Boolean).join(', ');
+
     await transporter.sendMail({
         from: `"Beta Narrative" <${process.env.GMAIL_SMTP_USER}>`,
-        to: process.env.CONTACT_EMAIL_TO || process.env.GMAIL_SMTP_USER,
+        to: allRecipients,
         subject: `New Application: ${data.fullName} - ${data.role}`,
         html: htmlContent,
         replyTo: data.email,
