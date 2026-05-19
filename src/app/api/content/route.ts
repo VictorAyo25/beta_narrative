@@ -6,7 +6,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { adminAuth, adminDb } from '@/lib/firebase-admin';
+import { getAdminAuth, getAdminDb } from '@/lib/firebase-admin';
 import { defaultSiteContent } from '@/lib/default-content';
 
 const CONTENT_DOC_ID = 'site-content';
@@ -21,13 +21,14 @@ async function verifyAuth(request: NextRequest) {
         return null;
     }
 
-    if (!adminAuth) {
+    const auth = getAdminAuth();
+    if (!auth) {
         return null;
     }
 
     const token = authHeader.split('Bearer ')[1];
     try {
-        const decodedToken = await adminAuth.verifyIdToken(token);
+        const decodedToken = await auth.verifyIdToken(token);
         return decodedToken;
     } catch (error) {
         console.error('Token verification failed:', error);
@@ -41,8 +42,10 @@ async function verifyAuth(request: NextRequest) {
  */
 export async function GET() {
     try {
+        const db = getAdminDb();
+
         // Check if Firebase Admin is initialized
-        if (!adminDb) {
+        if (!db) {
             return NextResponse.json({
                 success: true,
                 content: {
@@ -53,7 +56,7 @@ export async function GET() {
             });
         }
 
-        const docRef = adminDb.collection(CONTENT_COLLECTION).doc(CONTENT_DOC_ID);
+        const docRef = db.collection(CONTENT_COLLECTION).doc(CONTENT_DOC_ID);
         const docSnap = await docRef.get();
 
         if (docSnap.exists) {
@@ -92,8 +95,11 @@ export async function GET() {
  */
 export async function PUT(request: NextRequest) {
     try {
+        const db = getAdminDb();
+        const auth = getAdminAuth();
+
         // Check if Firebase Admin is initialized
-        if (!adminDb || !adminAuth) {
+        if (!db || !auth) {
             return NextResponse.json(
                 { error: 'Firebase Admin not configured' },
                 { status: 500 }
@@ -120,7 +126,7 @@ export async function PUT(request: NextRequest) {
         }
 
         // Update content in Firestore
-        const docRef = adminDb.collection(CONTENT_COLLECTION).doc(CONTENT_DOC_ID);
+        const docRef = db.collection(CONTENT_COLLECTION).doc(CONTENT_DOC_ID);
         await docRef.set(
             {
                 ...content,
