@@ -67,11 +67,11 @@ export default function ValueSection() {
                                     src="/images/Favour.JPG"
                                     alt="Favour - PR & Communications Expert"
                                     fill
-                                    className="object-cover object-center"
+                                    className="object-cover object-[center_20%]"
                                     sizes="(max-width: 640px) 256px, (max-width: 1024px) 288px, 320px"
                                 />
                                 {/* Subtle overlay for better blending */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0B1F]/30 via-transparent to-[#6B4FAD]/10" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0B1F]/30 via-transparent to-transparent" />
                             </div>
 
                             {/* Decorative glow effects */}
