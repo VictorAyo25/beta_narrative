@@ -1,10 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
 import { Sparkles } from 'lucide-react';
+import AnimatedCounter from '../AnimatedCounter';
 
 export default function ValueSection() {
     const { content } = useContent();
@@ -21,11 +22,15 @@ export default function ValueSection() {
         ],
     };
 
+    const { scrollYProgress } = useScroll();
+    const y1 = useTransform(scrollYProgress, [0, 1], [0, 250]);
+    const y2 = useTransform(scrollYProgress, [0, 1], [0, -250]);
+
     return (
         <section id="why" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#0D0B1F] overflow-hidden">
             {/* Background accents */}
-            <div className="absolute top-[20%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#6B4FAD]/10 blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-[10%] right-[-5%] w-[300px] h-[300px] rounded-full bg-[#E8721A]/8 blur-[80px] pointer-events-none" />
+            <motion.div style={{ y: y1 }} className="absolute top-[20%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#6B4FAD]/10 blur-[100px] pointer-events-none" />
+            <motion.div style={{ y: y2 }} className="absolute bottom-[10%] right-[-5%] w-[300px] h-[300px] rounded-full bg-[#E8721A]/8 blur-[80px] pointer-events-none" />
 
             <div className="max-w-6xl mx-auto relative">
                 {/* Header with Image */}
@@ -121,7 +126,7 @@ export default function ValueSection() {
                                     </div>
                                 </div>
                                 <div className="font-sans text-4xl sm:text-5xl font-bold text-gradient leading-none mb-3 tracking-tight">
-                                    {cred.number}
+                                    <AnimatedCounter value={cred.number} />
                                 </div>
                                 <p className="text-sm text-[#AFA9CC]/60 font-light leading-relaxed">
                                     {cred.label}

@@ -13,6 +13,7 @@ import ValueSection from '@/components/sections/ValueSection';
 import ResultsSection from '@/components/sections/ResultsSection';
 import OfferSection from '@/components/sections/OfferSection';
 import ContactSection from '@/components/sections/ContactSection';
+import FloatingCTA from '@/components/FloatingCTA';
 
 export default function HomePage() {
   return (
@@ -25,6 +26,7 @@ export default function HomePage() {
         <ResultsSection />
         <OfferSection />
         <ContactSection />
+        <FloatingCTA />
       </main>
       <Footer />
     </>

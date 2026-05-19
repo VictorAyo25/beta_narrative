@@ -1,27 +1,32 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
 import { ArrowRight } from 'lucide-react';
+import AnimatedCounter from '../AnimatedCounter';
 
 export default function HeroSection() {
     const { content } = useContent();
     const hero = content.hero;
 
+    const { scrollYProgress } = useScroll();
+    const y1 = useTransform(scrollYProgress, [0, 1], [0, 400]);
+    const y2 = useTransform(scrollYProgress, [0, 1], [0, -400]);
+
     return (
         <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#0D0B1F]">
             {/* Background elements */}
             <div className="absolute inset-0 z-0">
-                <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[#6B4FAD]/20 blur-[120px]" />
-                <div className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#E8721A]/10 blur-[100px]" />
+                <motion.div style={{ y: y1 }} className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[#6B4FAD]/20 blur-[120px]" />
+                <motion.div style={{ y: y2 }} className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#E8721A]/10 blur-[100px]" />
                 <div className="absolute inset-0">
                     <div className="absolute inset-0 bg-gradient-to-r from-[#0D0B1F] via-[#0D0B1F]/85 to-[#0D0B1F]/40 z-10" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0D0B1F] via-transparent to-[#0D0B1F]/60 z-10" />
                     <Image src="/images/Favour.JPG" alt="Favour Egbogun - Executive Brand Strategist" fill className="object-cover object-center opacity-20" priority sizes="100vw" />
                 </div>
                 <div className="absolute top-[15%] right-[8%] w-[2px] h-[50%] bg-gradient-to-b from-transparent via-[#E8721A]/50 to-transparent z-10" />
-                <div className="absolute top-[12%] right-[8%] translate-x-[1px] w-3 h-3 rounded-full bg-[#E8721A]/60 z-10" />
+                <motion.div style={{ y: y1 }} className="absolute top-[12%] right-[8%] translate-x-[1px] w-3 h-3 rounded-full bg-[#E8721A]/60 z-10" />
             </div>
 
             {/* Main content */}
@@ -61,19 +66,19 @@ export default function HeroSection() {
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }} className="mt-20 pt-10 border-t border-[#6B4FAD]/20">
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
                         <div>
-                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1">4+</div>
+                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="4+" /></div>
                             <div className="text-xs text-[#9B8EC4] tracking-wide">Years Experience</div>
                         </div>
                         <div>
-                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1">5×</div>
+                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="5×" /></div>
                             <div className="text-xs text-[#9B8EC4] tracking-wide">LinkedIn Reach in 90 Days</div>
                         </div>
                         <div>
-                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1">20%</div>
+                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="20%" /></div>
                             <div className="text-xs text-[#9B8EC4] tracking-wide">Engagement Lift</div>
                         </div>
                         <div>
-                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1">100%</div>
+                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="100%" /></div>
                             <div className="text-xs text-[#9B8EC4] tracking-wide">Client Satisfaction</div>
                         </div>
                     </div>
