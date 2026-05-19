@@ -8,7 +8,6 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { google } from 'googleapis';
 
 // Initialize Gmail SMTP transporter
 async function getEmailTransporter() {
@@ -23,20 +22,7 @@ async function getEmailTransporter() {
     });
 }
 
-// Initialize Google Sheets API
-async function getGoogleSheetsClient() {
-    const auth = new google.auth.GoogleAuth({
-        credentials: {
-            private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-            client_email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
-        },
-        scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-    });
-
-    return google.sheets({ version: 'v4', auth });
-}
-
-// Log submission to Google Sheets
+// Log submission to Google Sheets via Apps Script Webhook
 async function logToGoogleSheets(data: {
     fullName: string;
     email: string;
@@ -45,15 +31,13 @@ async function logToGoogleSheets(data: {
     challenge?: string;
 }) {
     try {
-        const sheets = await getGoogleSheetsClient();
-        const spreadsheetId = process.env.GOOGLE_SHEETS_ID;
+        const scriptUrl = process.env.GOOGLE_APPS_SCRIPT_URL;
 
-        if (!spreadsheetId) {
-            console.error('GOOGLE_SHEETS_ID not configured');
+        if (!scriptUrl) {
+            console.warn('GOOGLE_APPS_SCRIPT_URL not configured. Skipping Sheets logging.');
             return;
         }
 
-        const timestamp = new Date().toISOString();
         const journeyMap: Record<string, string> = {
             'mid-level': 'Mid-level professional moving into leadership',
             'senior': 'Senior leader / Director',
@@ -61,23 +45,20 @@ async function logToGoogleSheets(data: {
             'founder': 'Founder / Entrepreneur',
         };
 
-        await sheets.spreadsheets.values.append({
-            spreadsheetId,
-            range: 'Sheet1!A:F',
-            valueInputOption: 'USER_ENTERED',
-            requestBody: {
-                values: [
-                    [
-                        timestamp,
-                        data.fullName,
-                        data.email,
-                        data.role,
-                        journeyMap[data.journey] || data.journey,
-                        data.challenge || '',
-                    ],
-                ],
+        const response = await fetch(scriptUrl, {
+            method: 'POST',
+            body: JSON.stringify({
+                ...data,
+                journey: journeyMap[data.journey] || data.journey
+            }),
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8', // Important to avoid CORS preflight issues with Apps Script
             },
         });
+
+        if (!response.ok) {
+            console.error('Failed to log to Google Sheets:', await response.text());
+        }
     } catch (error) {
         console.error('Error logging to Google Sheets:', error);
     }
