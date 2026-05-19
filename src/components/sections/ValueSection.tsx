@@ -78,27 +78,22 @@ export default function ValueSection() {
                             <div className="absolute -bottom-4 -right-4 w-24 h-24 rounded-full bg-[#E8721A]/15 blur-2xl pointer-events-none" />
                             <div className="absolute -top-4 -left-4 w-20 h-20 rounded-full bg-[#6B4FAD]/15 blur-2xl pointer-events-none" />
 
-                            {/* Floating Caption Card */}
+                            {/* Floating Caption Pill */}
                             <motion.div 
                                 initial={{ opacity: 0, x: -10, y: 10 }}
                                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                className="absolute bottom-2 sm:bottom-6 -left-2 sm:-left-6 lg:-left-10 bg-[#0D0B1F]/40 backdrop-blur-xl border border-[#FAF9FF]/10 rounded-2xl p-4 sm:p-5 shadow-[0_8px_32px_rgba(0,0,0,0.3)] max-w-[200px] sm:max-w-[240px] z-10 overflow-hidden"
+                                className="absolute bottom-6 sm:bottom-10 -left-4 sm:-left-8 lg:-left-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-3.5 shadow-[0_12px_40px_rgba(0,0,0,0.2)] z-10 flex items-center gap-3.5"
                             >
-                                {/* Subtle internal reflection */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#FAF9FF]/10 to-transparent opacity-50 pointer-events-none" />
-                                
-                                <div className="relative">
-                                    <div className="flex items-center gap-2 mb-1.5">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-[#E8721A] animate-pulse shadow-[0_0_8px_rgba(232,114,26,0.8)]" />
-                                        <p className="font-serif text-[#FAF9FF] text-sm sm:text-base font-medium tracking-wide drop-shadow-md">
-                                            Favour Egbogun
-                                        </p>
-                                    </div>
-                                    <p className="text-[#FAF9FF]/80 text-[10px] sm:text-[11px] font-light leading-relaxed drop-shadow-sm">
-                                        Strategic Communications & Brand Storyteller
-                                    </p>
+                                <div className="w-2 h-2 rounded-full bg-[#E8721A] animate-pulse shadow-[0_0_10px_rgba(232,114,26,0.8)]" />
+                                <div className="flex flex-col">
+                                    <span className="font-serif text-[#FAF9FF] text-sm sm:text-[15px] font-semibold tracking-wide drop-shadow-md leading-none mb-1.5">
+                                        Favour Egbogun
+                                    </span>
+                                    <span className="text-white/80 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] leading-none">
+                                        PR & Brand Strategist
+                                    </span>
                                 </div>
                             </motion.div>
                         </div>
