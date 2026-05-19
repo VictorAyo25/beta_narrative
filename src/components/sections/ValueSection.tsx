@@ -13,7 +13,7 @@ export default function ValueSection() {
         sectionLabel: 'Why Beta Narrative',
         title: 'Strategic visibility,',
         titleEmphasis: 'not just content.',
-        body: "Founded by Communications Strategist Favour Egbogun, Beta Narrative translates executive experience into undeniable digital authority. Drawing from a deep foundation in strategic communication, we work directly with C-suite leaders at multinationals to craft narratives that command rooms. We don't just write content; we build the architecture around your expertise — your audience, your pillars, your voice, your legacy.",
+        body: "Founded by Favour Egbogun, Beta Narrative translates executive experience into undeniable digital authority. Drawing from a deep foundation in strategic communications, we work with leaders at every stage, from rising professionals stepping into their power, to seasoned executives ready for the world to catch up. We take your expertise, refined, real, and underrepresented online, and build a narrative so sharp, so unmistakably you, that the right people cannot scroll past. Your audience, your pillars, your voice, your legacy. We just make sure the world finally hears it.",
         credentials: [
             { number: '4+', label: 'Years crafting executive narratives for multinational leaders' },
             { number: '5×', label: 'LinkedIn reach growth in 90 days for a senior leader' },
