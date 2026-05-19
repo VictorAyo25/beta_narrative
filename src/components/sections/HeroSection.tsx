@@ -22,16 +22,23 @@ export default function HeroSection() {
                 <div className="absolute top-[15%] right-[8%] w-[2px] h-[50%] bg-gradient-to-b from-transparent via-[#E8721A]/50 to-transparent z-10" />
                 <div className="absolute top-[12%] right-[8%] translate-x-[1px] w-3 h-3 rounded-full bg-[#E8721A]/60 z-10" />
 
-                {/* Image Caption Overlay */}
+                {/* Image Caption Overlay - Favour Egbogun Brand Caption */}
                 <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="absolute bottom-8 right-5 sm:right-8 lg:right-10 z-20 max-w-xs text-right"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute bottom-6 right-5 sm:right-8 lg:right-10 z-20 max-w-sm"
                 >
-                    <div className="bg-[#0D0B1F]/70 backdrop-blur-sm border border-[#6B4FAD]/20 rounded-lg px-4 py-3">
-                        <p className="text-[10px] sm:text-xs text-[#B8A4E8]/80 leading-relaxed">
-                            <span className="text-[#E8721A] font-medium">Favour Egbogun</span> — Helping executives own their narrative and become the obvious choice for boards, stages, and opportunities.
+                    <div className="bg-gradient-to-r from-[#0D0B1F]/90 to-[#15112E]/90 backdrop-blur-md border border-[#E8721A]/30 rounded-xl px-5 py-4 shadow-[0_0_30px_rgba(232,114,26,0.15)]">
+                        <div className="flex items-center gap-2 mb-2">
+                            <div className="w-2 h-2 rounded-full bg-[#E8721A]"></div>
+                            <span className="text-[10px] sm:text-xs font-semibold text-[#E8721A] tracking-wide uppercase">Founder, Beta Narrative</span>
+                        </div>
+                        <p className="text-xs sm:text-sm text-[#FAF9FF] font-medium leading-relaxed">
+                            Favour Egbogun
+                        </p>
+                        <p className="text-[10px] sm:text-xs text-[#B8A4E8]/90 leading-relaxed mt-1">
+                            Executive Brand Strategist helping C-suite leaders become the obvious choice for boards, stages & opportunities.
                         </p>
                     </div>
                 </motion.div>
@@ -70,19 +77,19 @@ export default function HeroSection() {
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }} className="mt-20 pt-10 border-t border-[#6B4FAD]/20">
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
                         <div>
-                            <div className="font-sans text-2xl sm:text-3xl font-bold text-gradient mb-1">4+</div>
+                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1">4+</div>
                             <div className="text-xs text-[#9B8EC4] tracking-wide">Years Experience</div>
                         </div>
                         <div>
-                            <div className="font-sans text-2xl sm:text-3xl font-bold text-gradient mb-1">5×</div>
+                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1">5×</div>
                             <div className="text-xs text-[#9B8EC4] tracking-wide">LinkedIn Reach in 90 Days</div>
                         </div>
                         <div>
-                            <div className="font-sans text-2xl sm:text-3xl font-bold text-gradient mb-1">20%</div>
+                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1">20%</div>
                             <div className="text-xs text-[#9B8EC4] tracking-wide">Engagement Lift</div>
                         </div>
                         <div>
-                            <div className="font-sans text-2xl sm:text-3xl font-bold text-gradient mb-1">100%</div>
+                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1">100%</div>
                             <div className="text-xs text-[#9B8EC4] tracking-wide">Client Satisfaction</div>
                         </div>
                     </div>
