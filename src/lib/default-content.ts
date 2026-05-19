@@ -32,7 +32,7 @@ export const defaultSiteContent: Omit<SiteContent, 'id' | 'updatedAt'> = {
         sectionLabel: 'Why Beta Narrative',
         title: 'Strategic visibility,',
         titleEmphasis: 'not just content.',
-        body: 'Founded by PR & Brand Strategist Favour Egbogun, Beta Narrative translates executive experience into undeniable digital authority. Drawing from a deep foundation in strategic communication, we work directly with C-suite leaders at multinationals to craft narratives that command rooms. We don\'t just write content; we build the architecture around your expertise — your audience, your pillars, your voice, your legacy.',
+        body: 'Founded by Communications Strategist Favour Egbogun, Beta Narrative translates executive experience into undeniable digital authority. Drawing from a deep foundation in strategic communication, we work directly with C-suite leaders at multinationals to craft narratives that command rooms. We don\'t just write content; we build the architecture around your expertise — your audience, your pillars, your voice, your legacy.',
         credentials: [
             {
                 number: '4+',

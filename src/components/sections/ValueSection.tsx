@@ -13,7 +13,7 @@ export default function ValueSection() {
         sectionLabel: 'Why Beta Narrative',
         title: 'Strategic visibility,',
         titleEmphasis: 'not just content.',
-        body: "Founded by PR & Brand Strategist Favour Egbogun, Beta Narrative translates executive experience into undeniable digital authority. Drawing from a deep foundation in strategic communication, we work directly with C-suite leaders at multinationals to craft narratives that command rooms. We don't just write content; we build the architecture around your expertise — your audience, your pillars, your voice, your legacy.",
+        body: "Founded by Communications Strategist Favour Egbogun, Beta Narrative translates executive experience into undeniable digital authority. Drawing from a deep foundation in strategic communication, we work directly with C-suite leaders at multinationals to craft narratives that command rooms. We don't just write content; we build the architecture around your expertise — your audience, your pillars, your voice, your legacy.",
         credentials: [
             { number: '4+', label: 'Years crafting executive narratives for multinational leaders' },
             { number: '5×', label: 'LinkedIn reach growth in 90 days for a senior leader' },
@@ -92,7 +92,7 @@ export default function ValueSection() {
                                         Favour Egbogun
                                     </span>
                                     <span className="text-white/80 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] leading-none">
-                                        PR & Brand Strategist
+                                        Communications Strategist
                                     </span>
                                 </div>
                             </motion.div>
