@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
-import { Check, Crown, ArrowRight } from 'lucide-react';
+import { Check, Crown, ArrowRight, Plus } from 'lucide-react';
 
 export default function OfferSection() {
     const { content } = useContent();
@@ -160,6 +160,38 @@ export default function OfferSection() {
                                         ))}
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Optional Add-Ons Footer */}
+                    <div className="border-t border-[#6B4FAD]/20 bg-white/[0.03] p-7 sm:p-10 lg:px-12 lg:py-8 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent pointer-events-none" />
+                        <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+                            <div className="flex-shrink-0">
+                                <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#9B8EC4] mb-1">
+                                    Enhancements
+                                </p>
+                                <h4 className="text-base sm:text-lg font-serif text-[#FAF9FF]">
+                                    Optional Add-Ons
+                                </h4>
+                            </div>
+                            <div className="flex flex-wrap gap-2 sm:gap-3">
+                                {[
+                                    'Media advisory',
+                                    'Event coverage',
+                                    'Professional photography',
+                                    'PR amplification',
+                                    'Conference visibility support'
+                                ].map((item, index) => (
+                                    <div 
+                                        key={index} 
+                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:border-[#E8721A]/30 hover:bg-white/10 transition-all duration-300 group cursor-default"
+                                    >
+                                        <Plus size={12} className="text-[#6B4FAD] group-hover:text-[#E8721A] transition-colors" />
+                                        <span className="text-xs sm:text-sm text-[#AFA9CC]/90 group-hover:text-[#FAF9FF] transition-colors">{item}</span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
