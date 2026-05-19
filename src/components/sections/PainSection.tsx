@@ -1,15 +1,9 @@
 'use client';
 
-/**
- * Pain Section Component
- * 
- * Highlights the problem/ pain points the target audience faces.
- */
-
 import { motion } from 'framer-motion';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
-import Divider from '../Divider';
+import { AlertTriangle } from 'lucide-react';
 
 export default function PainSection() {
     const { content } = useContent();
@@ -28,53 +22,53 @@ export default function PainSection() {
     };
 
     return (
-        <section id="problem" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#13103A] border-t border-b border-[#534AB7]/25">
-            <div className="max-w-6xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                    {/* Left Column - Text */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: '-100px' }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <SectionLabel>{pain.sectionLabel}</SectionLabel>
-                        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-[#FAF9FF] mt-4 mb-6">
-                            {pain.title}{' '}
-                            <em className="italic text-[#E8721A]">{pain.titleEmphasis}</em>
-                        </h2>
-                        <p className="text-base text-[#AFA9EC]/70 font-light leading-relaxed">
-                            {pain.lead.split('visible').map((part, i, arr) => (
-                                <span key={i}>
-                                    {part}
-                                    {i < arr.length - 1 && <em className="text-[#F5A96A]">visible</em>}
-                                </span>
-                            ))}
-                        </p>
-                    </motion.div>
+        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#13103A] overflow-hidden">
+            {/* Subtle background accent */}
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-[#E8721A]/5 blur-[100px] pointer-events-none" />
 
-                    {/* Right Column - Pain Points List */}
-                    <motion.ul
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: '-100px' }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="space-y-4"
-                    >
-                        {pain.items.map((item, index) => (
-                            <motion.li
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: 0.1 * index }}
-                                className="flex items-start gap-4 p-4 border border-[#534AB7]/20 rounded bg-[#534AB7]/5 text-sm text-[#FAF9FF]/72 leading-relaxed"
-                            >
-                                <span className="text-[#E8721A] flex-shrink-0">—</span>
-                                {item}
-                            </motion.li>
-                        ))}
-                    </motion.ul>
+            <div className="max-w-6xl mx-auto relative">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                    {/* Left Column - Heading */}
+                    <div className="lg:col-span-5">
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: '-100px' }}
+                            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <SectionLabel>{pain.sectionLabel}</SectionLabel>
+                            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#FAF9FF] mt-5 mb-6">
+                                {pain.title}{' '}
+                                <em className="italic text-[#E8721A]">{pain.titleEmphasis}</em>
+                            </h2>
+                            <p className="text-base text-[#AFA9CC]/65 font-light leading-relaxed">
+                                {pain.lead}
+                            </p>
+                        </motion.div>
+                    </div>
+
+                    {/* Right Column - Pain Points */}
+                    <div className="lg:col-span-7">
+                        <div className="space-y-3">
+                            {pain.items.map((item, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: 0.1 * index, ease: [0.16, 1, 0.3, 1] }}
+                                    className="group flex items-start gap-4 p-5 rounded-2xl border border-[#534AB7]/15 bg-[#534AB7]/[0.03] hover:bg-[#534AB7]/[0.08] hover:border-[#534AB7]/30 transition-all duration-400"
+                                >
+                                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8721A]/10 flex items-center justify-center mt-0.5 group-hover:bg-[#E8721A]/20 transition-colors duration-300">
+                                        <AlertTriangle size={14} className="text-[#E8721A]" />
+                                    </div>
+                                    <p className="text-sm text-[#FAF9FF]/70 leading-relaxed group-hover:text-[#FAF9FF]/85 transition-colors duration-300">
+                                        {item}
+                                    </p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

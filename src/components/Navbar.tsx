@@ -1,12 +1,6 @@
 'use client';
 
-/**
- * Navigation Bar Component
- * 
- * Responsive navigation with mobile menu support.
- */
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -21,32 +15,46 @@ const navLinks = [
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 40);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0D0B1F]/95 backdrop-blur-sm border-b border-[#534AB7]/30">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16 md:h-20">
+        <nav
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
+                    ? 'glass py-3'
+                    : 'bg-transparent py-5'
+                }`}
+        >
+            <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+                <div className="flex items-center justify-between">
                     {/* Logo */}
-                    <Link href="/" className="flex-shrink-0">
-                        <span className="font-serif text-xl md:text-2xl text-[#E8721A] tracking-wide">
-                            Beta Narrative
+                    <Link href="/" className="flex-shrink-0 group">
+                        <span className="font-serif text-xl md:text-2xl tracking-wide">
+                            <span className="text-[#FAF9FF] group-hover:text-[#E8721A] transition-colors duration-300">Beta</span>
+                            <span className="text-[#E8721A]"> </span>
+                            <span className="text-[#AFA9EC] group-hover:text-[#FAF9FF] transition-colors duration-300">Narrative</span>
                         </span>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-8">
+                    <div className="hidden md:flex items-center gap-1">
                         {navLinks.map((link) => (
                             <a
                                 key={link.href}
                                 href={link.href}
-                                className="text-sm text-[#FAF9FF]/70 hover:text-[#E8721A] transition-colors duration-200"
+                                className="link-underline px-4 py-2 text-[13px] font-medium tracking-wide text-[#AFA9EC] hover:text-[#FAF9FF] transition-colors duration-300"
                             >
                                 {link.label}
                             </a>
                         ))}
                         <a
                             href="#contact"
-                            className="text-xs font-medium tracking-widest uppercase text-[#FAF9FF] bg-[#E8721A] px-5 py-2.5 rounded-sm hover:bg-[#F5A96A] transition-colors duration-200"
+                            className="ml-4 text-[11px] font-semibold tracking-[0.15em] uppercase text-[#0D0B1F] bg-gradient-to-r from-[#E8721A] to-[#F5A96A] px-6 py-2.5 rounded-full hover:shadow-[0_0_30px_rgba(232,114,26,0.4)] transition-all duration-300 hover:scale-[1.02]"
                         >
                             Claim Your Spot
                         </a>
@@ -55,10 +63,32 @@ export default function Navbar() {
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden p-2 text-[#FAF9FF] hover:text-[#E8721A] transition-colors"
+                        className="md:hidden relative w-10 h-10 flex items-center justify-center text-[#FAF9FF] hover:text-[#E8721A] transition-colors"
                         aria-label="Toggle menu"
                     >
-                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        <AnimatePresence mode="wait">
+                            {isOpen ? (
+                                <motion.div
+                                    key="close"
+                                    initial={{ rotate: -90, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: 90, opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <X size={22} strokeWidth={1.5} />
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="menu"
+                                    initial={{ rotate: 90, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: -90, opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <Menu size={22} strokeWidth={1.5} />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </button>
                 </div>
             </div>
@@ -70,27 +100,32 @@ export default function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="md:hidden bg-[#0D0B1F] border-b border-[#534AB7]/30"
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className="md:hidden overflow-hidden"
                     >
-                        <div className="px-4 py-4 space-y-3">
-                            {navLinks.map((link) => (
-                                <a
+                        <div className="glass-light mx-4 mt-3 rounded-2xl p-6 space-y-1">
+                            {navLinks.map((link, i) => (
+                                <motion.a
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="block text-sm text-[#FAF9FF]/70 hover:text-[#E8721A] py-2 transition-colors"
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: i * 0.05 }}
+                                    className="block px-4 py-3 text-sm font-medium text-[#AFA9EC] hover:text-[#FAF9FF] hover:bg-[#534AB7]/10 rounded-xl transition-all duration-200"
                                 >
                                     {link.label}
-                                </a>
+                                </motion.a>
                             ))}
-                            <a
-                                href="#contact"
-                                onClick={() => setIsOpen(false)}
-                                className="block text-center text-xs font-medium tracking-widest uppercase text-[#FAF9FF] bg-[#E8721A] px-5 py-3 rounded-sm hover:bg-[#F5A96A] transition-colors"
-                            >
-                                Claim Your Spot
-                            </a>
+                            <div className="pt-3">
+                                <a
+                                    href="#contact"
+                                    onClick={() => setIsOpen(false)}
+                                    className="block text-center text-[11px] font-semibold tracking-[0.15em] uppercase text-[#0D0B1F] bg-gradient-to-r from-[#E8721A] to-[#F5A96A] px-6 py-3.5 rounded-full"
+                                >
+                                    Claim Your Spot
+                                </a>
+                            </div>
                         </div>
                     </motion.div>
                 )}

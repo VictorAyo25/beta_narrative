@@ -1,18 +1,35 @@
-/**
- * Footer Component
- * 
- * Simple footer with branding and copyright.
- */
+import Link from 'next/link';
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-[#534AB7]/15 bg-[#0D0B1F]">
-            <div className="max-w-7xl mx-auto text-center">
-                <p className="text-sm text-[#8A86B8] tracking-wide">
-                    <span className="text-[#E8721A]">Beta Narrative</span> · Executive Brand Strategy · © {currentYear} All rights reserved.
-                </p>
+        <footer className="relative py-12 px-5 sm:px-8 lg:px-10 border-t border-[#534AB7]/15 bg-[#0D0B1F]">
+            {/* Top accent line */}
+            <div className="absolute top-0 left-[20%] right-[20%] h-[1px] bg-gradient-to-r from-transparent via-[#534AB7]/30 to-transparent" />
+
+            <div className="max-w-6xl mx-auto">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+                    {/* Logo */}
+                    <Link href="/" className="font-serif text-lg tracking-wide">
+                        <span className="text-[#FAF9FF]">Beta</span>
+                        <span className="text-[#E8721A]"> </span>
+                        <span className="text-[#AFA9EC]">Narrative</span>
+                    </Link>
+
+                    {/* Links */}
+                    <div className="flex items-center gap-6">
+                        <a href="#problem" className="text-xs text-[#8A86B8] hover:text-[#E8721A] transition-colors duration-300">The Problem</a>
+                        <a href="#why" className="text-xs text-[#8A86B8] hover:text-[#E8721A] transition-colors duration-300">Why Us</a>
+                        <a href="#results" className="text-xs text-[#8A86B8] hover:text-[#E8721A] transition-colors duration-300">Results</a>
+                        <a href="#contact" className="text-xs text-[#8A86B8] hover:text-[#E8721A] transition-colors duration-300">Apply</a>
+                    </div>
+
+                    {/* Copyright */}
+                    <p className="text-xs text-[#8A86B8]/50 tracking-wide">
+                        © {currentYear} Beta Narrative
+                    </p>
+                </div>
             </div>
         </footer>
     );

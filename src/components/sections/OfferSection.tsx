@@ -1,15 +1,9 @@
 'use client';
 
-/**
- * Offer Section Component
- * 
- * Displays the service package, pricing, timeline, and inclusions.
- */
-
 import { motion } from 'framer-motion';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
-import Divider from '../Divider';
+import { Check, Crown, ArrowRight } from 'lucide-react';
 
 export default function OfferSection() {
     const { content } = useContent();
@@ -22,11 +16,11 @@ export default function OfferSection() {
         packageName: 'Executive Brand Package',
         price: '₦500,000',
         priceNote: '3-month engagement · Beta pricing',
-        description: 'Designed for mid-level professionals stepping into leadership and executives ready for strategic visibility.',
+        description: 'Designed for mid-level professionals stepping into leadership and executives ready for strategic, consistent visibility that positions them for consultancy, speaking, and thought leadership.',
         timeline: [
-            { month: 'Month 1', title: 'Foundation & Strategy', content: 'Brand voice, tone guidelines, UVP document, target audience mapping.' },
-            { month: 'Month 2', title: 'Content & Visibility', content: 'Articles, LinkedIn posts, branded graphics, executive bio.' },
-            { month: 'Month 3', title: 'Amplification', content: 'TV feature opportunity, newsletter setup, visibility plan refinement.' },
+            { month: 'Month 1', title: 'Foundation & Strategy', content: 'Brand voice, tone guidelines, UVP document, target audience mapping, narrative pillars and content structure' },
+            { month: 'Month 2', title: 'Content & Visibility', content: 'Articles, LinkedIn posts, branded graphics, executive bio, op-ed placement and media outreach' },
+            { month: 'Month 3', title: 'Amplification', content: 'TV feature opportunity, newsletter setup, visibility plan refinement and handover' },
         ],
         includes: [
             '3 professionally crafted articles (BusinessDay-ready)',
@@ -43,17 +37,22 @@ export default function OfferSection() {
     };
 
     return (
-        <section id="offer" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#0D0B1F]">
-            <div className="max-w-6xl mx-auto">
+        <section id="offer" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#0D0B1F] overflow-hidden">
+            {/* Background accents */}
+            <div className="absolute top-[10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#E8721A]/6 blur-[100px] pointer-events-none" />
+            <div className="absolute bottom-[10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#534AB7]/10 blur-[100px] pointer-events-none" />
+
+            <div className="max-w-6xl mx-auto relative">
+                {/* Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    className="max-w-2xl mb-16"
                 >
                     <SectionLabel>{offer.sectionLabel}</SectionLabel>
-                    <Divider />
-                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-[#FAF9FF] max-w-2xl mb-4">
+                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#FAF9FF] mt-5">
                         {offer.title}{' '}
                         <em className="italic text-[#E8721A]">{offer.titleEmphasis}</em>
                     </h2>
@@ -64,67 +63,103 @@ export default function OfferSection() {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mt-12 border border-[#534AB7]/40 rounded-lg p-6 sm:p-10 bg-[#534AB7]/5"
+                    transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                    className="relative rounded-3xl border border-[#534AB7]/25 bg-gradient-to-br from-[#191547] via-[#13103A] to-[#0D0B1F] overflow-hidden"
                 >
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
-                        {/* Left Column - Package Details */}
-                        <div>
-                            <span className="inline-block text-xs font-medium tracking-widest uppercase text-[#A34A08] bg-[#FDE8D4] px-3 py-1.5 rounded-sm mb-4">
-                                {offer.badge}
-                            </span>
-                            <h3 className="font-serif text-2xl font-normal text-[#FAF9FF] mb-1">
-                                {offer.packageName}
-                            </h3>
-                            <div className="font-serif text-5xl font-semibold text-[#E8721A] leading-none my-4">
-                                {offer.price}
-                            </div>
-                            <p className="text-sm text-[#8A86B8] tracking-wide mb-6">
-                                {offer.priceNote}
-                            </p>
-                            <p className="text-sm text-[#AFA9EC]/60 font-light leading-relaxed mb-8">
-                                {offer.description}
-                            </p>
+                    {/* Top accent line */}
+                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E8721A] via-[#534AB7] to-[#E8721A]" />
 
-                            {/* Timeline */}
-                            <div className="space-y-0">
-                                {offer.timeline.map((item, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex gap-4 py-4 border-b border-[#534AB7]/20 last:border-b-0"
-                                    >
-                                        <span className="font-serif text-sm font-semibold text-[#E8721A] min-w-[70px] pt-0.5 tracking-wide">
-                                            {item.month}
-                                        </span>
-                                        <div>
-                                            <div className="font-medium text-sm text-[#FAF9FF] mb-1">
-                                                {item.title}
+                    <div className="p-7 sm:p-10 lg:p-12">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+                            {/* Left Column */}
+                            <div className="lg:col-span-5">
+                                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E8721A]/10 border border-[#E8721A]/20 mb-6">
+                                    <Crown size={13} className="text-[#E8721A]" />
+                                    <span className="text-[11px] font-semibold tracking-[0.15em] uppercase text-[#E8721A]">
+                                        {offer.badge}
+                                    </span>
+                                </div>
+
+                                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#FAF9FF] mb-2">
+                                    {offer.packageName}
+                                </h3>
+
+                                <div className="flex items-baseline gap-1 my-6">
+                                    <span className="font-serif text-5xl sm:text-6xl font-bold text-gradient leading-none">
+                                        {offer.price}
+                                    </span>
+                                </div>
+
+                                <p className="text-sm text-[#8A86B8] tracking-wide mb-6">
+                                    {offer.priceNote}
+                                </p>
+
+                                <p className="text-sm text-[#AFA9CC]/60 font-light leading-relaxed mb-8">
+                                    {offer.description}
+                                </p>
+
+                                <a
+                                    href="#contact"
+                                    className="group inline-flex items-center gap-3 text-sm font-semibold tracking-[0.12em] uppercase text-[#0D0B1F] bg-gradient-to-r from-[#E8721A] to-[#F5A96A] px-8 py-4 rounded-full hover:shadow-[0_0_40px_rgba(232,114,26,0.4)] transition-all duration-400 hover:scale-[1.03]"
+                                >
+                                    Secure Your Spot
+                                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
+                                </a>
+                            </div>
+
+                            {/* Right Column */}
+                            <div className="lg:col-span-7">
+                                {/* Timeline */}
+                                <div className="mb-10">
+                                    <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#8A86B8] mb-5">
+                                        Engagement Timeline
+                                    </p>
+                                    <div className="space-y-0">
+                                        {offer.timeline.map((item, index) => (
+                                            <div
+                                                key={index}
+                                                className="flex gap-5 py-4 border-b border-[#534AB7]/10 last:border-b-0"
+                                            >
+                                                <div className="flex-shrink-0 w-16 pt-0.5">
+                                                    <span className="text-[11px] font-bold tracking-wider text-[#E8721A] uppercase">
+                                                        {item.month}
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <div className="font-semibold text-sm text-[#FAF9FF] mb-1">
+                                                        {item.title}
+                                                    </div>
+                                                    <p className="text-sm text-[#AFA9CC]/55 font-light leading-relaxed">
+                                                        {item.content}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <p className="text-sm text-[#FAF9FF]/70 font-light leading-relaxed">
-                                                {item.content}
-                                            </p>
-                                        </div>
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
-                        </div>
+                                </div>
 
-                        {/* Right Column - What's Included */}
-                        <div>
-                            <p className="text-xs font-medium tracking-[0.1em] uppercase text-[#8A86B8] mb-6">
-                                What's included
-                            </p>
-                            <ul className="space-y-4">
-                                {offer.includes.map((item, index) => (
-                                    <li
-                                        key={index}
-                                        className="flex items-start gap-3 text-sm text-[#FAF9FF]/75 leading-relaxed"
-                                    >
-                                        <span className="text-[#E8721A] text-xs mt-1.5 flex-shrink-0">✦</span>
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
+                                {/* What's Included */}
+                                <div>
+                                    <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#8A86B8] mb-5">
+                                        What's Included
+                                    </p>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        {offer.includes.map((item, index) => (
+                                            <div
+                                                key={index}
+                                                className="flex items-start gap-3 group"
+                                            >
+                                                <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#E8721A]/10 flex items-center justify-center mt-0.5">
+                                                    <Check size={10} className="text-[#E8721A]" />
+                                                </div>
+                                                <span className="text-sm text-[#AFA9CC]/60 font-light leading-snug group-hover:text-[#AFA9CC]/80 transition-colors">
+                                                    {item}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </motion.div>

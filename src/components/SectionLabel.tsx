@@ -1,9 +1,3 @@
-/**
- * Section Label Component
- * 
- * Reusable section label with orange accent.
- */
-
 interface SectionLabelProps {
     children: React.ReactNode;
     className?: string;
@@ -11,8 +5,11 @@ interface SectionLabelProps {
 
 export default function SectionLabel({ children, className = '' }: SectionLabelProps) {
     return (
-        <span className={`text-xs font-medium tracking-[0.2em] uppercase text-[#E8721A] ${className}`}>
-            {children}
-        </span>
+        <div className={`flex items-center gap-3 ${className}`}>
+            <span className="w-6 h-[1px] bg-gradient-to-r from-[#E8721A] to-[#534AB7]" />
+            <span className="text-[10px] font-bold tracking-[0.25em] uppercase bg-gradient-to-r from-[#E8721A] to-[#AFA9EC] bg-clip-text text-transparent">
+                {children}
+            </span>
+        </div>
     );
 }

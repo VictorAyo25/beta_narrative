@@ -1,15 +1,9 @@
 'use client';
 
-/**
- * Results Section Component
- * 
- * Showcases client results and success stories.
- */
-
 import { motion } from 'framer-motion';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
-import Divider from '../Divider';
+import { TrendingUp, ArrowUpRight } from 'lucide-react';
 
 export default function ResultsSection() {
     const { content } = useContent();
@@ -20,25 +14,29 @@ export default function ResultsSection() {
         titleEmphasis: 'actually',
         titleEmphasisEnd: 'looks like.',
         results: [
-            { stat: '5× Reach', description: 'A senior leader grew their LinkedIn reach 5× within 90 days.' },
-            { stat: '+20% Engagement', description: 'Ghost-written articles drove a 20% LinkedIn engagement lift.' },
-            { stat: 'BusinessDay', description: 'Clients featured in national publications.' },
-            { stat: 'TV Features', description: 'Visibility strategy placed executives in broadcast conversations.' },
+            { stat: '5× Reach', description: 'A senior leader grew their LinkedIn reach 5× within 90 days — attracting inbound from decision-makers and industry peers.' },
+            { stat: '+20% Engagement', description: 'Ghost-written articles and op-eds drove a 20% LinkedIn engagement lift — turning followers into conversations that convert.' },
+            { stat: 'BusinessDay', description: 'Clients featured in national publications, positioning them as credible voices in their industries — not just practitioners.' },
+            { stat: 'TV Features', description: 'Visibility strategy has placed executives in broadcast conversations — widening reach far beyond LinkedIn.' },
         ],
     };
 
     return (
-        <section id="results" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#13103A] border-t border-b border-[#534AB7]/25">
-            <div className="max-w-6xl mx-auto">
+        <section id="results" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#13103A] overflow-hidden">
+            {/* Background accent */}
+            <div className="absolute bottom-0 left-[20%] w-[500px] h-[300px] rounded-full bg-[#534AB7]/8 blur-[100px] pointer-events-none" />
+
+            <div className="max-w-6xl mx-auto relative">
+                {/* Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    className="max-w-2xl mb-16"
                 >
                     <SectionLabel>{results.sectionLabel}</SectionLabel>
-                    <Divider />
-                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-[#FAF9FF] max-w-2xl mb-4">
+                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#FAF9FF] mt-5">
                         {results.title}{' '}
                         <em className="italic text-[#E8721A]">{results.titleEmphasis}</em>
                         {results.titleEmphasisEnd && ` ${results.titleEmphasisEnd}`}
@@ -46,21 +44,26 @@ export default function ResultsSection() {
                 </motion.div>
 
                 {/* Results Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     {results.results.map((result, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 24 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: 0.1 * index }}
-                            whileHover={{ borderLeftColor: '#E8721A' }}
-                            className="border-l-3 border-l-[#534AB7] p-6 bg-[#534AB7]/5 rounded-r transition-colors duration-200"
+                            transition={{ duration: 0.5, delay: 0.1 * index, ease: [0.16, 1, 0.3, 1] }}
+                            className="card-hover group relative p-7 rounded-2xl border border-[#534AB7]/15 bg-gradient-to-br from-[#534AB7]/[0.06] to-transparent hover:border-[#E8721A]/30 transition-all duration-400"
                         >
-                            <div className="font-serif text-2xl sm:text-3xl font-semibold text-[#AFA9EC] leading-none mb-3">
+                            <div className="flex items-start justify-between mb-5">
+                                <div className="w-10 h-10 rounded-xl bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 transition-colors duration-300">
+                                    <TrendingUp size={16} className="text-[#E8721A]" />
+                                </div>
+                                <ArrowUpRight size={16} className="text-[#534AB7]/40 group-hover:text-[#E8721A] transition-colors duration-300 mt-1" />
+                            </div>
+                            <div className="font-serif text-2xl sm:text-3xl font-bold text-[#FAF9FF] leading-none mb-3">
                                 {result.stat}
                             </div>
-                            <p className="text-sm text-[#FAF9FF]/60 font-light leading-relaxed">
+                            <p className="text-sm text-[#AFA9CC]/55 font-light leading-relaxed">
                                 {result.description}
                             </p>
                         </motion.div>
