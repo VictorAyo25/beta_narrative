@@ -27,9 +27,9 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                    className="absolute bottom-6 right-5 sm:right-8 lg:right-10 z-20 max-w-sm"
+                    className="absolute bottom-28 sm:bottom-32 md:bottom-36 lg:bottom-40 right-5 sm:right-8 lg:right-10 z-30 max-w-sm"
                 >
-                    <div className="bg-gradient-to-r from-[#0D0B1F]/90 to-[#15112E]/90 backdrop-blur-md border border-[#E8721A]/30 rounded-xl px-5 py-4 shadow-[0_0_30px_rgba(232,114,26,0.15)]">
+                    <div className="bg-gradient-to-r from-[#0D0B1F]/95 to-[#15112E]/95 backdrop-blur-md border border-[#E8721A]/40 rounded-xl px-5 py-4 shadow-[0_0_40px_rgba(232,114,26,0.2)]">
                         <div className="flex items-center gap-2 mb-2">
                             <div className="w-2 h-2 rounded-full bg-[#E8721A]"></div>
                             <span className="text-[10px] sm:text-xs font-semibold text-[#E8721A] tracking-wide uppercase">Founder, Beta Narrative</span>
