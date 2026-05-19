@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
 import { Sparkles } from 'lucide-react';
@@ -27,23 +28,63 @@ export default function ValueSection() {
             <div className="absolute bottom-[10%] right-[-5%] w-[300px] h-[300px] rounded-full bg-[#E8721A]/8 blur-[80px] pointer-events-none" />
 
             <div className="max-w-6xl mx-auto relative">
-                {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                    className="max-w-2xl mb-16"
-                >
-                    <SectionLabel>{value.sectionLabel}</SectionLabel>
-                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#FAF9FF] mt-5 mb-6">
-                        {value.title}{' '}
-                        <em className="italic text-[#E8721A]">{value.titleEmphasis}</em>
-                    </h2>
-                    <p className="text-base text-[#AFA9CC]/65 font-light leading-relaxed">
-                        {value.body}
-                    </p>
-                </motion.div>
+                {/* Header with Image */}
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
+                    {/* Text Content */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-100px' }}
+                        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <SectionLabel>{value.sectionLabel}</SectionLabel>
+                        <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#FAF9FF] mt-5 mb-6">
+                            {value.title}{' '}
+                            <em className="italic text-[#E8721A]">{value.titleEmphasis}</em>
+                        </h2>
+                        <p className="text-base text-[#AFA9CC]/65 font-light leading-relaxed">
+                            {value.body}
+                        </p>
+                    </motion.div>
+
+                    {/* Profile Image */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true, margin: '-100px' }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="relative"
+                    >
+                        <div className="relative aspect-[4/5] max-w-md mx-auto lg:mx-0 lg:ml-auto rounded-2xl overflow-hidden">
+                            {/* Gradient border effect */}
+                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#E8721A]/30 via-[#6B4FAD]/20 to-[#E8721A]/30 p-[1px]">
+                                <div className="absolute inset-[1px] rounded-2xl bg-[#0D0B1F]" />
+                            </div>
+
+                            {/* Image container */}
+                            <div className="absolute inset-[3px] rounded-2xl overflow-hidden">
+                                <Image
+                                    src="/images/Favour.JPG"
+                                    alt="Favour - PR & Communications Expert"
+                                    fill
+                                    className="object-cover object-center"
+                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                                />
+                                {/* Subtle overlay for better blending */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0B1F]/40 via-transparent to-[#6B4FAD]/10" />
+                            </div>
+
+                            {/* Decorative elements */}
+                            <div className="absolute -bottom-3 -right-3 w-24 h-24 rounded-full bg-[#E8721A]/10 blur-2xl pointer-events-none" />
+                            <div className="absolute -top-3 -left-3 w-20 h-20 rounded-full bg-[#6B4FAD]/10 blur-2xl pointer-events-none" />
+                        </div>
+
+                        {/* Floating accent */}
+                        <div className="absolute -bottom-4 -left-4 lg:left-auto lg:-right-8 w-16 h-16 rounded-xl bg-gradient-to-br from-[#E8721A]/20 to-[#6B4FAD]/20 border border-[#6B4FAD]/20 flex items-center justify-center animate-float">
+                            <Sparkles size={20} className="text-[#E8721A]" />
+                        </div>
+                    </motion.div>
+                </div>
 
                 {/* Credentials Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">

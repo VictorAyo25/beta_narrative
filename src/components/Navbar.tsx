@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
@@ -23,23 +22,56 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Smooth scroll to section with offset for fixed header
+    const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+        setIsOpen(false);
+
+        const targetId = href.replace('#', '');
+        const element = document.getElementById(targetId);
+
+        if (element) {
+            const headerOffset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    }, []);
+
+    // Scroll to top for logo
+    const scrollToTop = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }, []);
+
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-                    ? 'glass py-3'
-                    : 'bg-transparent py-5'
+                ? 'glass py-3'
+                : 'bg-transparent py-5'
                 }`}
         >
             <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
                 <div className="flex items-center justify-between">
                     {/* Logo */}
-                    <Link href="/" className="flex-shrink-0 group">
+                    <a
+                        href="#"
+                        onClick={scrollToTop}
+                        className="flex-shrink-0 group cursor-pointer"
+                    >
                         <span className="font-serif text-xl md:text-2xl tracking-wide">
                             <span className="text-[#FAF9FF] group-hover:text-[#E8721A] transition-colors duration-300">Beta</span>
                             <span className="text-[#E8721A]"> </span>
                             <span className="text-[#B8A4E8] group-hover:text-[#FAF9FF] transition-colors duration-300">Narrative</span>
                         </span>
-                    </Link>
+                    </a>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center gap-1">
@@ -47,6 +79,7 @@ export default function Navbar() {
                             <a
                                 key={link.href}
                                 href={link.href}
+                                onClick={(e) => scrollToSection(e, link.href)}
                                 className="link-underline px-4 py-2 text-[13px] font-medium tracking-wide text-[#B8A4E8] hover:text-[#FAF9FF] transition-colors duration-300"
                             >
                                 {link.label}
@@ -54,6 +87,7 @@ export default function Navbar() {
                         ))}
                         <a
                             href="#contact"
+                            onClick={(e) => scrollToSection(e, '#contact')}
                             className="ml-4 text-[11px] font-semibold tracking-[0.15em] uppercase text-[#0D0B1F] bg-gradient-to-r from-[#E8721A] to-[#F5A96A] px-6 py-2.5 rounded-full hover:shadow-[0_0_30px_rgba(232,114,26,0.4)] transition-all duration-300 hover:scale-[1.02]"
                         >
                             Claim Your Spot
@@ -103,16 +137,16 @@ export default function Navbar() {
                         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                         className="md:hidden overflow-hidden"
                     >
-                        <div className="glass-light mx-4 mt-3 rounded-2xl p-6 space-y-1">
+                        <div className="mobile-menu mx-4 mt-3 rounded-2xl p-6 space-y-1">
                             {navLinks.map((link, i) => (
                                 <motion.a
                                     key={link.href}
                                     href={link.href}
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={(e) => scrollToSection(e, link.href)}
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.05 }}
-                                    className="block px-4 py-3 text-sm font-medium text-[#B8A4E8] hover:text-[#FAF9FF] hover:bg-[#6B4FAD]/10 rounded-xl transition-all duration-200"
+                                    className="block px-4 py-3 text-sm font-medium text-[#FAF9FF] hover:text-[#E8721A] hover:bg-[#6B4FAD]/20 rounded-xl transition-all duration-200"
                                 >
                                     {link.label}
                                 </motion.a>
@@ -120,7 +154,7 @@ export default function Navbar() {
                             <div className="pt-3">
                                 <a
                                     href="#contact"
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={(e) => scrollToSection(e, '#contact')}
                                     className="block text-center text-[11px] font-semibold tracking-[0.15em] uppercase text-[#0D0B1F] bg-gradient-to-r from-[#E8721A] to-[#F5A96A] px-6 py-3.5 rounded-full"
                                 >
                                     Claim Your Spot
