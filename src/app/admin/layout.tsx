@@ -1,0 +1,57 @@
+'use client';
+
+/**
+ * Admin Layout
+ * 
+ * Wraps admin pages with authentication check.
+ */
+
+import { useEffect } from 'react';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter, usePathname } from 'next/navigation';
+
+export default function AdminLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
+    const { user, loading } = useAuth();
+    const router = useRouter();
+    const pathname = usePathname();
+    const isLoginPage = pathname === '/admin/login';
+
+    useEffect(() => {
+        // Don't redirect if on login page
+        if (isLoginPage) return;
+
+        // Redirect to login if not authenticated
+        if (!loading && !user) {
+            router.push('/admin/login');
+        }
+    }, [user, loading, router, isLoginPage]);
+
+    // Show loading state
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-[#0D0B1F] flex items-center justify-center">
+                <div className="text-[#8A86B8]">Loading...</div>
+            </div>
+        );
+    }
+
+    // Allow access to login page without auth
+    if (isLoginPage) {
+        return <>{children}</>;
+    }
+
+    // Redirect if not authenticated
+    if (!user) {
+        return (
+            <div className="min-h-screen bg-[#0D0B1F] flex items-center justify-center">
+                <div className="text-[#8A86B8]">Redirecting...</div>
+            </div>
+        );
+    }
+
+    return <>{children}</>;
+}
