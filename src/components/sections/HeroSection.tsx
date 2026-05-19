@@ -11,6 +11,7 @@ export default function HeroSection() {
 
     return (
         <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#0D0B1F]">
+            {/* Background elements */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[#6B4FAD]/20 blur-[120px]" />
                 <div className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#E8721A]/10 blur-[100px]" />
@@ -21,32 +22,28 @@ export default function HeroSection() {
                 </div>
                 <div className="absolute top-[15%] right-[8%] w-[2px] h-[50%] bg-gradient-to-b from-transparent via-[#E8721A]/50 to-transparent z-10" />
                 <div className="absolute top-[12%] right-[8%] translate-x-[1px] w-3 h-3 rounded-full bg-[#E8721A]/60 z-10" />
-
-                {/* Image Caption Overlay - Favour Egbogun Brand Caption */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                    className="absolute bottom-28 sm:bottom-32 md:bottom-36 lg:bottom-40 right-5 sm:right-8 lg:right-10 z-30 max-w-sm"
-                >
-                    <div className="bg-gradient-to-r from-[#0D0B1F]/95 to-[#15112E]/95 backdrop-blur-md border border-[#E8721A]/40 rounded-xl px-5 py-4 shadow-[0_0_40px_rgba(232,114,26,0.2)]">
-                        <div className="flex items-center gap-2 mb-2">
-                            <div className="w-2 h-2 rounded-full bg-[#E8721A]"></div>
-                            <span className="text-[10px] sm:text-xs font-semibold text-[#E8721A] tracking-wide uppercase">Founder, Beta Narrative</span>
-                        </div>
-                        <p className="text-sm sm:text-base text-[#FAF9FF] font-semibold leading-snug">
-                            Favour Egbogun
-                        </p>
-                        <p className="text-[10px] sm:text-xs text-[#B8A4E8]/90 leading-relaxed mt-1.5">
-                            I help C-suite executives own their narrative and become the obvious choice for boards, stages, and opportunities.
-                        </p>
-                    </div>
-                </motion.div>
             </div>
 
+            {/* Main content */}
             <div className="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-8 lg:px-10 pt-32 pb-20">
                 <div className="max-w-3xl">
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-4 mb-8">
+                    {/* Founder introduction badge */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                        className="inline-flex items-center gap-3 mb-6 px-4 py-2 rounded-full border border-[#E8721A]/30 bg-[#E8721A]/5"
+                    >
+                        <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-[#E8721A]/50">
+                            <Image src="/images/Favour.JPG" alt="Favour Egbogun" width={32} height={32} className="object-cover w-full h-full" />
+                        </div>
+                        <div>
+                            <p className="text-xs sm:text-sm text-[#FAF9FF] font-medium">Favour Egbogun</p>
+                            <p className="text-[10px] text-[#E8721A]">Founder, Beta Narrative</p>
+                        </div>
+                    </motion.div>
+
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-4 mb-6">
                         <span className="w-10 h-[1px] bg-gradient-to-r from-[#E8721A] to-[#6B4FAD]" />
                         <span className="text-[11px] font-semibold tracking-[0.25em] uppercase bg-gradient-to-r from-[#E8721A] to-[#B8A4E8] bg-clip-text text-transparent">{hero.eyebrow}</span>
                     </motion.div>
@@ -76,20 +73,20 @@ export default function HeroSection() {
 
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }} className="mt-20 pt-10 border-t border-[#6B4FAD]/20">
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
-                        <div className="overflow-visible">
-                            <div className="font-sans text-3xl sm:text-4xl font-extrabold text-[#E8721A] mb-1 leading-normal overflow-visible pb-1">4+</div>
+                        <div>
+                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1">4+</div>
                             <div className="text-xs text-[#9B8EC4] tracking-wide">Years Experience</div>
                         </div>
-                        <div className="overflow-visible">
-                            <div className="font-sans text-3xl sm:text-4xl font-extrabold text-[#E8721A] mb-1 leading-normal overflow-visible pb-1">5×</div>
+                        <div>
+                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1">5×</div>
                             <div className="text-xs text-[#9B8EC4] tracking-wide">LinkedIn Reach in 90 Days</div>
                         </div>
-                        <div className="overflow-visible">
-                            <div className="font-sans text-3xl sm:text-4xl font-extrabold text-[#E8721A] mb-1 leading-normal overflow-visible pb-1">20%</div>
+                        <div>
+                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1">20%</div>
                             <div className="text-xs text-[#9B8EC4] tracking-wide">Engagement Lift</div>
                         </div>
-                        <div className="overflow-visible">
-                            <div className="font-sans text-3xl sm:text-4xl font-extrabold text-[#E8721A] mb-1 leading-normal overflow-visible pb-1">100%</div>
+                        <div>
+                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1">100%</div>
                             <div className="text-xs text-[#9B8EC4] tracking-wide">Client Satisfaction</div>
                         </div>
                     </div>
