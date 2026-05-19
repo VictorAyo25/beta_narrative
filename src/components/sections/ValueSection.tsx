@@ -47,41 +47,36 @@ export default function ValueSection() {
                         </p>
                     </motion.div>
 
-                    {/* Profile Image */}
+                    {/* Profile Image - Circular */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true, margin: '-100px' }}
                         transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative"
+                        className="relative flex justify-center lg:justify-end"
                     >
-                        <div className="relative aspect-[4/5] max-w-md mx-auto lg:mx-0 lg:ml-auto rounded-2xl overflow-hidden">
-                            {/* Gradient border effect */}
-                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#E8721A]/30 via-[#6B4FAD]/20 to-[#E8721A]/30 p-[1px]">
-                                <div className="absolute inset-[1px] rounded-2xl bg-[#0D0B1F]" />
+                        <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80">
+                            {/* Gradient border ring */}
+                            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#E8721A] via-[#6B4FAD] to-[#E8721A] p-[3px]">
+                                <div className="absolute inset-[3px] rounded-full bg-[#0D0B1F]" />
                             </div>
 
-                            {/* Image container */}
-                            <div className="absolute inset-[3px] rounded-2xl overflow-hidden">
+                            {/* Image container - circular */}
+                            <div className="absolute inset-[4px] rounded-full overflow-hidden">
                                 <Image
                                     src="/images/Favour.JPG"
                                     alt="Favour - PR & Communications Expert"
                                     fill
                                     className="object-cover object-center"
-                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                                    sizes="(max-width: 640px) 256px, (max-width: 1024px) 288px, 320px"
                                 />
                                 {/* Subtle overlay for better blending */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0B1F]/40 via-transparent to-[#6B4FAD]/10" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0B1F]/30 via-transparent to-[#6B4FAD]/10" />
                             </div>
 
-                            {/* Decorative elements */}
-                            <div className="absolute -bottom-3 -right-3 w-24 h-24 rounded-full bg-[#E8721A]/10 blur-2xl pointer-events-none" />
-                            <div className="absolute -top-3 -left-3 w-20 h-20 rounded-full bg-[#6B4FAD]/10 blur-2xl pointer-events-none" />
-                        </div>
-
-                        {/* Floating accent */}
-                        <div className="absolute -bottom-4 -left-4 lg:left-auto lg:-right-8 w-16 h-16 rounded-xl bg-gradient-to-br from-[#E8721A]/20 to-[#6B4FAD]/20 border border-[#6B4FAD]/20 flex items-center justify-center animate-float">
-                            <Sparkles size={20} className="text-[#E8721A]" />
+                            {/* Decorative glow effects */}
+                            <div className="absolute -bottom-4 -right-4 w-24 h-24 rounded-full bg-[#E8721A]/15 blur-2xl pointer-events-none" />
+                            <div className="absolute -top-4 -left-4 w-20 h-20 rounded-full bg-[#6B4FAD]/15 blur-2xl pointer-events-none" />
                         </div>
                     </motion.div>
                 </div>

@@ -25,20 +25,24 @@ export default function Navbar() {
     // Smooth scroll to section with offset for fixed header
     const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
-        setIsOpen(false);
 
         const targetId = href.replace('#', '');
         const element = document.getElementById(targetId);
 
         if (element) {
-            const headerOffset = 80;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            // Close menu first, then scroll after a brief delay
+            setIsOpen(false);
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            setTimeout(() => {
+                const headerOffset = 80;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }, 150);
         }
     }, []);
 
