@@ -29,9 +29,9 @@ export default function HeroSection() {
                 <div className="max-w-3xl">
 
 
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-4 mb-6">
-                        <span className="w-10 h-[1px] bg-gradient-to-r from-[#E8721A] to-[#6B4FAD]" />
-                        <span className="text-[11px] font-semibold tracking-[0.25em] uppercase bg-gradient-to-r from-[#E8721A] to-[#B8A4E8] bg-clip-text text-transparent">{hero.eyebrow}</span>
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#E8721A]/20 bg-[#E8721A]/5 mb-6 shadow-[0_0_20px_rgba(232,114,26,0.05)]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#E8721A] animate-pulse shadow-[0_0_8px_rgba(232,114,26,0.5)]" />
+                        <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase bg-gradient-to-r from-[#E8721A] to-[#B8A4E8] bg-clip-text text-transparent mt-[1px]">{hero.eyebrow}</span>
                     </motion.div>
 
                     <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }} className="font-serif text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.25rem] font-semibold leading-[1.1] tracking-[-0.02em] mb-8">
