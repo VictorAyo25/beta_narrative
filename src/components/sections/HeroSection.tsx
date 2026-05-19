@@ -27,21 +27,7 @@ export default function HeroSection() {
             {/* Main content */}
             <div className="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-8 lg:px-10 pt-32 pb-20">
                 <div className="max-w-3xl">
-                    {/* Founder introduction badge */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                        className="inline-flex items-center gap-3 mb-6 px-4 py-2 rounded-full border border-[#E8721A]/30 bg-[#E8721A]/5"
-                    >
-                        <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-[#E8721A]/50">
-                            <Image src="/images/Favour.JPG" alt="Favour Egbogun" width={32} height={32} className="object-cover w-full h-full" />
-                        </div>
-                        <div>
-                            <p className="text-xs sm:text-sm text-[#FAF9FF] font-medium">Favour Egbogun</p>
-                            <p className="text-[10px] text-[#E8721A]">Founder, Beta Narrative</p>
-                        </div>
-                    </motion.div>
+
 
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-4 mb-6">
                         <span className="w-10 h-[1px] bg-gradient-to-r from-[#E8721A] to-[#6B4FAD]" />

@@ -80,22 +80,26 @@ export default function ValueSection() {
 
                             {/* Floating Caption Card */}
                             <motion.div 
-                                initial={{ opacity: 0, x: -20, y: 20 }}
+                                initial={{ opacity: 0, x: -10, y: 10 }}
                                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                                className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-12 bg-gradient-to-br from-[#1C1740]/95 to-[#15112E]/95 backdrop-blur-xl border border-[#6B4FAD]/30 rounded-2xl p-4 sm:p-5 shadow-2xl shadow-[#0D0B1F]/50 max-w-[240px] sm:max-w-[280px] z-10"
+                                transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                                className="absolute bottom-2 sm:bottom-6 -left-2 sm:-left-6 lg:-left-10 bg-[#0D0B1F]/40 backdrop-blur-xl border border-[#FAF9FF]/10 rounded-2xl p-4 sm:p-5 shadow-[0_8px_32px_rgba(0,0,0,0.3)] max-w-[200px] sm:max-w-[240px] z-10 overflow-hidden"
                             >
-                                <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#E8721A] to-[#6B4FAD] rounded-t-2xl opacity-80" />
-                                <div className="flex items-center gap-2.5 mb-2">
-                                    <div className="w-2 h-2 rounded-full bg-[#E8721A] animate-pulse" />
-                                    <p className="font-serif text-[#FAF9FF] text-sm sm:text-base font-semibold tracking-wide">
-                                        Favour Egbogun
+                                {/* Subtle internal reflection */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-[#FAF9FF]/10 to-transparent opacity-50 pointer-events-none" />
+                                
+                                <div className="relative">
+                                    <div className="flex items-center gap-2 mb-1.5">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-[#E8721A] animate-pulse shadow-[0_0_8px_rgba(232,114,26,0.8)]" />
+                                        <p className="font-serif text-[#FAF9FF] text-sm sm:text-base font-medium tracking-wide drop-shadow-md">
+                                            Favour Egbogun
+                                        </p>
+                                    </div>
+                                    <p className="text-[#FAF9FF]/80 text-[10px] sm:text-[11px] font-light leading-relaxed drop-shadow-sm">
+                                        Strategic Communications & Brand Storyteller
                                     </p>
                                 </div>
-                                <p className="text-[#AFA9CC]/90 text-[11px] sm:text-xs font-light leading-relaxed">
-                                    Strategic Communications & Brand Storyteller helping executives build boardroom-level influence.
-                                </p>
                             </motion.div>
                         </div>
                     </motion.div>
