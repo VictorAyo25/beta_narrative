@@ -22,9 +22,9 @@ export default function ResultsSection() {
     };
 
     return (
-        <section id="results" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#13103A] overflow-hidden">
+        <section id="results" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#15112E] overflow-hidden">
             {/* Background accent */}
-            <div className="absolute bottom-0 left-[20%] w-[500px] h-[300px] rounded-full bg-[#534AB7]/8 blur-[100px] pointer-events-none" />
+            <div className="absolute bottom-0 left-[20%] w-[500px] h-[300px] rounded-full bg-[#6B4FAD]/8 blur-[100px] pointer-events-none" />
 
             <div className="max-w-6xl mx-auto relative">
                 {/* Header */}
@@ -52,13 +52,13 @@ export default function ResultsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.1 * index, ease: [0.16, 1, 0.3, 1] }}
-                            className="card-hover group relative p-7 rounded-2xl border border-[#534AB7]/15 bg-gradient-to-br from-[#534AB7]/[0.06] to-transparent hover:border-[#E8721A]/30 transition-all duration-400"
+                            className="card-hover group relative p-7 rounded-2xl border border-[#6B4FAD]/15 bg-gradient-to-br from-[#6B4FAD]/[0.06] to-transparent hover:border-[#E8721A]/30 transition-all duration-400"
                         >
                             <div className="flex items-start justify-between mb-5">
                                 <div className="w-10 h-10 rounded-xl bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 transition-colors duration-300">
                                     <TrendingUp size={16} className="text-[#E8721A]" />
                                 </div>
-                                <ArrowUpRight size={16} className="text-[#534AB7]/40 group-hover:text-[#E8721A] transition-colors duration-300 mt-1" />
+                                <ArrowUpRight size={16} className="text-[#6B4FAD]/40 group-hover:text-[#E8721A] transition-colors duration-300 mt-1" />
                             </div>
                             <div className="font-serif text-2xl sm:text-3xl font-bold text-[#FAF9FF] leading-none mb-3">
                                 {result.stat}

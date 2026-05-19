@@ -74,7 +74,7 @@ export default function ContactSection() {
     };
 
     return (
-        <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#13103A] overflow-hidden">
+        <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#15112E] overflow-hidden">
             {/* Background accent */}
             <div className="absolute top-[20%] left-[10%] w-[400px] h-[400px] rounded-full bg-[#E8721A]/5 blur-[120px] pointer-events-none" />
 
@@ -94,7 +94,7 @@ export default function ContactSection() {
                         {contact.title}{' '}
                         <em className="italic text-[#E8721A]">{contact.titleEmphasis}</em>
                     </h2>
-                    <p className="text-sm text-[#AFA9CC]/60 font-light max-w-md mx-auto leading-relaxed">
+                    <p className="text-sm text-[#B8A4E8]/60 font-light max-w-md mx-auto leading-relaxed">
                         {contact.subtitle}
                     </p>
                 </motion.div>
@@ -105,7 +105,7 @@ export default function ContactSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative rounded-3xl border border-[#534AB7]/20 bg-gradient-to-br from-[#191547]/80 to-[#13103A] p-7 sm:p-10"
+                    className="relative rounded-3xl border border-[#6B4FAD]/20 bg-gradient-to-br from-[#1C1740]/80 to-[#15112E] p-7 sm:p-10"
                 >
                     {/* Top accent */}
                     <div className="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#E8721A]/40 to-transparent" />
@@ -120,7 +120,7 @@ export default function ContactSection() {
                                 <CheckCircle size={28} className="text-green-400" />
                             </div>
                             <h3 className="font-serif text-2xl text-[#FAF9FF] mb-3">Application Received</h3>
-                            <p className="text-sm text-[#AFA9CC]/60 max-w-sm mx-auto leading-relaxed">
+                            <p className="text-sm text-[#B8A4E8]/60 max-w-sm mx-auto leading-relaxed">
                                 Thank you for your interest. We'll review your application and get back to you within 48 hours.
                             </p>
                         </motion.div>
@@ -132,7 +132,7 @@ export default function ContactSection() {
                                     {...register('fullName')}
                                     type="text"
                                     placeholder="Full name"
-                                    className="w-full px-5 py-4 bg-[#534AB7]/8 border border-[#534AB7]/20 rounded-xl text-sm text-[#FAF9FF] placeholder-[#AFA9CC]/30 focus:border-[#E8721A]/50 focus:bg-[#534AB7]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#6B4FAD]/8 border border-[#6B4FAD]/20 rounded-xl text-sm text-[#FAF9FF] placeholder-[#B8A4E8]/30 focus:border-[#E8721A]/50 focus:bg-[#6B4FAD]/12 focus:outline-none transition-all duration-300"
                                 />
                                 {errors.fullName && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.fullName.message}</p>
@@ -145,7 +145,7 @@ export default function ContactSection() {
                                     {...register('email')}
                                     type="email"
                                     placeholder="Email address"
-                                    className="w-full px-5 py-4 bg-[#534AB7]/8 border border-[#534AB7]/20 rounded-xl text-sm text-[#FAF9FF] placeholder-[#AFA9CC]/30 focus:border-[#E8721A]/50 focus:bg-[#534AB7]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#6B4FAD]/8 border border-[#6B4FAD]/20 rounded-xl text-sm text-[#FAF9FF] placeholder-[#B8A4E8]/30 focus:border-[#E8721A]/50 focus:bg-[#6B4FAD]/12 focus:outline-none transition-all duration-300"
                                 />
                                 {errors.email && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.email.message}</p>
@@ -158,7 +158,7 @@ export default function ContactSection() {
                                     {...register('role')}
                                     type="text"
                                     placeholder="Current role and organisation"
-                                    className="w-full px-5 py-4 bg-[#534AB7]/8 border border-[#534AB7]/20 rounded-xl text-sm text-[#FAF9FF] placeholder-[#AFA9CC]/30 focus:border-[#E8721A]/50 focus:bg-[#534AB7]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#6B4FAD]/8 border border-[#6B4FAD]/20 rounded-xl text-sm text-[#FAF9FF] placeholder-[#B8A4E8]/30 focus:border-[#E8721A]/50 focus:bg-[#6B4FAD]/12 focus:outline-none transition-all duration-300"
                                 />
                                 {errors.role && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.role.message}</p>
@@ -169,14 +169,14 @@ export default function ContactSection() {
                             <div>
                                 <select
                                     {...register('journey')}
-                                    className="w-full px-5 py-4 bg-[#534AB7]/8 border border-[#534AB7]/20 rounded-xl text-sm text-[#FAF9FF] focus:border-[#E8721A]/50 focus:bg-[#534AB7]/12 focus:outline-none transition-all duration-300 appearance-none cursor-pointer"
+                                    className="w-full px-5 py-4 bg-[#6B4FAD]/8 border border-[#6B4FAD]/20 rounded-xl text-sm text-[#FAF9FF] focus:border-[#E8721A]/50 focus:bg-[#6B4FAD]/12 focus:outline-none transition-all duration-300 appearance-none cursor-pointer"
                                     style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23AFA9CC' fill-opacity='0.3' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
                                 >
                                     {journeyOptions.map((option) => (
                                         <option
                                             key={option.value}
                                             value={option.value}
-                                            className="bg-[#13103A] text-[#FAF9FF]"
+                                            className="bg-[#15112E] text-[#FAF9FF]"
                                         >
                                             {option.label}
                                         </option>
@@ -193,7 +193,7 @@ export default function ContactSection() {
                                     {...register('challenge')}
                                     type="text"
                                     placeholder="Your biggest visibility challenge (optional)"
-                                    className="w-full px-5 py-4 bg-[#534AB7]/8 border border-[#534AB7]/20 rounded-xl text-sm text-[#FAF9FF] placeholder-[#AFA9CC]/30 focus:border-[#E8721A]/50 focus:bg-[#534AB7]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#6B4FAD]/8 border border-[#6B4FAD]/20 rounded-xl text-sm text-[#FAF9FF] placeholder-[#B8A4E8]/30 focus:border-[#E8721A]/50 focus:bg-[#6B4FAD]/12 focus:outline-none transition-all duration-300"
                                 />
                             </div>
 
@@ -229,7 +229,7 @@ export default function ContactSection() {
                             )}
 
                             {/* Fine Print */}
-                            <p className="text-[11px] text-[#AFA9CC]/25 text-center pt-2 leading-relaxed">
+                            <p className="text-[11px] text-[#B8A4E8]/25 text-center pt-2 leading-relaxed">
                                 {contact.finePrint}
                             </p>
                         </form>

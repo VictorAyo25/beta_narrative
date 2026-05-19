@@ -22,7 +22,7 @@ export default function HeroSection() {
             {/* Background layers */}
             <div className="absolute inset-0 z-0">
                 {/* Gradient orbs */}
-                <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[#534AB7]/20 blur-[120px]" />
+                <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[#6B4FAD]/20 blur-[120px]" />
                 <div className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#E8721A]/10 blur-[100px]" />
 
                 {/* Background image */}
@@ -54,8 +54,8 @@ export default function HeroSection() {
                         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                         className="flex items-center gap-4 mb-8"
                     >
-                        <span className="w-10 h-[1px] bg-gradient-to-r from-[#E8721A] to-[#534AB7]" />
-                        <span className="text-[11px] font-semibold tracking-[0.25em] uppercase bg-gradient-to-r from-[#E8721A] to-[#AFA9EC] bg-clip-text text-transparent">
+                        <span className="w-10 h-[1px] bg-gradient-to-r from-[#E8721A] to-[#6B4FAD]" />
+                        <span className="text-[11px] font-semibold tracking-[0.25em] uppercase bg-gradient-to-r from-[#E8721A] to-[#B8A4E8] bg-clip-text text-transparent">
                             {loading ? 'Loading...' : hero.eyebrow}
                         </span>
                     </motion.div>
@@ -70,7 +70,7 @@ export default function HeroSection() {
                         <span className="text-[#FAF9FF]">{hero.title}</span>{' '}
                         <em className="italic text-gradient not-italic">{hero.titleEmphasis}</em>
                         <br />
-                        <span className="text-[#AFA9EC]">{hero.titleHighlight}</span>
+                        <span className="text-[#B8A4E8]">{hero.titleHighlight}</span>
                     </motion.h1>
 
                     {/* Subtitle */}
@@ -78,7 +78,7 @@ export default function HeroSection() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-base sm:text-lg text-[#AFA9EC]/70 max-w-xl mb-12 font-light leading-relaxed"
+                        className="text-base sm:text-lg text-[#B8A4E8]/70 max-w-xl mb-12 font-light leading-relaxed"
                     >
                         {hero.subtitle}
                     </motion.p>
@@ -99,7 +99,7 @@ export default function HeroSection() {
                         </a>
                         <a
                             href="#results"
-                            className="group inline-flex items-center gap-2 text-sm font-medium text-[#AFA9EC] hover:text-[#FAF9FF] transition-colors duration-300"
+                            className="group inline-flex items-center gap-2 text-sm font-medium text-[#B8A4E8] hover:text-[#FAF9FF] transition-colors duration-300"
                         >
                             See results
                             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
@@ -112,7 +112,7 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="mt-20 pt-10 border-t border-[#534AB7]/20"
+                    className="mt-20 pt-10 border-t border-[#6B4FAD]/20"
                 >
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
                         {[
@@ -125,7 +125,7 @@ export default function HeroSection() {
                                 <div className="font-serif text-2xl sm:text-3xl font-semibold text-gradient mb-1">
                                     {stat.num}
                                 </div>
-                                <div className="text-xs text-[#8A86B8] tracking-wide">{stat.label}</div>
+                                <div className="text-xs text-[#9B8EC4] tracking-wide">{stat.label}</div>
                             </div>
                         ))}
                     </div>

@@ -23,7 +23,7 @@ export default function ValueSection() {
     return (
         <section id="why" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#0D0B1F] overflow-hidden">
             {/* Background accents */}
-            <div className="absolute top-[20%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#534AB7]/10 blur-[100px] pointer-events-none" />
+            <div className="absolute top-[20%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#6B4FAD]/10 blur-[100px] pointer-events-none" />
             <div className="absolute bottom-[10%] right-[-5%] w-[300px] h-[300px] rounded-full bg-[#E8721A]/8 blur-[80px] pointer-events-none" />
 
             <div className="max-w-6xl mx-auto relative">
@@ -54,14 +54,14 @@ export default function ValueSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.12 * index, ease: [0.16, 1, 0.3, 1] }}
-                            className="card-hover group relative p-7 rounded-2xl border border-[#534AB7]/20 bg-gradient-to-br from-[#191547] to-[#13103A] overflow-hidden"
+                            className="card-hover group relative p-7 rounded-2xl border border-[#6B4FAD]/20 bg-gradient-to-br from-[#1C1740] to-[#15112E] overflow-hidden"
                         >
                             {/* Hover glow */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#E8721A]/0 to-[#534AB7]/0 group-hover:from-[#E8721A]/5 group-hover:to-[#534AB7]/5 transition-all duration-500" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#E8721A]/0 to-[#6B4FAD]/0 group-hover:from-[#E8721A]/5 group-hover:to-[#6B4FAD]/5 transition-all duration-500" />
 
                             <div className="relative">
                                 <div className="flex items-center gap-3 mb-5">
-                                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#E8721A]/20 to-[#534AB7]/20 flex items-center justify-center">
+                                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#E8721A]/20 to-[#6B4FAD]/20 flex items-center justify-center">
                                         <Sparkles size={16} className="text-[#E8721A]" />
                                     </div>
                                 </div>

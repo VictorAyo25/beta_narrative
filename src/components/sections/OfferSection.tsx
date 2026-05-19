@@ -40,7 +40,7 @@ export default function OfferSection() {
         <section id="offer" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#0D0B1F] overflow-hidden">
             {/* Background accents */}
             <div className="absolute top-[10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#E8721A]/6 blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-[10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#534AB7]/10 blur-[100px] pointer-events-none" />
+            <div className="absolute bottom-[10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#6B4FAD]/10 blur-[100px] pointer-events-none" />
 
             <div className="max-w-6xl mx-auto relative">
                 {/* Header */}
@@ -64,10 +64,10 @@ export default function OfferSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
                     transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative rounded-3xl border border-[#534AB7]/25 bg-gradient-to-br from-[#191547] via-[#13103A] to-[#0D0B1F] overflow-hidden"
+                    className="relative rounded-3xl border border-[#6B4FAD]/25 bg-gradient-to-br from-[#1C1740] via-[#15112E] to-[#0D0B1F] overflow-hidden"
                 >
                     {/* Top accent line */}
-                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E8721A] via-[#534AB7] to-[#E8721A]" />
+                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E8721A] via-[#6B4FAD] to-[#E8721A]" />
 
                     <div className="p-7 sm:p-10 lg:p-12">
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
@@ -90,7 +90,7 @@ export default function OfferSection() {
                                     </span>
                                 </div>
 
-                                <p className="text-sm text-[#8A86B8] tracking-wide mb-6">
+                                <p className="text-sm text-[#9B8EC4] tracking-wide mb-6">
                                     {offer.priceNote}
                                 </p>
 
@@ -111,14 +111,14 @@ export default function OfferSection() {
                             <div className="lg:col-span-7">
                                 {/* Timeline */}
                                 <div className="mb-10">
-                                    <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#8A86B8] mb-5">
+                                    <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#9B8EC4] mb-5">
                                         Engagement Timeline
                                     </p>
                                     <div className="space-y-0">
                                         {offer.timeline.map((item, index) => (
                                             <div
                                                 key={index}
-                                                className="flex gap-5 py-4 border-b border-[#534AB7]/10 last:border-b-0"
+                                                className="flex gap-5 py-4 border-b border-[#6B4FAD]/10 last:border-b-0"
                                             >
                                                 <div className="flex-shrink-0 w-16 pt-0.5">
                                                     <span className="text-[11px] font-bold tracking-wider text-[#E8721A] uppercase">
@@ -140,7 +140,7 @@ export default function OfferSection() {
 
                                 {/* What's Included */}
                                 <div>
-                                    <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#8A86B8] mb-5">
+                                    <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#9B8EC4] mb-5">
                                         What's Included
                                     </p>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

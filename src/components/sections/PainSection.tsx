@@ -22,7 +22,7 @@ export default function PainSection() {
     };
 
     return (
-        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#13103A] overflow-hidden">
+        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#15112E] overflow-hidden">
             {/* Subtle background accent */}
             <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-[#E8721A]/5 blur-[100px] pointer-events-none" />
 
@@ -41,7 +41,7 @@ export default function PainSection() {
                                 {pain.title}{' '}
                                 <em className="italic text-[#E8721A]">{pain.titleEmphasis}</em>
                             </h2>
-                            <p className="text-base text-[#AFA9CC]/65 font-light leading-relaxed">
+                            <p className="text-base text-[#B8A4E8]/65 font-light leading-relaxed">
                                 {pain.lead}
                             </p>
                         </motion.div>
@@ -57,7 +57,7 @@ export default function PainSection() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: 0.1 * index, ease: [0.16, 1, 0.3, 1] }}
-                                    className="group flex items-start gap-4 p-5 rounded-2xl border border-[#534AB7]/15 bg-[#534AB7]/[0.03] hover:bg-[#534AB7]/[0.08] hover:border-[#534AB7]/30 transition-all duration-400"
+                                    className="group flex items-start gap-4 p-5 rounded-2xl border border-[#6B4FAD]/15 bg-[#6B4FAD]/[0.03] hover:bg-[#6B4FAD]/[0.08] hover:border-[#6B4FAD]/30 transition-all duration-400"
                                 >
                                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8721A]/10 flex items-center justify-center mt-0.5 group-hover:bg-[#E8721A]/20 transition-colors duration-300">
                                         <AlertTriangle size={14} className="text-[#E8721A]" />

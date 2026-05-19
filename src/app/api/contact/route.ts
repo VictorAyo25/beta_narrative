@@ -110,9 +110,9 @@ async function sendEmailNotification(data: {
         .header { background: #0D0B1F; color: #FAF9FF; padding: 20px; text-align: center; }
         .content { background: #FAF9FF; padding: 30px; }
         .field { margin-bottom: 20px; }
-        .label { font-weight: 600; color: #534AB7; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .label { font-weight: 600; color: #6B4FAD; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
         .value { font-size: 16px; color: #0D0B1F; margin-top: 5px; }
-        .footer { text-align: center; padding: 20px; color: #8A86B8; font-size: 12px; }
+        .footer { text-align: center; padding: 20px; color: #9B8EC4; font-size: 12px; }
       </style>
     </head>
     <body>
