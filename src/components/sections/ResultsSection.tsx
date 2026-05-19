@@ -60,7 +60,7 @@ export default function ResultsSection() {
                                 </div>
                                 <ArrowUpRight size={16} className="text-[#6B4FAD]/40 group-hover:text-[#E8721A] transition-colors duration-300 mt-1" />
                             </div>
-                            <div className="font-serif text-2xl sm:text-3xl font-bold text-[#FAF9FF] leading-none mb-3">
+                            <div className="font-sans text-2xl sm:text-3xl font-bold text-[#FAF9FF] leading-none mb-3">
                                 {result.stat}
                             </div>
                             <p className="text-sm text-[#AFA9CC]/55 font-light leading-relaxed">

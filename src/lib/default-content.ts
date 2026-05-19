@@ -56,7 +56,7 @@ export const defaultSiteContent: Omit<SiteContent, 'id' | 'updatedAt'> = {
         results: [
             {
                 stat: '5× Reach',
-                description: 'A senior leader grew their LinkedIn reach 5× within 90 days — attracting inbound from decision-makers and industry peers.',
+                description: 'A senior leader\'s LinkedIn reach grew from 2,000 to 10,000+ impressions per post within 90 days — attracting inbound opportunities from decision-makers and industry peers.',
             },
             {
                 stat: '+20% Engagement',
