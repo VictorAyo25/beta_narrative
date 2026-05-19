@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
 import { ContactFormData } from '@/types';
-import { Send, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, ArrowRight, ChevronDown } from 'lucide-react';
 
 const contactSchema = z.object({
     fullName: z.string().min(2, 'Name must be at least 2 characters'),
@@ -30,6 +30,7 @@ export default function ContactSection() {
     const { content } = useContent();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const contact = content?.contact || {
         sectionLabel: 'Apply Now',
@@ -43,10 +44,14 @@ export default function ContactSection() {
         register,
         handleSubmit,
         reset,
+        setValue,
+        watch,
         formState: { errors },
     } = useForm<ContactFormData>({
         resolver: zodResolver(contactSchema),
     });
+
+    const selectedJourney = watch('journey');
 
     const onSubmit = async (data: ContactFormData) => {
         setIsSubmitting(true);
@@ -166,22 +171,52 @@ export default function ContactSection() {
                             </div>
 
                             {/* Leadership Journey */}
-                            <div>
-                                <select
-                                    {...register('journey')}
-                                    className="w-full px-5 py-4 bg-[#6B4FAD]/8 border border-[#6B4FAD]/20 rounded-xl text-sm text-[#FAF9FF] focus:border-[#E8721A]/50 focus:bg-[#6B4FAD]/12 focus:outline-none transition-all duration-300 appearance-none cursor-pointer"
-                                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23AFA9CC' fill-opacity='0.3' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
+                            <div className="relative">
+                                <input type="hidden" {...register('journey')} />
+                                
+                                <button
+                                    type="button"
+                                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                    className={`w-full px-5 py-4 bg-[#6B4FAD]/8 border ${isDropdownOpen ? 'border-[#E8721A]/50 bg-[#6B4FAD]/12' : 'border-[#6B4FAD]/20'} rounded-xl text-sm flex items-center justify-between focus:outline-none transition-all duration-300`}
                                 >
-                                    {journeyOptions.map((option) => (
-                                        <option
-                                            key={option.value}
-                                            value={option.value}
-                                            className="bg-[#15112E] text-[#FAF9FF]"
-                                        >
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </select>
+                                    <span className={selectedJourney ? 'text-[#FAF9FF]' : 'text-[#B8A4E8]/30'}>
+                                        {selectedJourney 
+                                            ? journeyOptions.find(o => o.value === selectedJourney)?.label 
+                                            : 'Where are you in your leadership journey?'}
+                                    </span>
+                                    <ChevronDown 
+                                        size={16} 
+                                        className={`text-[#AFA9CC]/50 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-[#E8721A]' : ''}`} 
+                                    />
+                                </button>
+
+                                {/* Custom Dropdown Menu */}
+                                {isDropdownOpen && (
+                                    <>
+                                        <div 
+                                            className="fixed inset-0 z-40"
+                                            onClick={() => setIsDropdownOpen(false)}
+                                        />
+                                        <div className="absolute z-50 w-full mt-2 bg-[#1A1636]/95 backdrop-blur-xl border border-[#6B4FAD]/20 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.5)] overflow-hidden">
+                                            <div className="max-h-60 overflow-y-auto">
+                                                {journeyOptions.filter(o => o.value !== '').map((option) => (
+                                                    <button
+                                                        key={option.value}
+                                                        type="button"
+                                                        onClick={() => {
+                                                            setValue('journey', option.value, { shouldValidate: true });
+                                                            setIsDropdownOpen(false);
+                                                        }}
+                                                        className={`w-full text-left px-5 py-3.5 text-sm hover:bg-[#6B4FAD]/20 transition-colors duration-200 border-b border-[#6B4FAD]/10 last:border-0 ${selectedJourney === option.value ? 'bg-[#E8721A]/10 text-[#E8721A] font-medium' : 'text-[#FAF9FF]/90'}`}
+                                                    >
+                                                        {option.label}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
+
                                 {errors.journey && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.journey.message}</p>
                                 )}
