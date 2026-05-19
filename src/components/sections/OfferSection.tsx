@@ -85,7 +85,7 @@ export default function OfferSection() {
                                 </h3>
 
                                 <div className="flex items-baseline gap-1 my-6">
-                                    <span className="font-serif text-5xl sm:text-6xl font-bold text-gradient leading-none">
+                                    <span className="font-sans text-5xl sm:text-6xl font-bold text-gradient leading-none tracking-tight">
                                         {offer.price}
                                     </span>
                                 </div>

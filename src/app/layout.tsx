@@ -6,15 +6,15 @@
  */
 
 import type { Metadata } from 'next';
-import { Playfair_Display, DM_Sans } from 'next/font/google';
+import { Outfit, DM_Sans } from 'next/font/google';
 import './globals.css';
 import { ContentProvider } from '@/context/ContentContext';
 import { AuthProvider } from '@/context/AuthContext';
 
 // Font configurations
-const playfair = Playfair_Display({
+const outfit = Outfit({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  variable: '--font-playfair', // Keeping the variable name the same so we don't break tailwind mappings in globals.css
   display: 'swap',
 });
 
@@ -63,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${dmSans.variable}`}>
       <body className="font-sans bg-[#0D0B1F] text-[#FAF9FF] antialiased">
         <ContentProvider>
           <AuthProvider>

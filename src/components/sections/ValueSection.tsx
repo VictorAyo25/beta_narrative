@@ -77,6 +77,26 @@ export default function ValueSection() {
                             {/* Decorative glow effects */}
                             <div className="absolute -bottom-4 -right-4 w-24 h-24 rounded-full bg-[#E8721A]/15 blur-2xl pointer-events-none" />
                             <div className="absolute -top-4 -left-4 w-20 h-20 rounded-full bg-[#6B4FAD]/15 blur-2xl pointer-events-none" />
+
+                            {/* Floating Caption Card */}
+                            <motion.div 
+                                initial={{ opacity: 0, x: -20, y: 20 }}
+                                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                                className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-12 bg-gradient-to-br from-[#1C1740]/95 to-[#15112E]/95 backdrop-blur-xl border border-[#6B4FAD]/30 rounded-2xl p-4 sm:p-5 shadow-2xl shadow-[#0D0B1F]/50 max-w-[240px] sm:max-w-[280px] z-10"
+                            >
+                                <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#E8721A] to-[#6B4FAD] rounded-t-2xl opacity-80" />
+                                <div className="flex items-center gap-2.5 mb-2">
+                                    <div className="w-2 h-2 rounded-full bg-[#E8721A] animate-pulse" />
+                                    <p className="font-serif text-[#FAF9FF] text-sm sm:text-base font-semibold tracking-wide">
+                                        Favour Egbogun
+                                    </p>
+                                </div>
+                                <p className="text-[#AFA9CC]/90 text-[11px] sm:text-xs font-light leading-relaxed">
+                                    Strategic Communications & Brand Storyteller helping executives build boardroom-level influence.
+                                </p>
+                            </motion.div>
                         </div>
                     </motion.div>
                 </div>
@@ -101,7 +121,7 @@ export default function ValueSection() {
                                         <Sparkles size={16} className="text-[#E8721A]" />
                                     </div>
                                 </div>
-                                <div className="font-serif text-4xl sm:text-5xl font-bold text-gradient leading-none mb-3">
+                                <div className="font-sans text-4xl sm:text-5xl font-bold text-gradient leading-none mb-3 tracking-tight">
                                     {cred.number}
                                 </div>
                                 <p className="text-sm text-[#AFA9CC]/60 font-light leading-relaxed">

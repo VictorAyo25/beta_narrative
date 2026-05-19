@@ -14,7 +14,7 @@
   --ink-card: #1C1740;
   --warm-white: #FAF9FF;
   --muted: #9B8EC4;
-  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-heading: var(--font-playfair, 'Outfit', sans-serif);
   --font-dm-sans: 'DM Sans', sans-serif;
 }
 
@@ -34,7 +34,7 @@ body {
 }
 
 .font-serif {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-playfair), sans-serif;
 }
 
 .font-sans {
