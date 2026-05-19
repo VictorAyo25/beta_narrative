@@ -201,22 +201,23 @@ export default function ContactSection() {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="group w-full flex items-center justify-center gap-3 py-4 bg-gradient-to-r from-[#E8721A] to-[#F5A96A] text-[#0D0B1F] text-sm font-semibold tracking-[0.12em] uppercase rounded-full hover:shadow-[0_0_40px_rgba(232,114,26,0.35)] transition-all duration-400 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                                className="group relative w-full flex items-center justify-center gap-3 py-4 bg-white/5 backdrop-blur-md border border-white/10 text-[#FAF9FF] text-sm font-semibold tracking-[0.12em] uppercase rounded-full hover:bg-white/10 hover:border-[#E8721A]/50 transition-all duration-400 overflow-hidden shadow-[0_0_20px_rgba(232,114,26,0.1)] hover:shadow-[0_0_40px_rgba(232,114,26,0.3)] hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed mt-2"
                             >
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#E8721A]/0 via-[#E8721A]/10 to-[#F5A96A]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                 {isSubmitting ? (
-                                    <span className="flex items-center gap-2">
-                                        <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                                    <span className="flex items-center gap-2 relative z-10">
+                                        <svg className="animate-spin h-4 w-4 text-[#E8721A]" viewBox="0 0 24 24">
                                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                                         </svg>
                                         Submitting...
                                     </span>
                                 ) : (
-                                    <>
-                                        <Send size={15} />
+                                    <span className="flex items-center gap-3 relative z-10">
+                                        <Send size={15} className="text-[#E8721A]" />
                                         Secure My Spot
-                                        <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-300" />
-                                    </>
+                                        <ArrowRight size={15} className="text-[#E8721A] group-hover:translate-x-1 transition-transform duration-300" />
+                                    </span>
                                 )}
                             </button>
 

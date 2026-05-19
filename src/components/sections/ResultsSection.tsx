@@ -52,10 +52,12 @@ export default function ResultsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.1 * index, ease: [0.16, 1, 0.3, 1] }}
-                            className="card-hover group relative p-7 rounded-2xl border border-[#6B4FAD]/15 bg-gradient-to-br from-[#6B4FAD]/[0.06] to-transparent hover:border-[#E8721A]/30 transition-all duration-400"
+                            className="group relative p-7 rounded-2xl border border-[#FAF9FF]/5 bg-[#0D0B1F]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#0D0B1F]/50 transition-all duration-500 overflow-hidden"
                         >
-                            <div className="flex items-start justify-between mb-5">
-                                <div className="w-10 h-10 rounded-xl bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 transition-colors duration-300">
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#FAF9FF]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                            
+                            <div className="flex items-start justify-between mb-5 relative z-10">
+                                <div className="w-10 h-10 rounded-xl border border-[#E8721A]/20 bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(232,114,26,0.5)]">
                                     <TrendingUp size={16} className="text-[#E8721A]" />
                                 </div>
                                 <ArrowUpRight size={16} className="text-[#6B4FAD]/40 group-hover:text-[#E8721A] transition-colors duration-300 mt-1" />

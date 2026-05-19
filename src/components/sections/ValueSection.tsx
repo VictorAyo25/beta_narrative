@@ -114,14 +114,14 @@ export default function ValueSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.12 * index, ease: [0.16, 1, 0.3, 1] }}
-                            className="card-hover group relative p-7 rounded-2xl border border-[#6B4FAD]/20 bg-gradient-to-br from-[#1C1740] to-[#15112E] overflow-hidden"
+                            className="group relative p-7 rounded-2xl border border-[#FAF9FF]/5 bg-[#0D0B1F]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#0D0B1F]/50 transition-all duration-500 overflow-hidden"
                         >
                             {/* Hover glow */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#E8721A]/0 to-[#6B4FAD]/0 group-hover:from-[#E8721A]/5 group-hover:to-[#6B4FAD]/5 transition-all duration-500" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#FAF9FF]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                            <div className="relative">
+                            <div className="relative z-10">
                                 <div className="flex items-center gap-3 mb-5">
-                                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#E8721A]/20 to-[#6B4FAD]/20 flex items-center justify-center">
+                                    <div className="w-10 h-10 rounded-xl border border-[#E8721A]/20 bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(232,114,26,0.5)]">
                                         <Sparkles size={16} className="text-[#E8721A]" />
                                     </div>
                                 </div>

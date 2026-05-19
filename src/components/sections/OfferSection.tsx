@@ -100,10 +100,11 @@ export default function OfferSection() {
 
                                 <a
                                     href="#contact"
-                                    className="group inline-flex items-center gap-3 text-sm font-semibold tracking-[0.12em] uppercase text-[#0D0B1F] bg-gradient-to-r from-[#E8721A] to-[#F5A96A] px-8 py-4 rounded-full hover:shadow-[0_0_40px_rgba(232,114,26,0.4)] transition-all duration-400 hover:scale-[1.03]"
+                                    className="group relative inline-flex items-center gap-3 text-sm font-semibold tracking-[0.12em] uppercase text-[#FAF9FF] bg-white/5 backdrop-blur-md border border-white/10 px-8 py-4 rounded-full hover:bg-white/10 hover:border-[#E8721A]/50 transition-all duration-400 overflow-hidden shadow-[0_0_20px_rgba(232,114,26,0.1)] hover:shadow-[0_0_40px_rgba(232,114,26,0.3)] hover:scale-[1.02]"
                                 >
+                                    <div className="absolute inset-0 bg-gradient-to-r from-[#E8721A]/0 via-[#E8721A]/10 to-[#F5A96A]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                     Secure Your Spot
-                                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
+                                    <ArrowRight size={16} className="text-[#E8721A] group-hover:translate-x-1 transition-transform duration-300" />
                                 </a>
                             </div>
 
