@@ -12,6 +12,7 @@ import PainSection from '@/components/sections/PainSection';
 import ValueSection from '@/components/sections/ValueSection';
 import ResultsSection from '@/components/sections/ResultsSection';
 import OfferSection from '@/components/sections/OfferSection';
+import AddOnsSection from '@/components/sections/AddOnsSection';
 import ContactSection from '@/components/sections/ContactSection';
 
 export default function HomePage() {
@@ -24,6 +25,7 @@ export default function HomePage() {
         <ValueSection />
         <ResultsSection />
         <OfferSection />
+        <AddOnsSection />
         <ContactSection />
       </main>
       <Footer />
