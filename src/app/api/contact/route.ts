@@ -2,15 +2,26 @@
  * Contact Form API Route
  * 
  * Handles contact form submissions:
- * 1. Sends email notification via Resend
- * 2. Logs submission to Google Sheets
+ * 1. Sends email notification via Gmail SMTP (Nodemailer)
+ * 2. Logs submission to Google Sheets (optional)
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import { google } from 'googleapis';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Gmail SMTP transporter
+async function getEmailTransporter() {
+    return nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: process.env.GMAIL_SMTP_USER,
+            pass: process.env.GMAIL_SMTP_PASSWORD,
+        },
+    });
+}
 
 // Initialize Google Sheets API
 async function getGoogleSheetsClient() {
@@ -52,7 +63,7 @@ async function logToGoogleSheets(data: {
 
         await sheets.spreadsheets.values.append({
             spreadsheetId,
-            range: 'Sheet1!A:F', // Assumes columns: Timestamp, Name, Email, Role, Journey, Challenge
+            range: 'Sheet1!A:F',
             valueInputOption: 'USER_ENTERED',
             requestBody: {
                 values: [
@@ -69,11 +80,10 @@ async function logToGoogleSheets(data: {
         });
     } catch (error) {
         console.error('Error logging to Google Sheets:', error);
-        // Don't throw - we still want to send the email even if Sheets fails
     }
 }
 
-// Send email notification
+// Send email notification via Gmail SMTP
 async function sendEmailNotification(data: {
     fullName: string;
     email: string;
@@ -81,6 +91,8 @@ async function sendEmailNotification(data: {
     journey: string;
     challenge?: string;
 }) {
+    const transporter = await getEmailTransporter();
+
     const journeyMap: Record<string, string> = {
         'mid-level': 'Mid-level professional moving into leadership',
         'senior': 'Senior leader / Director',
@@ -140,9 +152,9 @@ async function sendEmailNotification(data: {
     </html>
   `;
 
-    await resend.emails.send({
-        from: 'Beta Narrative <notifications@betanarrative.com>',
-        to: process.env.CONTACT_EMAIL_TO || 'admin@betanarrative.com',
+    await transporter.sendMail({
+        from: `"Beta Narrative" <${process.env.GMAIL_SMTP_USER}>`,
+        to: process.env.CONTACT_EMAIL_TO || process.env.GMAIL_SMTP_USER,
         subject: `New Application: ${data.fullName} - ${data.role}`,
         html: htmlContent,
         replyTo: data.email,

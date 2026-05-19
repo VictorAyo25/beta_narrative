@@ -32,7 +32,7 @@ export default function HeroSection() {
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0D0B1F] via-[#0D0B1F]/90 to-[#0D0B1F]/70 z-10" />
                 <Image
-                    src="/images/favour.jpg"
+                    src="/images/Favour.JPG"
                     alt="Favour - PR & Communications Expert"
                     fill
                     className="object-cover object-center opacity-30"
