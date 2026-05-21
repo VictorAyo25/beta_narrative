@@ -14,7 +14,7 @@ export default function ValueSection() {
         sectionLabel: 'Why Beta Narrative',
         title: 'Strategic visibility,',
         titleEmphasis: 'not just content.',
-        body: "Founded by Favour Egbogun, Beta Narrative translates executive experience into undeniable digital authority. Drawing from a deep foundation in strategic communications, we work with leaders at every stage, from rising professionals stepping into their power, to seasoned executives ready for the world to catch up. We take your expertise, refined, real, and underrepresented online, and build a narrative so sharp, so unmistakably you, that the right people cannot scroll past. Your audience, your pillars, your voice, your legacy. We just make sure the world finally hears it.",
+        body: "Founded by Favour Egbogun, Beta Narrative translates executive experience into undeniable digital authority. Drawing from a deep foundation in strategic communications, we work with leaders at every stage, from rising professionals stepping into their power, to seasoned executives ready for the world to catch up.\n\nWe take your expertise, refined, real, and underrepresented online, and build a narrative so sharp, so unmistakably you, that the right people cannot scroll past.\n\nYour audience, your pillars, your voice, your legacy. We just make sure the world finally hears it.",
         credentials: [
             { number: '4+', label: 'Years crafting executive narratives for multinational leaders' },
             { number: '5×', label: 'LinkedIn reach growth in 90 days for a senior leader' },
@@ -47,9 +47,13 @@ export default function ValueSection() {
                             {value.title}{' '}
                             <em className="italic text-[#E8721A]">{value.titleEmphasis}</em>
                         </h2>
-                        <p className="text-base text-[#1A0E35]/80 font-normal leading-relaxed">
-                            {value.body}
-                        </p>
+                        <div className="space-y-5 text-base text-[#1A0E35]/80 font-normal leading-relaxed">
+                            {value.body.split('\n\n').map((paragraph, idx) => (
+                                <p key={idx}>
+                                    {paragraph}
+                                </p>
+                            ))}
+                        </div>
                     </motion.div>
 
                     {/* Profile Image - Circular */}

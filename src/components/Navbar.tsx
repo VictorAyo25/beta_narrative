@@ -57,9 +57,9 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-                ? 'glass py-3'
-                : 'bg-transparent py-5'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#EEE8F8] border-b border-[#8B5CF6]/10 ${scrolled
+                ? 'py-3 shadow-[0_2px_20px_rgba(107,63,192,0.08)]'
+                : 'py-5'
                 }`}
         >
             <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
