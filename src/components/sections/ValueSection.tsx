@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
-import { Sparkles } from 'lucide-react';
+import { Award, Users, MessageSquare } from 'lucide-react';
 import AnimatedCounter from '../AnimatedCounter';
 
 export default function ValueSection() {
@@ -122,7 +122,9 @@ export default function ValueSection() {
                             <div className="relative z-10">
                                 <div className="flex items-center gap-3 mb-5">
                                     <div className="w-10 h-10 rounded-xl border border-[#E8721A]/20 bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(232,114,26,0.5)]">
-                                        <Sparkles size={16} className="text-[#E8721A]" />
+                                        {index === 0 && <Award size={16} className="text-[#E8721A]" />}
+                                        {index === 1 && <Users size={16} className="text-[#E8721A]" />}
+                                        {index === 2 && <MessageSquare size={16} className="text-[#E8721A]" />}
                                     </div>
                                 </div>
                                 <div className="font-sans text-4xl sm:text-5xl font-bold text-gradient leading-none mb-3 tracking-tight">
