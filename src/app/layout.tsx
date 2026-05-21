@@ -64,7 +64,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${outfit.variable} ${dmSans.variable}`}>
-      <body className="font-sans bg-[#FAF7F2] text-[#1A112E] antialiased">
+      <body className="font-sans bg-[#1E1B29] text-[#FAF9FF] antialiased">
         <ContentProvider>
           <AuthProvider>
             {children}

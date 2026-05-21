@@ -25,16 +25,16 @@ function EditableSection({
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="border border-[#BCAED9]/35 rounded-lg overflow-hidden">
+        <div className="border border-[#6B4FAD]/30 rounded-lg overflow-hidden">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between p-4 bg-[#F0EDE6] hover:bg-[#F0EDE6]/80 transition-colors"
+                className="w-full flex items-center justify-between p-4 bg-[#272336] hover:bg-[#272336]/80 transition-colors"
             >
-                <span className="font-medium text-[#1A112E]">{title}</span>
-                <span className="text-[#59497A]">{isOpen ? '−' : '+'}</span>
+                <span className="font-medium text-[#FAF9FF]">{title}</span>
+                <span className="text-[#9B8EC4]">{isOpen ? '−' : '+'}</span>
             </button>
             {isOpen && (
-                <div className="p-4 bg-[#FAF7F2] border-t border-[#BCAED9]/25">
+                <div className="p-4 bg-[#1E1B29] border-t border-[#6B4FAD]/20">
                     {children}
                 </div>
             )}
@@ -57,11 +57,11 @@ function FormField({
     placeholder?: string;
 }) {
     const baseClasses =
-        'w-full px-3 py-2 bg-[#D9CFF2]/10 border border-[#D9CFF2]/35 rounded text-sm text-[#1A112E] placeholder-[#D9CFF2]/40 focus:border-[#E8721A] focus:outline-none transition-colors';
+        'w-full px-3 py-2 bg-[#6B4FAD]/10 border border-[#6B4FAD]/35 rounded text-sm text-[#FAF9FF] placeholder-[#B8A4E8]/40 focus:border-[#E8721A] focus:outline-none transition-colors';
 
     return (
         <div className="mb-4">
-            <label className="block text-xs font-medium text-[#59497A] mb-1.5 uppercase tracking-wider">
+            <label className="block text-xs font-medium text-[#9B8EC4] mb-1.5 uppercase tracking-wider">
                 {label}
             </label>
             {multiline ? (
@@ -204,31 +204,31 @@ export default function AdminDashboardPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center">
-                <div className="text-[#59497A]">Loading content...</div>
+            <div className="min-h-screen bg-[#1E1B29] flex items-center justify-center">
+                <div className="text-[#9B8EC4]">Loading content...</div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#FAF7F2]">
+        <div className="min-h-screen bg-[#1E1B29]">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-[#FAF7F2]/95 backdrop-blur-sm border-b border-[#BCAED9]/35">
+            <header className="sticky top-0 z-50 bg-[#1E1B29]/95 backdrop-blur-sm border-b border-[#6B4FAD]/30">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-4">
                             <Link href="/" className="font-serif text-xl text-[#E8721A]">
                                 Beta Narrative
                             </Link>
-                            <span className="text-[#59497A] text-sm">Admin Dashboard</span>
+                            <span className="text-[#9B8EC4] text-sm">Admin Dashboard</span>
                         </div>
                         <div className="flex items-center gap-4">
-                            <span className="text-[#59497A] text-sm hidden sm:block">
+                            <span className="text-[#9B8EC4] text-sm hidden sm:block">
                                 {user?.email}
                             </span>
                             <button
                                 onClick={logout}
-                                className="flex items-center gap-2 text-[#59497A] hover:text-[#E8721A] transition-colors text-sm"
+                                className="flex items-center gap-2 text-[#9B8EC4] hover:text-[#E8721A] transition-colors text-sm"
                             >
                                 <LogOut className="w-4 h-4" />
                                 <span className="hidden sm:inline">Logout</span>
@@ -248,15 +248,15 @@ export default function AdminDashboardPage() {
                     {/* Page Title */}
                     <div className="flex items-center justify-between mb-8">
                         <div>
-                            <h1 className="font-serif text-3xl text-[#1A112E]">Content Editor</h1>
-                            <p className="text-[#59497A] text-sm mt-1">
+                            <h1 className="font-serif text-3xl text-[#FAF9FF]">Content Editor</h1>
+                            <p className="text-[#9B8EC4] text-sm mt-1">
                                 Edit your site content. Changes will be reflected immediately after saving.
                             </p>
                         </div>
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={fetchContent}
-                                className="flex items-center gap-2 px-4 py-2 text-sm text-[#59497A] hover:text-[#1A112E] border border-[#BCAED9]/35 rounded hover:border-[#D9CFF2]/50 transition-colors"
+                                className="flex items-center gap-2 px-4 py-2 text-sm text-[#9B8EC4] hover:text-[#FAF9FF] border border-[#6B4FAD]/30 rounded hover:border-[#6B4FAD]/50 transition-colors"
                             >
                                 <RefreshCw className="w-4 h-4" />
                                 Refresh
@@ -264,7 +264,7 @@ export default function AdminDashboardPage() {
                             <button
                                 onClick={handleSave}
                                 disabled={saving}
-                                className="flex items-center gap-2 px-6 py-2 text-sm font-medium text-[#1A112E] bg-[#E8721A] rounded hover:bg-[#F5A96A] transition-colors disabled:opacity-50"
+                                className="flex items-center gap-2 px-6 py-2 text-sm font-medium text-[#FAF9FF] bg-[#E8721A] rounded hover:bg-[#F5A96A] transition-colors disabled:opacity-50"
                             >
                                 <Save className="w-4 h-4" />
                                 {saving ? 'Saving...' : 'Save Changes'}

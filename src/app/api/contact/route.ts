@@ -86,14 +86,14 @@ async function sendEmailNotification(data: {
     <html>
     <head>
       <style>
-        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #FAF7F2; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #1E1B29; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: #FAF7F2; color: #1A112E; padding: 20px; text-align: center; }
-        .content { background: #1A112E; padding: 30px; }
+        .header { background: #1E1B29; color: #FAF9FF; padding: 20px; text-align: center; }
+        .content { background: #FAF9FF; padding: 30px; }
         .field { margin-bottom: 20px; }
-        .label { font-weight: 600; color: #D9CFF2; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        .value { font-size: 16px; color: #FAF7F2; margin-top: 5px; }
-        .footer { text-align: center; padding: 20px; color: #826AAB; font-size: 12px; }
+        .label { font-weight: 600; color: #6B4FAD; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .value { font-size: 16px; color: #1E1B29; margin-top: 5px; }
+        .footer { text-align: center; padding: 20px; color: #9B8EC4; font-size: 12px; }
       </style>
     </head>
     <body>
