@@ -7,6 +7,25 @@ import SectionLabel from '../SectionLabel';
 import { Award, Users, MessageSquare } from 'lucide-react';
 import AnimatedCounter from '../AnimatedCounter';
 
+const LinkedInIcon = ({ size = 14, className = "" }: { size?: number; className?: string }) => (
+    <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        width={size} 
+        height={size} 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        className={className}
+    >
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+        <rect x="2" y="9" width="4" height="12" />
+        <circle cx="4" cy="4" r="2" />
+    </svg>
+);
+
 export default function ValueSection() {
     const { content } = useContent();
 
@@ -88,23 +107,35 @@ export default function ValueSection() {
                             <div className="absolute -top-4 -left-4 w-20 h-20 rounded-full bg-[#C4A8E8]/35 blur-2xl pointer-events-none" />
 
                             {/* Floating Caption Pill */}
-                            <motion.div 
+                            <motion.a 
+                                href="https://www.linkedin.com/in/favour-egbogun-3b748b166/"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 initial={{ opacity: 0, x: -10, y: 10 }}
                                 whileInView={{ opacity: 1, x: 0, y: 0 }}
+                                whileHover={{ 
+                                    scale: 1.04,
+                                    y: -2,
+                                    boxShadow: '0 20px 40px rgba(74, 45, 143, 0.15), 0 0 20px rgba(232, 114, 26, 0.15)'
+                                }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                className="absolute bottom-6 sm:bottom-10 -left-4 sm:-left-8 lg:-left-12 bg-[#FAF7FF] border border-[#8B5CF6]/35 shadow-[0_8px_30px_rgba(0,0,0,0.08)] rounded-full px-6 py-3.5 shadow-[0_12px_40px_rgba(0,0,0,0.2)] z-10 flex items-center gap-3.5"
+                                className="absolute bottom-6 sm:bottom-10 -left-4 sm:-left-8 lg:-left-12 bg-[#FAF7FF] border border-[#8B5CF6]/35 rounded-full pl-5 pr-4 py-3 shadow-[0_12px_40px_rgba(0,0,0,0.15)] z-10 flex items-center gap-3.5 cursor-pointer group transition-all duration-200"
                             >
-                                <div className="w-2 h-2 rounded-full bg-[#E8721A] animate-pulse shadow-[0_0_10px_rgba(232,114,26,0.8)]" />
-                                <div className="flex flex-col">
-                                    <span className="font-serif text-[#1A0E35] text-sm sm:text-[15px] font-semibold tracking-wide drop-shadow-md leading-none mb-1.5">
+                                <div className="w-2 h-2 rounded-full bg-[#E8721A] animate-pulse shadow-[0_0_10px_rgba(232,114,26,0.8)] flex-shrink-0" />
+                                <div className="flex flex-col flex-grow min-w-0">
+                                    <span className="font-serif text-[#1A0E35] text-sm sm:text-[15px] font-semibold tracking-wide drop-shadow-sm leading-none mb-1.5 truncate">
                                         Favour Egbogun
                                     </span>
-                                    <span className="text-[#6B3FC0]/90 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] leading-none">
+                                    <span className="text-[#6B3FC0]/90 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] leading-none truncate">
                                         Communications Strategist
                                     </span>
                                 </div>
-                            </motion.div>
+                                <div className="h-8 w-[1px] bg-[#8B5CF6]/20 self-center flex-shrink-0" />
+                                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#6B3FC0]/10 text-[#6B3FC0] group-hover:bg-[#E8721A] group-hover:text-white transition-all duration-300 flex-shrink-0 shadow-[0_2px_8px_rgba(107,63,192,0.05)]">
+                                    <LinkedInIcon size={14} className="transition-transform duration-300 group-hover:scale-110" />
+                                </div>
+                            </motion.a>
                         </div>
                     </motion.div>
                 </div>
