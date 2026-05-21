@@ -24,7 +24,7 @@ export default function HeroSection() {
                 <div className="absolute inset-0">
                     <div className="absolute inset-0 bg-gradient-to-r from-[#EEE8F8]/95 via-[#EEE8F8]/65 to-transparent z-10" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#EEE8F8] via-transparent to-[#EEE8F8]/20 z-10" />
-                    <Image src="/images/Favour.JPG" alt="Favour Egbogun - Executive Brand Strategist" fill className="object-cover object-center opacity-35 mix-blend-multiply filter grayscale contrast-110" priority sizes="100vw" />
+                    <Image src="/images/Favour.JPG" alt="Favour Egbogun - Executive Brand Strategist" fill className="object-cover object-[center_25%] opacity-35 mix-blend-multiply filter grayscale contrast-110" priority sizes="100vw" />
                 </div>
                 <div className="absolute top-[15%] right-[8%] w-[2px] h-[50%] bg-gradient-to-b from-transparent via-[#C4A8E8]/70 to-transparent z-10" />
                 <motion.div style={{ y: y1 }} className="absolute top-[12%] right-[8%] translate-x-[1px] w-3 h-3 rounded-full bg-[#C4A8E8]/80 z-10" />
