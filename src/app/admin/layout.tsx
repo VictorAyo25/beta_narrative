@@ -33,7 +33,7 @@ export default function AdminLayout({
     // Show loading state
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#0D0B1F] flex items-center justify-center">
+            <div className="min-h-screen bg-[#FCFAFF] flex items-center justify-center">
                 <div className="text-[#8A86B8]">Loading...</div>
             </div>
         );
@@ -47,7 +47,7 @@ export default function AdminLayout({
     // Redirect if not authenticated
     if (!user) {
         return (
-            <div className="min-h-screen bg-[#0D0B1F] flex items-center justify-center">
+            <div className="min-h-screen bg-[#FCFAFF] flex items-center justify-center">
                 <div className="text-[#8A86B8]">Redirecting...</div>
             </div>
         );

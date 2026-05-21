@@ -22,9 +22,9 @@ export default function ResultsSection() {
     };
 
     return (
-        <section id="results" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#15112E] overflow-hidden">
+        <section id="results" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#F2EEF9] overflow-hidden">
             {/* Background accent */}
-            <div className="absolute bottom-0 left-[20%] w-[500px] h-[300px] rounded-full bg-[#6B4FAD]/8 blur-[100px] pointer-events-none" />
+            <div className="absolute bottom-0 left-[20%] w-[500px] h-[300px] rounded-full bg-[#D9CFF2]/8 blur-[100px] pointer-events-none" />
 
             <div className="max-w-6xl mx-auto relative">
                 {/* Header */}
@@ -36,7 +36,7 @@ export default function ResultsSection() {
                     className="max-w-2xl mb-16"
                 >
                     <SectionLabel>{results.sectionLabel}</SectionLabel>
-                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#FAF9FF] mt-5">
+                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#1A112E] mt-5">
                         {results.title}{' '}
                         <em className="italic text-[#E8721A]">{results.titleEmphasis}</em>
                         {results.titleEmphasisEnd && ` ${results.titleEmphasisEnd}`}
@@ -52,9 +52,9 @@ export default function ResultsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.1 * index, ease: [0.16, 1, 0.3, 1] }}
-                            className="group relative p-7 rounded-2xl border border-[#FAF9FF]/5 bg-[#0D0B1F]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#0D0B1F]/50 transition-all duration-500 overflow-hidden"
+                            className="group relative p-7 rounded-2xl border border-[#1A112E]/5 bg-[#FCFAFF]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#FCFAFF]/50 transition-all duration-500 overflow-hidden"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#FAF9FF]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#1A112E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                             
                             <div className="flex items-start justify-between mb-5 relative z-10">
                                 <div className="w-10 h-10 rounded-xl border border-[#E8721A]/20 bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(232,114,26,0.5)]">
@@ -65,7 +65,7 @@ export default function ResultsSection() {
                             <div className="font-sans text-2xl sm:text-3xl font-bold text-[#E8721A] mb-3">
                                 {result.stat}
                             </div>
-                            <p className="text-sm text-[#AFA9CC]/55 font-light leading-relaxed">
+                            <p className="text-sm text-[#826AAB]/55 font-light leading-relaxed">
                                 {result.description}
                             </p>
                         </motion.div>

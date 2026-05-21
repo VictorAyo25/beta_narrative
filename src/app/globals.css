@@ -2,18 +2,18 @@
 
 :root {
   --purple: #4A2D8F;
-  --purple-mid: #6B4FAD;
-  --purple-light: #B8A4E8;
+  --purple-mid: #D9CFF2;
+  --purple-light: #D9CFF2;
   --purple-pale: #EDE6FA;
   --orange: #E8721A;
   --orange-light: #F5A96A;
   --orange-pale: #FDE8D4;
   --orange-dark: #A34A08;
-  --ink: #0D0B1F;
-  --ink-soft: #15112E;
-  --ink-card: #1C1740;
-  --warm-white: #FAF9FF;
-  --muted: #9B8EC4;
+  --ink: #FCFAFF;
+  --ink-soft: #F2EEF9;
+  --ink-card: #FFFFFF;
+  --warm-white: #1A112E;
+  --muted: #826AAB;
   --font-heading: var(--font-playfair, 'Outfit', sans-serif);
   --font-dm-sans: 'DM Sans', sans-serif;
 }
@@ -102,25 +102,25 @@ select {
 }
 
 .glass {
-  background: rgba(13, 11, 31, 0.7);
+  background: rgba(252, 250, 255, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(107, 79, 173, 0.2);
+  border: 1px solid rgba(107, 79, 173, 0.1);
 }
 
 .glass-light {
-  background: rgba(28, 23, 64, 0.5);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(107, 79, 173, 0.15);
+  border: 1px solid rgba(107, 79, 173, 0.08);
 }
 
 .mobile-menu {
-  background: rgba(21, 17, 46, 0.95);
+  background: rgba(242, 238, 249, 0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(107, 79, 173, 0.3);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(107, 79, 173, 0.15);
+  border: 1px solid rgba(107, 79, 173, 0.15);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1), 0 0 40px rgba(107, 79, 173, 0.08);
 }
 
 .glow-orange {
