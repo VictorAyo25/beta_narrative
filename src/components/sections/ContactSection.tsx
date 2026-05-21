@@ -79,7 +79,7 @@ export default function ContactSection() {
     };
 
     return (
-        <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#EAE4F2] overflow-hidden">
+        <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#F0EDE6] overflow-hidden">
             {/* Background accent */}
             <div className="absolute top-[20%] left-[10%] w-[400px] h-[400px] rounded-full bg-[#E8721A]/5 blur-[120px] pointer-events-none" />
 
@@ -110,7 +110,7 @@ export default function ContactSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative rounded-3xl border border-[#D9CFF2]/20 bg-[#FFFFFF] shadow-[0_20px_50px_rgba(0,0,0,0.06)] p-7 sm:p-10"
+                    className="relative rounded-3xl border border-[#BCAED9]/25 bg-[#FFFFFF] shadow-[0_20px_50px_rgba(0,0,0,0.06)] p-7 sm:p-10"
                 >
                     {/* Top accent */}
                     <div className="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#E8721A]/40 to-transparent" />
@@ -137,7 +137,7 @@ export default function ContactSection() {
                                     {...register('fullName')}
                                     type="text"
                                     placeholder="Full name"
-                                    className="w-full px-5 py-4 bg-[#EAE4F2]/20 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#F0EDE6]/20 border border-[#BCAED9]/25 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
                                 />
                                 {errors.fullName && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.fullName.message}</p>
@@ -150,7 +150,7 @@ export default function ContactSection() {
                                     {...register('email')}
                                     type="email"
                                     placeholder="Email address"
-                                    className="w-full px-5 py-4 bg-[#EAE4F2]/20 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#F0EDE6]/20 border border-[#BCAED9]/25 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
                                 />
                                 {errors.email && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.email.message}</p>
@@ -163,7 +163,7 @@ export default function ContactSection() {
                                     {...register('role')}
                                     type="text"
                                     placeholder="Current role and organisation"
-                                    className="w-full px-5 py-4 bg-[#EAE4F2]/20 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#F0EDE6]/20 border border-[#BCAED9]/25 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
                                 />
                                 {errors.role && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.role.message}</p>
@@ -177,7 +177,7 @@ export default function ContactSection() {
                                 <button
                                     type="button"
                                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                                    className={`w-full px-5 py-4 bg-[#EAE4F2]/20 border ${isDropdownOpen ? 'border-[#E8721A]/50 bg-[#D9CFF2]/12' : 'border-[#D9CFF2]/20'} rounded-xl text-sm flex items-center justify-between focus:outline-none transition-all duration-300`}
+                                    className={`w-full px-5 py-4 bg-[#F0EDE6]/20 border ${isDropdownOpen ? 'border-[#E8721A]/50 bg-[#D9CFF2]/12' : 'border-[#BCAED9]/25'} rounded-xl text-sm flex items-center justify-between focus:outline-none transition-all duration-300`}
                                 >
                                     <span className={selectedJourney ? 'text-[#1A112E]' : 'text-[#59497A]/60'}>
                                         {selectedJourney 
@@ -207,7 +207,7 @@ export default function ContactSection() {
                                                             setValue('journey', option.value, { shouldValidate: true });
                                                             setIsDropdownOpen(false);
                                                         }}
-                                                        className={`w-full text-left px-5 py-3.5 text-sm hover:bg-[#EAE4F2]/40 transition-colors duration-200 border-b border-[#D9CFF2]/10 last:border-0 ${selectedJourney === option.value ? 'bg-[#E8721A]/10 text-[#E8721A] font-medium' : 'text-[#1A112E]'}`}
+                                                        className={`w-full text-left px-5 py-3.5 text-sm hover:bg-[#F0EDE6]/40 transition-colors duration-200 border-b border-[#D9CFF2]/10 last:border-0 ${selectedJourney === option.value ? 'bg-[#E8721A]/10 text-[#E8721A] font-medium' : 'text-[#1A112E]'}`}
                                                     >
                                                         {option.label}
                                                     </button>
@@ -228,7 +228,7 @@ export default function ContactSection() {
                                     {...register('challenge')}
                                     type="text"
                                     placeholder="Your biggest visibility challenge (optional)"
-                                    className="w-full px-5 py-4 bg-[#EAE4F2]/20 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#F0EDE6]/20 border border-[#BCAED9]/25 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
                                 />
                             </div>
 

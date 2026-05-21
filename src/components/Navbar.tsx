@@ -150,7 +150,7 @@ export default function Navbar() {
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.05 }}
-                                    className="block px-4 py-3 text-sm font-medium text-[#1A112E] hover:text-[#E8721A] hover:bg-[#D9CFF2]/20 rounded-xl transition-all duration-200"
+                                    className="block px-4 py-3 text-sm font-medium text-[#1A112E] hover:text-[#E8721A] hover:bg-[#BCAED9]/10 rounded-xl transition-all duration-200"
                                 >
                                     {link.label}
                                 </motion.a>

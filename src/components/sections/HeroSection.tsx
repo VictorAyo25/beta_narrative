@@ -15,14 +15,14 @@ export default function HeroSection() {
     const y2 = useTransform(scrollYProgress, [0, 1], [0, -400]);
 
     return (
-        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#F5F2FA]">
+        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#FAF7F2]">
             {/* Background elements */}
             <div className="absolute inset-0 z-0">
-                <motion.div style={{ y: y1 }} className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[#D9CFF2]/20 blur-[120px]" />
+                <motion.div style={{ y: y1 }} className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[#BCAED9]/10 blur-[120px]" />
                 <motion.div style={{ y: y2 }} className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#E8721A]/10 blur-[100px]" />
                 <div className="absolute inset-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#F5F2FA] via-[#F5F2FA]/60 to-transparent z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#F5F2FA] via-transparent to-[#F5F2FA]/30 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F2] via-[#FAF7F2]/60 to-transparent z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-transparent to-[#FAF7F2]/30 z-10" />
                     <Image src="/images/Favour.JPG" alt="Favour Egbogun - Executive Brand Strategist" fill className="object-cover object-center opacity-30 mix-blend-multiply filter grayscale contrast-125" priority sizes="100vw" />
                 </div>
                 <div className="absolute top-[15%] right-[8%] w-[2px] h-[50%] bg-gradient-to-b from-transparent via-[#E8721A]/50 to-transparent z-10" />
@@ -63,7 +63,7 @@ export default function HeroSection() {
                     </motion.div>
                 </div>
 
-                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }} className="mt-20 pt-10 border-t border-[#D9CFF2]/20">
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }} className="mt-20 pt-10 border-t border-[#BCAED9]/25">
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
                         <div>
                             <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="4+" /></div>

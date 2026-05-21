@@ -37,7 +37,7 @@ export default function OfferSection() {
     };
 
     return (
-        <section id="offer" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#F5F2FA] overflow-hidden">
+        <section id="offer" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#FAF7F2] overflow-hidden">
             {/* Background accents */}
             <div className="absolute top-[10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#E8721A]/6 blur-[100px] pointer-events-none" />
             <div className="absolute bottom-[10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#D9CFF2]/10 blur-[100px] pointer-events-none" />
@@ -64,7 +64,7 @@ export default function OfferSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
                     transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative rounded-3xl border border-[#D9CFF2]/25 bg-gradient-to-br from-[#FFFFFF] via-[#EAE4F2] to-[#F5F2FA] overflow-hidden"
+                    className="relative rounded-3xl border border-[#D9CFF2]/25 bg-gradient-to-br from-[#FFFFFF] via-[#F0EDE6] to-[#FAF7F2] overflow-hidden"
                 >
                     {/* Top accent line */}
                     <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E8721A] via-[#4A2D8F] to-[#E8721A]" />
@@ -165,7 +165,7 @@ export default function OfferSection() {
                     </div>
 
                     {/* Optional Add-Ons Footer */}
-                    <div className="border-t border-[#D9CFF2]/20 bg-[#1A112E]/[0.03] p-7 sm:p-10 lg:px-12 lg:py-8 relative overflow-hidden">
+                    <div className="border-t border-[#BCAED9]/25 bg-[#1A112E]/[0.03] p-7 sm:p-10 lg:px-12 lg:py-8 relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#1A112E]/[0.02] to-transparent pointer-events-none" />
                         <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
                             <div className="flex-shrink-0">

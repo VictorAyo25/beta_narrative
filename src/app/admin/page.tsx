@@ -25,16 +25,16 @@ function EditableSection({
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="border border-[#D9CFF2]/30 rounded-lg overflow-hidden">
+        <div className="border border-[#BCAED9]/35 rounded-lg overflow-hidden">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between p-4 bg-[#EAE4F2] hover:bg-[#EAE4F2]/80 transition-colors"
+                className="w-full flex items-center justify-between p-4 bg-[#F0EDE6] hover:bg-[#F0EDE6]/80 transition-colors"
             >
                 <span className="font-medium text-[#1A112E]">{title}</span>
                 <span className="text-[#59497A]">{isOpen ? '−' : '+'}</span>
             </button>
             {isOpen && (
-                <div className="p-4 bg-[#F5F2FA] border-t border-[#D9CFF2]/20">
+                <div className="p-4 bg-[#FAF7F2] border-t border-[#BCAED9]/25">
                     {children}
                 </div>
             )}
@@ -204,16 +204,16 @@ export default function AdminDashboardPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#F5F2FA] flex items-center justify-center">
+            <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center">
                 <div className="text-[#59497A]">Loading content...</div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#F5F2FA]">
+        <div className="min-h-screen bg-[#FAF7F2]">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-[#F5F2FA]/95 backdrop-blur-sm border-b border-[#D9CFF2]/30">
+            <header className="sticky top-0 z-50 bg-[#FAF7F2]/95 backdrop-blur-sm border-b border-[#BCAED9]/35">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-4">
@@ -256,7 +256,7 @@ export default function AdminDashboardPage() {
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={fetchContent}
-                                className="flex items-center gap-2 px-4 py-2 text-sm text-[#59497A] hover:text-[#1A112E] border border-[#D9CFF2]/30 rounded hover:border-[#D9CFF2]/50 transition-colors"
+                                className="flex items-center gap-2 px-4 py-2 text-sm text-[#59497A] hover:text-[#1A112E] border border-[#BCAED9]/35 rounded hover:border-[#D9CFF2]/50 transition-colors"
                             >
                                 <RefreshCw className="w-4 h-4" />
                                 Refresh

@@ -22,7 +22,7 @@ export default function ResultsSection() {
     };
 
     return (
-        <section id="results" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#EAE4F2] overflow-hidden">
+        <section id="results" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#F0EDE6] overflow-hidden">
             {/* Background accent */}
             <div className="absolute bottom-0 left-[20%] w-[500px] h-[300px] rounded-full bg-[#D9CFF2]/8 blur-[100px] pointer-events-none" />
 
@@ -52,7 +52,7 @@ export default function ResultsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.1 * index, ease: [0.16, 1, 0.3, 1] }}
-                            className="group relative p-7 rounded-2xl border border-[#1A112E]/5 bg-[#F5F2FA]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#F5F2FA]/50 transition-all duration-500 overflow-hidden"
+                            className="group relative p-7 rounded-2xl border border-[#1A112E]/5 bg-[#FAF7F2]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#FAF7F2]/50 transition-all duration-500 overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-gradient-to-br from-[#1A112E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                             

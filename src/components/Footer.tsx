@@ -4,7 +4,7 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="relative py-12 px-5 sm:px-8 lg:px-10 border-t border-[#D9CFF2]/15 bg-[#F5F2FA]">
+        <footer className="relative py-12 px-5 sm:px-8 lg:px-10 border-t border-[#D9CFF2]/15 bg-[#FAF7F2]">
             {/* Top accent line */}
             <div className="absolute top-0 left-[20%] right-[20%] h-[1px] bg-gradient-to-r from-transparent via-[#4A2D8F]/30 to-transparent" />
 

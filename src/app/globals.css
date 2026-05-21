@@ -2,18 +2,18 @@
 
 :root {
   --purple: #4A2D8F;
-  --purple-mid: #D9CFF2;
-  --purple-light: #D9CFF2;
-  --purple-pale: #EDE6FA;
+  --purple-mid: #BCAED9;
+  --purple-light: #8B7BB5;
+  --purple-pale: #E9E3F5;
   --orange: #E8721A;
   --orange-light: #F5A96A;
   --orange-pale: #FDE8D4;
   --orange-dark: #A34A08;
-  --ink: #F5F2FA;
-  --ink-soft: #EAE4F2;
+  --ink: #FAF7F2;
+  --ink-soft: #F0EDE6;
   --ink-card: #FFFFFF;
   --warm-white: #1A112E;
-  --muted: #59497A;
+  --muted: #5E537A;
   --font-heading: var(--font-playfair, 'Outfit', sans-serif);
   --font-dm-sans: 'DM Sans', sans-serif;
 }
@@ -102,33 +102,33 @@ select {
 }
 
 .glass {
-  background: rgba(252, 250, 255, 0.7);
+  background: rgba(255, 254, 252, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(107, 79, 173, 0.1);
+  border: 1px solid rgba(74, 45, 143, 0.08);
 }
 
 .glass-light {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(107, 79, 173, 0.08);
+  border: 1px solid rgba(74, 45, 143, 0.05);
 }
 
 .mobile-menu {
-  background: rgba(242, 238, 249, 0.95);
+  background: rgba(250, 246, 238, 0.96);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(107, 79, 173, 0.15);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1), 0 0 40px rgba(107, 79, 173, 0.08);
+  border: 1px solid rgba(74, 45, 143, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(26, 17, 46, 0.08), 0 0 40px rgba(74, 45, 143, 0.04);
 }
 
 .glow-orange {
-  box-shadow: 0 0 40px rgba(232, 114, 26, 0.15), 0 0 80px rgba(232, 114, 26, 0.05);
+  box-shadow: 0 0 40px rgba(232, 114, 26, 0.08), 0 0 80px rgba(232, 114, 26, 0.03);
 }
 
 .glow-purple {
-  box-shadow: 0 0 40px rgba(107, 79, 173, 0.2), 0 0 80px rgba(107, 79, 173, 0.08);
+  box-shadow: 0 0 40px rgba(74, 45, 143, 0.08), 0 0 80px rgba(74, 45, 143, 0.03);
 }
 
 .card-hover {

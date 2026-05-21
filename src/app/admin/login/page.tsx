@@ -52,7 +52,7 @@ export default function AdminLoginPage() {
     const displayError = localError || error;
 
     return (
-        <div className="min-h-screen bg-[#F5F2FA] flex items-center justify-center px-5 relative overflow-hidden">
+        <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center px-5 relative overflow-hidden">
             {/* Background accents */}
             <div className="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#D9CFF2]/10 blur-[100px] pointer-events-none" />
             <div className="absolute bottom-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#E8721A]/6 blur-[80px] pointer-events-none" />
@@ -76,7 +76,7 @@ export default function AdminLoginPage() {
                 </div>
 
                 {/* Card */}
-                <div className="relative rounded-3xl border border-[#D9CFF2]/20 bg-gradient-to-br from-[#FFFFFF]/80 to-[#EAE4F2] p-8 sm:p-10">
+                <div className="relative rounded-3xl border border-[#BCAED9]/25 bg-gradient-to-br from-[#FFFFFF]/80 to-[#F0EDE6] p-8 sm:p-10">
                     {/* Top accent */}
                     <div className="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#E8721A]/40 to-transparent" />
 
@@ -115,7 +115,7 @@ export default function AdminLoginPage() {
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             placeholder="Email address"
-                                            className="w-full pl-11 pr-4 py-4 bg-[#D9CFF2]/8 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#D9CFF2]/30 focus:border-[#E8721A]/50 focus:outline-none transition-all duration-300"
+                                            className="w-full pl-11 pr-4 py-4 bg-[#D9CFF2]/8 border border-[#BCAED9]/25 rounded-xl text-sm text-[#1A112E] placeholder-[#D9CFF2]/30 focus:border-[#E8721A]/50 focus:outline-none transition-all duration-300"
                                         />
                                     </div>
 
@@ -164,7 +164,7 @@ export default function AdminLoginPage() {
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         placeholder="Email address"
-                                        className="w-full pl-11 pr-4 py-4 bg-[#D9CFF2]/8 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#D9CFF2]/30 focus:border-[#E8721A]/50 focus:outline-none transition-all duration-300"
+                                        className="w-full pl-11 pr-4 py-4 bg-[#D9CFF2]/8 border border-[#BCAED9]/25 rounded-xl text-sm text-[#1A112E] placeholder-[#D9CFF2]/30 focus:border-[#E8721A]/50 focus:outline-none transition-all duration-300"
                                     />
                                 </div>
 
@@ -175,7 +175,7 @@ export default function AdminLoginPage() {
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         placeholder="Password"
-                                        className="w-full pl-11 pr-4 py-4 bg-[#D9CFF2]/8 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#D9CFF2]/30 focus:border-[#E8721A]/50 focus:outline-none transition-all duration-300"
+                                        className="w-full pl-11 pr-4 py-4 bg-[#D9CFF2]/8 border border-[#BCAED9]/25 rounded-xl text-sm text-[#1A112E] placeholder-[#D9CFF2]/30 focus:border-[#E8721A]/50 focus:outline-none transition-all duration-300"
                                     />
                                 </div>
 
