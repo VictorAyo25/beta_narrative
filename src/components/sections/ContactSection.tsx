@@ -99,7 +99,7 @@ export default function ContactSection() {
                         {contact.title}{' '}
                         <em className="italic text-[#E8721A]">{contact.titleEmphasis}</em>
                     </h2>
-                    <p className="text-sm text-[#4A2D8F]/60 font-light max-w-md mx-auto leading-relaxed">
+                    <p className="text-sm text-[#1A112E]/80 font-light max-w-md mx-auto leading-relaxed">
                         {contact.subtitle}
                     </p>
                 </motion.div>
@@ -110,7 +110,7 @@ export default function ContactSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative rounded-3xl border border-[#D9CFF2]/20 bg-gradient-to-br from-[#FFFFFF]/80 to-[#EAE4F2] p-7 sm:p-10"
+                    className="relative rounded-3xl border border-[#D9CFF2]/20 bg-[#FFFFFF] shadow-[0_20px_50px_rgba(0,0,0,0.06)] p-7 sm:p-10"
                 >
                     {/* Top accent */}
                     <div className="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#E8721A]/40 to-transparent" />
@@ -125,7 +125,7 @@ export default function ContactSection() {
                                 <CheckCircle size={28} className="text-green-400" />
                             </div>
                             <h3 className="font-serif text-2xl text-[#1A112E] mb-3">Application Received</h3>
-                            <p className="text-sm text-[#4A2D8F]/60 max-w-sm mx-auto leading-relaxed">
+                            <p className="text-sm text-[#1A112E]/80 max-w-sm mx-auto leading-relaxed">
                                 Thank you for your interest. We'll review your application and get back to you within 48 hours.
                             </p>
                         </motion.div>
@@ -137,7 +137,7 @@ export default function ContactSection() {
                                     {...register('fullName')}
                                     type="text"
                                     placeholder="Full name"
-                                    className="w-full px-5 py-4 bg-[#D9CFF2]/8 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#D9CFF2]/30 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#EAE4F2]/20 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
                                 />
                                 {errors.fullName && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.fullName.message}</p>
@@ -150,7 +150,7 @@ export default function ContactSection() {
                                     {...register('email')}
                                     type="email"
                                     placeholder="Email address"
-                                    className="w-full px-5 py-4 bg-[#D9CFF2]/8 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#D9CFF2]/30 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#EAE4F2]/20 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
                                 />
                                 {errors.email && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.email.message}</p>
@@ -163,7 +163,7 @@ export default function ContactSection() {
                                     {...register('role')}
                                     type="text"
                                     placeholder="Current role and organisation"
-                                    className="w-full px-5 py-4 bg-[#D9CFF2]/8 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#D9CFF2]/30 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#EAE4F2]/20 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
                                 />
                                 {errors.role && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.role.message}</p>
@@ -177,9 +177,9 @@ export default function ContactSection() {
                                 <button
                                     type="button"
                                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                                    className={`w-full px-5 py-4 bg-[#D9CFF2]/8 border ${isDropdownOpen ? 'border-[#E8721A]/50 bg-[#D9CFF2]/12' : 'border-[#D9CFF2]/20'} rounded-xl text-sm flex items-center justify-between focus:outline-none transition-all duration-300`}
+                                    className={`w-full px-5 py-4 bg-[#EAE4F2]/20 border ${isDropdownOpen ? 'border-[#E8721A]/50 bg-[#D9CFF2]/12' : 'border-[#D9CFF2]/20'} rounded-xl text-sm flex items-center justify-between focus:outline-none transition-all duration-300`}
                                 >
-                                    <span className={selectedJourney ? 'text-[#1A112E]' : 'text-[#4A2D8F]/30'}>
+                                    <span className={selectedJourney ? 'text-[#1A112E]' : 'text-[#59497A]/60'}>
                                         {selectedJourney 
                                             ? journeyOptions.find(o => o.value === selectedJourney)?.label 
                                             : 'Where are you in your leadership journey?'}
@@ -197,7 +197,7 @@ export default function ContactSection() {
                                             className="fixed inset-0 z-40"
                                             onClick={() => setIsDropdownOpen(false)}
                                         />
-                                        <div className="absolute z-50 w-full mt-2 bg-[#1A1636]/95 backdrop-blur-xl border border-[#D9CFF2]/20 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.5)] overflow-hidden">
+                                        <div className="absolute z-50 w-full mt-2 bg-[#FFFFFF] border border-[#D9CFF2]/40 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.08)] overflow-hidden">
                                             <div className="max-h-60 overflow-y-auto">
                                                 {journeyOptions.filter(o => o.value !== '').map((option) => (
                                                     <button
@@ -207,7 +207,7 @@ export default function ContactSection() {
                                                             setValue('journey', option.value, { shouldValidate: true });
                                                             setIsDropdownOpen(false);
                                                         }}
-                                                        className={`w-full text-left px-5 py-3.5 text-sm hover:bg-[#D9CFF2]/20 transition-colors duration-200 border-b border-[#D9CFF2]/10 last:border-0 ${selectedJourney === option.value ? 'bg-[#E8721A]/10 text-[#E8721A] font-medium' : 'text-[#1A112E]/90'}`}
+                                                        className={`w-full text-left px-5 py-3.5 text-sm hover:bg-[#EAE4F2]/40 transition-colors duration-200 border-b border-[#D9CFF2]/10 last:border-0 ${selectedJourney === option.value ? 'bg-[#E8721A]/10 text-[#E8721A] font-medium' : 'text-[#1A112E]'}`}
                                                     >
                                                         {option.label}
                                                     </button>
@@ -228,7 +228,7 @@ export default function ContactSection() {
                                     {...register('challenge')}
                                     type="text"
                                     placeholder="Your biggest visibility challenge (optional)"
-                                    className="w-full px-5 py-4 bg-[#D9CFF2]/8 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#D9CFF2]/30 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#EAE4F2]/20 border border-[#D9CFF2]/20 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
                                 />
                             </div>
 
@@ -236,7 +236,7 @@ export default function ContactSection() {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="group relative w-full flex items-center justify-center gap-3 py-4 bg-[#1A112E]/5 backdrop-blur-md border border-[#1A112E]/10 text-[#1A112E] text-sm font-semibold tracking-[0.12em] uppercase rounded-full hover:bg-[#1A112E]/10 hover:border-[#E8721A]/50 transition-all duration-400 overflow-hidden shadow-[0_0_20px_rgba(232,114,26,0.1)] hover:shadow-[0_0_40px_rgba(232,114,26,0.3)] hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                                className="group relative w-full flex items-center justify-center gap-3 py-4 bg-[#E8721A] text-white hover:bg-[#E8721A]/90 hover:scale-[1.02] text-sm font-semibold tracking-[0.12em] uppercase rounded-full hover:bg-[#1A112E]/10 hover:border-[#E8721A]/50 transition-all duration-400 overflow-hidden shadow-[0_0_20px_rgba(232,114,26,0.1)] hover:shadow-[0_0_40px_rgba(232,114,26,0.3)] hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed mt-2"
                             >
                                 <div className="absolute inset-0 bg-gradient-to-r from-[#E8721A]/0 via-[#E8721A]/10 to-[#F5A96A]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                 {isSubmitting ? (
@@ -251,7 +251,7 @@ export default function ContactSection() {
                                     <span className="flex items-center gap-3 relative z-10">
                                         <Send size={15} className="text-[#E8721A]" />
                                         Secure My Spot
-                                        <ArrowRight size={15} className="text-[#E8721A] group-hover:translate-x-1 transition-transform duration-300" />
+                                        <ArrowRight size={15} className="text-white group-hover:translate-x-1 transition-transform duration-300" />
                                     </span>
                                 )}
                             </button>
@@ -265,7 +265,7 @@ export default function ContactSection() {
                             )}
 
                             {/* Fine Print */}
-                            <p className="text-[11px] text-[#4A2D8F]/25 text-center pt-2 leading-relaxed">
+                            <p className="text-[11px] text-[#59497A]/60 text-center pt-2 leading-relaxed">
                                 {contact.finePrint}
                             </p>
                         </form>

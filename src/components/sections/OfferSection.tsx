@@ -94,7 +94,7 @@ export default function OfferSection() {
                                     {offer.priceNote}
                                 </p>
 
-                                <p className="text-sm text-[#59497A]/60 font-light leading-relaxed mb-8">
+                                <p className="text-sm text-[#59497A]/85 font-light leading-relaxed mb-8">
                                     {offer.description}
                                 </p>
 
@@ -130,7 +130,7 @@ export default function OfferSection() {
                                                     <div className="font-semibold text-sm text-[#1A112E] mb-1">
                                                         {item.title}
                                                     </div>
-                                                    <p className="text-sm text-[#59497A]/55 font-light leading-relaxed">
+                                                    <p className="text-sm text-[#59497A]/85 font-light leading-relaxed">
                                                         {item.content}
                                                     </p>
                                                 </div>
@@ -153,7 +153,7 @@ export default function OfferSection() {
                                                 <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#E8721A]/10 flex items-center justify-center mt-0.5">
                                                     <Check size={10} className="text-[#E8721A]" />
                                                 </div>
-                                                <span className="text-sm text-[#59497A]/60 font-light leading-snug group-hover:text-[#59497A]/80 transition-colors">
+                                                <span className="text-sm text-[#59497A]/85 font-light leading-snug group-hover:text-[#59497A]/80 transition-colors">
                                                     {item}
                                                 </span>
                                             </div>

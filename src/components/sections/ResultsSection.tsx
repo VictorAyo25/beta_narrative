@@ -60,12 +60,12 @@ export default function ResultsSection() {
                                 <div className="w-10 h-10 rounded-xl border border-[#E8721A]/20 bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(232,114,26,0.5)]">
                                     <TrendingUp size={16} className="text-[#E8721A]" />
                                 </div>
-                                <ArrowUpRight size={16} className="text-[#4A2D8F]/40 group-hover:text-[#E8721A] transition-colors duration-300 mt-1" />
+                                <ArrowUpRight size={16} className="text-[#4A2D8F]/75 group-hover:text-[#E8721A] transition-colors duration-300 mt-1" />
                             </div>
                             <div className="font-sans text-2xl sm:text-3xl font-bold text-[#E8721A] mb-3">
                                 {result.stat}
                             </div>
-                            <p className="text-sm text-[#59497A]/55 font-light leading-relaxed">
+                            <p className="text-sm text-[#59497A]/85 font-light leading-relaxed">
                                 {result.description}
                             </p>
                         </motion.div>

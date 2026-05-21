@@ -47,7 +47,7 @@ export default function ValueSection() {
                             {value.title}{' '}
                             <em className="italic text-[#E8721A]">{value.titleEmphasis}</em>
                         </h2>
-                        <p className="text-base text-[#59497A]/65 font-light leading-relaxed">
+                        <p className="text-base text-[#1A112E]/80 font-light leading-relaxed">
                             {value.body}
                         </p>
                     </motion.div>
@@ -89,14 +89,14 @@ export default function ValueSection() {
                                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                className="absolute bottom-6 sm:bottom-10 -left-4 sm:-left-8 lg:-left-12 bg-[#1A112E]/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-3.5 shadow-[0_12px_40px_rgba(0,0,0,0.2)] z-10 flex items-center gap-3.5"
+                                className="absolute bottom-6 sm:bottom-10 -left-4 sm:-left-8 lg:-left-12 bg-[#FFFFFF] border border-[#D9CFF2]/40 shadow-[0_8px_30px_rgba(0,0,0,0.08)] rounded-full px-6 py-3.5 shadow-[0_12px_40px_rgba(0,0,0,0.2)] z-10 flex items-center gap-3.5"
                             >
                                 <div className="w-2 h-2 rounded-full bg-[#E8721A] animate-pulse shadow-[0_0_10px_rgba(232,114,26,0.8)]" />
                                 <div className="flex flex-col">
                                     <span className="font-serif text-[#1A112E] text-sm sm:text-[15px] font-semibold tracking-wide drop-shadow-md leading-none mb-1.5">
                                         Favour Egbogun
                                     </span>
-                                    <span className="text-white/80 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] leading-none">
+                                    <span className="text-[#4A2D8F]/90 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] leading-none">
                                         Communications Strategist
                                     </span>
                                 </div>
@@ -128,7 +128,7 @@ export default function ValueSection() {
                                 <div className="font-sans text-4xl sm:text-5xl font-bold text-gradient leading-none mb-3 tracking-tight">
                                     <AnimatedCounter value={cred.number} />
                                 </div>
-                                <p className="text-sm text-[#59497A]/60 font-light leading-relaxed">
+                                <p className="text-sm text-[#59497A]/85 font-light leading-relaxed">
                                     {cred.label}
                                 </p>
                             </div>
