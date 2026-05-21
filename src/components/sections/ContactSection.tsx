@@ -79,7 +79,7 @@ export default function ContactSection() {
     };
 
     return (
-        <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#F2EEF9] overflow-hidden">
+        <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#EAE4F2] overflow-hidden">
             {/* Background accent */}
             <div className="absolute top-[20%] left-[10%] w-[400px] h-[400px] rounded-full bg-[#E8721A]/5 blur-[120px] pointer-events-none" />
 
@@ -99,7 +99,7 @@ export default function ContactSection() {
                         {contact.title}{' '}
                         <em className="italic text-[#E8721A]">{contact.titleEmphasis}</em>
                     </h2>
-                    <p className="text-sm text-[#6B4FAD]/60 font-light max-w-md mx-auto leading-relaxed">
+                    <p className="text-sm text-[#4A2D8F]/60 font-light max-w-md mx-auto leading-relaxed">
                         {contact.subtitle}
                     </p>
                 </motion.div>
@@ -110,7 +110,7 @@ export default function ContactSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative rounded-3xl border border-[#D9CFF2]/20 bg-gradient-to-br from-[#FFFFFF]/80 to-[#F2EEF9] p-7 sm:p-10"
+                    className="relative rounded-3xl border border-[#D9CFF2]/20 bg-gradient-to-br from-[#FFFFFF]/80 to-[#EAE4F2] p-7 sm:p-10"
                 >
                     {/* Top accent */}
                     <div className="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#E8721A]/40 to-transparent" />
@@ -125,7 +125,7 @@ export default function ContactSection() {
                                 <CheckCircle size={28} className="text-green-400" />
                             </div>
                             <h3 className="font-serif text-2xl text-[#1A112E] mb-3">Application Received</h3>
-                            <p className="text-sm text-[#6B4FAD]/60 max-w-sm mx-auto leading-relaxed">
+                            <p className="text-sm text-[#4A2D8F]/60 max-w-sm mx-auto leading-relaxed">
                                 Thank you for your interest. We'll review your application and get back to you within 48 hours.
                             </p>
                         </motion.div>
@@ -179,14 +179,14 @@ export default function ContactSection() {
                                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                                     className={`w-full px-5 py-4 bg-[#D9CFF2]/8 border ${isDropdownOpen ? 'border-[#E8721A]/50 bg-[#D9CFF2]/12' : 'border-[#D9CFF2]/20'} rounded-xl text-sm flex items-center justify-between focus:outline-none transition-all duration-300`}
                                 >
-                                    <span className={selectedJourney ? 'text-[#1A112E]' : 'text-[#6B4FAD]/30'}>
+                                    <span className={selectedJourney ? 'text-[#1A112E]' : 'text-[#4A2D8F]/30'}>
                                         {selectedJourney 
                                             ? journeyOptions.find(o => o.value === selectedJourney)?.label 
                                             : 'Where are you in your leadership journey?'}
                                     </span>
                                     <ChevronDown 
                                         size={16} 
-                                        className={`text-[#826AAB]/50 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-[#E8721A]' : ''}`} 
+                                        className={`text-[#59497A]/50 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-[#E8721A]' : ''}`} 
                                     />
                                 </button>
 
@@ -265,7 +265,7 @@ export default function ContactSection() {
                             )}
 
                             {/* Fine Print */}
-                            <p className="text-[11px] text-[#6B4FAD]/25 text-center pt-2 leading-relaxed">
+                            <p className="text-[11px] text-[#4A2D8F]/25 text-center pt-2 leading-relaxed">
                                 {contact.finePrint}
                             </p>
                         </form>

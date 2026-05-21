@@ -9,11 +9,11 @@
   --orange-light: #F5A96A;
   --orange-pale: #FDE8D4;
   --orange-dark: #A34A08;
-  --ink: #FCFAFF;
-  --ink-soft: #F2EEF9;
+  --ink: #F5F2FA;
+  --ink-soft: #EAE4F2;
   --ink-card: #FFFFFF;
   --warm-white: #1A112E;
-  --muted: #826AAB;
+  --muted: #59497A;
   --font-heading: var(--font-playfair, 'Outfit', sans-serif);
   --font-dm-sans: 'DM Sans', sans-serif;
 }

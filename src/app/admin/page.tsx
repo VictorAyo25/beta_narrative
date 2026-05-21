@@ -28,13 +28,13 @@ function EditableSection({
         <div className="border border-[#D9CFF2]/30 rounded-lg overflow-hidden">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between p-4 bg-[#F2EEF9] hover:bg-[#F2EEF9]/80 transition-colors"
+                className="w-full flex items-center justify-between p-4 bg-[#EAE4F2] hover:bg-[#EAE4F2]/80 transition-colors"
             >
                 <span className="font-medium text-[#1A112E]">{title}</span>
-                <span className="text-[#826AAB]">{isOpen ? '−' : '+'}</span>
+                <span className="text-[#59497A]">{isOpen ? '−' : '+'}</span>
             </button>
             {isOpen && (
-                <div className="p-4 bg-[#FCFAFF] border-t border-[#D9CFF2]/20">
+                <div className="p-4 bg-[#F5F2FA] border-t border-[#D9CFF2]/20">
                     {children}
                 </div>
             )}
@@ -61,7 +61,7 @@ function FormField({
 
     return (
         <div className="mb-4">
-            <label className="block text-xs font-medium text-[#826AAB] mb-1.5 uppercase tracking-wider">
+            <label className="block text-xs font-medium text-[#59497A] mb-1.5 uppercase tracking-wider">
                 {label}
             </label>
             {multiline ? (
@@ -204,31 +204,31 @@ export default function AdminDashboardPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#FCFAFF] flex items-center justify-center">
-                <div className="text-[#826AAB]">Loading content...</div>
+            <div className="min-h-screen bg-[#F5F2FA] flex items-center justify-center">
+                <div className="text-[#59497A]">Loading content...</div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#FCFAFF]">
+        <div className="min-h-screen bg-[#F5F2FA]">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-[#FCFAFF]/95 backdrop-blur-sm border-b border-[#D9CFF2]/30">
+            <header className="sticky top-0 z-50 bg-[#F5F2FA]/95 backdrop-blur-sm border-b border-[#D9CFF2]/30">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-4">
                             <Link href="/" className="font-serif text-xl text-[#E8721A]">
                                 Beta Narrative
                             </Link>
-                            <span className="text-[#826AAB] text-sm">Admin Dashboard</span>
+                            <span className="text-[#59497A] text-sm">Admin Dashboard</span>
                         </div>
                         <div className="flex items-center gap-4">
-                            <span className="text-[#826AAB] text-sm hidden sm:block">
+                            <span className="text-[#59497A] text-sm hidden sm:block">
                                 {user?.email}
                             </span>
                             <button
                                 onClick={logout}
-                                className="flex items-center gap-2 text-[#826AAB] hover:text-[#E8721A] transition-colors text-sm"
+                                className="flex items-center gap-2 text-[#59497A] hover:text-[#E8721A] transition-colors text-sm"
                             >
                                 <LogOut className="w-4 h-4" />
                                 <span className="hidden sm:inline">Logout</span>
@@ -249,14 +249,14 @@ export default function AdminDashboardPage() {
                     <div className="flex items-center justify-between mb-8">
                         <div>
                             <h1 className="font-serif text-3xl text-[#1A112E]">Content Editor</h1>
-                            <p className="text-[#826AAB] text-sm mt-1">
+                            <p className="text-[#59497A] text-sm mt-1">
                                 Edit your site content. Changes will be reflected immediately after saving.
                             </p>
                         </div>
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={fetchContent}
-                                className="flex items-center gap-2 px-4 py-2 text-sm text-[#826AAB] hover:text-[#1A112E] border border-[#D9CFF2]/30 rounded hover:border-[#D9CFF2]/50 transition-colors"
+                                className="flex items-center gap-2 px-4 py-2 text-sm text-[#59497A] hover:text-[#1A112E] border border-[#D9CFF2]/30 rounded hover:border-[#D9CFF2]/50 transition-colors"
                             >
                                 <RefreshCw className="w-4 h-4" />
                                 Refresh

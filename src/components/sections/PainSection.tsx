@@ -22,7 +22,7 @@ export default function PainSection() {
     };
 
     return (
-        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#F2EEF9] overflow-hidden">
+        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#EAE4F2] overflow-hidden">
             {/* Subtle background accent */}
             <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-[#E8721A]/5 blur-[100px] pointer-events-none" />
 
@@ -41,7 +41,7 @@ export default function PainSection() {
                                 {pain.title}{' '}
                                 <em className="italic text-[#E8721A]">{pain.titleEmphasis}</em>
                             </h2>
-                            <p className="text-base text-[#6B4FAD]/65 font-light leading-relaxed">
+                            <p className="text-base text-[#4A2D8F]/65 font-light leading-relaxed">
                                 {pain.lead}
                             </p>
                         </motion.div>
@@ -57,7 +57,7 @@ export default function PainSection() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: 0.1 * index, ease: [0.16, 1, 0.3, 1] }}
-                                    className="group flex items-start gap-4 p-5 rounded-2xl border border-[#1A112E]/5 bg-[#FCFAFF]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#FCFAFF]/50 transition-all duration-500 relative overflow-hidden"
+                                    className="group flex items-start gap-4 p-5 rounded-2xl border border-[#1A112E]/5 bg-[#F5F2FA]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#F5F2FA]/50 transition-all duration-500 relative overflow-hidden"
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-br from-[#1A112E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8721A]/10 border border-[#E8721A]/20 flex items-center justify-center mt-0.5 group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 group-hover:shadow-[0_0_12px_rgba(232,114,26,0.5)] transition-all duration-300 relative z-10">

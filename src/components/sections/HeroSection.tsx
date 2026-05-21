@@ -15,14 +15,14 @@ export default function HeroSection() {
     const y2 = useTransform(scrollYProgress, [0, 1], [0, -400]);
 
     return (
-        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#FCFAFF]">
+        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#F5F2FA]">
             {/* Background elements */}
             <div className="absolute inset-0 z-0">
                 <motion.div style={{ y: y1 }} className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[#D9CFF2]/20 blur-[120px]" />
                 <motion.div style={{ y: y2 }} className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#E8721A]/10 blur-[100px]" />
                 <div className="absolute inset-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#FCFAFF] via-[#FCFAFF]/60 to-transparent z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#FCFAFF] via-transparent to-[#FCFAFF]/30 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#F5F2FA] via-[#F5F2FA]/60 to-transparent z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#F5F2FA] via-transparent to-[#F5F2FA]/30 z-10" />
                     <Image src="/images/Favour.JPG" alt="Favour Egbogun - Executive Brand Strategist" fill className="object-cover object-center opacity-30 mix-blend-multiply filter grayscale contrast-125" priority sizes="100vw" />
                 </div>
                 <div className="absolute top-[15%] right-[8%] w-[2px] h-[50%] bg-gradient-to-b from-transparent via-[#E8721A]/50 to-transparent z-10" />
@@ -36,17 +36,17 @@ export default function HeroSection() {
 
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#E8721A]/20 bg-[#E8721A]/5 mb-6 shadow-[0_0_20px_rgba(232,114,26,0.05)]">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#E8721A] animate-pulse shadow-[0_0_8px_rgba(232,114,26,0.5)]" />
-                        <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase bg-gradient-to-r from-[#E8721A] to-[#6B4FAD] bg-clip-text text-transparent mt-[1px]">{hero.eyebrow}</span>
+                        <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase bg-gradient-to-r from-[#E8721A] to-[#4A2D8F] bg-clip-text text-transparent mt-[1px]">{hero.eyebrow}</span>
                     </motion.div>
 
                     <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }} className="font-serif text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.25rem] font-semibold leading-[1.1] tracking-[-0.02em] mb-8">
                         <span className="text-[#1A112E]">{hero.title}</span>{' '}
                         <em className="italic text-gradient not-italic">{hero.titleEmphasis}</em>
                         <br />
-                        <span className="text-[#6B4FAD]">{hero.titleHighlight}</span>
+                        <span className="text-[#4A2D8F]">{hero.titleHighlight}</span>
                     </motion.h1>
 
-                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }} className="text-base sm:text-lg text-[#6B4FAD]/70 max-w-xl mb-12 font-light leading-relaxed">
+                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }} className="text-base sm:text-lg text-[#4A2D8F]/70 max-w-xl mb-12 font-light leading-relaxed">
                         {hero.subtitle}
                     </motion.p>
 
@@ -56,7 +56,7 @@ export default function HeroSection() {
                             {hero.ctaText.replace(/[→\->]/g, '').trim()}
                             <ArrowRight size={16} className="text-[#E8721A] group-hover:translate-x-1 transition-transform duration-300" />
                         </a>
-                        <a href="#results" className="group inline-flex items-center gap-2 text-sm font-medium text-[#6B4FAD] hover:text-[#1A112E] transition-colors duration-300">
+                        <a href="#results" className="group inline-flex items-center gap-2 text-sm font-medium text-[#4A2D8F] hover:text-[#1A112E] transition-colors duration-300">
                             See results
                             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
                         </a>
@@ -67,19 +67,19 @@ export default function HeroSection() {
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
                         <div>
                             <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="4+" /></div>
-                            <div className="text-xs text-[#826AAB] tracking-wide">Years Experience</div>
+                            <div className="text-xs text-[#59497A] tracking-wide">Years Experience</div>
                         </div>
                         <div>
                             <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="5×" /></div>
-                            <div className="text-xs text-[#826AAB] tracking-wide">LinkedIn Reach in 90 Days</div>
+                            <div className="text-xs text-[#59497A] tracking-wide">LinkedIn Reach in 90 Days</div>
                         </div>
                         <div>
                             <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="20%" /></div>
-                            <div className="text-xs text-[#826AAB] tracking-wide">Engagement Lift</div>
+                            <div className="text-xs text-[#59497A] tracking-wide">Engagement Lift</div>
                         </div>
                         <div>
                             <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="100%" /></div>
-                            <div className="text-xs text-[#826AAB] tracking-wide">Client Satisfaction</div>
+                            <div className="text-xs text-[#59497A] tracking-wide">Client Satisfaction</div>
                         </div>
                     </div>
                 </motion.div>

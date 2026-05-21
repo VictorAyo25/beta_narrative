@@ -52,7 +52,7 @@ export default function AdminLoginPage() {
     const displayError = localError || error;
 
     return (
-        <div className="min-h-screen bg-[#FCFAFF] flex items-center justify-center px-5 relative overflow-hidden">
+        <div className="min-h-screen bg-[#F5F2FA] flex items-center justify-center px-5 relative overflow-hidden">
             {/* Background accents */}
             <div className="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#D9CFF2]/10 blur-[100px] pointer-events-none" />
             <div className="absolute bottom-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#E8721A]/6 blur-[80px] pointer-events-none" />
@@ -69,21 +69,21 @@ export default function AdminLoginPage() {
                         <span className="font-serif text-2xl tracking-wide">
                             <span className="text-[#1A112E]">Beta</span>
                             <span className="text-[#E8721A]"> </span>
-                            <span className="text-[#6B4FAD]">Narrative</span>
+                            <span className="text-[#4A2D8F]">Narrative</span>
                         </span>
                     </Link>
-                    <p className="text-[#826AAB] text-sm mt-3">Admin Dashboard</p>
+                    <p className="text-[#59497A] text-sm mt-3">Admin Dashboard</p>
                 </div>
 
                 {/* Card */}
-                <div className="relative rounded-3xl border border-[#D9CFF2]/20 bg-gradient-to-br from-[#FFFFFF]/80 to-[#F2EEF9] p-8 sm:p-10">
+                <div className="relative rounded-3xl border border-[#D9CFF2]/20 bg-gradient-to-br from-[#FFFFFF]/80 to-[#EAE4F2] p-8 sm:p-10">
                     {/* Top accent */}
                     <div className="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#E8721A]/40 to-transparent" />
 
                     {isResetMode ? (
                         <div>
                             <h2 className="font-serif text-2xl text-[#1A112E] mb-2">Reset Password</h2>
-                            <p className="text-[#826AAB] text-sm mb-8">
+                            <p className="text-[#59497A] text-sm mb-8">
                                 Enter your email address and we'll send you a link to reset your password.
                             </p>
 
@@ -93,7 +93,7 @@ export default function AdminLoginPage() {
                                         <CheckCircle size={24} className="text-green-400" />
                                     </div>
                                     <p className="text-[#1A112E] mb-2 font-medium">Check your email</p>
-                                    <p className="text-[#826AAB] text-sm">
+                                    <p className="text-[#59497A] text-sm">
                                         We've sent a password reset link to {email}
                                     </p>
                                     <button
@@ -109,7 +109,7 @@ export default function AdminLoginPage() {
                             ) : (
                                 <form onSubmit={handleResetPassword} className="space-y-5">
                                     <div className="relative">
-                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#826AAB]" />
+                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#59497A]" />
                                         <input
                                             type="email"
                                             value={email}
@@ -141,7 +141,7 @@ export default function AdminLoginPage() {
                                             setLocalError('');
                                             clearError();
                                         }}
-                                        className="w-full flex items-center justify-center gap-2 text-[#826AAB] text-sm hover:text-[#1A112E] transition-colors"
+                                        className="w-full flex items-center justify-center gap-2 text-[#59497A] text-sm hover:text-[#1A112E] transition-colors"
                                     >
                                         <ArrowLeft size={14} />
                                         Back to login
@@ -152,13 +152,13 @@ export default function AdminLoginPage() {
                     ) : (
                         <div>
                             <h2 className="font-serif text-2xl text-[#1A112E] mb-2">Welcome Back</h2>
-                            <p className="text-[#826AAB] text-sm mb-8">
+                            <p className="text-[#59497A] text-sm mb-8">
                                 Sign in to manage your site content
                             </p>
 
                             <form onSubmit={handleLogin} className="space-y-5">
                                 <div className="relative">
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#826AAB]" />
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#59497A]" />
                                     <input
                                         type="email"
                                         value={email}
@@ -169,7 +169,7 @@ export default function AdminLoginPage() {
                                 </div>
 
                                 <div className="relative">
-                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#826AAB]" />
+                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#59497A]" />
                                     <input
                                         type="password"
                                         value={password}
@@ -201,7 +201,7 @@ export default function AdminLoginPage() {
                                         setLocalError('');
                                         clearError();
                                     }}
-                                    className="w-full text-[#826AAB] text-sm hover:text-[#E8721A] transition-colors text-center"
+                                    className="w-full text-[#59497A] text-sm hover:text-[#E8721A] transition-colors text-center"
                                 >
                                     Forgot your password?
                                 </button>
@@ -212,7 +212,7 @@ export default function AdminLoginPage() {
 
                 {/* Back to Site */}
                 <div className="text-center mt-8">
-                    <Link href="/" className="text-[#826AAB] text-sm hover:text-[#E8721A] transition-colors link-underline inline-block">
+                    <Link href="/" className="text-[#59497A] text-sm hover:text-[#E8721A] transition-colors link-underline inline-block">
                         ← Back to website
                     </Link>
                 </div>

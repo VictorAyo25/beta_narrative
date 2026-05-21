@@ -27,7 +27,7 @@ export default function ValueSection() {
     const y2 = useTransform(scrollYProgress, [0, 1], [0, -250]);
 
     return (
-        <section id="why" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#FCFAFF] overflow-hidden">
+        <section id="why" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#F5F2FA] overflow-hidden">
             {/* Background accents */}
             <motion.div style={{ y: y1 }} className="absolute top-[20%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#D9CFF2]/10 blur-[100px] pointer-events-none" />
             <motion.div style={{ y: y2 }} className="absolute bottom-[10%] right-[-5%] w-[300px] h-[300px] rounded-full bg-[#E8721A]/8 blur-[80px] pointer-events-none" />
@@ -47,7 +47,7 @@ export default function ValueSection() {
                             {value.title}{' '}
                             <em className="italic text-[#E8721A]">{value.titleEmphasis}</em>
                         </h2>
-                        <p className="text-base text-[#826AAB]/65 font-light leading-relaxed">
+                        <p className="text-base text-[#59497A]/65 font-light leading-relaxed">
                             {value.body}
                         </p>
                     </motion.div>
@@ -62,8 +62,8 @@ export default function ValueSection() {
                     >
                         <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80">
                             {/* Gradient border ring */}
-                            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#E8721A] via-[#6B4FAD] to-[#E8721A] p-[3px]">
-                                <div className="absolute inset-[3px] rounded-full bg-[#FCFAFF]" />
+                            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#E8721A] via-[#4A2D8F] to-[#E8721A] p-[3px]">
+                                <div className="absolute inset-[3px] rounded-full bg-[#F5F2FA]" />
                             </div>
 
                             {/* Image container - circular */}
@@ -76,7 +76,7 @@ export default function ValueSection() {
                                     sizes="(max-width: 640px) 256px, (max-width: 1024px) 288px, 320px"
                                 />
                                 {/* Subtle overlay for better blending */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#FCFAFF]/30 via-transparent to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#F5F2FA]/30 via-transparent to-transparent" />
                             </div>
 
                             {/* Decorative glow effects */}
@@ -114,7 +114,7 @@ export default function ValueSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.12 * index, ease: [0.16, 1, 0.3, 1] }}
-                            className="group relative p-7 rounded-2xl border border-[#1A112E]/5 bg-[#FCFAFF]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#FCFAFF]/50 transition-all duration-500 overflow-hidden"
+                            className="group relative p-7 rounded-2xl border border-[#1A112E]/5 bg-[#F5F2FA]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#F5F2FA]/50 transition-all duration-500 overflow-hidden"
                         >
                             {/* Hover glow */}
                             <div className="absolute inset-0 bg-gradient-to-br from-[#1A112E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -128,7 +128,7 @@ export default function ValueSection() {
                                 <div className="font-sans text-4xl sm:text-5xl font-bold text-gradient leading-none mb-3 tracking-tight">
                                     <AnimatedCounter value={cred.number} />
                                 </div>
-                                <p className="text-sm text-[#826AAB]/60 font-light leading-relaxed">
+                                <p className="text-sm text-[#59497A]/60 font-light leading-relaxed">
                                     {cred.label}
                                 </p>
                             </div>

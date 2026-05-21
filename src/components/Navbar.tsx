@@ -73,7 +73,7 @@ export default function Navbar() {
                         <span className="font-serif text-xl md:text-2xl tracking-wide">
                             <span className="text-[#1A112E] group-hover:text-[#E8721A] transition-colors duration-300">Beta</span>
                             <span className="text-[#E8721A]"> </span>
-                            <span className="text-[#6B4FAD] group-hover:text-[#1A112E] transition-colors duration-300">Narrative</span>
+                            <span className="text-[#4A2D8F] group-hover:text-[#1A112E] transition-colors duration-300">Narrative</span>
                         </span>
                     </a>
 
@@ -84,7 +84,7 @@ export default function Navbar() {
                                 key={link.href}
                                 href={link.href}
                                 onClick={(e) => scrollToSection(e, link.href)}
-                                className="link-underline px-4 py-2 text-[13px] font-medium tracking-wide text-[#6B4FAD] hover:text-[#1A112E] transition-colors duration-300"
+                                className="link-underline px-4 py-2 text-[13px] font-medium tracking-wide text-[#4A2D8F] hover:text-[#1A112E] transition-colors duration-300"
                             >
                                 {link.label}
                             </a>
