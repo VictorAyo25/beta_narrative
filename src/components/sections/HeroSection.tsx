@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
-import { ArrowRight } from 'lucide-react';
+
 import AnimatedCounter from '../AnimatedCounter';
 
 export default function HeroSection() {
@@ -15,18 +15,19 @@ export default function HeroSection() {
     const y2 = useTransform(scrollYProgress, [0, 1], [0, -400]);
 
     return (
-        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#FAF7F2]">
+        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#EEE8F8]">
             {/* Background elements */}
             <div className="absolute inset-0 z-0">
-                <motion.div style={{ y: y1 }} className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[#BCAED9]/10 blur-[120px]" />
-                <motion.div style={{ y: y2 }} className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#E8721A]/10 blur-[100px]" />
+                <motion.div style={{ y: y1 }} className="absolute top-[-20%] right-[-10%] w-[700px] h-[700px] rounded-full bg-[#C4A8E8]/25 blur-[120px]" />
+                <motion.div style={{ y: y2 }} className="absolute bottom-[-20%] left-[-10%] w-[550px] h-[550px] rounded-full bg-[#E8721A]/20 blur-[100px]" />
+                <motion.div style={{ y: y1 }} className="absolute top-[40%] right-[20%] w-[350px] h-[350px] rounded-full bg-[#E8721A]/10 blur-[80px]" />
                 <div className="absolute inset-0">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F2] via-[#FAF7F2]/60 to-transparent z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-transparent to-[#FAF7F2]/30 z-10" />
-                    <Image src="/images/Favour.JPG" alt="Favour Egbogun - Executive Brand Strategist" fill className="object-cover object-center opacity-30 mix-blend-multiply filter grayscale contrast-125" priority sizes="100vw" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#EEE8F8]/95 via-[#EEE8F8]/65 to-transparent z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#EEE8F8] via-transparent to-[#EEE8F8]/20 z-10" />
+                    <Image src="/images/Favour.JPG" alt="Favour Egbogun - Executive Brand Strategist" fill className="object-cover object-center opacity-35 mix-blend-multiply filter grayscale contrast-110" priority sizes="100vw" />
                 </div>
-                <div className="absolute top-[15%] right-[8%] w-[2px] h-[50%] bg-gradient-to-b from-transparent via-[#E8721A]/50 to-transparent z-10" />
-                <motion.div style={{ y: y1 }} className="absolute top-[12%] right-[8%] translate-x-[1px] w-3 h-3 rounded-full bg-[#E8721A]/60 z-10" />
+                <div className="absolute top-[15%] right-[8%] w-[2px] h-[50%] bg-gradient-to-b from-transparent via-[#C4A8E8]/70 to-transparent z-10" />
+                <motion.div style={{ y: y1 }} className="absolute top-[12%] right-[8%] translate-x-[1px] w-3 h-3 rounded-full bg-[#C4A8E8]/80 z-10" />
             </div>
 
             {/* Main content */}
@@ -40,49 +41,24 @@ export default function HeroSection() {
                     </motion.div>
 
                     <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }} className="font-serif text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.25rem] font-semibold leading-[1.1] tracking-[-0.02em] mb-8">
-                        <span className="text-[#1A112E]">{hero.title}</span>{' '}
+                        <span className="text-[#1A0E35]">{hero.title}</span>{' '}
                         <em className="italic text-gradient not-italic">{hero.titleEmphasis}</em>
                         <br />
-                        <span className="text-[#4A2D8F]">{hero.titleHighlight}</span>
+                        <span className="text-[#6B3FC0]">{hero.titleHighlight}</span>
                     </motion.h1>
 
-                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }} className="text-base sm:text-lg text-[#4A2D8F]/70 max-w-xl mb-12 font-light leading-relaxed">
+                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }} className="text-base sm:text-lg text-[#1A0E35] max-w-xl mb-12 font-normal leading-relaxed">
                         {hero.subtitle}
                     </motion.p>
 
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }} className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
-                        <a href="#contact" className="group relative inline-flex items-center gap-3 text-sm font-semibold tracking-[0.12em] uppercase text-[#1A112E] bg-[#1A112E]/5 backdrop-blur-md border border-[#1A112E]/10 px-8 py-4 rounded-full hover:bg-[#1A112E]/10 hover:border-[#E8721A]/50 transition-all duration-400 overflow-hidden shadow-[0_0_20px_rgba(232,114,26,0.1)] hover:shadow-[0_0_40px_rgba(232,114,26,0.3)] hover:scale-[1.02]">
-                            <div className="absolute inset-0 bg-gradient-to-r from-[#E8721A]/0 via-[#E8721A]/10 to-[#F5A96A]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                        <a href="#contact" className="group relative inline-flex items-center justify-center text-sm font-semibold tracking-[0.12em] uppercase text-white bg-[#E8721A] px-8 py-4 rounded-full hover:bg-[#C05A0E] hover:shadow-[0_0_40px_rgba(232,114,26,0.5)] hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_24px_rgba(232,114,26,0.35)]">
                             {hero.ctaText.replace(/[→\->]/g, '').trim()}
-                            <ArrowRight size={16} className="text-[#E8721A] group-hover:translate-x-1 transition-transform duration-300" />
-                        </a>
-                        <a href="#results" className="group inline-flex items-center gap-2 text-sm font-medium text-[#4A2D8F] hover:text-[#1A112E] transition-colors duration-300">
-                            See results
-                            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
                         </a>
                     </motion.div>
                 </div>
 
-                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }} className="mt-20 pt-10 border-t border-[#BCAED9]/25">
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
-                        <div>
-                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="4+" /></div>
-                            <div className="text-xs text-[#59497A] tracking-wide">Years Experience</div>
-                        </div>
-                        <div>
-                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="5×" /></div>
-                            <div className="text-xs text-[#59497A] tracking-wide">LinkedIn Reach in 90 Days</div>
-                        </div>
-                        <div>
-                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="20%" /></div>
-                            <div className="text-xs text-[#59497A] tracking-wide">Engagement Lift</div>
-                        </div>
-                        <div>
-                            <div className="font-sans text-3xl sm:text-4xl font-bold text-[#E8721A] mb-1"><AnimatedCounter value="100%" /></div>
-                            <div className="text-xs text-[#59497A] tracking-wide">Client Satisfaction</div>
-                        </div>
-                    </div>
-                </motion.div>
+
             </div>
         </section>
     );

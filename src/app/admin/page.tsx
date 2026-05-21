@@ -28,13 +28,13 @@ function EditableSection({
         <div className="border border-[#BCAED9]/35 rounded-lg overflow-hidden">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between p-4 bg-[#F0EDE6] hover:bg-[#F0EDE6]/80 transition-colors"
+                className="w-full flex items-center justify-between p-4 bg-[#E4DAEF] hover:bg-[#E4DAEF]/80 transition-colors"
             >
-                <span className="font-medium text-[#1A112E]">{title}</span>
-                <span className="text-[#59497A]">{isOpen ? '−' : '+'}</span>
+                <span className="font-medium text-[#1A0E35]">{title}</span>
+                <span className="text-[#3D2A6E]">{isOpen ? '−' : '+'}</span>
             </button>
             {isOpen && (
-                <div className="p-4 bg-[#FAF7F2] border-t border-[#BCAED9]/25">
+                <div className="p-4 bg-[#EEE8F8] border-t border-[#8B5CF6]/25">
                     {children}
                 </div>
             )}
@@ -57,11 +57,11 @@ function FormField({
     placeholder?: string;
 }) {
     const baseClasses =
-        'w-full px-3 py-2 bg-[#D9CFF2]/10 border border-[#D9CFF2]/35 rounded text-sm text-[#1A112E] placeholder-[#D9CFF2]/40 focus:border-[#E8721A] focus:outline-none transition-colors';
+        'w-full px-3 py-2 bg-[#C4A8E8]/30 border border-[#D9CFF2]/35 rounded text-sm text-[#1A0E35] placeholder-[#D9CFF2]/40 focus:border-[#E8721A] focus:outline-none transition-colors';
 
     return (
         <div className="mb-4">
-            <label className="block text-xs font-medium text-[#59497A] mb-1.5 uppercase tracking-wider">
+            <label className="block text-xs font-medium text-[#3D2A6E] mb-1.5 uppercase tracking-wider">
                 {label}
             </label>
             {multiline ? (
@@ -204,31 +204,31 @@ export default function AdminDashboardPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center">
-                <div className="text-[#59497A]">Loading content...</div>
+            <div className="min-h-screen bg-[#EEE8F8] flex items-center justify-center">
+                <div className="text-[#3D2A6E]">Loading content...</div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#FAF7F2]">
+        <div className="min-h-screen bg-[#EEE8F8]">
             {/* Header */}
-            <header className="sticky top-0 z-50 bg-[#FAF7F2]/95 backdrop-blur-sm border-b border-[#BCAED9]/35">
+            <header className="sticky top-0 z-50 bg-[#EEE8F8]/95 backdrop-blur-sm border-b border-[#BCAED9]/35">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-4">
                             <Link href="/" className="font-serif text-xl text-[#E8721A]">
                                 Beta Narrative
                             </Link>
-                            <span className="text-[#59497A] text-sm">Admin Dashboard</span>
+                            <span className="text-[#3D2A6E] text-sm">Admin Dashboard</span>
                         </div>
                         <div className="flex items-center gap-4">
-                            <span className="text-[#59497A] text-sm hidden sm:block">
+                            <span className="text-[#3D2A6E] text-sm hidden sm:block">
                                 {user?.email}
                             </span>
                             <button
                                 onClick={logout}
-                                className="flex items-center gap-2 text-[#59497A] hover:text-[#E8721A] transition-colors text-sm"
+                                className="flex items-center gap-2 text-[#3D2A6E] hover:text-[#E8721A] transition-colors text-sm"
                             >
                                 <LogOut className="w-4 h-4" />
                                 <span className="hidden sm:inline">Logout</span>
@@ -248,15 +248,15 @@ export default function AdminDashboardPage() {
                     {/* Page Title */}
                     <div className="flex items-center justify-between mb-8">
                         <div>
-                            <h1 className="font-serif text-3xl text-[#1A112E]">Content Editor</h1>
-                            <p className="text-[#59497A] text-sm mt-1">
+                            <h1 className="font-serif text-3xl text-[#1A0E35]">Content Editor</h1>
+                            <p className="text-[#3D2A6E] text-sm mt-1">
                                 Edit your site content. Changes will be reflected immediately after saving.
                             </p>
                         </div>
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={fetchContent}
-                                className="flex items-center gap-2 px-4 py-2 text-sm text-[#59497A] hover:text-[#1A112E] border border-[#BCAED9]/35 rounded hover:border-[#D9CFF2]/50 transition-colors"
+                                className="flex items-center gap-2 px-4 py-2 text-sm text-[#3D2A6E] hover:text-[#1A0E35] border border-[#BCAED9]/35 rounded hover:border-[#D9CFF2]/50 transition-colors"
                             >
                                 <RefreshCw className="w-4 h-4" />
                                 Refresh
@@ -264,7 +264,7 @@ export default function AdminDashboardPage() {
                             <button
                                 onClick={handleSave}
                                 disabled={saving}
-                                className="flex items-center gap-2 px-6 py-2 text-sm font-medium text-[#1A112E] bg-[#E8721A] rounded hover:bg-[#F5A96A] transition-colors disabled:opacity-50"
+                                className="flex items-center gap-2 px-6 py-2 text-sm font-medium text-[#1A0E35] bg-[#E8721A] rounded hover:bg-[#F5A96A] transition-colors disabled:opacity-50"
                             >
                                 <Save className="w-4 h-4" />
                                 {saving ? 'Saving...' : 'Save Changes'}

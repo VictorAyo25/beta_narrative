@@ -71,9 +71,9 @@ export default function Navbar() {
                         className="flex-shrink-0 group cursor-pointer"
                     >
                         <span className="font-serif text-xl md:text-2xl tracking-wide">
-                            <span className="text-[#1A112E] group-hover:text-[#E8721A] transition-colors duration-300">Beta</span>
+                            <span className="text-[#1A0E35] group-hover:text-[#E8721A] transition-colors duration-300">Beta</span>
                             <span className="text-[#E8721A]"> </span>
-                            <span className="text-[#4A2D8F] group-hover:text-[#1A112E] transition-colors duration-300">Narrative</span>
+                            <span className="text-[#6B3FC0] group-hover:text-[#1A0E35] transition-colors duration-300">Narrative</span>
                         </span>
                     </a>
 
@@ -84,7 +84,7 @@ export default function Navbar() {
                                 key={link.href}
                                 href={link.href}
                                 onClick={(e) => scrollToSection(e, link.href)}
-                                className="link-underline px-4 py-2 text-[13px] font-medium tracking-wide text-[#4A2D8F] hover:text-[#1A112E] transition-colors duration-300"
+                                className="link-underline px-4 py-2 text-[13px] font-medium tracking-wide text-[#1A0E35] hover:text-[#E8721A] transition-colors duration-300"
                             >
                                 {link.label}
                             </a>
@@ -92,7 +92,7 @@ export default function Navbar() {
                         <a
                             href="#contact"
                             onClick={(e) => scrollToSection(e, '#contact')}
-                            className="ml-4 text-[11px] font-semibold tracking-[0.15em] uppercase text-white bg-gradient-to-r from-[#E8721A] to-[#F5A96A] px-6 py-2.5 rounded-full hover:shadow-[0_0_30px_rgba(232,114,26,0.4)] transition-all duration-300 hover:scale-[1.02]"
+                            className="ml-4 text-[11px] font-semibold tracking-[0.15em] uppercase text-white bg-[#E8721A] px-6 py-2.5 rounded-full hover:bg-[#C05A0E] hover:shadow-[0_0_30px_rgba(232,114,26,0.4)] transition-all duration-300 hover:scale-[1.02]"
                         >
                             Claim Your Spot
                         </a>
@@ -101,7 +101,7 @@ export default function Navbar() {
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden relative w-10 h-10 flex items-center justify-center text-[#1A112E] hover:text-[#E8721A] transition-colors"
+                        className="md:hidden relative w-10 h-10 flex items-center justify-center text-[#1A0E35] hover:text-[#E8721A] transition-colors"
                         aria-label="Toggle menu"
                     >
                         <AnimatePresence mode="wait">
@@ -150,7 +150,7 @@ export default function Navbar() {
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.05 }}
-                                    className="block px-4 py-3 text-sm font-medium text-[#1A112E] hover:text-[#E8721A] hover:bg-[#BCAED9]/10 rounded-xl transition-all duration-200"
+                                    className="block px-4 py-3 text-sm font-medium text-[#1A0E35] hover:text-[#E8721A] hover:bg-[#C4A8E8]/25 rounded-xl transition-all duration-200"
                                 >
                                     {link.label}
                                 </motion.a>

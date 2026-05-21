@@ -22,7 +22,7 @@ export default function PainSection() {
     };
 
     return (
-        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#F0EDE6] overflow-hidden">
+        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#E4DAEF] overflow-hidden">
             {/* Subtle background accent */}
             <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-[#E8721A]/5 blur-[100px] pointer-events-none" />
 
@@ -37,11 +37,11 @@ export default function PainSection() {
                             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                         >
                             <SectionLabel>{pain.sectionLabel}</SectionLabel>
-                            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#1A112E] mt-5 mb-6">
+                            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#1A0E35] mt-5 mb-6">
                                 {pain.title}{' '}
                                 <em className="italic text-[#E8721A]">{pain.titleEmphasis}</em>
                             </h2>
-                            <p className="text-base text-[#4A2D8F]/85 font-light leading-relaxed">
+                            <p className="text-base text-[#6B3FC0]/85 font-normal leading-relaxed">
                                 {pain.lead}
                             </p>
                         </motion.div>
@@ -57,13 +57,13 @@ export default function PainSection() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: 0.1 * index, ease: [0.16, 1, 0.3, 1] }}
-                                    className="group flex items-start gap-4 p-5 rounded-2xl border border-[#1A112E]/5 bg-[#FAF7F2]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#FAF7F2]/50 transition-all duration-500 relative overflow-hidden"
+                                    className="group flex items-start gap-4 p-5 rounded-2xl border border-[#130E20]/5 bg-[#EEE8F8]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#EEE8F8]/50 transition-all duration-500 relative overflow-hidden"
                                 >
-                                    <div className="absolute inset-0 bg-gradient-to-br from-[#1A112E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                                    <div className="absolute inset-0 bg-gradient-to-br from-[#130E20]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8721A]/10 border border-[#E8721A]/20 flex items-center justify-center mt-0.5 group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 group-hover:shadow-[0_0_12px_rgba(232,114,26,0.5)] transition-all duration-300 relative z-10">
                                         <AlertTriangle size={14} className="text-[#E8721A]" />
                                     </div>
-                                    <p className="text-sm text-[#1A112E]/90 leading-relaxed group-hover:text-[#1A112E] transition-colors duration-300 relative z-10">
+                                    <p className="text-sm text-[#1A0E35]/90 leading-relaxed group-hover:text-[#1A0E35] transition-colors duration-300 relative z-10">
                                         {item}
                                     </p>
                                 </motion.div>

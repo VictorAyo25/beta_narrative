@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
 import { ContactFormData } from '@/types';
-import { Send, CheckCircle, AlertCircle, ArrowRight, ChevronDown } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, ChevronDown } from 'lucide-react';
 
 const contactSchema = z.object({
     fullName: z.string().min(2, 'Name must be at least 2 characters'),
@@ -79,7 +79,7 @@ export default function ContactSection() {
     };
 
     return (
-        <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#F0EDE6] overflow-hidden">
+        <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#E4DAEF] overflow-hidden">
             {/* Background accent */}
             <div className="absolute top-[20%] left-[10%] w-[400px] h-[400px] rounded-full bg-[#E8721A]/5 blur-[120px] pointer-events-none" />
 
@@ -95,11 +95,11 @@ export default function ContactSection() {
                     <div className="flex justify-center">
                         <SectionLabel>{contact.sectionLabel}</SectionLabel>
                     </div>
-                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#1A112E] mt-5 mb-5">
+                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#1A0E35] mt-5 mb-5">
                         {contact.title}{' '}
                         <em className="italic text-[#E8721A]">{contact.titleEmphasis}</em>
                     </h2>
-                    <p className="text-sm text-[#1A112E]/80 font-light max-w-md mx-auto leading-relaxed">
+                    <p className="text-sm text-[#1A0E35]/80 font-normal max-w-md mx-auto leading-relaxed">
                         {contact.subtitle}
                     </p>
                 </motion.div>
@@ -110,7 +110,7 @@ export default function ContactSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative rounded-3xl border border-[#BCAED9]/25 bg-[#FFFFFF] shadow-[0_20px_50px_rgba(0,0,0,0.06)] p-7 sm:p-10"
+                    className="relative rounded-3xl border border-[#8B5CF6]/25 bg-[#FAF7FF] shadow-[0_20px_50px_rgba(0,0,0,0.06)] p-7 sm:p-10"
                 >
                     {/* Top accent */}
                     <div className="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#E8721A]/40 to-transparent" />
@@ -124,8 +124,8 @@ export default function ContactSection() {
                             <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-6">
                                 <CheckCircle size={28} className="text-green-400" />
                             </div>
-                            <h3 className="font-serif text-2xl text-[#1A112E] mb-3">Application Received</h3>
-                            <p className="text-sm text-[#1A112E]/80 max-w-sm mx-auto leading-relaxed">
+                            <h3 className="font-serif text-2xl text-[#1A0E35] mb-3">Application Received</h3>
+                            <p className="text-sm text-[#1A0E35]/80 max-w-sm mx-auto leading-relaxed">
                                 Thank you for your interest. We'll review your application and get back to you within 48 hours.
                             </p>
                         </motion.div>
@@ -137,7 +137,7 @@ export default function ContactSection() {
                                     {...register('fullName')}
                                     type="text"
                                     placeholder="Full name"
-                                    className="w-full px-5 py-4 bg-[#F0EDE6]/20 border border-[#BCAED9]/25 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#E4DAEF]/20 border border-[#8B5CF6]/25 rounded-xl text-sm text-[#1A0E35] placeholder-[#3B334C]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
                                 />
                                 {errors.fullName && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.fullName.message}</p>
@@ -150,7 +150,7 @@ export default function ContactSection() {
                                     {...register('email')}
                                     type="email"
                                     placeholder="Email address"
-                                    className="w-full px-5 py-4 bg-[#F0EDE6]/20 border border-[#BCAED9]/25 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#E4DAEF]/20 border border-[#8B5CF6]/25 rounded-xl text-sm text-[#1A0E35] placeholder-[#3B334C]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
                                 />
                                 {errors.email && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.email.message}</p>
@@ -163,7 +163,7 @@ export default function ContactSection() {
                                     {...register('role')}
                                     type="text"
                                     placeholder="Current role and organisation"
-                                    className="w-full px-5 py-4 bg-[#F0EDE6]/20 border border-[#BCAED9]/25 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#E4DAEF]/20 border border-[#8B5CF6]/25 rounded-xl text-sm text-[#1A0E35] placeholder-[#3B334C]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
                                 />
                                 {errors.role && (
                                     <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.role.message}</p>
@@ -177,16 +177,16 @@ export default function ContactSection() {
                                 <button
                                     type="button"
                                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                                    className={`w-full px-5 py-4 bg-[#F0EDE6]/20 border ${isDropdownOpen ? 'border-[#E8721A]/50 bg-[#D9CFF2]/12' : 'border-[#BCAED9]/25'} rounded-xl text-sm flex items-center justify-between focus:outline-none transition-all duration-300`}
+                                    className={`w-full px-5 py-4 bg-[#E4DAEF]/20 border ${isDropdownOpen ? 'border-[#E8721A]/50 bg-[#D9CFF2]/12' : 'border-[#8B5CF6]/25'} rounded-xl text-sm flex items-center justify-between focus:outline-none transition-all duration-300`}
                                 >
-                                    <span className={selectedJourney ? 'text-[#1A112E]' : 'text-[#59497A]/60'}>
+                                    <span className={selectedJourney ? 'text-[#1A0E35]' : 'text-[#3D2A6E]/60'}>
                                         {selectedJourney 
                                             ? journeyOptions.find(o => o.value === selectedJourney)?.label 
                                             : 'Where are you in your leadership journey?'}
                                     </span>
                                     <ChevronDown 
                                         size={16} 
-                                        className={`text-[#59497A]/50 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-[#E8721A]' : ''}`} 
+                                        className={`text-[#3D2A6E]/50 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-[#E8721A]' : ''}`} 
                                     />
                                 </button>
 
@@ -197,7 +197,7 @@ export default function ContactSection() {
                                             className="fixed inset-0 z-40"
                                             onClick={() => setIsDropdownOpen(false)}
                                         />
-                                        <div className="absolute z-50 w-full mt-2 bg-[#FFFFFF] border border-[#D9CFF2]/40 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.08)] overflow-hidden">
+                                        <div className="absolute z-50 w-full mt-2 bg-[#FAF7FF] border border-[#8B5CF6]/35 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.08)] overflow-hidden">
                                             <div className="max-h-60 overflow-y-auto">
                                                 {journeyOptions.filter(o => o.value !== '').map((option) => (
                                                     <button
@@ -207,7 +207,7 @@ export default function ContactSection() {
                                                             setValue('journey', option.value, { shouldValidate: true });
                                                             setIsDropdownOpen(false);
                                                         }}
-                                                        className={`w-full text-left px-5 py-3.5 text-sm hover:bg-[#F0EDE6]/40 transition-colors duration-200 border-b border-[#D9CFF2]/10 last:border-0 ${selectedJourney === option.value ? 'bg-[#E8721A]/10 text-[#E8721A] font-medium' : 'text-[#1A112E]'}`}
+                                                        className={`w-full text-left px-5 py-3.5 text-sm hover:bg-[#E4DAEF]/40 transition-colors duration-200 border-b border-[#8B5CF6]/20 last:border-0 ${selectedJourney === option.value ? 'bg-[#E8721A]/10 text-[#E8721A] font-medium' : 'text-[#1A0E35]'}`}
                                                     >
                                                         {option.label}
                                                     </button>
@@ -228,7 +228,7 @@ export default function ContactSection() {
                                     {...register('challenge')}
                                     type="text"
                                     placeholder="Your biggest visibility challenge (optional)"
-                                    className="w-full px-5 py-4 bg-[#F0EDE6]/20 border border-[#BCAED9]/25 rounded-xl text-sm text-[#1A112E] placeholder-[#59497A]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                    className="w-full px-5 py-4 bg-[#E4DAEF]/20 border border-[#8B5CF6]/25 rounded-xl text-sm text-[#1A0E35] placeholder-[#3B334C]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
                                 />
                             </div>
 
@@ -236,22 +236,20 @@ export default function ContactSection() {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="group relative w-full flex items-center justify-center gap-3 py-4 bg-[#E8721A] text-white hover:bg-[#E8721A]/90 hover:scale-[1.02] text-sm font-semibold tracking-[0.12em] uppercase rounded-full hover:bg-[#1A112E]/10 hover:border-[#E8721A]/50 transition-all duration-400 overflow-hidden shadow-[0_0_20px_rgba(232,114,26,0.1)] hover:shadow-[0_0_40px_rgba(232,114,26,0.3)] hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                                className="w-full flex items-center justify-center gap-2.5 py-4 bg-[#E8721A] text-white text-sm font-semibold tracking-[0.12em] uppercase rounded-full hover:bg-[#C05A0E] hover:shadow-[0_0_40px_rgba(232,114,26,0.5)] hover:scale-[1.01] transition-all duration-300 shadow-[0_4px_24px_rgba(232,114,26,0.35)] disabled:opacity-50 disabled:cursor-not-allowed mt-2"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-[#E8721A]/0 via-[#E8721A]/10 to-[#F5A96A]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                 {isSubmitting ? (
-                                    <span className="flex items-center gap-2 relative z-10">
-                                        <svg className="animate-spin h-4 w-4 text-[#E8721A]" viewBox="0 0 24 24">
+                                    <span className="flex items-center gap-2">
+                                        <svg className="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24">
                                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                                         </svg>
                                         Submitting...
                                     </span>
                                 ) : (
-                                    <span className="flex items-center gap-3 relative z-10">
-                                        <Send size={15} className="text-[#E8721A]" />
+                                    <span className="flex items-center gap-2">
+                                        <Send size={15} className="text-white" />
                                         Secure My Spot
-                                        <ArrowRight size={15} className="text-white group-hover:translate-x-1 transition-transform duration-300" />
                                     </span>
                                 )}
                             </button>
@@ -265,7 +263,7 @@ export default function ContactSection() {
                             )}
 
                             {/* Fine Print */}
-                            <p className="text-[11px] text-[#59497A]/60 text-center pt-2 leading-relaxed">
+                            <p className="text-[11px] text-[#3D2A6E]/60 text-center pt-2 leading-relaxed">
                                 {contact.finePrint}
                             </p>
                         </form>

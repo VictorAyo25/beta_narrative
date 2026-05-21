@@ -1,7 +1,6 @@
 'use client';
 
 import { motion, useScroll } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function FloatingCTA() {
@@ -24,12 +23,10 @@ export default function FloatingCTA() {
         >
             <a
                 href="#contact"
-                className="group relative inline-flex items-center gap-3 text-sm font-semibold tracking-[0.12em] uppercase text-[#1A112E] bg-[#FFFFFF]/90 backdrop-blur-xl border border-[#1A112E]/10 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.25)] hover:border-[#E8721A]/50 transition-all duration-400 overflow-hidden"
+                className="inline-flex items-center justify-center text-sm font-semibold tracking-[0.12em] uppercase text-white bg-[#E8721A] px-6 sm:px-8 py-3.5 sm:py-4 rounded-full hover:bg-[#C05A0E] hover:shadow-[0_0_40px_rgba(232,114,26,0.5)] hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_24px_rgba(232,114,26,0.4)]"
             >
-                <div className="absolute inset-0 bg-gradient-to-r from-[#E8721A]/0 via-[#E8721A]/10 to-[#F5A96A]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 <span className="hidden sm:inline">Secure Your Spot</span>
                 <span className="sm:hidden">Apply Now</span>
-                <ArrowRight size={16} className="text-[#E8721A] group-hover:translate-x-1 transition-transform duration-300" />
             </a>
         </motion.div>
     );

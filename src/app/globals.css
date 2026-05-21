@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --purple: #4A2D8F;
-  --purple-mid: #4A2D8F;
-  --purple-light: #311B6B;
-  --purple-pale: #EDE6FA;
-  --orange: #D65E0C;
-  --orange-light: #E8721A;
-  --orange-pale: #FDE8D4;
-  --orange-dark: #8F3C00;
-  --ink: #FAF7F2;
-  --ink-soft: #F0EDE6;
-  --ink-card: #FFFFFF;
-  --warm-white: #130E20;
-  --muted: #4F4666;
+  --purple: #6B3FC0;
+  --purple-mid: #8B5CF6;
+  --purple-light: #C4A8E8;
+  --purple-pale: #EEE8F8;
+  --orange: #E8721A;
+  --orange-light: #F5943A;
+  --orange-pale: #FDEEDD;
+  --orange-dark: #C05A0E;
+  --ink: #EEE8F8;
+  --ink-soft: #E4DAEF;
+  --ink-card: #FAF7FF;
+  --warm-white: #1A0E35;
+  --muted: #3D2A6E;
   --font-heading: var(--font-playfair, 'Outfit', sans-serif);
   --font-dm-sans: 'DM Sans', sans-serif;
 }
@@ -88,47 +88,47 @@ select {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 50%, var(--purple-light) 100%);
+  background: linear-gradient(135deg, #E8721A 0%, #C4660F 30%, #9B6ED9 70%, #6B3FC0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-purple {
-  background: linear-gradient(135deg, var(--purple-light) 0%, var(--orange) 100%);
+  background: linear-gradient(135deg, #8B5CF6 0%, #E8721A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .glass {
-  background: rgba(255, 254, 252, 0.8);
+  background: rgba(238, 232, 248, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(26, 17, 46, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.15);
 }
 
 .glass-light {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(250, 247, 255, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(26, 17, 46, 0.05);
+  border: 1px solid rgba(139, 92, 246, 0.1);
 }
 
 .mobile-menu {
-  background: rgba(250, 246, 238, 0.97);
+  background: rgba(238, 232, 248, 0.97);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(26, 17, 46, 0.1);
-  box-shadow: 0 25px 50px -12px rgba(26, 17, 46, 0.08), 0 0 40px rgba(74, 45, 143, 0.03);
+  border: 1px solid rgba(107, 63, 192, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(26, 14, 53, 0.12), 0 0 40px rgba(107, 63, 192, 0.06);
 }
 
 .glow-orange {
-  box-shadow: 0 0 40px rgba(232, 114, 26, 0.05), 0 0 80px rgba(232, 114, 26, 0.02);
+  box-shadow: 0 0 40px rgba(232, 114, 26, 0.2), 0 0 80px rgba(232, 114, 26, 0.08);
 }
 
 .glow-purple {
-  box-shadow: 0 0 40px rgba(74, 45, 143, 0.05), 0 0 80px rgba(74, 45, 143, 0.02);
+  box-shadow: 0 0 40px rgba(107, 63, 192, 0.25), 0 0 80px rgba(107, 63, 192, 0.1);
 }
 
 .card-hover {
@@ -137,7 +137,7 @@ select {
 
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(232, 114, 26, 0.08);
+  box-shadow: 0 20px 60px rgba(107, 63, 192, 0.12), 0 0 40px rgba(232, 114, 26, 0.1);
 }
 
 .link-underline {

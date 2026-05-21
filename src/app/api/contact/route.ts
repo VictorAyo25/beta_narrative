@@ -88,8 +88,8 @@ async function sendEmailNotification(data: {
       <style>
         body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #FAF7F2; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: #FAF7F2; color: #1A112E; padding: 20px; text-align: center; }
-        .content { background: #1A112E; padding: 30px; }
+        .header { background: #FAF7F2; color: #130E20; padding: 20px; text-align: center; }
+        .content { background: #130E20; padding: 30px; }
         .field { margin-bottom: 20px; }
         .label { font-weight: 600; color: #D9CFF2; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
         .value { font-size: 16px; color: #FAF7F2; margin-top: 5px; }

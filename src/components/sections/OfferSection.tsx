@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
-import { Check, Crown, ArrowRight, Plus } from 'lucide-react';
+import { Check, Crown, Plus } from 'lucide-react';
 
 export default function OfferSection() {
     const { content } = useContent();
@@ -37,10 +37,10 @@ export default function OfferSection() {
     };
 
     return (
-        <section id="offer" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#FAF7F2] overflow-hidden">
+        <section id="offer" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#EEE8F8] overflow-hidden">
             {/* Background accents */}
             <div className="absolute top-[10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#E8721A]/6 blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-[10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#D9CFF2]/10 blur-[100px] pointer-events-none" />
+            <div className="absolute bottom-[10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#C4A8E8]/30 blur-[100px] pointer-events-none" />
 
             <div className="max-w-6xl mx-auto relative">
                 {/* Header */}
@@ -52,7 +52,7 @@ export default function OfferSection() {
                     className="max-w-2xl mb-16"
                 >
                     <SectionLabel>{offer.sectionLabel}</SectionLabel>
-                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#1A112E] mt-5">
+                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#1A0E35] mt-5">
                         {offer.title}{' '}
                         <em className="italic text-[#E8721A]">{offer.titleEmphasis}</em>
                     </h2>
@@ -64,7 +64,7 @@ export default function OfferSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
                     transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative rounded-3xl border border-[#D9CFF2]/25 bg-gradient-to-br from-[#FFFFFF] via-[#F0EDE6] to-[#FAF7F2] overflow-hidden"
+                    className="relative rounded-3xl border border-[#8B5CF6]/25 bg-gradient-to-br from-[#FFFFFF] via-[#E4DAEF] to-[#EEE8F8] overflow-hidden"
                 >
                     {/* Top accent line */}
                     <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E8721A] via-[#4A2D8F] to-[#E8721A]" />
@@ -80,7 +80,7 @@ export default function OfferSection() {
                                     </span>
                                 </div>
 
-                                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1A112E] mb-2">
+                                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1A0E35] mb-2">
                                     {offer.packageName}
                                 </h3>
 
@@ -90,21 +90,19 @@ export default function OfferSection() {
                                     </span>
                                 </div>
 
-                                <p className="text-sm text-[#59497A] tracking-wide mb-6">
+                                <p className="text-sm text-[#3D2A6E] tracking-wide mb-6">
                                     {offer.priceNote}
                                 </p>
 
-                                <p className="text-sm text-[#59497A]/85 font-light leading-relaxed mb-8">
+                                <p className="text-sm text-[#3D2A6E]/85 font-normal leading-relaxed mb-8">
                                     {offer.description}
                                 </p>
 
                                 <a
                                     href="#contact"
-                                    className="group relative inline-flex items-center gap-3 text-sm font-semibold tracking-[0.12em] uppercase text-[#1A112E] bg-[#1A112E]/5 backdrop-blur-md border border-[#1A112E]/10 px-8 py-4 rounded-full hover:bg-[#1A112E]/10 hover:border-[#E8721A]/50 transition-all duration-400 overflow-hidden shadow-[0_0_20px_rgba(232,114,26,0.1)] hover:shadow-[0_0_40px_rgba(232,114,26,0.3)] hover:scale-[1.02]"
+                                    className="group relative inline-flex items-center justify-center text-sm font-semibold tracking-[0.12em] uppercase text-white bg-[#E8721A] px-8 py-4 rounded-full hover:bg-[#C05A0E] hover:shadow-[0_0_40px_rgba(232,114,26,0.5)] hover:scale-[1.02] transition-all duration-300 shadow-[0_4px_24px_rgba(232,114,26,0.35)]"
                                 >
-                                    <div className="absolute inset-0 bg-gradient-to-r from-[#E8721A]/0 via-[#E8721A]/10 to-[#F5A96A]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                     Secure Your Spot
-                                    <ArrowRight size={16} className="text-[#E8721A] group-hover:translate-x-1 transition-transform duration-300" />
                                 </a>
                             </div>
 
@@ -112,14 +110,14 @@ export default function OfferSection() {
                             <div className="lg:col-span-7">
                                 {/* Timeline */}
                                 <div className="mb-10">
-                                    <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#59497A] mb-5">
+                                    <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#3D2A6E] mb-5">
                                         Engagement Timeline
                                     </p>
                                     <div className="space-y-0">
                                         {offer.timeline.map((item, index) => (
                                             <div
                                                 key={index}
-                                                className="flex gap-5 py-4 border-b border-[#D9CFF2]/10 last:border-b-0"
+                                                className="flex gap-5 py-4 border-b border-[#8B5CF6]/20 last:border-b-0"
                                             >
                                                 <div className="flex-shrink-0 w-16 pt-0.5">
                                                     <span className="text-[11px] font-bold tracking-wider text-[#E8721A] uppercase">
@@ -127,10 +125,10 @@ export default function OfferSection() {
                                                     </span>
                                                 </div>
                                                 <div>
-                                                    <div className="font-semibold text-sm text-[#1A112E] mb-1">
+                                                    <div className="font-semibold text-sm text-[#1A0E35] mb-1">
                                                         {item.title}
                                                     </div>
-                                                    <p className="text-sm text-[#59497A]/85 font-light leading-relaxed">
+                                                    <p className="text-sm text-[#3D2A6E]/85 font-normal leading-relaxed">
                                                         {item.content}
                                                     </p>
                                                 </div>
@@ -141,7 +139,7 @@ export default function OfferSection() {
 
                                 {/* What's Included */}
                                 <div>
-                                    <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#59497A] mb-5">
+                                    <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#3D2A6E] mb-5">
                                         What's Included
                                     </p>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -153,7 +151,7 @@ export default function OfferSection() {
                                                 <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#E8721A]/10 flex items-center justify-center mt-0.5">
                                                     <Check size={10} className="text-[#E8721A]" />
                                                 </div>
-                                                <span className="text-sm text-[#59497A]/85 font-light leading-snug group-hover:text-[#59497A]/80 transition-colors">
+                                                <span className="text-sm text-[#3D2A6E]/85 font-normal leading-snug group-hover:text-[#3D2A6E]/80 transition-colors">
                                                     {item}
                                                 </span>
                                             </div>
@@ -165,14 +163,14 @@ export default function OfferSection() {
                     </div>
 
                     {/* Optional Add-Ons Footer */}
-                    <div className="border-t border-[#BCAED9]/25 bg-[#1A112E]/[0.03] p-7 sm:p-10 lg:px-12 lg:py-8 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#1A112E]/[0.02] to-transparent pointer-events-none" />
+                    <div className="border-t border-[#8B5CF6]/25 bg-[#130E20]/[0.03] p-7 sm:p-10 lg:px-12 lg:py-8 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#130E20]/[0.02] to-transparent pointer-events-none" />
                         <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
                             <div className="flex-shrink-0">
-                                <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#59497A] mb-1">
+                                <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#3D2A6E] mb-1">
                                     Enhancements
                                 </p>
-                                <h4 className="text-base sm:text-lg font-serif text-[#1A112E]">
+                                <h4 className="text-base sm:text-lg font-serif text-[#1A0E35]">
                                     Optional Add-Ons
                                 </h4>
                             </div>
@@ -186,10 +184,10 @@ export default function OfferSection() {
                                 ].map((item, index) => (
                                     <div 
                                         key={index} 
-                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1A112E]/5 border border-[#1A112E]/10 hover:border-[#E8721A]/30 hover:bg-[#1A112E]/10 transition-all duration-300 group cursor-default"
+                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#6B3FC0]/5 border border-[#6B3FC0]/15 hover:border-[#E8721A]/30 hover:bg-[#130E20]/10 transition-all duration-300 group cursor-default"
                                     >
-                                        <Plus size={12} className="text-[#4A2D8F] group-hover:text-[#E8721A] transition-colors" />
-                                        <span className="text-xs sm:text-sm text-[#59497A]/90 group-hover:text-[#1A112E] transition-colors">{item}</span>
+                                        <Plus size={12} className="text-[#6B3FC0] group-hover:text-[#E8721A] transition-colors" />
+                                        <span className="text-xs sm:text-sm text-[#3D2A6E]/90 group-hover:text-[#1A0E35] transition-colors">{item}</span>
                                     </div>
                                 ))}
                             </div>
