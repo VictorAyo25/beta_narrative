@@ -5,20 +5,42 @@ import { useEffect, useState } from 'react';
 
 export default function FloatingCTA() {
     const { scrollY } = useScroll();
-    const [isVisible, setIsVisible] = useState(false);
+    const [pastHero, setPastHero] = useState(false);
+    const [staticVisible, setStaticVisible] = useState(false);
 
+    // Show only after scrolling past the hero
     useEffect(() => {
         return scrollY.on('change', (latest) => {
-            // Show the floating CTA after scrolling past the Hero section (~500px)
-            setIsVisible(latest > 500);
+            setPastHero(latest > 500);
         });
     }, [scrollY]);
+
+    // Hide when the static Offer button is on screen
+    useEffect(() => {
+        const target = document.getElementById('offer-cta-btn');
+        if (!target) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => setStaticVisible(entry.isIntersecting),
+            // 80px margin so the float fades before they physically overlap
+            { rootMargin: '80px' }
+        );
+
+        observer.observe(target);
+        return () => observer.disconnect();
+    }, []);
+
+    const isVisible = pastHero && !staticVisible;
 
     return (
         <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50, scale: isVisible ? 1 : 0.9 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            animate={{
+                opacity: isVisible ? 1 : 0,
+                y: isVisible ? 0 : 50,
+                scale: isVisible ? 1 : 0.9,
+            }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className={`fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 ${isVisible ? 'pointer-events-auto' : 'pointer-events-none'}`}
         >
             <a
@@ -31,3 +53,4 @@ export default function FloatingCTA() {
         </motion.div>
     );
 }
+

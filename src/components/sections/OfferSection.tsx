@@ -99,6 +99,7 @@ export default function OfferSection() {
                                 </p>
 
                                 <a
+                                    id="offer-cta-btn"
                                     href="#contact"
                                     className="group relative inline-flex items-center justify-center text-sm font-semibold tracking-[0.12em] uppercase text-white bg-[#E8721A] px-8 py-4 rounded-full hover:bg-[#C05A0E] hover:shadow-[0_0_40px_rgba(232,114,26,0.5)] hover:scale-[1.02] transition-all duration-300 shadow-[0_4px_24px_rgba(232,114,26,0.35)]"
                                 >
