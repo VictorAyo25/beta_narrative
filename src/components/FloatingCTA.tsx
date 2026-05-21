@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 export default function FloatingCTA() {
     const { scrollY } = useScroll();
     const [pastHero, setPastHero] = useState(false);
-    const [staticVisible, setStaticVisible] = useState(false);
+    const [staticOfferVisible, setStaticOfferVisible] = useState(false);
+    const [staticContactVisible, setStaticContactVisible] = useState(false);
 
     // Show only after scrolling past the hero
     useEffect(() => {
@@ -15,22 +16,33 @@ export default function FloatingCTA() {
         });
     }, [scrollY]);
 
-    // Hide when the static Offer button is on screen
+    // Hide when either main static CTA button is on screen
     useEffect(() => {
-        const target = document.getElementById('offer-cta-btn');
-        if (!target) return;
+        const offerTarget = document.getElementById('offer-cta-btn');
+        const contactTarget = document.getElementById('contact-submit-btn');
 
-        const observer = new IntersectionObserver(
-            ([entry]) => setStaticVisible(entry.isIntersecting),
-            // 80px margin so the float fades before they physically overlap
-            { rootMargin: '80px' }
+        const observerOptions = { rootMargin: '80px' };
+
+        const offerObserver = new IntersectionObserver(
+            ([entry]) => setStaticOfferVisible(entry.isIntersecting),
+            observerOptions
         );
 
-        observer.observe(target);
-        return () => observer.disconnect();
+        const contactObserver = new IntersectionObserver(
+            ([entry]) => setStaticContactVisible(entry.isIntersecting),
+            observerOptions
+        );
+
+        if (offerTarget) offerObserver.observe(offerTarget);
+        if (contactTarget) contactObserver.observe(contactTarget);
+
+        return () => {
+            offerObserver.disconnect();
+            contactObserver.disconnect();
+        };
     }, []);
 
-    const isVisible = pastHero && !staticVisible;
+    const isVisible = pastHero && !staticOfferVisible && !staticContactVisible;
 
     return (
         <motion.div

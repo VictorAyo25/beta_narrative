@@ -234,6 +234,7 @@ export default function ContactSection() {
 
                             {/* Submit Button */}
                             <button
+                                id="contact-submit-btn"
                                 type="submit"
                                 disabled={isSubmitting}
                                 className="w-full flex items-center justify-center gap-2.5 py-4 bg-[#E8721A] text-white text-sm font-semibold tracking-[0.12em] uppercase rounded-full hover:bg-[#C05A0E] hover:shadow-[0_0_40px_rgba(232,114,26,0.5)] hover:scale-[1.01] transition-all duration-300 shadow-[0_4px_24px_rgba(232,114,26,0.35)] disabled:opacity-50 disabled:cursor-not-allowed mt-2"
