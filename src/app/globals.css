@@ -2,18 +2,18 @@
 
 :root {
   --purple: #4A2D8F;
-  --purple-mid: #7A5EBD;
-  --purple-light: #C5B8EA;
-  --purple-pale: #EFEBF7;
-  --orange: #E8721A;
-  --orange-light: #F5A96A;
+  --purple-mid: #4A2D8F;
+  --purple-light: #311B6B;
+  --purple-pale: #EDE6FA;
+  --orange: #D65E0C;
+  --orange-light: #E8721A;
   --orange-pale: #FDE8D4;
-  --orange-dark: #A34A08;
-  --ink: #1E1B29;
-  --ink-soft: #272336;
-  --ink-card: #2F2A42;
-  --warm-white: #FAF9FF;
-  --muted: #A096C2;
+  --orange-dark: #8F3C00;
+  --ink: #FAF7F2;
+  --ink-soft: #F0EDE6;
+  --ink-card: #FFFFFF;
+  --warm-white: #130E20;
+  --muted: #4F4666;
   --font-heading: var(--font-playfair, 'Outfit', sans-serif);
   --font-dm-sans: 'DM Sans', sans-serif;
 }
@@ -102,33 +102,33 @@ select {
 }
 
 .glass {
-  background: rgba(30, 27, 41, 0.75);
+  background: rgba(255, 254, 252, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(197, 184, 234, 0.15);
+  border: 1px solid rgba(26, 17, 46, 0.08);
 }
 
 .glass-light {
-  background: rgba(47, 42, 66, 0.55);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(197, 184, 234, 0.1);
+  border: 1px solid rgba(26, 17, 46, 0.05);
 }
 
 .mobile-menu {
-  background: rgba(39, 35, 54, 0.96);
+  background: rgba(250, 246, 238, 0.97);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(197, 184, 234, 0.18);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 40px rgba(197, 184, 234, 0.06);
+  border: 1px solid rgba(26, 17, 46, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(26, 17, 46, 0.08), 0 0 40px rgba(74, 45, 143, 0.03);
 }
 
 .glow-orange {
-  box-shadow: 0 0 40px rgba(232, 114, 26, 0.12), 0 0 80px rgba(232, 114, 26, 0.04);
+  box-shadow: 0 0 40px rgba(232, 114, 26, 0.05), 0 0 80px rgba(232, 114, 26, 0.02);
 }
 
 .glow-purple {
-  box-shadow: 0 0 40px rgba(122, 94, 189, 0.15), 0 0 80px rgba(122, 94, 189, 0.06);
+  box-shadow: 0 0 40px rgba(74, 45, 143, 0.05), 0 0 80px rgba(74, 45, 143, 0.02);
 }
 
 .card-hover {

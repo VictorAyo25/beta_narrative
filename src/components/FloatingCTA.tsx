@@ -24,7 +24,7 @@ export default function FloatingCTA() {
         >
             <a
                 href="#contact"
-                className="group relative inline-flex items-center gap-3 text-sm font-semibold tracking-[0.12em] uppercase text-[#FAF9FF] bg-[#2F2A42]/90 backdrop-blur-xl border border-white/10 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.25)] hover:border-[#E8721A]/50 transition-all duration-400 overflow-hidden"
+                className="group relative inline-flex items-center gap-3 text-sm font-semibold tracking-[0.12em] uppercase text-[#1A112E] bg-[#FFFFFF]/90 backdrop-blur-xl border border-[#1A112E]/10 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.25)] hover:border-[#E8721A]/50 transition-all duration-400 overflow-hidden"
             >
                 <div className="absolute inset-0 bg-gradient-to-r from-[#E8721A]/0 via-[#E8721A]/10 to-[#F5A96A]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 <span className="hidden sm:inline">Secure Your Spot</span>
