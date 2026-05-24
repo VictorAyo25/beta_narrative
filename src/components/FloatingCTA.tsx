@@ -2,9 +2,11 @@
 
 import { motion, useScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useContent } from '@/context/ContentContext';
 
 export default function FloatingCTA() {
     const { scrollY } = useScroll();
+    const { content } = useContent();
     const [pastHero, setPastHero] = useState(false);
     const [staticOfferVisible, setStaticOfferVisible] = useState(false);
     const [staticContactVisible, setStaticContactVisible] = useState(false);
@@ -18,13 +20,23 @@ export default function FloatingCTA() {
 
     // Hide when either main static CTA button is on screen
     useEffect(() => {
-        const offerTarget = document.getElementById('offer-cta-btn');
+        const offerTargets = document.querySelectorAll('[id^="offer-cta-btn-"]');
         const contactTarget = document.getElementById('contact-submit-btn');
 
         const observerOptions = { rootMargin: '80px' };
+        const visibleOffers = new Set<string>();
 
         const offerObserver = new IntersectionObserver(
-            ([entry]) => setStaticOfferVisible(entry.isIntersecting),
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        visibleOffers.add(entry.target.id);
+                    } else {
+                        visibleOffers.delete(entry.target.id);
+                    }
+                });
+                setStaticOfferVisible(visibleOffers.size > 0);
+            },
             observerOptions
         );
 
@@ -33,14 +45,14 @@ export default function FloatingCTA() {
             observerOptions
         );
 
-        if (offerTarget) offerObserver.observe(offerTarget);
+        offerTargets.forEach((target) => offerObserver.observe(target));
         if (contactTarget) contactObserver.observe(contactTarget);
 
         return () => {
             offerObserver.disconnect();
             contactObserver.disconnect();
         };
-    }, []);
+    }, [content]);
 
     const isVisible = pastHero && !staticOfferVisible && !staticContactVisible;
 

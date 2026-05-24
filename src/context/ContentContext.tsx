@@ -14,16 +14,21 @@ interface ContentContextType {
 
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
-// Create default content object once
 const fallbackContent: SiteContent = {
     id: 'default',
     ...defaultSiteContent,
     updatedAt: new Date(),
 };
 
-export function ContentProvider({ children }: { children: ReactNode }) {
-    // Initialize with default content immediately — no loading flash
-    const [content, setContent] = useState<SiteContent>(fallbackContent);
+export function ContentProvider({
+    children,
+    initialContent,
+}: {
+    children: ReactNode;
+    initialContent?: SiteContent;
+}) {
+    // If the server already fetched real content, use it — no flash of defaults
+    const [content, setContent] = useState<SiteContent>(initialContent ?? fallbackContent);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -36,16 +41,19 @@ export function ContentProvider({ children }: { children: ReactNode }) {
         } catch (err) {
             console.error('Error fetching content:', err);
             setError('Failed to load content');
-            // Keep existing content on error
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        // Fetch from Firestore in background — content already shows defaults
-        fetchContent();
+        // Only do the client-side fetch if no server-provided content was given
+        if (!initialContent) {
+            fetchContent();
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
 
     return (
         <ContentContext.Provider

@@ -27,6 +27,7 @@ interface AuthContextType {
     resetPassword: (email: string) => Promise<void>;
     changePassword: (newPassword: string) => Promise<void>;
     clearError: () => void;
+    loginAsDev?: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -39,8 +40,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user);
-            setLoading(false);
+            // Only overwrite if we don't have a mock dev user active
+            if (user || !user && (!window.sessionStorage.getItem('dev_bypass'))) {
+                setUser(user);
+                setLoading(false);
+            } else if (window.sessionStorage.getItem('dev_bypass')) {
+                setUser({
+                    email: 'dev@betanarrative.com',
+                    uid: 'dev-user-id',
+                    getIdToken: async () => 'mock-dev-token'
+                } as any);
+                setLoading(false);
+            } else {
+                setLoading(false);
+            }
         });
 
         return () => unsubscribe();
@@ -50,6 +63,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         try {
             setError(null);
             setLoading(true);
+            window.sessionStorage.removeItem('dev_bypass');
             await signInWithEmailAndPassword(auth, email, password);
             router.push('/admin');
         } catch (err: any) {
@@ -61,9 +75,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
     };
 
+    const loginAsDev = () => {
+        setError(null);
+        setLoading(true);
+        window.sessionStorage.setItem('dev_bypass', 'true');
+        setUser({
+            email: 'dev@betanarrative.com',
+            uid: 'dev-user-id',
+            getIdToken: async () => 'mock-dev-token'
+        } as any);
+        router.push('/admin');
+        setLoading(false);
+    };
+
     const logout = async () => {
         try {
+            window.sessionStorage.removeItem('dev_bypass');
             await signOut(auth);
+            setUser(null);
             router.push('/admin/login');
         } catch (err: any) {
             console.error('Logout error:', err);
@@ -107,6 +136,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 resetPassword,
                 changePassword,
                 clearError,
+                loginAsDev,
             }}
         >
             {children}

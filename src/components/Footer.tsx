@@ -1,7 +1,24 @@
+'use client';
+
 import Link from 'next/link';
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
+
+    const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+        const targetId = href.replace('#', '');
+        const element = document.getElementById(targetId);
+        if (element) {
+            const headerOffset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    };
 
     return (
         <footer className="relative py-12 px-5 sm:px-8 lg:px-10 border-t border-[#D9CFF2]/15 bg-[#EEE8F8]">
@@ -19,10 +36,41 @@ export default function Footer() {
 
                     {/* Links */}
                     <div className="flex items-center gap-6">
-                        <a href="#problem" className="text-xs text-[#3D2A6E] hover:text-[#E8721A] transition-colors duration-300">The Problem</a>
-                        <a href="#why" className="text-xs text-[#3D2A6E] hover:text-[#E8721A] transition-colors duration-300">Why Us</a>
-                        <a href="#results" className="text-xs text-[#3D2A6E] hover:text-[#E8721A] transition-colors duration-300">Results</a>
-                        <a href="#contact" className="text-xs text-[#3D2A6E] hover:text-[#E8721A] transition-colors duration-300">Apply</a>
+                        <a 
+                            href="#problem" 
+                            onClick={(e) => scrollToSection(e, '#problem')}
+                            className="text-xs text-[#3D2A6E] hover:text-[#E8721A] transition-colors duration-300"
+                        >
+                            The Problem
+                        </a>
+                        <a 
+                            href="#why" 
+                            onClick={(e) => scrollToSection(e, '#why')}
+                            className="text-xs text-[#3D2A6E] hover:text-[#E8721A] transition-colors duration-300"
+                        >
+                            Why Us
+                        </a>
+                        <a 
+                            href="#results" 
+                            onClick={(e) => scrollToSection(e, '#results')}
+                            className="text-xs text-[#3D2A6E] hover:text-[#E8721A] transition-colors duration-300"
+                        >
+                            Results
+                        </a>
+                        <a 
+                            href="#offer" 
+                            onClick={(e) => scrollToSection(e, '#offer')}
+                            className="text-xs text-[#3D2A6E] hover:text-[#E8721A] transition-colors duration-300"
+                        >
+                            Offer
+                        </a>
+                        <a 
+                            href="#contact" 
+                            onClick={(e) => scrollToSection(e, '#contact')}
+                            className="text-xs text-[#3D2A6E] hover:text-[#E8721A] transition-colors duration-300"
+                        >
+                            Apply
+                        </a>
                     </div>
 
                     {/* Copyright */}

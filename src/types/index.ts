@@ -11,7 +11,7 @@ export interface SiteContent {
     pain: PainContent;
     value: ValueContent;
     results: ResultsContent;
-    offer: OfferContent;
+    offer: OfferSectionContent;
     contact: ContactContent;
     updatedAt: Date;
 }
@@ -59,16 +59,22 @@ export interface Result {
     description: string;
 }
 
-export interface OfferContent {
+export interface OfferSectionContent {
     sectionLabel: string;
     title: string;
     titleEmphasis: string;
-    badge: string;
+    offers: OfferContent[];
+}
+
+export interface OfferContent {
     packageName: string;
+    badge: string;
+    tagline: string;
+    hook: string;
     price: string;
+    priceSecond?: string;
     priceNote: string;
     description: string;
-    timeline: TimelineItem[];
     includes: string[];
 }
 

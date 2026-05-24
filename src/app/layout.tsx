@@ -1,8 +1,9 @@
 /**
  * Root Layout
- * 
- * Main layout wrapper for the entire application.
- * Includes global styles, fonts, and context providers.
+ *
+ * Async Server Component — fetches real Firestore content before the first
+ * paint and passes it into ContentProvider as `initialContent`.
+ * This eliminates the flash of stale default content on every page load.
  */
 
 import type { Metadata } from 'next';
@@ -10,11 +11,14 @@ import { Outfit, DM_Sans } from 'next/font/google';
 import './globals.css';
 import { ContentProvider } from '@/context/ContentContext';
 import { AuthProvider } from '@/context/AuthContext';
+import { getAdminDb } from '@/lib/firebase-admin';
+import { defaultSiteContent } from '@/lib/default-content';
+import { SiteContent } from '@/types';
 
 // Font configurations
 const outfit = Outfit({
   subsets: ['latin'],
-  variable: '--font-playfair', // Keeping the variable name the same so we don't break tailwind mappings in globals.css
+  variable: '--font-playfair', // Keeping the variable name so Tailwind mappings in globals.css stay intact
   display: 'swap',
 });
 
@@ -57,15 +61,48 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+/**
+ * Server-side content fetch using the Admin SDK.
+ * Falls back to defaults gracefully — never crashes the page.
+ */
+async function getServerContent(): Promise<SiteContent> {
+  try {
+    const db = getAdminDb();
+    if (!db) throw new Error('Admin DB unavailable');
+
+    const docSnap = await db.collection('content').doc('site-content').get();
+
+    if (docSnap.exists) {
+      const data = docSnap.data()!;
+      return {
+        id: docSnap.id,
+        ...data,
+        updatedAt: data.updatedAt?.toDate?.() ?? new Date(),
+      } as SiteContent;
+    }
+  } catch {
+    // Fall through — Firestore unavailable in this environment
+  }
+
+  return {
+    id: 'default',
+    ...defaultSiteContent,
+    updatedAt: new Date(),
+  };
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Fetch on the server so the very first render has real data
+  const initialContent = await getServerContent();
+
   return (
     <html lang="en" className={`${outfit.variable} ${dmSans.variable}`}>
       <body className="font-sans bg-[#EEE8F8] text-[#1A0E35] antialiased">
-        <ContentProvider>
+        <ContentProvider initialContent={initialContent}>
           <AuthProvider>
             {children}
           </AuthProvider>

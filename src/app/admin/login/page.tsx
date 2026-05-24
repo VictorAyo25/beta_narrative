@@ -7,7 +7,7 @@ import { Mail, Lock, ArrowLeft, CheckCircle, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminLoginPage() {
-    const { login, resetPassword, loading, error, clearError } = useAuth();
+    const { login, resetPassword, loading, error, clearError, loginAsDev } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isResetMode, setIsResetMode] = useState(false);
@@ -193,6 +193,16 @@ export default function AdminLoginPage() {
                                 >
                                     {loading ? 'Signing in...' : 'Sign In'}
                                 </button>
+
+                                {process.env.NODE_ENV === 'development' && (
+                                    <button
+                                        type="button"
+                                        onClick={loginAsDev}
+                                        className="w-full py-3.5 border border-dashed border-[#8B5CF6]/40 text-[#6B3FC0] hover:text-[#E8721A] text-xs font-semibold tracking-[0.15em] uppercase rounded-full hover:bg-[#6B3FC0]/5 transition-all duration-300 mt-2"
+                                    >
+                                        🛠️ Bypass Login (Local Dev)
+                                    </button>
+                                )}
 
                                 <button
                                     type="button"
