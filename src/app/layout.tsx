@@ -15,6 +15,8 @@ import { getAdminDb } from '@/lib/firebase-admin';
 import { defaultSiteContent } from '@/lib/default-content';
 import { SiteContent } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 // Font configurations
 const outfit = Outfit({
   subsets: ['latin'],
