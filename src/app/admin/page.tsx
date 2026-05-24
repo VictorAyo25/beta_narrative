@@ -232,6 +232,7 @@ export default function AdminDashboardPage() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [saveError, setSaveError] = useState<string>('');
     
     // Customizer layout states
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');
@@ -295,10 +296,13 @@ export default function AdminDashboardPage() {
                 setSaveStatus('success');
                 setTimeout(() => setSaveStatus('idle'), 3000);
             } else {
+                const data = await response.json().catch(() => ({}));
+                setSaveError(data.error || `Server error ${response.status}`);
                 setSaveStatus('error');
             }
         } catch (error) {
             console.error('Error saving content:', error);
+            setSaveError(error instanceof Error ? error.message : 'Network error');
             setSaveStatus('error');
         } finally {
             setSaving(false);
@@ -1422,12 +1426,12 @@ export default function AdminDashboardPage() {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 20, scale: 0.95 }}
                             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-3 px-5 py-3.5 bg-[#1F0D0D] border border-rose-500/40 rounded-2xl text-rose-300 text-xs font-semibold shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl whitespace-nowrap"
+                            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-3 px-5 py-3.5 bg-[#1F0D0D] border border-rose-500/40 rounded-2xl text-rose-300 text-xs font-semibold shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl max-w-sm text-center"
                         >
-                            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-rose-500/20">
+                            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-rose-500/20 shrink-0">
                                 <AlertCircle className="w-3.5 h-3.5 text-rose-400" />
                             </span>
-                            Save failed — check your connection and try again.
+                            {saveError || 'Save failed — check your connection and try again.'}
                         </motion.div>
                     )}
                 </AnimatePresence>

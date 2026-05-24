@@ -145,8 +145,9 @@ export async function PUT(request: NextRequest) {
         });
     } catch (error) {
         console.error('Error updating content:', error);
+        const message = error instanceof Error ? error.message : 'Unknown error';
         return NextResponse.json(
-            { error: 'Failed to update content' },
+            { error: `Failed to update content: ${message}` },
             { status: 500 }
         );
     }
