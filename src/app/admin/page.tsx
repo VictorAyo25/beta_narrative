@@ -679,7 +679,7 @@ export default function AdminDashboardPage() {
                             {saving && saveAction === 'publish' ? (
                                 <RefreshCw size={13} className="animate-spin" />
                             ) : (
-                                <Sparkles size={13} />
+                                <Check size={13} />
                             )}
                             <span>Publish Live</span>
                         </button>
