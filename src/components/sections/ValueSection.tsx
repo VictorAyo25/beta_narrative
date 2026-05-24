@@ -6,6 +6,7 @@ import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
 import { Award, Users, MessageSquare } from 'lucide-react';
 import AnimatedCounter from '../AnimatedCounter';
+import GlowCard from '../GlowCard';
 
 const LinkedInIcon = ({ size = 14, className = "" }: { size?: number; className?: string }) => (
     <svg 
@@ -143,36 +144,29 @@ export default function ValueSection() {
                 {/* Credentials Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                     {value.credentials.map((cred, index) => (
-                        <motion.div
+                        <GlowCard
                             key={index}
-                            initial={{ opacity: 0, y: 24 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.12 * index, ease: [0.16, 1, 0.3, 1] }}
-                            className="group relative p-7 rounded-2xl border border-[#130E20]/5 bg-[#EEE8F8]/30 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(232,114,26,0.15)] hover:border-[#E8721A]/30 hover:bg-[#EEE8F8]/50 transition-all duration-500 overflow-hidden"
+                            delay={0.12 * index}
+                            className="group"
                         >
-                            {/* Hover glow */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#130E20]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                            <div className="relative z-10">
-                                <div className="flex items-center gap-3 mb-5">
-                                    <div className="w-10 h-10 rounded-xl border border-[#E8721A]/20 bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(232,114,26,0.5)]">
-                                        {index === 0 && <Award size={16} className="text-[#E8721A]" />}
-                                        {index === 1 && <Users size={16} className="text-[#E8721A]" />}
-                                        {index === 2 && <MessageSquare size={16} className="text-[#E8721A]" />}
-                                    </div>
+                            <div className="flex items-center gap-3 mb-5">
+                                <div className="w-10 h-10 rounded-xl border border-[#E8721A]/20 bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(232,114,26,0.5)]">
+                                    {index === 0 && <Award size={16} className="text-[#E8721A]" />}
+                                    {index === 1 && <Users size={16} className="text-[#E8721A]" />}
+                                    {index === 2 && <MessageSquare size={16} className="text-[#E8721A]" />}
                                 </div>
-                                <div className="font-sans text-4xl sm:text-5xl font-bold text-gradient leading-none mb-3 tracking-tight">
-                                    <AnimatedCounter value={cred.number} />
-                                </div>
-                                <p className="text-sm text-[#3D2A6E]/85 font-normal leading-relaxed">
-                                    {cred.label}
-                                </p>
                             </div>
-                        </motion.div>
+                            <div className="font-sans text-4xl sm:text-5xl font-bold text-gradient leading-none mb-3 tracking-tight">
+                                <AnimatedCounter value={cred.number} />
+                            </div>
+                            <p className="text-sm text-[#3D2A6E]/85 font-normal leading-relaxed">
+                                {cred.label}
+                            </p>
+                        </GlowCard>
                     ))}
                 </div>
             </div>
         </section>
     );
 }
+

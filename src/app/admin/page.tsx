@@ -235,6 +235,7 @@ export default function AdminDashboardPage() {
     const [saving, setSaving] = useState(false);
     const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
     const [saveError, setSaveError] = useState<string>('');
+    const [saveAction, setSaveAction] = useState<'draft' | 'publish'>('draft');
     
     // Customizer layout states
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');
@@ -268,11 +269,12 @@ export default function AdminDashboardPage() {
         }
     };
 
-    const handleSave = async () => {
+    const handleSave = async (action: 'draft' | 'publish' = 'draft') => {
         if (!content) return;
 
         try {
             setSaving(true);
+            setSaveAction(action);
             setSaveStatus('idle');
 
             const token = await user?.getIdToken();
@@ -284,6 +286,7 @@ export default function AdminDashboardPage() {
                     Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
+                    action,
                     content: {
                         hero: content.hero,
                         pain: content.pain,
@@ -298,7 +301,7 @@ export default function AdminDashboardPage() {
             if (response.ok) {
                 setSaveStatus('success');
                 setOriginalContent(JSON.parse(JSON.stringify(content)));
-                setTimeout(() => setSaveStatus('idle'), 3000);
+                setTimeout(() => setSaveStatus('idle'), 4000);
             } else {
                 const data = await response.json().catch(() => ({}));
                 setSaveError(data.error || `Server error ${response.status}`);
@@ -644,16 +647,41 @@ export default function AdminDashboardPage() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <button
-                            onClick={handleSave}
-                            disabled={saving}
-                            className="relative px-6 py-2.5 bg-gradient-to-r from-[#E8721A] to-[#F08C3A] text-white rounded-2xl text-xs font-bold tracking-wide flex items-center gap-2.5 transition-all duration-200 hover:shadow-[0_0_24px_rgba(232,114,26,0.45)] hover:scale-[1.03] active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed ring-1 ring-white/10"
+                        <a
+                            href="/?preview=true"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2.5 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white rounded-2xl text-xs font-semibold flex items-center gap-1.5 transition-all select-none"
+                            title="Open landing page with dynamic draft preview in a new tab"
                         >
-                            {saving
-                                ? <RefreshCw size={13} className="animate-spin" />
-                                : <Save size={13} />
-                            }
-                            <span>{saving ? 'Saving…' : 'Save Changes'}</span>
+                            <Eye size={13} />
+                            <span>Preview Draft</span>
+                        </a>
+
+                        <button
+                            onClick={() => handleSave('draft')}
+                            disabled={saving}
+                            className="px-4 py-2.5 bg-white/10 border border-white/20 hover:bg-white/20 hover:border-white/30 text-white rounded-2xl text-xs font-bold tracking-wide flex items-center gap-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed select-none"
+                        >
+                            {saving && saveAction === 'draft' ? (
+                                <RefreshCw size={13} className="animate-spin" />
+                            ) : (
+                                <FileText size={13} />
+                            )}
+                            <span>Save Draft</span>
+                        </button>
+
+                        <button
+                            onClick={() => handleSave('publish')}
+                            disabled={saving}
+                            className="relative px-5 py-2.5 bg-gradient-to-r from-[#E8721A] to-[#F08C3A] hover:shadow-[0_0_24px_rgba(232,114,26,0.4)] text-white rounded-2xl text-xs font-extrabold tracking-wide flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed ring-1 ring-white/10 select-none"
+                        >
+                            {saving && saveAction === 'publish' ? (
+                                <RefreshCw size={13} className="animate-spin" />
+                            ) : (
+                                <Sparkles size={13} />
+                            )}
+                            <span>Publish Live</span>
                         </button>
                     </div>
 
@@ -1489,7 +1517,9 @@ export default function AdminDashboardPage() {
                             <span className="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/20">
                                 <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
                             </span>
-                            Changes saved — your site is now live.
+                            {saveAction === 'publish' 
+                                ? 'Content successfully published — the changes are now live!' 
+                                : 'Draft saved successfully — preview it using the "Preview Draft" button.'}
                         </motion.div>
                     )}
                     {saveStatus === 'error' && (

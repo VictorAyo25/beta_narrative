@@ -42,7 +42,7 @@ async function verifyAuth(request: NextRequest) {
 
 /**
  * GET /api/content
- * Fetches the current site content.
+ * Fetches the current site content (latest draft for CMS workspace).
  */
 export async function GET() {
     try {
@@ -60,8 +60,14 @@ export async function GET() {
             });
         }
 
-        const docRef = db.collection(CONTENT_COLLECTION).doc(CONTENT_DOC_ID);
-        const docSnap = await docRef.get();
+        // Try loading draft first, fallback to live
+        let docRef = db.collection(CONTENT_COLLECTION).doc('site-content-draft');
+        let docSnap = await docRef.get();
+
+        if (!docSnap.exists) {
+            docRef = db.collection(CONTENT_COLLECTION).doc('site-content');
+            docSnap = await docRef.get();
+        }
 
         if (docSnap.exists) {
             const data = docSnap.data();
@@ -95,7 +101,7 @@ export async function GET() {
 
 /**
  * PUT /api/content
- * Updates the site content. Requires authentication.
+ * Updates the site content. Supports saving as 'draft' or 'publish'.
  */
 export async function PUT(request: NextRequest) {
     try {
@@ -120,7 +126,7 @@ export async function PUT(request: NextRequest) {
         }
 
         const body = await request.json();
-        const { content } = body;
+        const { content, action } = body; // action: 'draft' | 'publish'
 
         if (!content) {
             return NextResponse.json(
@@ -129,8 +135,11 @@ export async function PUT(request: NextRequest) {
             );
         }
 
-        // Update content in Firestore
-        const docRef = db.collection(CONTENT_COLLECTION).doc(CONTENT_DOC_ID);
+        const isPublish = action === 'publish';
+        const docId = isPublish ? 'site-content' : 'site-content-draft';
+
+        // Update target content in Firestore
+        const docRef = db.collection(CONTENT_COLLECTION).doc(docId);
         await docRef.set(
             {
                 ...content,
@@ -139,9 +148,21 @@ export async function PUT(request: NextRequest) {
             { merge: true }
         );
 
+        // Keep draft synchronized if publishing live
+        if (isPublish) {
+            const draftRef = db.collection(CONTENT_COLLECTION).doc('site-content-draft');
+            await draftRef.set(
+                {
+                    ...content,
+                    updatedAt: new Date(),
+                },
+                { merge: true }
+            );
+        }
+
         return NextResponse.json({
             success: true,
-            message: 'Content updated successfully',
+            message: isPublish ? 'Content published successfully' : 'Draft saved successfully',
         });
     } catch (error) {
         console.error('Error updating content:', error);

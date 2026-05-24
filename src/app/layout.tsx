@@ -1,19 +1,7 @@
-/**
- * Root Layout
- *
- * Async Server Component — fetches real Firestore content before the first
- * paint and passes it into ContentProvider as `initialContent`.
- * This eliminates the flash of stale default content on every page load.
- */
-
 import type { Metadata } from 'next';
 import { Outfit, DM_Sans } from 'next/font/google';
 import './globals.css';
-import { ContentProvider } from '@/context/ContentContext';
 import { AuthProvider } from '@/context/AuthContext';
-import { getAdminDb } from '@/lib/firebase-admin';
-import { defaultSiteContent } from '@/lib/default-content';
-import { SiteContent } from '@/types';
 
 export const dynamic = 'force-dynamic';
 
@@ -63,52 +51,17 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * Server-side content fetch using the Admin SDK.
- * Falls back to defaults gracefully — never crashes the page.
- */
-async function getServerContent(): Promise<SiteContent> {
-  try {
-    const db = getAdminDb();
-    if (!db) throw new Error('Admin DB unavailable');
-
-    const docSnap = await db.collection('content').doc('site-content').get();
-
-    if (docSnap.exists) {
-      const data = docSnap.data()!;
-      return {
-        id: docSnap.id,
-        ...data,
-        updatedAt: data.updatedAt?.toDate?.() ?? new Date(),
-      } as SiteContent;
-    }
-  } catch {
-    // Fall through — Firestore unavailable in this environment
-  }
-
-  return {
-    id: 'default',
-    ...defaultSiteContent,
-    updatedAt: new Date(),
-  };
-}
-
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Fetch on the server so the very first render has real data
-  const initialContent = await getServerContent();
-
   return (
     <html lang="en" className={`${outfit.variable} ${dmSans.variable}`}>
       <body className="font-sans bg-[#EEE8F8] text-[#1A0E35] antialiased">
-        <ContentProvider initialContent={initialContent}>
-          <AuthProvider>
-            {children}
-          </AuthProvider>
-        </ContentProvider>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
