@@ -55,6 +55,15 @@ export default function ValueSection() {
             <motion.div style={{ y: y2 }} className="absolute bottom-[10%] right-[-5%] w-[300px] h-[300px] rounded-full bg-[#E8721A]/8 blur-[80px] pointer-events-none" />
  
             <div className="max-w-6xl mx-auto relative">
+                {/* Mobile Title (visible only on mobile) */}
+                <div className="lg:hidden mb-8">
+                    <SectionLabel>{value.sectionLabel}</SectionLabel>
+                    <h2 className="font-serif text-3xl sm:text-4xl font-normal leading-[1.15] text-[#1A0E35] mt-5">
+                        {value.title}{' '}
+                        <em className="italic text-[#E8721A]">{value.titleEmphasis}</em>
+                    </h2>
+                </div>
+
                 {/* Header with Image */}
                 <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${hasCredentials ? 'mb-16' : ''}`}>
                     {/* Text Content */}
@@ -63,12 +72,16 @@ export default function ValueSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: '-100px' }}
                         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                        className="order-2 lg:order-1"
                     >
-                        <SectionLabel>{value.sectionLabel}</SectionLabel>
-                        <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#1A0E35] mt-5 mb-6">
-                            {value.title}{' '}
-                            <em className="italic text-[#E8721A]">{value.titleEmphasis}</em>
-                        </h2>
+                        {/* Desktop Title (hidden on mobile) */}
+                        <div className="hidden lg:block">
+                            <SectionLabel>{value.sectionLabel}</SectionLabel>
+                            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#1A0E35] mt-5 mb-6">
+                                {value.title}{' '}
+                                <em className="italic text-[#E8721A]">{value.titleEmphasis}</em>
+                            </h2>
+                        </div>
                         <div className="space-y-5 text-base text-[#1A0E35]/80 font-normal leading-relaxed">
                             {value.body.split('\n\n').map((paragraph, idx) => (
                                 <p key={idx}>
@@ -84,7 +97,7 @@ export default function ValueSection() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true, margin: '-100px' }}
                         transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative flex justify-center lg:justify-end"
+                        className="relative flex justify-center lg:justify-end order-1 lg:order-2"
                     >
                         <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80">
                             {/* Gradient border ring */}

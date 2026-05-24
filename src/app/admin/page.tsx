@@ -90,10 +90,10 @@ function ValuePreview({ sectionLabel, title, titleEmphasis, body, credentials, p
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 items-center">
-                    <div className="sm:col-span-3 text-[10px] text-[#1A0E35]/80 leading-relaxed whitespace-pre-line">
+                    <div className="order-2 sm:order-1 sm:col-span-3 text-[10px] text-[#1A0E35]/80 leading-relaxed whitespace-pre-line">
                         {body || 'Body description paragraph...'}
                     </div>
-                    <div className="sm:col-span-2 flex flex-col items-center bg-[#FAF9FC] p-3 rounded-xl border border-[#E4DAEF]/50 relative group shrink-0">
+                    <div className="order-1 sm:order-2 sm:col-span-2 flex flex-col items-center bg-[#FAF9FC] p-3 rounded-xl border border-[#E4DAEF]/50 relative group shrink-0">
                         <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#6B3FC0]/30 mb-1.5">
                             <img
                                 src={profileImage || "/images/Favour.JPG"}
