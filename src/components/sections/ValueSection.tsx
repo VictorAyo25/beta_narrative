@@ -93,8 +93,8 @@ export default function ValueSection() {
                             {/* Image container - circular */}
                             <div className="absolute inset-[4px] rounded-full overflow-hidden">
                                 <Image
-                                    src="/images/Favour.JPG"
-                                    alt="Favour - PR & Communications Expert"
+                                    src={value.profileImage || "/images/Favour.JPG"}
+                                    alt={`${value.profileName || "Favour Egbogun"} - PR & Communications Expert`}
                                     fill
                                     className="object-cover object-[center_20%]"
                                     sizes="(max-width: 640px) 256px, (max-width: 1024px) 288px, 320px"
@@ -109,7 +109,7 @@ export default function ValueSection() {
 
                             {/* Floating Caption Pill */}
                             <motion.a 
-                                href="https://www.linkedin.com/in/favour-egbogun-3b748b166/"
+                                href={value.profileLinkedin || "https://www.linkedin.com/in/favour-egbogun-3b748b166/"}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 initial={{ opacity: 0, x: -10, y: 10 }}
@@ -126,10 +126,10 @@ export default function ValueSection() {
                                 <div className="w-2 h-2 rounded-full bg-[#E8721A] animate-pulse shadow-[0_0_10px_rgba(232,114,26,0.8)] flex-shrink-0" />
                                 <div className="flex flex-col flex-grow min-w-0">
                                     <span className="font-serif text-[#1A0E35] text-sm sm:text-[15px] font-semibold tracking-wide drop-shadow-sm leading-none mb-1.5 truncate">
-                                        Favour Egbogun
+                                        {value.profileName || "Favour Egbogun"}
                                     </span>
                                     <span className="text-[#6B3FC0]/90 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] leading-none truncate">
-                                        Communications Strategist
+                                        {value.profileRole || "Communications Strategist"}
                                     </span>
                                 </div>
                                 <div className="h-8 w-[1px] bg-[#8B5CF6]/20 self-center flex-shrink-0" />

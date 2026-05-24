@@ -39,6 +39,10 @@ export interface ValueContent {
     titleEmphasis: string;
     body: string;
     credentials: Credential[];
+    profileName?: string;
+    profileRole?: string;
+    profileLinkedin?: string;
+    profileImage?: string;
 }
 
 export interface Credential {

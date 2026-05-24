@@ -33,6 +33,10 @@ export const defaultSiteContent: Omit<SiteContent, 'id' | 'updatedAt'> = {
         title: 'Strategic visibility,',
         titleEmphasis: 'not just content.',
         body: "Founded by Favour Egbogun, Beta Narrative translates executive experience into undeniable digital authority. Drawing from a deep foundation in strategic communications, we work with leaders at every stage, from rising professionals stepping into their power, to seasoned executives ready for the world to catch up.\n\nWe take your expertise, refined, real, and underrepresented online, and build a narrative so sharp, so unmistakably you, that the right people cannot scroll past.\n\nYour audience, your pillars, your voice, your legacy. We just make sure the world finally hears it.",
+        profileName: 'Favour Egbogun',
+        profileRole: 'Communications Strategist',
+        profileLinkedin: 'https://www.linkedin.com/in/favour-egbogun-3b748b166/',
+        profileImage: '/images/Favour.JPG',
         credentials: [
             {
                 number: '4+',
