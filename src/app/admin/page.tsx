@@ -541,10 +541,24 @@ export default function AdminDashboardPage() {
                             <X size={18} />
                         </button>
                     </div>
-
                     {/* Navigation Menu */}
                     <nav className="p-4 space-y-6">
                         
+                        {/* Logout & User Info */}
+                        <div className="px-3 py-3 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-2.5">
+                            <div className="overflow-hidden">
+                                <p className="text-[8px] text-white/30 uppercase tracking-widest font-bold">Session Email</p>
+                                <p className="text-[11px] text-white/80 truncate font-semibold mt-0.5" title={user?.email || ''}>{user?.email}</p>
+                            </div>
+                            <button
+                                onClick={logout}
+                                className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-[#E8721A]/10 border border-[#E8721A]/20 text-[#E8721A] hover:bg-[#E8721A] hover:text-white rounded-xl text-xs font-bold transition-all duration-200 select-none shadow-[0_2px_8px_rgba(232,114,26,0.05)] active:scale-[0.97]"
+                            >
+                                <LogOut size={13} />
+                                <span>Log Out</span>
+                            </button>
+                        </div>
+
                         {/* Dashboard Group */}
                         <div>
                             <div className="text-[9px] font-bold text-white/40 uppercase tracking-widest px-3 mb-2 select-none">
@@ -588,7 +602,7 @@ export default function AdminDashboardPage() {
                                             className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 ${
                                                 active 
                                                     ? 'bg-gradient-to-r from-[#E8721A] to-[#F5A96A] text-white shadow-[0_0_20px_rgba(232,114,26,0.25)]' 
-                                                    : 'text-white/60 hover:text-white hover:bg-white/5'
+                                                     : 'text-white/60 hover:text-white hover:bg-white/5'
                                             }`}
                                         >
                                             <Icon size={16} />
@@ -602,23 +616,6 @@ export default function AdminDashboardPage() {
                         {/* Settings & Core section removed */}
 
                     </nav>
-                </div>
-
-                {/* Footer User Info */}
-                <div className="p-4 border-t border-white/5 bg-black/20">
-                    <div className="flex items-center justify-between">
-                        <div className="overflow-hidden pr-2">
-                            <p className="text-[9px] text-white/30 uppercase tracking-wider font-semibold">Logged in as</p>
-                            <p className="text-xs text-white/80 truncate font-semibold" title={user?.email || ''}>{user?.email}</p>
-                        </div>
-                        <button
-                            onClick={logout}
-                            className="p-2 rounded-xl bg-white/5 text-white/70 hover:text-[#E8721A] hover:bg-white/10 transition-all duration-200"
-                            title="Log Out"
-                        >
-                            <LogOut size={15} />
-                        </button>
-                    </div>
                 </div>
 
             </aside>
