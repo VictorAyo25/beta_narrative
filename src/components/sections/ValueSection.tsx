@@ -46,15 +46,17 @@ export default function ValueSection() {
     const y1 = useTransform(scrollYProgress, [0, 1], [0, 250]);
     const y2 = useTransform(scrollYProgress, [0, 1], [0, -250]);
 
+    const hasCredentials = value.credentials && value.credentials.length > 0;
+
     return (
-        <section id="why" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#EEE8F8] overflow-hidden">
+        <section id="why" className="relative pt-16 sm:pt-20 pb-16 sm:pb-20 px-5 sm:px-8 lg:px-10 bg-[#EEE8F8] overflow-hidden">
             {/* Background accents */}
             <motion.div style={{ y: y1 }} className="absolute top-[20%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#C4A8E8]/30 blur-[100px] pointer-events-none" />
             <motion.div style={{ y: y2 }} className="absolute bottom-[10%] right-[-5%] w-[300px] h-[300px] rounded-full bg-[#E8721A]/8 blur-[80px] pointer-events-none" />
-
+ 
             <div className="max-w-6xl mx-auto relative">
                 {/* Header with Image */}
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
+                <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${hasCredentials ? 'mb-16' : ''}`}>
                     {/* Text Content */}
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
@@ -142,29 +144,31 @@ export default function ValueSection() {
                 </div>
 
                 {/* Credentials Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                    {value.credentials.map((cred, index) => (
-                        <GlowCard
-                            key={index}
-                            delay={0.12 * index}
-                            className="group"
-                        >
-                            <div className="flex items-center gap-3 mb-5">
-                                <div className="w-10 h-10 rounded-xl border border-[#E8721A]/20 bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(232,114,26,0.5)]">
-                                    {index === 0 && <Award size={16} className="text-[#E8721A]" />}
-                                    {index === 1 && <Users size={16} className="text-[#E8721A]" />}
-                                    {index === 2 && <MessageSquare size={16} className="text-[#E8721A]" />}
+                {hasCredentials && (
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                        {value.credentials.map((cred, index) => (
+                            <GlowCard
+                                key={index}
+                                delay={0.12 * index}
+                                className="group"
+                            >
+                                <div className="flex items-center gap-3 mb-5">
+                                    <div className="w-10 h-10 rounded-xl border border-[#E8721A]/20 bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(232,114,26,0.5)]">
+                                        {index === 0 && <Award size={16} className="text-[#E8721A]" />}
+                                        {index === 1 && <Users size={16} className="text-[#E8721A]" />}
+                                        {index === 2 && <MessageSquare size={16} className="text-[#E8721A]" />}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="font-sans text-4xl sm:text-5xl font-bold text-gradient leading-none mb-3 tracking-tight">
-                                <AnimatedCounter value={cred.number} />
-                            </div>
-                            <p className="text-sm text-[#3D2A6E]/85 font-normal leading-relaxed">
-                                {cred.label}
-                            </p>
-                        </GlowCard>
-                    ))}
-                </div>
+                                <div className="font-sans text-4xl sm:text-5xl font-bold text-gradient leading-none mb-3 tracking-tight">
+                                    <AnimatedCounter value={cred.number} />
+                                </div>
+                                <p className="text-sm text-[#3D2A6E]/85 font-normal leading-relaxed">
+                                    {cred.label}
+                                </p>
+                            </GlowCard>
+                        ))}
+                    </div>
+                )}
             </div>
         </section>
     );

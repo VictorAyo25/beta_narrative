@@ -22,7 +22,7 @@ export default function PainSection() {
     };
 
     return (
-        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#E4DAEF] overflow-hidden">
+        <section id="problem" className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 px-5 sm:px-8 lg:px-10 bg-[#E4DAEF] overflow-hidden">
             {/* Subtle background accent */}
             <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-[#E8721A]/5 blur-[100px] pointer-events-none" />
 

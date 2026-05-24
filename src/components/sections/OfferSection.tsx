@@ -16,7 +16,7 @@ export default function OfferSection() {
     const { sectionLabel, title, titleEmphasis, offers = [] } = offerSection;
 
     return (
-        <section id="offer" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#EEE8F8] overflow-hidden">
+        <section id="offer" className="relative pt-16 sm:pt-20 pb-16 sm:pb-20 px-5 sm:px-8 lg:px-10 bg-[#EEE8F8] overflow-hidden">
             {/* Background accents */}
             <div className="absolute top-[10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#E8721A]/6 blur-[100px] pointer-events-none" />
             <div className="absolute bottom-[10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#C4A8E8]/30 blur-[100px] pointer-events-none" />

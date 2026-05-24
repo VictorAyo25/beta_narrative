@@ -23,7 +23,7 @@ export default function ResultsSection() {
     };
 
     return (
-        <section id="results" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#E4DAEF] overflow-hidden">
+        <section id="results" className="relative pt-16 sm:pt-20 pb-16 sm:pb-20 px-5 sm:px-8 lg:px-10 bg-[#E4DAEF] overflow-hidden">
             {/* Background accent */}
             <div className="absolute bottom-0 left-[20%] w-[500px] h-[300px] rounded-full bg-[#C4A8E8]/25 blur-[100px] pointer-events-none" />
 

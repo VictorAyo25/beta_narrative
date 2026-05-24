@@ -79,7 +79,7 @@ export default function ContactSection() {
     };
 
     return (
-        <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-10 bg-[#E4DAEF] overflow-hidden">
+        <section id="contact" className="relative pt-16 sm:pt-20 pb-24 sm:pb-32 px-5 sm:px-8 lg:px-10 bg-[#E4DAEF] overflow-hidden">
             {/* Background accent */}
             <div className="absolute top-[20%] left-[10%] w-[400px] h-[400px] rounded-full bg-[#E8721A]/5 blur-[120px] pointer-events-none" />
 
