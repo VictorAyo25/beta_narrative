@@ -16,7 +16,8 @@ import {
     Layout, FileText, Settings, Database, Plus, Trash2, 
     Server, Check, ArrowRight, ExternalLink, Menu, X, 
     Sparkles, HelpCircle, Eye, Edit3, ArrowUpRight, Award, Compass, MessageSquare,
-    BarChart, LayoutGrid, Target, ShieldCheck, TrendingUp, Tag, Mail, Layers
+    BarChart, LayoutGrid, Target, ShieldCheck, TrendingUp, Tag, Mail, Layers,
+    RotateCcw
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -229,6 +230,7 @@ type TabType = 'dashboard' | 'hero' | 'pain' | 'value' | 'results' | 'offer' | '
 export default function AdminDashboardPage() {
     const { user, logout } = useAuth();
     const [content, setContent] = useState<SiteContent | null>(null);
+    const [originalContent, setOriginalContent] = useState<SiteContent | null>(null);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -257,6 +259,7 @@ export default function AdminDashboardPage() {
                     contentData.offer = defaultSiteContent.offer;
                 }
                 setContent(contentData);
+                setOriginalContent(JSON.parse(JSON.stringify(contentData)));
             }
         } catch (error) {
             console.error('Error fetching content:', error);
@@ -294,6 +297,7 @@ export default function AdminDashboardPage() {
 
             if (response.ok) {
                 setSaveStatus('success');
+                setOriginalContent(JSON.parse(JSON.stringify(content)));
                 setTimeout(() => setSaveStatus('idle'), 3000);
             } else {
                 const data = await response.json().catch(() => ({}));
@@ -307,6 +311,14 @@ export default function AdminDashboardPage() {
         } finally {
             setSaving(false);
         }
+    };
+
+    const undoSectionChanges = (sectionKey: keyof Omit<SiteContent, 'id' | 'updatedAt'>) => {
+        if (!originalContent || !content) return;
+        setContent({
+            ...content,
+            [sectionKey]: JSON.parse(JSON.stringify(originalContent[sectionKey])),
+        });
     };
 
     // Form Update Handlers
@@ -848,7 +860,17 @@ export default function AdminDashboardPage() {
                         {activeTab === 'hero' && (
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                                 <div className={`lg:col-span-7 ${showPreviewOnMobile ? 'hidden lg:block' : 'block'}`}>
-                                    <h3 className="font-serif text-lg mb-6 border-b border-[#BCAED9]/20 pb-3 text-[#1A0E35]">Edit Hero Section</h3>
+                                    <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-3">
+                                        <h3 className="font-serif text-lg text-white">Edit Hero Section</h3>
+                                        <button
+                                            onClick={() => undoSectionChanges('hero')}
+                                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white rounded-xl text-xs font-semibold transition-all border border-white/10 shadow-sm"
+                                            title="Revert this section back to its last saved state"
+                                        >
+                                            <RotateCcw size={13} />
+                                            <span>Undo Changes</span>
+                                        </button>
+                                    </div>
                                     
                                     <FormField
                                         label="Hero Eyebrow Text"
@@ -920,7 +942,17 @@ export default function AdminDashboardPage() {
                         {activeTab === 'pain' && (
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                                 <div className={`lg:col-span-7 ${showPreviewOnMobile ? 'hidden lg:block' : 'block'}`}>
-                                    <h3 className="font-serif text-lg mb-6 border-b border-white/10 pb-3 text-white">Edit Pain Points Section</h3>
+                                    <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-3">
+                                        <h3 className="font-serif text-lg text-white">Edit Pain Points Section</h3>
+                                        <button
+                                            onClick={() => undoSectionChanges('pain')}
+                                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white rounded-xl text-xs font-semibold transition-all border border-white/10 shadow-sm"
+                                            title="Revert this section back to its last saved state"
+                                        >
+                                            <RotateCcw size={13} />
+                                            <span>Undo Changes</span>
+                                        </button>
+                                    </div>
                                     
                                     <FormField
                                         label="Section Eyebrow Label"
@@ -1010,7 +1042,17 @@ export default function AdminDashboardPage() {
                         {activeTab === 'value' && (
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                                 <div className={`lg:col-span-7 ${showPreviewOnMobile ? 'hidden lg:block' : 'block'}`}>
-                                    <h3 className="font-serif text-lg mb-6 border-b border-white/10 pb-3 text-white">Edit Value Proposition</h3>
+                                    <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-3">
+                                        <h3 className="font-serif text-lg text-white">Edit Value Proposition</h3>
+                                        <button
+                                            onClick={() => undoSectionChanges('value')}
+                                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white rounded-xl text-xs font-semibold transition-all border border-white/10 shadow-sm"
+                                            title="Revert this section back to its last saved state"
+                                        >
+                                            <RotateCcw size={13} />
+                                            <span>Undo Changes</span>
+                                        </button>
+                                    </div>
                                     
                                     <FormField
                                         label="Section Label"
@@ -1116,7 +1158,17 @@ export default function AdminDashboardPage() {
                         {/* 5. RESULTS EDIT SECTION */}
                         {activeTab === 'results' && (
                             <div>
-                                <h3 className="font-serif text-lg mb-6 border-b border-white/10 pb-3 text-white">Edit Client Results Section</h3>
+                                <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-3">
+                                    <h3 className="font-serif text-lg text-white">Edit Client Results Section</h3>
+                                    <button
+                                        onClick={() => undoSectionChanges('results')}
+                                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white rounded-xl text-xs font-semibold transition-all border border-white/10 shadow-sm"
+                                        title="Revert this section back to its last saved state"
+                                    >
+                                        <RotateCcw size={13} />
+                                        <span>Undo Changes</span>
+                                    </button>
+                                </div>
                                 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                                     <FormField
@@ -1209,7 +1261,17 @@ export default function AdminDashboardPage() {
                         {activeTab === 'offer' && (
                             <div className="space-y-8">
                                 <div>
-                                    <h3 className="font-serif text-lg mb-6 border-b border-white/10 pb-3 text-white">Edit Pricing & Offers Section</h3>
+                                <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-3">
+                                    <h3 className="font-serif text-lg text-white">Edit Pricing & Offers Section</h3>
+                                    <button
+                                        onClick={() => undoSectionChanges('offer')}
+                                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white rounded-xl text-xs font-semibold transition-all border border-white/10 shadow-sm"
+                                        title="Revert this section back to its last saved state"
+                                    >
+                                        <RotateCcw size={13} />
+                                        <span>Undo Changes</span>
+                                    </button>
+                                </div>
                                     
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                         <FormField
@@ -1355,7 +1417,17 @@ export default function AdminDashboardPage() {
                         {/* 7. CONTACT EDIT SECTION */}
                         {activeTab === 'contact' && (
                             <div>
-                                <h3 className="font-serif text-lg mb-6 border-b border-white/10 pb-3 text-white">Edit Contact Form Settings</h3>
+                                <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-3">
+                                    <h3 className="font-serif text-lg text-white">Edit Contact Form Settings</h3>
+                                    <button
+                                        onClick={() => undoSectionChanges('contact')}
+                                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white rounded-xl text-xs font-semibold transition-all border border-white/10 shadow-sm"
+                                        title="Revert this section back to its last saved state"
+                                    >
+                                        <RotateCcw size={13} />
+                                        <span>Undo Changes</span>
+                                    </button>
+                                </div>
                                 
                                 <div className="max-w-2xl space-y-4">
                                     <FormField
