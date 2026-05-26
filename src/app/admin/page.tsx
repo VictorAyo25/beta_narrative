@@ -761,33 +761,6 @@ export default function AdminDashboardPage() {
                         {activeTab === 'dashboard' && (
                             <div className="space-y-8">
                                 
-                                {/* Welcome Header */}
-                                <div className="p-8 rounded-3xl bg-gradient-to-br from-[#6B3FC0] via-[#5a32a3] to-[#1A0E35] text-white relative overflow-hidden shadow-lg border border-[#BCAED9]/10">
-                                    <div className="absolute top-[-50%] right-[-20%] w-96 h-96 rounded-full bg-[#E8721A]/20 blur-[80px] pointer-events-none" />
-                                    <div className="absolute bottom-[-40%] left-[-10%] w-72 h-72 rounded-full bg-[#8B5CF6]/30 blur-[70px] pointer-events-none" />
-                                    
-                                    <div className="relative z-10 space-y-4">
-                                        <div className="inline-block text-[10px] font-bold tracking-[0.2em] uppercase bg-[#E8721A] text-white px-3 py-1 rounded-full shadow-sm">
-                                            Command Center
-                                        </div>
-                                        <h2 className="font-serif text-3xl font-normal leading-tight">
-                                            Design & Customize Your Brand Presence.
-                                        </h2>
-                                        <p className="text-[#D9CFF2]/90 text-xs leading-relaxed max-w-2xl font-light">
-                                            Modify copy, structure, price points, and highlights across the entire landing page. All edits are updated on the live site instantly upon saving.
-                                        </p>
-                                        <div className="pt-2 flex flex-wrap gap-3">
-                                            <a href="/" target="_blank" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#E8721A] hover:bg-[#C05A0E] transition-all text-xs font-semibold rounded-xl shadow-md hover:shadow-lg">
-                                                <span>Visit Website</span>
-                                                <ExternalLink size={13} />
-                                            </a>
-                                            <button onClick={() => setActiveTab('hero')} className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 transition-all text-xs font-semibold rounded-xl border border-white/10 backdrop-blur-sm">
-                                                <span>Begin Customizing</span>
-                                                <ArrowRight size={13} />
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 {/* Theme & Mode Settings Card */}
                                 <div className="p-6 rounded-3xl bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/[0.06] relative overflow-hidden group shadow-md">
