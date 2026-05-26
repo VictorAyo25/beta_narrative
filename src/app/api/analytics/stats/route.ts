@@ -34,20 +34,10 @@ function getCountryCode(countryName: string): string {
   return countryNameToCode[name] || 'NG';
 }
 
-function getFlagEmoji(countryCode: string): string {
-  if (!countryCode) return '🌐';
-  const code = countryCode.toUpperCase();
-  if (code.length !== 2) {
-    return '🌐';
-  }
-  const codePoints = code
-    .split('')
-    .map(char => 127397 + char.charCodeAt(0));
-  try {
-    return String.fromCodePoint(...codePoints);
-  } catch (e) {
-    return '🌐';
-  }
+function getFlagUrl(countryCode: string): string {
+  const code = (countryCode || 'NG').toUpperCase().trim();
+  if (code.length !== 2) return 'https://flagcdn.com/w40/ng.png';
+  return `https://flagcdn.com/w40/${code.toLowerCase()}.png`;
 }
 
 async function verifyAuth(request: NextRequest) {
@@ -127,7 +117,7 @@ export async function GET(req: NextRequest) {
       }
       
       const docCountryCode = data.countryCode || getCountryCode(country);
-      const flag = getFlagEmoji(docCountryCode);
+      const flagUrl = getFlagUrl(docCountryCode);
 
       const timestamp = data.timestamp?.toDate?.() || new Date();
       // Mask IP address for privacy
@@ -178,7 +168,7 @@ export async function GET(req: NextRequest) {
           page,
           city,
           country,
-          flag,
+          flagUrl,
           ip,
           timestamp,
         });
@@ -199,7 +189,7 @@ export async function GET(req: NextRequest) {
         const code = getCountryCode(country);
         return {
           country,
-          flag: getFlagEmoji(code),
+          flagUrl: getFlagUrl(code),
           views: stats.views,
           uniqueVisitors: stats.visitors.size,
         };
@@ -213,7 +203,7 @@ export async function GET(req: NextRequest) {
         return {
           city: cityName,
           country: stats.country,
-          flag: getFlagEmoji(code),
+          flagUrl: getFlagUrl(code),
           views: stats.views,
           uniqueVisitors: stats.visitors.size,
         };
