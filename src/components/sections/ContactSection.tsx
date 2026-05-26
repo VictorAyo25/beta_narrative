@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
 import { ContactFormData } from '@/types';
-import { Send, CheckCircle, AlertCircle, ChevronDown, ChevronRight } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, ChevronDown, ChevronRight, Check } from 'lucide-react';
 import CalendlyEmbed from '../CalendlyEmbed';
 
 const contactSchema = z.object({
@@ -139,49 +139,95 @@ export default function ContactSection() {
 
                     {/* Step Progress Tracker */}
                     {(contact.calendlyUrl || 'https://calendly.com/egbogunfavour/30min') && (
-                        <div className="flex items-center justify-between max-w-xs mx-auto mb-8 relative select-none">
-                            {/* Connecting Background Line */}
-                            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#8B5CF6]/15 z-0" />
-                            {/* Connecting Active Progress Line */}
+                        <div className="relative mb-12 max-w-md mx-auto px-4 select-none">
+                            {/* Connecting Progress Bar */}
+                            <div className="absolute left-10 right-10 top-5 h-[3px] bg-[#8B5CF6]/10 rounded-full -translate-y-1/2" />
                             <div 
-                                className="absolute left-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#E8721A] z-0 transition-all duration-500 ease-in-out" 
+                                className="absolute left-10 top-5 h-[3px] bg-gradient-to-r from-[#6B3FC0] to-[#E8721A] rounded-full -translate-y-1/2 transition-all duration-500 ease-out" 
                                 style={{ width: step === 1 ? '0%' : step === 2 ? '50%' : '100%' }}
                             />
 
-                            {/* Step 1 Node */}
-                            <div className="z-10 flex flex-col items-center">
-                                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-300 border ${
-                                    step >= 1 
-                                        ? 'bg-[#E8721A] text-white border-[#E8721A] shadow-[0_0_12px_rgba(232,114,26,0.35)]' 
-                                        : 'bg-[#FAF7FF] text-[#1A0E35]/40 border-[#8B5CF6]/25'
-                                }`}>
-                                    1
+                            <div className="flex items-center justify-between relative z-10">
+                                {/* Step 1: Profile */}
+                                <div className="flex flex-col items-center flex-1">
+                                    <div 
+                                        className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 relative ${
+                                            step > 1 
+                                                ? 'bg-[#6B3FC0] text-white border-2 border-[#6B3FC0] shadow-[0_0_15px_rgba(107,63,192,0.25)]' 
+                                                : step === 1
+                                                ? 'bg-[#E8721A] text-white border-2 border-[#E8721A] shadow-[0_0_15px_rgba(232,114,26,0.35)] scale-110' 
+                                                : 'bg-white text-[#3D2A6E]/40 border-2 border-[#8B5CF6]/20'
+                                        }`}
+                                    >
+                                        {step > 1 ? (
+                                            <Check size={14} className="text-white stroke-[3px]" />
+                                        ) : (
+                                            <span>1</span>
+                                        )}
+                                        {step === 1 && (
+                                            <span className="absolute -inset-1.5 rounded-full border border-[#E8721A]/30 animate-pulse pointer-events-none" />
+                                        )}
+                                    </div>
+                                    <span className={`text-[10px] font-bold uppercase tracking-wider mt-3.5 transition-colors duration-300 ${
+                                        step === 1 ? 'text-[#E8721A]' : step > 1 ? 'text-[#6B3FC0]' : 'text-[#1A0E35]/40'
+                                    }`}>
+                                        Profile
+                                    </span>
                                 </div>
-                                <span className="text-[9px] font-bold text-[#1A0E35]/65 uppercase tracking-wider mt-1.5 bg-[#FAF7FF] px-1.5">Profile</span>
-                            </div>
 
-                            {/* Step 2 Node */}
-                            <div className="z-10 flex flex-col items-center">
-                                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-300 border ${
-                                    step >= 2 
-                                        ? 'bg-[#E8721A] text-white border-[#E8721A] shadow-[0_0_12px_rgba(232,114,26,0.35)]' 
-                                        : 'bg-[#FAF7FF] text-[#1A0E35]/40 border-[#8B5CF6]/25'
-                                }`}>
-                                    2
+                                {/* Step 2: Schedule */}
+                                <div className="flex flex-col items-center flex-1">
+                                    <div 
+                                        className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 relative ${
+                                            step > 2 
+                                                ? 'bg-[#6B3FC0] text-white border-2 border-[#6B3FC0] shadow-[0_0_15px_rgba(107,63,192,0.25)]' 
+                                                : step === 2
+                                                ? 'bg-[#E8721A] text-white border-2 border-[#E8721A] shadow-[0_0_15px_rgba(232,114,26,0.35)] scale-110' 
+                                                : 'bg-white text-[#3D2A6E]/40 border-2 border-[#8B5CF6]/20'
+                                        }`}
+                                    >
+                                        {step > 2 ? (
+                                            <Check size={14} className="text-white stroke-[3px]" />
+                                        ) : (
+                                            <span>2</span>
+                                        )}
+                                        {step === 2 && (
+                                            <span className="absolute -inset-1.5 rounded-full border border-[#E8721A]/30 animate-pulse pointer-events-none" />
+                                        )}
+                                    </div>
+                                    <span className={`text-[10px] font-bold uppercase tracking-wider mt-3.5 transition-colors duration-300 ${
+                                        step === 2 ? 'text-[#E8721A]' : step > 2 ? 'text-[#6B3FC0]' : 'text-[#1A0E35]/40'
+                                    }`}>
+                                        Schedule
+                                    </span>
                                 </div>
-                                <span className="text-[9px] font-bold text-[#1A0E35]/65 uppercase tracking-wider mt-1.5 bg-[#FAF7FF] px-1.5">Schedule</span>
-                            </div>
 
-                            {/* Step 3 Node */}
-                            <div className="z-10 flex flex-col items-center">
-                                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-300 border ${
-                                    step >= 3 
-                                        ? 'bg-[#E8721A] text-white border-[#E8721A] shadow-[0_0_12px_rgba(232,114,26,0.35)]' 
-                                        : 'bg-[#FAF7FF] text-[#1A0E35]/40 border-[#8B5CF6]/25'
-                                }`}>
-                                    3
+                                {/* Step 3: Confirm */}
+                                <div className="flex flex-col items-center flex-1">
+                                    <div 
+                                        className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 relative ${
+                                            step > 3 
+                                                ? 'bg-[#6B3FC0] text-white border-2 border-[#6B3FC0]' 
+                                                : step === 3
+                                                ? 'bg-[#E8721A] text-white border-2 border-[#E8721A] shadow-[0_0_15px_rgba(232,114,26,0.35)] scale-110' 
+                                                : 'bg-white text-[#3D2A6E]/40 border-2 border-[#8B5CF6]/20'
+                                        }`}
+                                    >
+                                        {step > 3 ? (
+                                            <Check size={14} className="text-white stroke-[3px]" />
+                                        ) : (
+                                            <span>3</span>
+                                        )}
+                                        {step === 3 && (
+                                            <span className="absolute -inset-1.5 rounded-full border border-[#E8721A]/30 animate-pulse pointer-events-none" />
+                                        )}
+                                    </div>
+                                    <span className={`text-[10px] font-bold uppercase tracking-wider mt-3.5 transition-colors duration-300 ${
+                                        step === 3 ? 'text-[#E8721A]' : step > 3 ? 'text-[#6B3FC0]' : 'text-[#1A0E35]/40'
+                                    }`}>
+                                        Confirm
+                                    </span>
                                 </div>
-                                <span className="text-[9px] font-bold text-[#1A0E35]/65 uppercase tracking-wider mt-1.5 bg-[#FAF7FF] px-1.5">Confirm</span>
                             </div>
                         </div>
                     )}
