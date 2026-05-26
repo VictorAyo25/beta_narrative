@@ -121,7 +121,7 @@ export default function OfferSection() {
                                             What's Included
                                         </p>
                                         <div className="space-y-3.5">
-                                            {plan.includes.map((item, index) => (
+                                            {plan.includes.filter((item) => item && item.trim() !== '').map((item, index) => (
                                                 <div
                                                     key={index}
                                                     className="flex items-start gap-3 group"

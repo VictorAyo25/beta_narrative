@@ -8,6 +8,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdminAuth, getAdminDb } from '@/lib/firebase-admin';
 import { defaultSiteContent } from '@/lib/default-content';
+import { revalidatePath } from 'next/cache';
 
 const CONTENT_DOC_ID = 'site-content';
 const CONTENT_COLLECTION = 'content';
@@ -158,6 +159,14 @@ export async function PUT(request: NextRequest) {
                 },
                 { merge: true }
             );
+        }
+
+        // Force Next.js to revalidate/regenerate the homepage and admin cache
+        try {
+            revalidatePath('/');
+            revalidatePath('/admin');
+        } catch (cacheError) {
+            console.error('Failed to revalidate paths:', cacheError);
         }
 
         return NextResponse.json({

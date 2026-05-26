@@ -157,10 +157,10 @@ function OfferPreview({ packageName, badge, tagline, hook, price, priceSecond, p
                         <p className="text-[10px] text-[#3D2A6E]/80 leading-relaxed whitespace-pre-line">{description}</p>
                     </div>
                 )}
-                {(includes || []).filter(Boolean).length > 0 && (
+                {(includes || []).filter((item: string) => item && item.trim() !== '').length > 0 && (
                     <div className="pt-2 border-t border-[#BCAED9]/15 space-y-1.5">
                         <p className="text-[9px] font-bold uppercase tracking-wider text-[#3D2A6E]/50 mb-1.5">What&apos;s included</p>
-                        {(includes || []).filter(Boolean).map((item: string, idx: number) => (
+                        {(includes || []).filter((item: string) => item && item.trim() !== '').map((item: string, idx: number) => (
                             <div key={idx} className="flex gap-1.5 items-start text-[10px] text-[#1A0E35]/85">
                                 <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
                                 <span>{item}</span>
