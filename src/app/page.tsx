@@ -12,6 +12,8 @@ import { getAdminDb } from '@/lib/firebase-admin';
 import { defaultSiteContent } from '@/lib/default-content';
 import { SiteContent } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 async function getServerContent(isPreview: boolean): Promise<SiteContent> {
   try {
     const db = getAdminDb();
