@@ -1173,22 +1173,55 @@ export default function AdminDashboardPage() {
                                              </div>
 
                                              {/* X-Axis labels */}
-                                             <div className="flex justify-between text-[9px] font-bold text-white/40 px-1">
-                                                 {(analyticsStats.trafficHistory || []).map((d: any, i: number) => (
-                                                     <div key={i} className="text-center w-14 truncate">{d.date}</div>
-                                                 ))}
+                                             <div className="flex justify-between text-[9px] font-bold text-white/40 px-1 mt-1">
+                                                 {(analyticsStats.trafficHistory || []).map((d: any, i: number) => {
+                                                     // Declutter X-axis in 24h mode by only displaying every 4th hour
+                                                     if (analyticsTimeRange === '24h') {
+                                                         const isEvery4th = i % 4 === 0;
+                                                         const isLast = i === (analyticsStats.trafficHistory.length - 1);
+                                                         if (!isEvery4th && !isLast) {
+                                                             return <div key={i} className="w-14 text-center opacity-0">{d.date}</div>;
+                                                         }
+                                                     }
+                                                     return <div key={i} className="text-center w-14 truncate">{d.date}</div>;
+                                                 })}
                                              </div>
 
                                              {/* Detail Indicators */}
-                                             <div className="grid grid-cols-7 gap-1 border-t border-white/5 pt-4 text-center">
-                                                 {(analyticsStats.trafficHistory || []).map((d: any, i: number) => (
-                                                     <div key={i} className="space-y-1">
-                                                         <div className="text-[9px] text-white/30 font-semibold">{d.date}</div>
-                                                         <div className="text-[11px] font-bold text-[#E8721A]">{d.views} <span className="text-[8px] text-white/35 font-normal">v</span></div>
-                                                         <div className="text-[10px] text-[#8B5CF6] font-medium">{d.visitors} <span className="text-[8px] text-white/35 font-normal">u</span></div>
+                                             {analyticsTimeRange === '7d' ? (
+                                                 <div className="grid grid-cols-7 gap-1 border-t border-white/5 pt-4 text-center">
+                                                     {(analyticsStats.trafficHistory || []).map((d: any, i: number) => (
+                                                         <div key={i} className="space-y-1">
+                                                             <div className="text-[9px] text-white/30 font-semibold">{d.date}</div>
+                                                             <div className="text-[11px] font-bold text-[#E8721A]">{d.views} <span className="text-[8px] text-white/35 font-normal">v</span></div>
+                                                             <div className="text-[10px] text-[#8B5CF6] font-medium">{d.visitors} <span className="text-[8px] text-white/35 font-normal">u</span></div>
+                                                         </div>
+                                                     ))}
+                                                 </div>
+                                             ) : (
+                                                 <div className="border-t border-white/5 pt-4">
+                                                     <div className="flex items-center justify-between mb-3">
+                                                         <span className="text-[10px] text-white/40 font-bold uppercase tracking-wider">Active Hours Breakdown</span>
+                                                         <span className="text-[9px] text-white/30 font-semibold uppercase">Showing active slots only</span>
                                                      </div>
-                                                 ))}
-                                             </div>
+                                                     <div className="flex flex-wrap gap-2">
+                                                         {(() => {
+                                                             const activeHours = (analyticsStats.trafficHistory || []).filter((d: any) => d.views > 0);
+                                                             if (activeHours.length === 0) {
+                                                                 return <div className="text-xs text-white/30 italic py-2">No activity recorded in the last 24 hours.</div>;
+                                                             }
+                                                             return activeHours.map((d: any, i: number) => (
+                                                                 <div key={i} className="px-3 py-1.5 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center gap-2.5 shadow-sm">
+                                                                     <span className="text-[10px] font-bold text-white/70">{d.date}</span>
+                                                                     <div className="h-3 w-[1px] bg-white/10" />
+                                                                     <span className="text-[10px] font-bold text-[#E8721A]">{d.views} <span className="text-[8px] text-white/40 font-normal uppercase">v</span></span>
+                                                                     <span className="text-[10px] font-bold text-[#8B5CF6]">{d.visitors} <span className="text-[8px] text-white/40 font-normal uppercase">u</span></span>
+                                                                 </div>
+                                                             ));
+                                                         })()}
+                                                     </div>
+                                                 </div>
+                                             )}
                                          </div>
 
                                         {/* Geolocation Breakdown — full width (single-page site) */}
