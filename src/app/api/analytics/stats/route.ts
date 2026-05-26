@@ -78,100 +78,104 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Firebase Admin not configured' }, { status: 500 });
     }
 
-    // 2. Fetch recent visits (capped to avoid memory/read issues)
+    // 2. Parse time range query param
+    const url = new URL(req.url);
+    const range = url.searchParams.get('range') === '24h' ? '24h' : '7d';
+    const now = Date.now();
+    const rangeMs = range === '24h' ? 24 * 60 * 60 * 1000 : 7 * 24 * 60 * 60 * 1000;
+    const startTime = new Date(now - rangeMs);
+
+    // 3. Fetch recent visits (capped to avoid memory/read issues)
     const snapshot = await db.collection('analytics_visits')
       .orderBy('timestamp', 'desc')
       .limit(3000)
       .get();
 
-    // 3. Process records in memory
+    // 4. Process records in memory
     const pageViewsMap: Record<string, { views: number; visitors: Set<string> }> = {};
     const countryMap: Record<string, { views: number; visitors: Set<string> }> = {};
     const cityMap: Record<string, { views: number; country: string; visitors: Set<string> }> = {};
     const uniqueVisitorsSet = new Set<string>();
     const visitsList: any[] = [];
 
-    // Group traffic by date (last 7 days)
+    // Initialize traffic history buckets
     const trafficHistoryMap: Record<string, { views: number; visitors: Set<string> }> = {};
-    const oneDayMs = 24 * 60 * 60 * 1000;
-    
-    // Initialize last 7 days with keys like "May 26"
-    for (let i = 6; i >= 0; i--) {
-      const dateStr = new Date(Date.now() - i * oneDayMs).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-      trafficHistoryMap[dateStr] = { views: 0, visitors: new Set() };
+
+    if (range === '24h') {
+      // 24 hourly buckets, labelled "HH:00"
+      for (let i = 23; i >= 0; i--) {
+        const d = new Date(now - i * 60 * 60 * 1000);
+        const label = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+        trafficHistoryMap[label] = { views: 0, visitors: new Set() };
+      }
+    } else {
+      // 7 daily buckets, labelled "May 26"
+      const oneDayMs = 24 * 60 * 60 * 1000;
+      for (let i = 6; i >= 0; i--) {
+        const label = new Date(now - i * oneDayMs).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        trafficHistoryMap[label] = { views: 0, visitors: new Set() };
+      }
     }
 
     snapshot.forEach((doc) => {
       const data = doc.data();
+      const timestamp = data.timestamp?.toDate?.() || new Date();
+
+      // Filter to selected time range
+      if (timestamp < startTime) return;
+
       const visitorId = data.visitorId || 'unknown';
       const page = data.page || '/';
-      
+
       let country = data.country || 'Nigeria';
       let city = data.city || 'Lagos';
-      
-      if (country === 'Unknown' || country === '') {
-        country = 'Nigeria';
-      }
-      if (city === 'Unknown' || city === '') {
-        city = 'Lagos';
-      }
-      
+
+      if (country === 'Unknown' || country === '') country = 'Nigeria';
+      if (city === 'Unknown' || city === '') city = 'Lagos';
+
       const docCountryCode = data.countryCode || getCountryCode(country);
       const flagUrl = getFlagUrl(docCountryCode);
 
-      const timestamp = data.timestamp?.toDate?.() || new Date();
       // Mask IP address for privacy
       let ip = data.ip || 'unknown';
       if (ip !== 'unknown' && ip !== '::1' && ip !== '127.0.0.1') {
         const parts = ip.split('.');
-        if (parts.length === 4) {
-          ip = `${parts[0]}.${parts[1]}.*.*`;
-        }
+        if (parts.length === 4) ip = `${parts[0]}.${parts[1]}.*.*`;
       }
 
       uniqueVisitorsSet.add(visitorId);
 
       // Track page views
-      if (!pageViewsMap[page]) {
-        pageViewsMap[page] = { views: 0, visitors: new Set() };
-      }
+      if (!pageViewsMap[page]) pageViewsMap[page] = { views: 0, visitors: new Set() };
       pageViewsMap[page].views += 1;
       pageViewsMap[page].visitors.add(visitorId);
 
       // Track countries
-      if (!countryMap[country]) {
-        countryMap[country] = { views: 0, visitors: new Set() };
-      }
+      if (!countryMap[country]) countryMap[country] = { views: 0, visitors: new Set() };
       countryMap[country].views += 1;
       countryMap[country].visitors.add(visitorId);
 
       // Track cities
       const cityKey = `${city}, ${country}`;
-      if (!cityMap[cityKey]) {
-        cityMap[cityKey] = { views: 0, country, visitors: new Set() };
-      }
+      if (!cityMap[cityKey]) cityMap[cityKey] = { views: 0, country, visitors: new Set() };
       cityMap[cityKey].views += 1;
       cityMap[cityKey].visitors.add(visitorId);
 
-      // Track traffic history
-      const dateStr = timestamp.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-      if (dateStr in trafficHistoryMap) {
-        trafficHistoryMap[dateStr].views += 1;
-        trafficHistoryMap[dateStr].visitors.add(visitorId);
+      // Track traffic history bucket
+      let bucketLabel: string;
+      if (range === '24h') {
+        bucketLabel = timestamp.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+      } else {
+        bucketLabel = timestamp.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      }
+      if (bucketLabel in trafficHistoryMap) {
+        trafficHistoryMap[bucketLabel].views += 1;
+        trafficHistoryMap[bucketLabel].visitors.add(visitorId);
       }
 
-      // Save to recent lists (cap at 50 for the UI table)
+      // Save to recent visits list (cap at 50)
       if (visitsList.length < 50) {
-        visitsList.push({
-          id: doc.id,
-          visitorId,
-          page,
-          city,
-          country,
-          flagUrl,
-          ip,
-          timestamp,
-        });
+        visitsList.push({ id: doc.id, visitorId, page, city, country, flagUrl, ip, timestamp });
       }
     });
 
@@ -216,10 +220,14 @@ export async function GET(req: NextRequest) {
       visitors: stats.visitors.size,
     }));
 
+    // Total filtered views = sum of all page view counts
+    const totalFilteredViews = Object.values(pageViewsMap).reduce((sum, p) => sum + p.views, 0);
+
     return NextResponse.json({
       success: true,
+      range,
       stats: {
-        totalPageViews: snapshot.size,
+        totalPageViews: totalFilteredViews,
         uniqueVisitors: uniqueVisitorsSet.size,
         pages,
         countries,

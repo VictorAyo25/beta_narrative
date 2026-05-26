@@ -265,6 +265,7 @@ export default function AdminDashboardPage() {
     const [analyticsStats, setAnalyticsStats] = useState<any>(null);
     const [analyticsLoading, setAnalyticsLoading] = useState(false);
     const [analyticsError, setAnalyticsError] = useState<string>('');
+    const [analyticsTimeRange, setAnalyticsTimeRange] = useState<'24h' | '7d'>('7d');
 
     // Customizer layout states
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');
@@ -305,12 +306,12 @@ export default function AdminDashboardPage() {
         }
     };
 
-    const fetchAnalyticsStats = async () => {
+    const fetchAnalyticsStats = async (range: '24h' | '7d' = analyticsTimeRange) => {
         try {
             setAnalyticsLoading(true);
             setAnalyticsError('');
             const token = await user?.getIdToken();
-            const response = await fetch('/api/analytics/stats', {
+            const response = await fetch(`/api/analytics/stats?range=${range}`, {
                 headers: {
                     Authorization: `Bearer ${token || 'mock-dev-token'}`,
                 },
@@ -340,6 +341,13 @@ export default function AdminDashboardPage() {
             fetchAnalyticsStats();
         }
     }, [activeTab]);
+
+    // Re-fetch when time range changes (while analytics tab is open)
+    useEffect(() => {
+        if (activeTab === 'analytics') {
+            fetchAnalyticsStats(analyticsTimeRange);
+        }
+    }, [analyticsTimeRange]);
 
     const handleSave = async (action: 'draft' | 'publish' = 'draft') => {
         if (!content) return;
@@ -1000,7 +1008,7 @@ export default function AdminDashboardPage() {
                                         <p className="text-xs text-white/50 mt-1">Real-time engagement, page path performance, and reader demographics.</p>
                                     </div>
                                     <button
-                                        onClick={fetchAnalyticsStats}
+                                        onClick={() => fetchAnalyticsStats()}
                                         disabled={analyticsLoading}
                                         className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#E8721A] to-[#F08C3A] hover:shadow-[0_0_15px_rgba(232,114,26,0.3)] disabled:opacity-50 text-white rounded-xl text-xs font-bold transition-all"
                                     >
@@ -1064,19 +1072,43 @@ export default function AdminDashboardPage() {
 
                                         {/* Traffic Over Time Chart */}
                                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-6">
-                                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                                                 <div className="flex items-center gap-2">
                                                     <TrendingUp size={15} className="text-[#E8721A]" />
-                                                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">Traffic Over Time (Last 7 Days)</h4>
+                                                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                                                        Traffic Over Time
+                                                        <span className="ml-2 text-white/40 font-normal normal-case">
+                                                            ({analyticsTimeRange === '24h' ? 'Last 24 Hours' : 'Last 7 Days'})
+                                                        </span>
+                                                    </h4>
                                                 </div>
-                                                <div className="flex items-center gap-4 text-[10px] uppercase font-bold tracking-wider">
-                                                    <div className="flex items-center gap-1.5">
-                                                        <span className="w-2.5 h-2.5 rounded-full bg-[#E8721A]" />
-                                                        <span className="text-white/60">Page Views</span>
+                                                <div className="flex items-center gap-3">
+                                                    {/* Range toggle */}
+                                                    <div className="flex items-center bg-black/30 rounded-xl p-1 border border-white/5 gap-1">
+                                                        {(['24h', '7d'] as const).map(r => (
+                                                            <button
+                                                                key={r}
+                                                                onClick={() => setAnalyticsTimeRange(r)}
+                                                                className={`px-3 py-1 rounded-lg text-[10px] font-bold tracking-wider uppercase cursor-pointer transition-all duration-200 ${
+                                                                    analyticsTimeRange === r
+                                                                        ? 'bg-gradient-to-r from-[#6B3FC0] to-[#8B5CF6] text-white shadow'
+                                                                        : 'text-white/50 hover:text-white hover:bg-white/5'
+                                                                }`}
+                                                            >
+                                                                {r}
+                                                            </button>
+                                                        ))}
                                                     </div>
-                                                    <div className="flex items-center gap-1.5">
-                                                        <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6]" />
-                                                        <span className="text-white/60">Unique Visitors</span>
+                                                    {/* Legend */}
+                                                    <div className="hidden sm:flex items-center gap-4 text-[10px] uppercase font-bold tracking-wider">
+                                                        <div className="flex items-center gap-1.5">
+                                                            <span className="w-2.5 h-2.5 rounded-full bg-[#E8721A]" />
+                                                            <span className="text-white/60">Page Views</span>
+                                                        </div>
+                                                        <div className="flex items-center gap-1.5">
+                                                            <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6]" />
+                                                            <span className="text-white/60">Unique Visitors</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
