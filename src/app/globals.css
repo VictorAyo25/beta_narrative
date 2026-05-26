@@ -252,3 +252,124 @@ select {
 .delay-800 {
   animation-delay: 0.8s;
 }
+
+/* Custom scrollbar for analytics tables/lists */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 114, 26, 0.6);
+}
+
+/* --- DARK THEME OVERRIDES --- */
+.dark-theme {
+  --purple-pale: #0B0813;
+  --ink: #0B0813;
+  --ink-soft: #120D20;
+  --ink-card: #18112A;
+  --warm-white: #EAE6F3;
+  --muted: #A396C0;
+}
+
+.dark-theme body {
+  background-color: #0B0813 !important;
+  color: #EAE6F3 !important;
+}
+
+/* Background Overrides for Hardcoded Tailwind classes */
+.dark-theme .bg-\[\#EEE8F8\] {
+  background-color: #0B0813 !important;
+}
+.dark-theme .bg-\[\#E4DAEF\] {
+  background-color: #120D20 !important;
+}
+.dark-theme .bg-\[\#FAF7FF\] {
+  background-color: #18112A !important;
+}
+.dark-theme .bg-\[\#130E20\]\/\[0\.02\] {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+.dark-theme .bg-\[\#EEE8F8\]\/30 {
+  background-color: rgba(24, 17, 41, 0.4) !important;
+}
+.dark-theme .bg-\[\#EEE8F8\]\/50 {
+  background-color: rgba(24, 17, 41, 0.6) !important;
+}
+.dark-theme .bg-white\/5 {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Border Overrides for Hardcoded Tailwind classes */
+.dark-theme .border-\[\#8B5CF6\]\/10 {
+  border-color: rgba(139, 92, 246, 0.12) !important;
+}
+.dark-theme .border-\[\#8B5CF6\]\/15 {
+  border-color: rgba(139, 92, 246, 0.18) !important;
+}
+.dark-theme .border-\[\#8B5CF6\]\/20 {
+  border-color: rgba(139, 92, 246, 0.22) !important;
+}
+.dark-theme .border-\[\#8B5CF6\]\/25 {
+  border-color: rgba(139, 92, 246, 0.28) !important;
+}
+.dark-theme .border-\[\#130E20\]\/5 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Text Color Overrides */
+.dark-theme .text-\[\#1A0E35\] {
+  color: #EAE6F3 !important;
+}
+.dark-theme .text-\[\#3D2A6E\] {
+  color: #B5A8D3 !important;
+}
+.dark-theme .text-\[\#3B334C\]\/50 {
+  color: rgba(234, 230, 243, 0.5) !important;
+}
+.dark-theme .text-slate-800 {
+  color: #F1F5F9 !important;
+}
+
+/* Hover and Menus */
+.dark-theme .hover\:bg-\[\#C4A8E8\]\/25:hover {
+  background-color: rgba(139, 92, 246, 0.2) !important;
+}
+.dark-theme .mobile-menu {
+  background: rgba(14, 10, 26, 0.97) !important;
+  border-color: rgba(139, 92, 246, 0.25) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Background floating glow spots overrides */
+.dark-theme .bg-\[\#C4A8E8\]\/25 {
+  background-color: rgba(139, 92, 246, 0.08) !important;
+}
+.dark-theme .bg-\[\#C4A8E8\]\/30 {
+  background-color: rgba(139, 92, 246, 0.1) !important;
+}
+.dark-theme .bg-\[\#C4A8E8\]\/35 {
+  background-color: rgba(139, 92, 246, 0.12) !important;
+}
+
+/* Contact form inputs and placeholders */
+.dark-theme .bg-\[\#E4DAEF\]\/20 {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+.dark-theme .text-\[\#1A0E35\]::placeholder,
+.dark-theme .placeholder-\[\#3B334C\]\/50::placeholder {
+  color: rgba(234, 230, 243, 0.4) !important;
+}
+
+.dark-theme input,
+.dark-theme textarea,
+.dark-theme select {
+  color: #EAE6F3 !important;
+}

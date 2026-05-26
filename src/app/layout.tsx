@@ -51,6 +51,8 @@ export const metadata: Metadata = {
   },
 };
 
+import AnalyticsTracker from '@/components/AnalyticsTracker';
+
 export default async function RootLayout({
   children,
 }: {
@@ -60,6 +62,7 @@ export default async function RootLayout({
     <html lang="en" className={`${outfit.variable} ${dmSans.variable}`}>
       <body className="font-sans bg-[#EEE8F8] text-[#1A0E35] antialiased">
         <AuthProvider>
+          <AnalyticsTracker />
           {children}
         </AuthProvider>
       </body>

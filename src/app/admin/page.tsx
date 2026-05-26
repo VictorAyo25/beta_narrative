@@ -17,7 +17,7 @@ import {
     Server, Check, ArrowRight, ExternalLink, Menu, X, 
     Sparkles, HelpCircle, Eye, Edit3, ArrowUpRight, Award, Compass, MessageSquare,
     BarChart, LayoutGrid, Target, ShieldCheck, TrendingUp, Tag, Mail, Layers,
-    RotateCcw
+    RotateCcw, Sun, Moon
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -249,7 +249,7 @@ function MockupWindow({ children }: { children: React.ReactNode }) {
     );
 }
 
-type TabType = 'dashboard' | 'hero' | 'pain' | 'value' | 'results' | 'offer' | 'contact';
+type TabType = 'dashboard' | 'analytics' | 'hero' | 'pain' | 'value' | 'results' | 'offer' | 'contact';
 
 export default function AdminDashboardPage() {
     const { user, logout } = useAuth();
@@ -261,6 +261,11 @@ export default function AdminDashboardPage() {
     const [saveError, setSaveError] = useState<string>('');
     const [saveAction, setSaveAction] = useState<'draft' | 'publish'>('draft');
     
+    // Analytics states
+    const [analyticsStats, setAnalyticsStats] = useState<any>(null);
+    const [analyticsLoading, setAnalyticsLoading] = useState(false);
+    const [analyticsError, setAnalyticsError] = useState<string>('');
+
     // Customizer layout states
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -288,10 +293,41 @@ export default function AdminDashboardPage() {
         }
     };
 
+    const fetchAnalyticsStats = async () => {
+        try {
+            setAnalyticsLoading(true);
+            setAnalyticsError('');
+            const token = await user?.getIdToken();
+            const response = await fetch('/api/analytics/stats', {
+                headers: {
+                    Authorization: `Bearer ${token || 'mock-dev-token'}`,
+                },
+            });
+            const data = await response.json();
+            if (data.success) {
+                setAnalyticsStats(data.stats);
+            } else {
+                setAnalyticsError(data.error || 'Failed to load analytics stats.');
+            }
+        } catch (error) {
+            console.error('Error fetching analytics stats:', error);
+            setAnalyticsError('Network error occurred.');
+        } finally {
+            setAnalyticsLoading(false);
+        }
+    };
+
     // Fetch content on mount
     useEffect(() => {
         fetchContent();
     }, []);
+
+    // Fetch analytics when analytics tab is opened
+    useEffect(() => {
+        if (activeTab === 'analytics') {
+            fetchAnalyticsStats();
+        }
+    }, [activeTab]);
 
     const handleSave = async (action: 'draft' | 'publish' = 'draft') => {
         if (!content) return;
@@ -312,6 +348,7 @@ export default function AdminDashboardPage() {
                 body: JSON.stringify({
                     action,
                     content: {
+                        theme: content.theme || 'light',
                         hero: content.hero,
                         pain: content.pain,
                         value: content.value,
@@ -521,6 +558,7 @@ export default function AdminDashboardPage() {
     // Sidebar navigation definitions
     const sidebarMenuItems = [
         { id: 'dashboard', label: 'Dashboard', icon: LayoutGrid, section: 'core' },
+        { id: 'analytics', label: 'Visitor Analytics', icon: BarChart, section: 'core' },
         { id: 'hero', label: 'Hero Header', icon: Layers, section: 'pages' },
         { id: 'pain', label: 'Pain Section', icon: Target, section: 'pages' },
         { id: 'value', label: 'Value Section', icon: ShieldCheck, section: 'pages' },
@@ -531,6 +569,7 @@ export default function AdminDashboardPage() {
 
     const getBreadcrumbName = (tab: TabType) => {
         if (tab === 'dashboard') return 'Overview';
+        if (tab === 'analytics') return 'Visitor Analytics';
         const item = sidebarMenuItems.find(i => i.id === tab);
         return item ? `Edit Section > ${item.label}` : 'Section Settings';
     };
@@ -750,6 +789,42 @@ export default function AdminDashboardPage() {
                                     </div>
                                 </div>
 
+                                {/* Theme & Mode Settings Card */}
+                                <div className="p-6 rounded-3xl bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/[0.06] relative overflow-hidden group shadow-md">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#8B5CF6]/5 rounded-bl-full pointer-events-none" />
+                                    
+                                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                        <div className="space-y-1">
+                                            <span className="text-[9px] font-bold text-[#8B5CF6] uppercase tracking-widest block">Website Appearance</span>
+                                            <h4 className="text-sm font-bold text-white">Active User-Side Theme</h4>
+                                            <p className="text-[11px] text-white/50">Control whether the live website loads in Dark or Light mode by default.</p>
+                                        </div>
+                                        <div className="flex items-center gap-2 bg-[#07050F]/60 p-1.5 rounded-2xl border border-white/5 self-start sm:self-center shrink-0">
+                                            <button
+                                                onClick={() => setContent(c => c ? { ...c, theme: 'light' } : null)}
+                                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
+                                                    content?.theme !== 'dark'
+                                                        ? 'bg-white text-black shadow-md'
+                                                        : 'text-white/60 hover:text-white hover:bg-white/5'
+                                                }`}
+                                            >
+                                                <Sun size={14} />
+                                                <span>Light Mode</span>
+                                            </button>
+                                            <button
+                                                onClick={() => setContent(c => c ? { ...c, theme: 'dark' } : null)}
+                                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
+                                                    content?.theme === 'dark'
+                                                        ? 'bg-gradient-to-r from-[#6B3FC0] to-[#8B5CF6] text-white shadow-md'
+                                                        : 'text-white/60 hover:text-white hover:bg-white/5'
+                                                }`}
+                                            >
+                                                <Moon size={14} />
+                                                <span>Dark Mode</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 {/* Visual Landing Page Flow Map */}
                                 <div className="space-y-4">
@@ -901,9 +976,363 @@ export default function AdminDashboardPage() {
                                             </div>
                                         </div>
 
+                                        {/* Card 7: Analytics */}
+                                        <div 
+                                            onClick={() => setActiveTab('analytics')}
+                                            className="p-6 bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#6B3FC0]/50 rounded-2xl shadow-lg cursor-pointer transition-all duration-300 hover:-translate-y-1 relative group overflow-hidden"
+                                        >
+                                            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#E8721A]/10 to-transparent rounded-bl-full group-hover:scale-110 transition-transform" />
+                                            <div className="flex items-center gap-3 mb-4">
+                                                <div className="p-2.5 bg-[#E8721A]/15 text-[#F5A96A] rounded-xl">
+                                                    <BarChart size={18} />
+                                                </div>
+                                                <div>
+                                                    <h4 className="text-sm font-bold text-white">Visitor Stats</h4>
+                                                    <span className="text-[9px] font-bold text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-500/20">Live</span>
+                                                </div>
+                                            </div>
+                                            <p className="text-[11px] text-white/60 leading-relaxed font-light mb-4">
+                                                Monitor unique web visitors, total page views, geolocations, and recent reader interactions.
+                                            </p>
+                                            <div className="flex items-center text-xs font-bold text-[#A78BFA] group-hover:translate-x-1.5 transition-transform duration-300">
+                                                <span>View Analytics Dashboard</span>
+                                                <ArrowRight size={14} className="ml-1" />
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
+                            </div>
+                        )}
+
+                        {/* 1B. ANALYTICS VIEW */}
+                        {activeTab === 'analytics' && (
+                            <div className="space-y-8">
+                                {/* Header with Action */}
+                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-white/10 pb-4">
+                                    <div>
+                                        <h3 className="font-serif text-2xl text-white">Visitor Analytics</h3>
+                                        <p className="text-xs text-white/50 mt-1">Real-time engagement, page path performance, and reader demographics.</p>
+                                    </div>
+                                    <button
+                                        onClick={fetchAnalyticsStats}
+                                        disabled={analyticsLoading}
+                                        className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#E8721A] to-[#F08C3A] hover:shadow-[0_0_15px_rgba(232,114,26,0.3)] disabled:opacity-50 text-white rounded-xl text-xs font-bold transition-all"
+                                    >
+                                        <RefreshCw size={13} className={analyticsLoading ? 'animate-spin' : ''} />
+                                        <span>Refresh Stats</span>
+                                    </button>
+                                </div>
+
+                                {analyticsError && (
+                                    <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs flex items-center gap-2">
+                                        <AlertCircle size={14} />
+                                        <span>{analyticsError}</span>
+                                    </div>
+                                )}
+
+                                {analyticsLoading && !analyticsStats ? (
+                                    <div className="py-20 flex flex-col items-center justify-center">
+                                        <RefreshCw className="w-8 h-8 text-[#E8721A] animate-spin mb-4" />
+                                        <div className="text-white/60 text-xs">Fetching latest engagement data...</div>
+                                    </div>
+                                ) : !analyticsStats ? (
+                                    <div className="py-20 text-center text-white/40 text-xs italic">
+                                        No visitor tracking data loaded.
+                                    </div>
+                                ) : (
+                                    <>
+                                        {/* Key Metrics Grid */}
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                            {/* Unique Visitors */}
+                                            <div className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/[0.08] relative overflow-hidden group">
+                                                <div className="absolute top-0 right-0 w-24 h-24 bg-[#6B3FC0]/5 rounded-bl-full pointer-events-none" />
+                                                <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1">Unique Visitors</span>
+                                                <h4 className="text-3xl font-serif font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-300">
+                                                    {analyticsStats.uniqueVisitors.toLocaleString()}
+                                                </h4>
+                                                <p className="text-[10px] text-white/50 mt-2">Based on unique browser sessions</p>
+                                            </div>
+
+                                            {/* Total Page Views */}
+                                            <div className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/[0.08] relative overflow-hidden group">
+                                                <div className="absolute top-0 right-0 w-24 h-24 bg-[#E8721A]/5 rounded-bl-full pointer-events-none" />
+                                                <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1">Total Page Views</span>
+                                                <h4 className="text-3xl font-serif font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#E8721A] to-[#F5A96A]">
+                                                    {analyticsStats.totalPageViews.toLocaleString()}
+                                                </h4>
+                                                <p className="text-[10px] text-white/50 mt-2">All recorded tracking requests</p>
+                                            </div>
+
+                                            {/* Avg Page Views / Visitor */}
+                                            <div className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/[0.08] relative overflow-hidden group">
+                                                <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-bl-full pointer-events-none" />
+                                                <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1">Views per Visitor</span>
+                                                <h4 className="text-3xl font-serif font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-300">
+                                                    {analyticsStats.uniqueVisitors > 0 
+                                                        ? (analyticsStats.totalPageViews / analyticsStats.uniqueVisitors).toFixed(1) 
+                                                        : '0.0'}
+                                                </h4>
+                                                <p className="text-[10px] text-white/50 mt-2">Average engagement ratio</p>
+                                            </div>
+                                        </div>
+
+                                        {/* Traffic Over Time Chart */}
+                                        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-6">
+                                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                                <div className="flex items-center gap-2">
+                                                    <TrendingUp size={15} className="text-[#E8721A]" />
+                                                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">Traffic Over Time (Last 7 Days)</h4>
+                                                </div>
+                                                <div className="flex items-center gap-4 text-[10px] uppercase font-bold tracking-wider">
+                                                    <div className="flex items-center gap-1.5">
+                                                        <span className="w-2.5 h-2.5 rounded-full bg-[#E8721A]" />
+                                                        <span className="text-white/60">Page Views</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-1.5">
+                                                        <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6]" />
+                                                        <span className="text-white/60">Unique Visitors</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="relative w-full h-[220px]">
+                                                <svg className="w-full h-full" viewBox="0 0 600 220" preserveAspectRatio="none">
+                                                    <defs>
+                                                        <linearGradient id="orangeGrad" x1="0" y1="0" x2="0" y2="1">
+                                                             <stop offset="0%" stopColor="#E8721A" stopOpacity="0.3" />
+                                                             <stop offset="100%" stopColor="#E8721A" stopOpacity="0.0" />
+                                                        </linearGradient>
+                                                        <linearGradient id="purpleGrad" x1="0" y1="0" x2="0" y2="1">
+                                                             <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.25" />
+                                                             <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.0" />
+                                                        </linearGradient>
+                                                    </defs>
+                                                    
+                                                     {/* Grid Lines */}
+                                                    <line x1="0" y1="45" x2="600" y2="45" stroke="rgba(255,255,255,0.04)" strokeDasharray="3,3" />
+                                                    <line x1="0" y1="90" x2="600" y2="90" stroke="rgba(255,255,255,0.04)" strokeDasharray="3,3" />
+                                                    <line x1="0" y1="135" x2="600" y2="135" stroke="rgba(255,255,255,0.04)" strokeDasharray="3,3" />
+                                                    <line x1="0" y1="180" x2="600" y2="180" stroke="rgba(255,255,255,0.04)" strokeDasharray="3,3" />
+
+                                                     {/* Render SVG Paths */}
+                                                     {(() => {
+                                                         const history = analyticsStats.trafficHistory || [];
+                                                         if (history.length === 0) return null;
+                                                         const maxVal = Math.max(...history.map((d: any) => Math.max(d.views, d.visitors)), 5);
+                                                         
+                                                         const pointsViews = history.map((d: any, i: number) => {
+                                                             const x = (i / (history.length - 1)) * 600;
+                                                             const y = 180 - (d.views / maxVal) * 140;
+                                                             return `${x},${y}`;
+                                                         });
+                                                         
+                                                         const pathViews = `M ${pointsViews.join(' L ')}`;
+                                                         const areaViews = `${pathViews} L 600,180 L 0,180 Z`;
+
+                                                         const pointsVisitors = history.map((d: any, i: number) => {
+                                                             const x = (i / (history.length - 1)) * 600;
+                                                             const y = 180 - (d.visitors / maxVal) * 140;
+                                                             return `${x},${y}`;
+                                                         });
+                                                         
+                                                         const pathVisitors = `M ${pointsVisitors.join(' L ')}`;
+                                                         const areaVisitors = `${pathVisitors} L 600,180 L 0,180 Z`;
+
+                                                         return (
+                                                             <>
+                                                                 {/* Area fills */}
+                                                                 <path d={areaViews} fill="url(#orangeGrad)" />
+                                                                 <path d={areaVisitors} fill="url(#purpleGrad)" />
+
+                                                                 {/* Stroke lines */}
+                                                                 <path d={pathViews} fill="none" stroke="#E8721A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                                                                 <path d={pathVisitors} fill="none" stroke="#8B5CF6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+
+                                                                 {/* Interactive Data Dots */}
+                                                                 {history.map((d: any, i: number) => {
+                                                                     const x = (i / (history.length - 1)) * 600;
+                                                                     const yV = 180 - (d.views / maxVal) * 140;
+                                                                     const yU = 180 - (d.visitors / maxVal) * 140;
+                                                                     return (
+                                                                         <g key={i}>
+                                                                             <circle cx={x} cy={yV} r="3.5" fill="#0E0A1E" stroke="#E8721A" strokeWidth="2" />
+                                                                             <circle cx={x} cy={yU} r="3.5" fill="#0E0A1E" stroke="#8B5CF6" strokeWidth="2" />
+                                                                         </g>
+                                                                     );
+                                                                 })}
+                                                             </>
+                                                         );
+                                                     })()}
+                                                 </svg>
+                                             </div>
+
+                                             {/* X-Axis labels */}
+                                             <div className="flex justify-between text-[9px] font-bold text-white/40 px-1">
+                                                 {(analyticsStats.trafficHistory || []).map((d: any, i: number) => (
+                                                     <div key={i} className="text-center w-14 truncate">{d.date}</div>
+                                                 ))}
+                                             </div>
+
+                                             {/* Detail Indicators */}
+                                             <div className="grid grid-cols-7 gap-1 border-t border-white/5 pt-4 text-center">
+                                                 {(analyticsStats.trafficHistory || []).map((d: any, i: number) => (
+                                                     <div key={i} className="space-y-1">
+                                                         <div className="text-[9px] text-white/30 font-semibold">{d.date}</div>
+                                                         <div className="text-[11px] font-bold text-[#E8721A]">{d.views} <span className="text-[8px] text-white/35 font-normal">v</span></div>
+                                                         <div className="text-[10px] text-[#8B5CF6] font-medium">{d.visitors} <span className="text-[8px] text-white/35 font-normal">u</span></div>
+                                                     </div>
+                                                 ))}
+                                             </div>
+                                         </div>
+
+                                        {/* Double Column Breakdown */}
+                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                            {/* Column 1: Visited Pages */}
+                                            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-4">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <Layers size={15} className="text-[#8B5CF6]" />
+                                                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">Top Pages</h4>
+                                                </div>
+                                                <div className="overflow-x-auto">
+                                                    <table className="w-full text-left text-xs">
+                                                        <thead>
+                                                            <tr className="border-b border-white/5 text-white/40 font-bold uppercase tracking-wider">
+                                                                <th className="py-2.5">Page Path</th>
+                                                                <th className="py-2.5 text-right w-24">Views</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody className="divide-y divide-white/5 text-white/80">
+                                                            {analyticsStats.pages.map((item: any, idx: number) => (
+                                                                <tr key={idx} className="hover:bg-white/[0.01] transition-colors">
+                                                                    <td className="py-3 font-mono text-[11px] truncate max-w-xs" title={item.page}>{item.page}</td>
+                                                                    <td className="py-3 text-right font-semibold">{item.views.toLocaleString()}</td>
+                                                                </tr>
+                                                            ))}
+                                                            {analyticsStats.pages.length === 0 && (
+                                                                <tr>
+                                                                    <td colSpan={2} className="py-4 text-center text-white/30 italic">No page data.</td>
+                                                                </tr>
+                                                            )}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            {/* Column 2: Geolocation breakdown */}
+                                            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-4">
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <div className="flex items-center gap-2">
+                                                        <Compass size={15} className="text-[#E8721A]" />
+                                                        <h4 className="text-xs font-bold text-white uppercase tracking-wider">Demographics</h4>
+                                                    </div>
+                                                    <span className="text-[10px] text-white/40 font-semibold uppercase tracking-wider">Visited Countries</span>
+                                                </div>
+                                                
+                                                {/* Scrollable list of visited countries */}
+                                                <div className="max-h-[300px] overflow-y-auto pr-1 space-y-3 custom-scrollbar">
+                                                    {analyticsStats.countries.map((item: any, idx: number) => {
+                                                        const totalUnique = analyticsStats.uniqueVisitors || 1;
+                                                        const pct = Math.round((item.uniqueVisitors / totalUnique) * 100);
+                                                        return (
+                                                            <div key={idx} className="space-y-1">
+                                                                <div className="flex justify-between text-xs font-medium">
+                                                                    <span className="text-white/80 flex items-center gap-2">
+                                                                        <span className="text-[10px] text-white/30 font-mono">#{idx+1}</span>
+                                                                        {item.country}
+                                                                    </span>
+                                                                    <span className="text-white/40 text-[11px]">
+                                                                        <strong className="text-white/80 font-bold">{item.uniqueVisitors}</strong> visitors ({item.views} views)
+                                                                    </span>
+                                                                </div>
+                                                                <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                                                    <div 
+                                                                        className="h-full bg-gradient-to-r from-[#6B3FC0] to-[#E8721A] rounded-full transition-all duration-500" 
+                                                                        style={{ width: `${pct}%` }}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                    {analyticsStats.countries.length === 0 && (
+                                                        <p className="text-center text-white/30 italic text-xs py-10">No demographic data.</p>
+                                                    )}
+                                                </div>
+
+                                                <div className="pt-4 border-t border-white/5">
+                                                    <span className="text-[10px] text-white/40 font-semibold uppercase tracking-wider block mb-3">Top Cities</span>
+                                                    <div className="max-h-[160px] overflow-y-auto pr-1 space-y-2 custom-scrollbar text-[11px]">
+                                                        {analyticsStats.cities.slice(0, 30).map((item: any, idx: number) => (
+                                                            <div key={idx} className="flex justify-between items-center py-1 hover:bg-white/[0.01]">
+                                                                <span className="text-white/70">{item.city}, {item.country}</span>
+                                                                <span className="text-white/40 font-mono">
+                                                                    <strong className="text-white/80 font-semibold">{item.uniqueVisitors}</strong> visitors ({item.views} views)
+                                                                </span>
+                                                            </div>
+                                                        ))}
+                                                        {analyticsStats.cities.length === 0 && (
+                                                            <p className="text-center text-white/30 italic py-4">No city data.</p>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Activity Log Feed */}
+                                        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-4">
+                                            <div className="flex items-center gap-2">
+                                                <TrendingUp size={15} className="text-emerald-400" />
+                                                <h4 className="text-xs font-bold text-white uppercase tracking-wider">Recent Activity Feed</h4>
+                                            </div>
+                                            <div className="overflow-x-auto">
+                                                <table className="w-full text-left text-xs">
+                                                    <thead>
+                                                        <tr className="border-b border-white/5 text-white/40 font-bold uppercase tracking-wider">
+                                                            <th className="py-2.5">Time</th>
+                                                            <th className="py-2.5">Visitor ID</th>
+                                                            <th className="py-2.5">IP</th>
+                                                            <th className="py-2.5">Page Path</th>
+                                                            <th className="py-2.5">Location</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody className="divide-y divide-white/5 text-white/80">
+                                                        {analyticsStats.recentVisits.map((item: any) => (
+                                                            <tr key={item.id} className="hover:bg-white/[0.01] transition-colors">
+                                                                <td className="py-3 text-white/50 text-[10px] whitespace-nowrap">
+                                                                    {new Date(item.timestamp).toLocaleDateString(undefined, {
+                                                                        month: 'short',
+                                                                        day: 'numeric',
+                                                                        hour: '2-digit',
+                                                                        minute: '2-digit',
+                                                                        second: '2-digit'
+                                                                    })}
+                                                                </td>
+                                                                <td className="py-3 font-mono text-[10px] text-purple-300">
+                                                                    {item.visitorId.slice(0, 10)}...
+                                                                </td>
+                                                                <td className="py-3 font-mono text-white/50 text-[10px]">
+                                                                    {item.ip}
+                                                                </td>
+                                                                <td className="py-3 font-mono text-[10px] truncate max-w-[150px]" title={item.page}>
+                                                                    {item.page}
+                                                                </td>
+                                                                <td className="py-3 text-[11px] whitespace-nowrap text-white/70">
+                                                                    {item.city}, {item.country}
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                        {analyticsStats.recentVisits.length === 0 && (
+                                                            <tr>
+                                                                <td colSpan={5} className="py-6 text-center text-white/30 italic">No recent visits recorded.</td>
+                                                            </tr>
+                                                        )}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         )}
 

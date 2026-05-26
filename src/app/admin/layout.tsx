@@ -21,6 +21,12 @@ export default function AdminLayout({
     const isLoginPage = pathname === '/admin/login';
 
     useEffect(() => {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('ignore_analytics', 'true');
+        }
+    }, []);
+
+    useEffect(() => {
         // Don't redirect if on login page
         if (isLoginPage) return;
 

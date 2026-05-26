@@ -7,6 +7,7 @@
 // Site content structure stored in Firestore
 export interface SiteContent {
     id: string;
+    theme?: 'light' | 'dark';
     hero: HeroContent;
     pain: PainContent;
     value: ValueContent;
