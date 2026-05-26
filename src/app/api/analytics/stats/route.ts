@@ -102,9 +102,10 @@ export async function GET(req: NextRequest) {
     const trafficHistoryMap: Record<string, { views: number; visitors: Set<string> }> = {};
 
     if (range === '24h') {
-      // 24 hourly buckets, labelled "HH:00"
+      // 24 hourly buckets, standardized to "HH:00"
       for (let i = 23; i >= 0; i--) {
         const d = new Date(now - i * 60 * 60 * 1000);
+        d.setMinutes(0, 0, 0);
         const label = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
         trafficHistoryMap[label] = { views: 0, visitors: new Set() };
       }
@@ -164,7 +165,9 @@ export async function GET(req: NextRequest) {
       // Track traffic history bucket
       let bucketLabel: string;
       if (range === '24h') {
-        bucketLabel = timestamp.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+        const d = new Date(timestamp);
+        d.setMinutes(0, 0, 0);
+        bucketLabel = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
       } else {
         bucketLabel = timestamp.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
       }
