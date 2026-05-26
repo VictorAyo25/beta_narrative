@@ -43,16 +43,25 @@ export default function Navbar() {
                     behavior: 'smooth'
                 });
             }, 150);
+        } else {
+            setIsOpen(false);
+            window.location.href = `/${href}`;
         }
     }, []);
 
     // Scroll to top for logo
     const scrollToTop = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        if (typeof window !== 'undefined') {
+            if (window.location.pathname === '/') {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } else {
+                window.location.href = '/';
+            }
+        }
     }, []);
 
     return (

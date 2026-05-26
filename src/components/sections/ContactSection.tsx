@@ -1,14 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
 import { ContactFormData } from '@/types';
-import { Send, CheckCircle, AlertCircle, ChevronDown } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, ChevronDown, ChevronRight } from 'lucide-react';
+import CalendlyEmbed from '../CalendlyEmbed';
 
 const contactSchema = z.object({
     fullName: z.string().min(2, 'Name must be at least 2 characters'),
@@ -31,6 +32,20 @@ export default function ContactSection() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [submittedData, setSubmittedData] = useState<ContactFormData | null>(null);
+    const [step, setStep] = useState<1 | 2 | 3>(1);
+
+    // Listen for Calendly event scheduling success to auto-advance to step 3
+    useEffect(() => {
+        const handleCalendlyEvent = (e: MessageEvent) => {
+            if (e.data.event === 'calendly.event_scheduled') {
+                setStep(3);
+            }
+        };
+
+        window.addEventListener('message', handleCalendlyEvent);
+        return () => window.removeEventListener('message', handleCalendlyEvent);
+    }, []);
 
     const contact = content?.contact || {
         sectionLabel: 'Apply Now',
@@ -43,10 +58,10 @@ export default function ContactSection() {
     const {
         register,
         handleSubmit,
-        reset,
-        setValue,
-        watch,
         formState: { errors },
+        watch,
+        setValue,
+        reset,
     } = useForm<ContactFormData>({
         resolver: zodResolver(contactSchema),
     });
@@ -65,7 +80,14 @@ export default function ContactSection() {
             });
 
             if (response.ok) {
+                setSubmittedData(data);
                 setSubmitStatus('success');
+                // Move to Step 2 if Calendly URL is configured, else go straight to Step 3
+                if (contact.calendlyUrl || 'https://calendly.com/egbogunfavour/30min') {
+                    setStep(2);
+                } else {
+                    setStep(3);
+                }
                 reset();
             } else {
                 setSubmitStatus('error');
@@ -115,160 +137,255 @@ export default function ContactSection() {
                     {/* Top accent */}
                     <div className="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#E8721A]/40 to-transparent" />
 
-                    {submitStatus === 'success' ? (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="text-center py-12"
-                        >
-                            <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-6">
-                                <CheckCircle size={28} className="text-green-400" />
-                            </div>
-                            <h3 className="font-serif text-2xl text-[#1A0E35] mb-3">Application Received</h3>
-                            <p className="text-sm text-[#1A0E35]/80 max-w-sm mx-auto leading-relaxed">
-                                Thank you for your interest. We'll review your application and get back to you within 48 hours.
-                            </p>
-                        </motion.div>
-                    ) : (
-                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                            {/* Full Name */}
-                            <div>
-                                <input
-                                    {...register('fullName')}
-                                    type="text"
-                                    placeholder="Full name"
-                                    className="w-full px-5 py-4 bg-[#E4DAEF]/20 border border-[#8B5CF6]/25 rounded-xl text-sm text-[#1A0E35] placeholder-[#3B334C]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
-                                />
-                                {errors.fullName && (
-                                    <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.fullName.message}</p>
-                                )}
-                            </div>
+                    {/* Step Progress Tracker */}
+                    {(contact.calendlyUrl || 'https://calendly.com/egbogunfavour/30min') && (
+                        <div className="flex items-center justify-between max-w-xs mx-auto mb-8 relative select-none">
+                            {/* Connecting Background Line */}
+                            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#8B5CF6]/15 z-0" />
+                            {/* Connecting Active Progress Line */}
+                            <div 
+                                className="absolute left-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#E8721A] z-0 transition-all duration-500 ease-in-out" 
+                                style={{ width: step === 1 ? '0%' : step === 2 ? '50%' : '100%' }}
+                            />
 
-                            {/* Email */}
-                            <div>
-                                <input
-                                    {...register('email')}
-                                    type="email"
-                                    placeholder="Email address"
-                                    className="w-full px-5 py-4 bg-[#E4DAEF]/20 border border-[#8B5CF6]/25 rounded-xl text-sm text-[#1A0E35] placeholder-[#3B334C]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
-                                />
-                                {errors.email && (
-                                    <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.email.message}</p>
-                                )}
-                            </div>
-
-                            {/* Role */}
-                            <div>
-                                <input
-                                    {...register('role')}
-                                    type="text"
-                                    placeholder="Current role and organisation"
-                                    className="w-full px-5 py-4 bg-[#E4DAEF]/20 border border-[#8B5CF6]/25 rounded-xl text-sm text-[#1A0E35] placeholder-[#3B334C]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
-                                />
-                                {errors.role && (
-                                    <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.role.message}</p>
-                                )}
-                            </div>
-
-                            {/* Leadership Journey */}
-                            <div className="relative">
-                                <input type="hidden" {...register('journey')} />
-                                
-                                <button
-                                    type="button"
-                                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                                    className={`w-full px-5 py-4 bg-[#E4DAEF]/20 border ${isDropdownOpen ? 'border-[#E8721A]/50 bg-[#D9CFF2]/12' : 'border-[#8B5CF6]/25'} rounded-xl text-sm flex items-center justify-between focus:outline-none transition-all duration-300`}
-                                >
-                                    <span className={selectedJourney ? 'text-[#1A0E35]' : 'text-[#3D2A6E]/60'}>
-                                        {selectedJourney 
-                                            ? journeyOptions.find(o => o.value === selectedJourney)?.label 
-                                            : 'Where are you in your leadership journey?'}
-                                    </span>
-                                    <ChevronDown 
-                                        size={16} 
-                                        className={`text-[#3D2A6E]/50 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-[#E8721A]' : ''}`} 
-                                    />
-                                </button>
-
-                                {/* Custom Dropdown Menu */}
-                                {isDropdownOpen && (
-                                    <>
-                                        <div 
-                                            className="fixed inset-0 z-40"
-                                            onClick={() => setIsDropdownOpen(false)}
-                                        />
-                                        <div className="absolute z-50 w-full mt-2 bg-[#FAF7FF] border border-[#8B5CF6]/35 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.08)] overflow-hidden">
-                                            <div className="max-h-60 overflow-y-auto">
-                                                {journeyOptions.filter(o => o.value !== '').map((option) => (
-                                                    <button
-                                                        key={option.value}
-                                                        type="button"
-                                                        onClick={() => {
-                                                            setValue('journey', option.value, { shouldValidate: true });
-                                                            setIsDropdownOpen(false);
-                                                        }}
-                                                        className={`w-full text-left px-5 py-3.5 text-sm hover:bg-[#E4DAEF]/40 transition-colors duration-200 border-b border-[#8B5CF6]/20 last:border-0 ${selectedJourney === option.value ? 'bg-[#E8721A]/10 text-[#E8721A] font-medium' : 'text-[#1A0E35]'}`}
-                                                    >
-                                                        {option.label}
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-
-                                {errors.journey && (
-                                    <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.journey.message}</p>
-                                )}
-                            </div>
-
-                            {/* Challenge (Optional) */}
-                            <div>
-                                <input
-                                    {...register('challenge')}
-                                    type="text"
-                                    placeholder="Your biggest visibility challenge (optional)"
-                                    className="w-full px-5 py-4 bg-[#E4DAEF]/20 border border-[#8B5CF6]/25 rounded-xl text-sm text-[#1A0E35] placeholder-[#3B334C]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
-                                />
-                            </div>
-
-                            {/* Submit Button */}
-                            <button
-                                id="contact-submit-btn"
-                                type="submit"
-                                disabled={isSubmitting}
-                                className="w-full flex items-center justify-center gap-2.5 py-4 bg-[#E8721A] text-white text-sm font-semibold tracking-[0.12em] uppercase rounded-full hover:bg-[#C05A0E] hover:shadow-[0_0_40px_rgba(232,114,26,0.5)] hover:scale-[1.01] transition-all duration-300 shadow-[0_4px_24px_rgba(232,114,26,0.35)] disabled:opacity-50 disabled:cursor-not-allowed mt-2"
-                            >
-                                {isSubmitting ? (
-                                    <span className="flex items-center gap-2">
-                                        <svg className="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                                        </svg>
-                                        Submitting...
-                                    </span>
-                                ) : (
-                                    <span className="flex items-center gap-2">
-                                        <Send size={15} className="text-white" />
-                                        Secure My Spot
-                                    </span>
-                                )}
-                            </button>
-
-                            {/* Error Message */}
-                            {submitStatus === 'error' && (
-                                <div className="flex items-center justify-center gap-2 text-red-400/80 text-sm">
-                                    <AlertCircle size={14} />
-                                    Something went wrong. Please try again.
+                            {/* Step 1 Node */}
+                            <div className="z-10 flex flex-col items-center">
+                                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-300 border ${
+                                    step >= 1 
+                                        ? 'bg-[#E8721A] text-white border-[#E8721A] shadow-[0_0_12px_rgba(232,114,26,0.35)]' 
+                                        : 'bg-[#FAF7FF] text-[#1A0E35]/40 border-[#8B5CF6]/25'
+                                }`}>
+                                    1
                                 </div>
-                            )}
+                                <span className="text-[9px] font-bold text-[#1A0E35]/65 uppercase tracking-wider mt-1.5 bg-[#FAF7FF] px-1.5">Profile</span>
+                            </div>
 
-                            {/* Fine Print */}
-                            <p className="text-[11px] text-[#3D2A6E]/60 text-center pt-2 leading-relaxed">
-                                {contact.finePrint}
-                            </p>
-                        </form>
+                            {/* Step 2 Node */}
+                            <div className="z-10 flex flex-col items-center">
+                                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-300 border ${
+                                    step >= 2 
+                                        ? 'bg-[#E8721A] text-white border-[#E8721A] shadow-[0_0_12px_rgba(232,114,26,0.35)]' 
+                                        : 'bg-[#FAF7FF] text-[#1A0E35]/40 border-[#8B5CF6]/25'
+                                }`}>
+                                    2
+                                </div>
+                                <span className="text-[9px] font-bold text-[#1A0E35]/65 uppercase tracking-wider mt-1.5 bg-[#FAF7FF] px-1.5">Schedule</span>
+                            </div>
+
+                            {/* Step 3 Node */}
+                            <div className="z-10 flex flex-col items-center">
+                                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-300 border ${
+                                    step >= 3 
+                                        ? 'bg-[#E8721A] text-white border-[#E8721A] shadow-[0_0_12px_rgba(232,114,26,0.35)]' 
+                                        : 'bg-[#FAF7FF] text-[#1A0E35]/40 border-[#8B5CF6]/25'
+                                }`}>
+                                    3
+                                </div>
+                                <span className="text-[9px] font-bold text-[#1A0E35]/65 uppercase tracking-wider mt-1.5 bg-[#FAF7FF] px-1.5">Confirm</span>
+                            </div>
+                        </div>
                     )}
+
+                    <AnimatePresence mode="wait">
+                        {step === 1 && (
+                            <motion.div
+                                key="step1"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: 10 }}
+                                transition={{ duration: 0.25, ease: 'easeInOut' }}
+                            >
+                                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                                    {/* Full Name */}
+                                    <div>
+                                        <input
+                                            {...register('fullName')}
+                                            type="text"
+                                            placeholder="Full name"
+                                            className="w-full px-5 py-4 bg-[#E4DAEF]/20 border border-[#8B5CF6]/25 rounded-xl text-sm text-[#1A0E35] placeholder-[#3B334C]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                        />
+                                        {errors.fullName && (
+                                            <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.fullName.message}</p>
+                                        )}
+                                    </div>
+
+                                    {/* Email */}
+                                    <div>
+                                        <input
+                                            {...register('email')}
+                                            type="email"
+                                            placeholder="Email address"
+                                            className="w-full px-5 py-4 bg-[#E4DAEF]/20 border border-[#8B5CF6]/25 rounded-xl text-sm text-[#1A0E35] placeholder-[#3B334C]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                        />
+                                        {errors.email && (
+                                            <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.email.message}</p>
+                                        )}
+                                    </div>
+
+                                    {/* Role */}
+                                    <div>
+                                        <input
+                                            {...register('role')}
+                                            type="text"
+                                            placeholder="Current role and organisation"
+                                            className="w-full px-5 py-4 bg-[#E4DAEF]/20 border border-[#8B5CF6]/25 rounded-xl text-sm text-[#1A0E35] placeholder-[#3B334C]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                        />
+                                        {errors.role && (
+                                            <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.role.message}</p>
+                                        )}
+                                    </div>
+
+                                    {/* Leadership Journey */}
+                                    <div className="relative">
+                                        <input type="hidden" {...register('journey')} />
+                                        
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                            className={`w-full px-5 py-4 bg-[#E4DAEF]/20 border ${isDropdownOpen ? 'border-[#E8721A]/50 bg-[#D9CFF2]/12' : 'border-[#8B5CF6]/25'} rounded-xl text-sm flex items-center justify-between focus:outline-none transition-all duration-300`}
+                                        >
+                                            <span className={selectedJourney ? 'text-[#1A0E35]' : 'text-[#3D2A6E]/60'}>
+                                                {selectedJourney 
+                                                    ? journeyOptions.find(o => o.value === selectedJourney)?.label 
+                                                    : 'Where are you in your leadership journey?'}
+                                            </span>
+                                            <ChevronDown 
+                                                size={16} 
+                                                className={`text-[#3D2A6E]/50 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-[#E8721A]' : ''}`} 
+                                            />
+                                        </button>
+
+                                        {/* Custom Dropdown Menu */}
+                                        {isDropdownOpen && (
+                                            <>
+                                                <div 
+                                                    className="fixed inset-0 z-40"
+                                                    onClick={() => setIsDropdownOpen(false)}
+                                                />
+                                                <div className="absolute z-50 w-full mt-2 bg-[#FAF7FF] border border-[#8B5CF6]/35 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.08)] overflow-hidden">
+                                                    <div className="max-h-60 overflow-y-auto">
+                                                        {journeyOptions.filter(o => o.value !== '').map((option) => (
+                                                            <button
+                                                                key={option.value}
+                                                                type="button"
+                                                                onClick={() => {
+                                                                    setValue('journey', option.value, { shouldValidate: true });
+                                                                    setIsDropdownOpen(false);
+                                                                }}
+                                                                className={`w-full text-left px-5 py-3.5 text-sm hover:bg-[#E4DAEF]/40 transition-colors duration-200 border-b border-[#8B5CF6]/20 last:border-0 ${selectedJourney === option.value ? 'bg-[#E8721A]/10 text-[#E8721A] font-medium' : 'text-[#1A0E35]'}`}
+                                                            >
+                                                                {option.label}
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {errors.journey && (
+                                            <p className="text-xs text-red-400/80 mt-1.5 ml-1">{errors.journey.message}</p>
+                                        )}
+                                    </div>
+
+                                    {/* Challenge (Optional) */}
+                                    <div>
+                                        <input
+                                            {...register('challenge')}
+                                            type="text"
+                                            placeholder="Your biggest visibility challenge (optional)"
+                                            className="w-full px-5 py-4 bg-[#E4DAEF]/20 border border-[#8B5CF6]/25 rounded-xl text-sm text-[#1A0E35] placeholder-[#3B334C]/50 focus:border-[#E8721A]/50 focus:bg-[#D9CFF2]/12 focus:outline-none transition-all duration-300"
+                                        />
+                                    </div>
+
+                                    {/* Submit Button */}
+                                    <button
+                                        id="contact-submit-btn"
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="w-full flex items-center justify-center gap-2.5 py-4 bg-[#E8721A] text-white text-sm font-semibold tracking-[0.12em] uppercase rounded-full hover:bg-[#C05A0E] hover:shadow-[0_0_40px_rgba(232,114,26,0.5)] hover:scale-[1.01] transition-all duration-300 shadow-[0_4px_24px_rgba(232,114,26,0.35)] disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                                    >
+                                        {isSubmitting ? (
+                                            <span className="flex items-center gap-2">
+                                                <svg className="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                                                </svg>
+                                                Submitting...
+                                            </span>
+                                        ) : (
+                                            <span className="flex items-center gap-2">
+                                                <span>Continue to Booking</span>
+                                                <ChevronRight size={15} className="text-white" />
+                                            </span>
+                                        )}
+                                    </button>
+
+                                    {/* Error Message */}
+                                    {submitStatus === 'error' && (
+                                        <div className="flex items-center justify-center gap-2 text-red-400/80 text-sm">
+                                            <AlertCircle size={14} />
+                                            Something went wrong. Please try again.
+                                        </div>
+                                    )}
+
+                                    {/* Fine Print */}
+                                    <p className="text-[11px] text-[#3D2A6E]/60 text-center pt-2 leading-relaxed">
+                                        {contact.finePrint}
+                                    </p>
+                                </form>
+                            </motion.div>
+                        )}
+
+                        {step === 2 && (
+                            <motion.div
+                                key="step2"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: 10 }}
+                                transition={{ duration: 0.25, ease: 'easeInOut' }}
+                                className="text-center"
+                            >
+                                <h3 className="font-serif text-xl text-[#1A0E35] mb-2 font-normal">Select your call slot</h3>
+                                <p className="text-sm text-[#1A0E35]/80 max-w-md mx-auto leading-relaxed mb-6">
+                                    Thanks <span className="font-semibold text-[#E8721A]">{submittedData?.fullName}</span>! Choose a time below to finalize your discovery session.
+                                </p>
+                                <CalendlyEmbed
+                                    url={contact.calendlyUrl || 'https://calendly.com/egbogunfavour/30min'}
+                                    prefillName={submittedData?.fullName}
+                                    prefillEmail={submittedData?.email}
+                                    height="650px"
+                                    className="border border-[#8B5CF6]/15 shadow-sm rounded-2xl"
+                                />
+                                <button
+                                    onClick={() => setStep(1)}
+                                    className="mt-6 text-xs text-[#1A0E35]/50 hover:text-[#E8721A] font-semibold flex items-center justify-center gap-1 mx-auto transition-colors"
+                                >
+                                    ← Edit Profile Details
+                                </button>
+                            </motion.div>
+                        )}
+
+                        {step === 3 && (
+                            <motion.div
+                                key="step3"
+                                initial={{ opacity: 0, scale: 0.96 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ type: 'spring', damping: 22 }}
+                                className="text-center py-8"
+                            >
+                                <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-5">
+                                    <CheckCircle size={26} className="text-green-500" />
+                                </div>
+                                <h3 className="font-serif text-2xl text-[#1A0E35] mb-3">Application Confirmed!</h3>
+                                <p className="text-sm text-[#1A0E35]/80 max-w-md mx-auto leading-relaxed mb-6">
+                                    Thank you, <span className="font-semibold text-[#E8721A]">{submittedData?.fullName}</span>. Your application details are secure, and your discovery call is officially booked!
+                                </p>
+                                <p className="text-xs text-[#3D2A6E]/60 max-w-xs mx-auto leading-relaxed border-t border-[#8B5CF6]/10 pt-5">
+                                    We have sent a calendar invitation and confirmation details to your email address at <span className="font-semibold text-[#1A0E35]">{submittedData?.email}</span>.
+                                </p>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </motion.div>
             </div>
         </section>

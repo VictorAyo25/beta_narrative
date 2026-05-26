@@ -173,18 +173,22 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Send email and log to sheets in parallel
-        await Promise.all([
-            sendEmailNotification({ fullName, email, role, journey, challenge }),
-            logToGoogleSheets({ fullName, email, role, journey, challenge }),
-        ]);
+        // Send email and log to sheets in parallel, but handle errors gracefully so booking isn't blocked
+        try {
+            await Promise.all([
+                sendEmailNotification({ fullName, email, role, journey, challenge }),
+                logToGoogleSheets({ fullName, email, role, journey, challenge }),
+            ]);
+        } catch (deliveryError) {
+            console.error('Non-blocking contact submission error (email/sheets delivery failed):', deliveryError);
+        }
 
         return NextResponse.json(
             { success: true, message: 'Application submitted successfully' },
             { status: 200 }
         );
     } catch (error) {
-        console.error('Contact form error:', error);
+        console.error('Contact form critical error:', error);
         return NextResponse.json(
             { error: 'Failed to submit application' },
             { status: 500 }

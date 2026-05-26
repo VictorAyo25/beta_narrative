@@ -1549,6 +1549,14 @@ export default function AdminDashboardPage() {
                                     />
 
                                     <FormField
+                                        label="Calendly Booking URL"
+                                        value={content?.contact?.calendlyUrl || ''}
+                                        onChange={(v) => updateContact('calendlyUrl', v)}
+                                        placeholder="https://calendly.com/favour-egbogun/30min"
+                                        helper="Providing a URL will show a scheduling calendar automatically after successful form submissions."
+                                    />
+
+                                    <FormField
                                         label="Fine Print Footer"
                                         value={content?.contact?.finePrint || ''}
                                         onChange={(v) => updateContact('finePrint', v)}

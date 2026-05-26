@@ -21,7 +21,7 @@ export default function FloatingCTA() {
     // Hide when either main static CTA button is on screen
     useEffect(() => {
         const offerTargets = document.querySelectorAll('[id^="offer-cta-btn-"]');
-        const contactTarget = document.getElementById('contact-submit-btn');
+        const contactTarget = document.getElementById('contact');
 
         const observerOptions = { rootMargin: '80px' };
         const visibleOffers = new Set<string>();

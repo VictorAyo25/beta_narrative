@@ -94,6 +94,7 @@ export interface ContactContent {
     titleEmphasis: string;
     subtitle: string;
     finePrint: string;
+    calendlyUrl?: string;
 }
 
 // Contact form submission
