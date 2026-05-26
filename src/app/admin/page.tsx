@@ -1036,7 +1036,7 @@ export default function AdminDashboardPage() {
                                 ) : (
                                     <>
                                         {/* Key Metrics Grid */}
-                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             {/* Unique Visitors */}
                                             <div className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/[0.08] relative overflow-hidden group">
                                                 <div className="absolute top-0 right-0 w-24 h-24 bg-[#6B3FC0]/5 rounded-bl-full pointer-events-none" />
@@ -1055,18 +1055,6 @@ export default function AdminDashboardPage() {
                                                     {analyticsStats.totalPageViews.toLocaleString()}
                                                 </h4>
                                                 <p className="text-[10px] text-white/50 mt-2">All recorded tracking requests</p>
-                                            </div>
-
-                                            {/* Avg Page Views / Visitor */}
-                                            <div className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/[0.08] relative overflow-hidden group">
-                                                <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-bl-full pointer-events-none" />
-                                                <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1">Views per Visitor</span>
-                                                <h4 className="text-3xl font-serif font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-300">
-                                                    {analyticsStats.uniqueVisitors > 0 
-                                                        ? (analyticsStats.totalPageViews / analyticsStats.uniqueVisitors).toFixed(1) 
-                                                        : '0.0'}
-                                                </h4>
-                                                <p className="text-[10px] text-white/50 mt-2">Average engagement ratio</p>
                                             </div>
                                         </div>
 
@@ -1228,7 +1216,7 @@ export default function AdminDashboardPage() {
                                                                         <img src={item.flagUrl} alt={item.country} className="w-5 h-3.5 rounded-[2px] object-cover inline-block shadow-sm" /> <span>{item.country}</span>
                                                                     </span>
                                                                     <span className="text-white/40 text-[11px]">
-                                                                        <strong className="text-white/80 font-bold">{item.uniqueVisitors}</strong> visitors ({item.views} views)
+                                                                        <strong className="text-white/80 font-bold">{item.uniqueVisitors}</strong> visitors
                                                                     </span>
                                                                 </div>
                                                                 <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
@@ -1252,7 +1240,7 @@ export default function AdminDashboardPage() {
                                                             <div key={idx} className="flex justify-between items-center py-1 hover:bg-white/[0.01]">
                                                                 <span className="text-white/70 flex items-center gap-1.5"><img src={item.flagUrl} alt={item.country} className="w-4 h-3 rounded-[2px] object-cover shadow-sm" /> <span>{item.city}, {item.country}</span></span>
                                                                 <span className="text-white/40 font-mono">
-                                                                    <strong className="text-white/80 font-semibold">{item.uniqueVisitors}</strong> visitors ({item.views} views)
+                                                                    <strong className="text-white/80 font-semibold">{item.uniqueVisitors}</strong> visitors
                                                                 </span>
                                                             </div>
                                                         ))}
@@ -1277,7 +1265,6 @@ export default function AdminDashboardPage() {
                                                             <th className="py-2.5">Time</th>
                                                             <th className="py-2.5">Visitor ID</th>
                                                             <th className="py-2.5">IP</th>
-                                                            <th className="py-2.5">Page Path</th>
                                                             <th className="py-2.5">Location</th>
                                                         </tr>
                                                     </thead>
@@ -1299,9 +1286,6 @@ export default function AdminDashboardPage() {
                                                                 <td className="py-3 font-mono text-white/50 text-[10px]">
                                                                     {item.ip}
                                                                 </td>
-                                                                <td className="py-3 font-mono text-[10px] truncate max-w-[150px]" title={item.page}>
-                                                                    {item.page}
-                                                                </td>
                                                                 <td className="py-3 text-[11px] whitespace-nowrap text-white/70">
                                                                     <span className="inline-flex items-center gap-1.5"><img src={item.flagUrl} alt={item.country} className="w-4 h-3 rounded-[2px] object-cover shadow-sm" />{item.city}, {item.country}</span>
                                                                 </td>
@@ -1309,7 +1293,7 @@ export default function AdminDashboardPage() {
                                                         ))}
                                                         {analyticsStats.recentVisits.length === 0 && (
                                                             <tr>
-                                                                <td colSpan={5} className="py-6 text-center text-white/30 italic">No recent visits recorded.</td>
+                                                                <td colSpan={4} className="py-6 text-center text-white/30 italic">No recent visits recorded.</td>
                                                             </tr>
                                                         )}
                                                     </tbody>
