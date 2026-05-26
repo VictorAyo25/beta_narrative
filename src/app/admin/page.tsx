@@ -1171,40 +1171,9 @@ export default function AdminDashboardPage() {
                                              </div>
                                          </div>
 
-                                        {/* Double Column Breakdown */}
-                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                            {/* Column 1: Visited Pages */}
-                                            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-4">
-                                                <div className="flex items-center gap-2 mb-2">
-                                                    <Layers size={15} className="text-[#8B5CF6]" />
-                                                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">Top Pages</h4>
-                                                </div>
-                                                <div className="overflow-x-auto">
-                                                    <table className="w-full text-left text-xs">
-                                                        <thead>
-                                                            <tr className="border-b border-white/5 text-white/40 font-bold uppercase tracking-wider">
-                                                                <th className="py-2.5">Page Path</th>
-                                                                <th className="py-2.5 text-right w-24">Views</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody className="divide-y divide-white/5 text-white/80">
-                                                            {analyticsStats.pages.map((item: any, idx: number) => (
-                                                                <tr key={idx} className="hover:bg-white/[0.01] transition-colors">
-                                                                    <td className="py-3 font-mono text-[11px] truncate max-w-xs" title={item.page}>{item.page}</td>
-                                                                    <td className="py-3 text-right font-semibold">{item.views.toLocaleString()}</td>
-                                                                </tr>
-                                                            ))}
-                                                            {analyticsStats.pages.length === 0 && (
-                                                                <tr>
-                                                                    <td colSpan={2} className="py-4 text-center text-white/30 italic">No page data.</td>
-                                                                </tr>
-                                                            )}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-
-                                            {/* Column 2: Geolocation breakdown */}
+                                        {/* Geolocation Breakdown — full width (single-page site) */}
+                                        <div className="grid grid-cols-1 gap-8">
+                                            {/* Demographics */}
                                             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-4">
                                                 <div className="flex items-center justify-between mb-2">
                                                     <div className="flex items-center gap-2">
