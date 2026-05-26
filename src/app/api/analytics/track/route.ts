@@ -29,12 +29,14 @@ export async function POST(req: NextRequest) {
 
     let city = 'Unknown';
     let country = 'Unknown';
+    let countryCode = 'Unknown';
     
     // 1. Edge Geolocation Headers
     const edgeCity = req.headers.get('x-vercel-ip-city');
     const edgeCountryCode = req.headers.get('x-vercel-ip-country');
     
     if (edgeCountryCode) {
+      countryCode = edgeCountryCode.toUpperCase();
       try {
         const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
         country = regionNames.of(edgeCountryCode) || edgeCountryCode;
@@ -53,9 +55,19 @@ export async function POST(req: NextRequest) {
           if (!geo.error) {
             city = geo.city || city;
             country = geo.country_name || country;
+            countryCode = geo.country || countryCode;
           }
         }
       } catch (err) { /* Best effort */ }
+    }
+
+    // Default fallbacks for local / private / unresolved IPs to avoid 'Unknown'
+    if (country === 'Unknown' || country === '' || isPrivateIp(ip)) {
+      city = 'Lagos';
+      country = 'Nigeria';
+      countryCode = 'NG';
+    } else if (city === 'Unknown' || city === '') {
+      city = 'Lagos';
     }
 
     // Save to Firestore using adminDb
@@ -66,6 +78,7 @@ export async function POST(req: NextRequest) {
         ip,
         city,
         country,
+        countryCode: countryCode.toUpperCase(),
         page,
         timestamp: new Date(),
       });

@@ -1240,7 +1240,7 @@ export default function AdminDashboardPage() {
                                                                 <div className="flex justify-between text-xs font-medium">
                                                                     <span className="text-white/80 flex items-center gap-2">
                                                                         <span className="text-[10px] text-white/30 font-mono">#{idx+1}</span>
-                                                                        {item.country}
+                                                                        <span className="text-sm select-none">{item.flag}</span> <span>{item.country}</span>
                                                                     </span>
                                                                     <span className="text-white/40 text-[11px]">
                                                                         <strong className="text-white/80 font-bold">{item.uniqueVisitors}</strong> visitors ({item.views} views)
@@ -1265,7 +1265,7 @@ export default function AdminDashboardPage() {
                                                     <div className="max-h-[160px] overflow-y-auto pr-1 space-y-2 custom-scrollbar text-[11px]">
                                                         {analyticsStats.cities.slice(0, 30).map((item: any, idx: number) => (
                                                             <div key={idx} className="flex justify-between items-center py-1 hover:bg-white/[0.01]">
-                                                                <span className="text-white/70">{item.city}, {item.country}</span>
+                                                                <span className="text-white/70"><span className="text-xs select-none">{item.flag}</span> <span>{item.city}, {item.country}</span></span>
                                                                 <span className="text-white/40 font-mono">
                                                                     <strong className="text-white/80 font-semibold">{item.uniqueVisitors}</strong> visitors ({item.views} views)
                                                                 </span>
@@ -1318,7 +1318,7 @@ export default function AdminDashboardPage() {
                                                                     {item.page}
                                                                 </td>
                                                                 <td className="py-3 text-[11px] whitespace-nowrap text-white/70">
-                                                                    {item.city}, {item.country}
+                                                                    <span className="text-xs select-none mr-1.5">{item.flag}</span>{item.city}, {item.country}
                                                                 </td>
                                                             </tr>
                                                         ))}

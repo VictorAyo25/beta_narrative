@@ -1,6 +1,55 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdminAuth, getAdminDb } from '@/lib/firebase-admin';
 
+function getCountryCode(countryName: string): string {
+  if (!countryName) return 'NG';
+  const name = countryName.trim().toLowerCase();
+  
+  const countryNameToCode: Record<string, string> = {
+    'nigeria': 'NG',
+    'united states': 'US',
+    'united states of america': 'US',
+    'united kingdom': 'GB',
+    'great britain': 'GB',
+    'canada': 'CA',
+    'south africa': 'ZA',
+    'kenya': 'KE',
+    'ghana': 'GH',
+    'germany': 'DE',
+    'france': 'FR',
+    'italy': 'IT',
+    'spain': 'ES',
+    'netherlands': 'NL',
+    'india': 'IN',
+    'china': 'CN',
+    'japan': 'JP',
+    'australia': 'AU',
+    'brazil': 'BR',
+    'ireland': 'IE',
+    'united arab emirates': 'AE',
+    'switzerland': 'CH',
+    'unknown': 'NG'
+  };
+  
+  return countryNameToCode[name] || 'NG';
+}
+
+function getFlagEmoji(countryCode: string): string {
+  if (!countryCode) return '🌐';
+  const code = countryCode.toUpperCase();
+  if (code.length !== 2) {
+    return '🌐';
+  }
+  const codePoints = code
+    .split('')
+    .map(char => 127397 + char.charCodeAt(0));
+  try {
+    return String.fromCodePoint(...codePoints);
+  } catch (e) {
+    return '🌐';
+  }
+}
+
 async function verifyAuth(request: NextRequest) {
   const authHeader = request.headers.get('Authorization');
   if (!authHeader?.startsWith('Bearer ')) {
@@ -66,8 +115,20 @@ export async function GET(req: NextRequest) {
       const data = doc.data();
       const visitorId = data.visitorId || 'unknown';
       const page = data.page || '/';
-      const country = data.country || 'Unknown';
-      const city = data.city || 'Unknown';
+      
+      let country = data.country || 'Nigeria';
+      let city = data.city || 'Lagos';
+      
+      if (country === 'Unknown' || country === '') {
+        country = 'Nigeria';
+      }
+      if (city === 'Unknown' || city === '') {
+        city = 'Lagos';
+      }
+      
+      const docCountryCode = data.countryCode || getCountryCode(country);
+      const flag = getFlagEmoji(docCountryCode);
+
       const timestamp = data.timestamp?.toDate?.() || new Date();
       // Mask IP address for privacy
       let ip = data.ip || 'unknown';
@@ -117,6 +178,7 @@ export async function GET(req: NextRequest) {
           page,
           city,
           country,
+          flag,
           ip,
           timestamp,
         });
@@ -133,19 +195,25 @@ export async function GET(req: NextRequest) {
       .sort((a, b) => b.views - a.views);
 
     const countries = Object.entries(countryMap)
-      .map(([country, stats]) => ({
-        country,
-        views: stats.views,
-        uniqueVisitors: stats.visitors.size,
-      }))
+      .map(([country, stats]) => {
+        const code = getCountryCode(country);
+        return {
+          country,
+          flag: getFlagEmoji(code),
+          views: stats.views,
+          uniqueVisitors: stats.visitors.size,
+        };
+      })
       .sort((a, b) => b.uniqueVisitors - a.uniqueVisitors);
 
     const cities = Object.entries(cityMap)
       .map(([cityKey, stats]) => {
         const cityName = cityKey.split(', ')[0];
+        const code = getCountryCode(stats.country);
         return {
           city: cityName,
           country: stats.country,
+          flag: getFlagEmoji(code),
           views: stats.views,
           uniqueVisitors: stats.visitors.size,
         };
