@@ -47,10 +47,9 @@ export function ContentProvider({
     };
 
     useEffect(() => {
-        // Only do the client-side fetch if no server-provided content was given
-        if (!initialContent) {
-            fetchContent();
-        }
+        // Always do a live client-side fetch after hydration so published
+        // CMS changes are visible without needing a full redeploy.
+        fetchContent();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
