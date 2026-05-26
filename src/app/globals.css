@@ -269,107 +269,85 @@ select {
   background: rgba(232, 114, 26, 0.6);
 }
 
-/* --- DARK THEME OVERRIDES --- */
-.dark-theme {
-  --purple-pale: #0B0813;
-  --ink: #0B0813;
-  --ink-soft: #120D20;
-  --ink-card: #18112A;
-  --warm-white: #EAE6F3;
-  --muted: #A396C0;
+/* --- ADMIN PANEL THEMES --- */
+
+/* Default dark theme for admin (existing dark look) */
+.admin-dark {
+  background-color: #07050F;
+  color: #ffffff;
+  --admin-bg: #07050F;
+  --admin-card: rgba(255,255,255,0.02);
+  --admin-border: rgba(255,255,255,0.06);
+  --admin-text: #ffffff;
+  --admin-text-muted: rgba(255,255,255,0.5);
+  --admin-header-bg: #07050F;
+  --admin-sidebar-bg: rgba(14,10,30,0.8);
+  --admin-input-bg: rgba(19,14,38,0.5);
 }
 
-.dark-theme body {
-  background-color: #0B0813 !important;
-  color: #EAE6F3 !important;
+/* Light theme for admin */
+.admin-light {
+  background-color: #F4F2FA;
+  color: #1A0E35;
+  --admin-bg: #F4F2FA;
+  --admin-card: #ffffff;
+  --admin-border: rgba(107,63,192,0.12);
+  --admin-text: #1A0E35;
+  --admin-text-muted: rgba(26,14,53,0.55);
+  --admin-header-bg: #ffffff;
+  --admin-sidebar-bg: rgba(14,10,30,0.95);
+  --admin-input-bg: rgba(107,63,192,0.06);
 }
 
-/* Background Overrides for Hardcoded Tailwind classes */
-.dark-theme .bg-\[\#EEE8F8\] {
-  background-color: #0B0813 !important;
-}
-.dark-theme .bg-\[\#E4DAEF\] {
-  background-color: #120D20 !important;
-}
-.dark-theme .bg-\[\#FAF7FF\] {
-  background-color: #18112A !important;
-}
-.dark-theme .bg-\[\#130E20\]\/\[0\.02\] {
-  background-color: rgba(255, 255, 255, 0.03) !important;
-}
-.dark-theme .bg-\[\#EEE8F8\]\/30 {
-  background-color: rgba(24, 17, 41, 0.4) !important;
-}
-.dark-theme .bg-\[\#EEE8F8\]\/50 {
-  background-color: rgba(24, 17, 41, 0.6) !important;
-}
-.dark-theme .bg-white\/5 {
-  background-color: rgba(255, 255, 255, 0.05) !important;
+/* Light-mode overrides — target hardcoded Tailwind classes inside .admin-light */
+.admin-light .bg-white\/\[0\.02\] { background-color: #ffffff !important; }
+.admin-light .hover\:bg-white\/\[0\.04\]:hover { background-color: #f7f4ff !important; }
+.admin-light .bg-white\/\[0\.03\] { background-color: rgba(255,255,255,0.7) !important; }
+.admin-light .bg-white\/\[0\.01\] { background-color: rgba(255,255,255,0.5) !important; }
+.admin-light .bg-white\/5 { background-color: rgba(107,63,192,0.06) !important; }
+.admin-light .bg-white\/10 { background-color: rgba(107,63,192,0.10) !important; }
+.admin-light .bg-white\/\[0\.02\] { background-color: #fff !important; }
+.admin-light .bg-black\/20, .admin-light .bg-black\/30 { background-color: rgba(26,14,53,0.06) !important; }
+
+.admin-light .border-white\/5 { border-color: rgba(107,63,192,0.1) !important; }
+.admin-light .border-white\/\[0\.06\] { border-color: rgba(107,63,192,0.12) !important; }
+.admin-light .border-white\/10 { border-color: rgba(107,63,192,0.15) !important; }
+.admin-light .border-white\/20 { border-color: rgba(107,63,192,0.22) !important; }
+.admin-light .border-white\/30 { border-color: rgba(107,63,192,0.3) !important; }
+.admin-light .divide-white\/5 > * + * { border-color: rgba(107,63,192,0.1) !important; }
+
+.admin-light .text-white { color: #1A0E35 !important; }
+.admin-light .text-white\/80 { color: rgba(26,14,53,0.85) !important; }
+.admin-light .text-white\/70 { color: rgba(26,14,53,0.75) !important; }
+.admin-light .text-white\/60 { color: rgba(26,14,53,0.6) !important; }
+.admin-light .text-white\/50 { color: rgba(26,14,53,0.55) !important; }
+.admin-light .text-white\/40 { color: rgba(26,14,53,0.45) !important; }
+.admin-light .text-white\/30 { color: rgba(26,14,53,0.35) !important; }
+
+/* Header bar */
+.admin-light header.sticky { background-color: #ffffff !important; border-color: rgba(107,63,192,0.1) !important; }
+
+/* Cards and panels */
+.admin-light .backdrop-blur-xl { backdrop-filter: blur(20px) !important; }
+.admin-light .shadow-\[0_8px_32px_rgba\(0\,0\,0\,0\.35\)\] {
+  box-shadow: 0 4px 20px rgba(107,63,192,0.08) !important;
 }
 
-/* Border Overrides for Hardcoded Tailwind classes */
-.dark-theme .border-\[\#8B5CF6\]\/10 {
-  border-color: rgba(139, 92, 246, 0.12) !important;
-}
-.dark-theme .border-\[\#8B5CF6\]\/15 {
-  border-color: rgba(139, 92, 246, 0.18) !important;
-}
-.dark-theme .border-\[\#8B5CF6\]\/20 {
-  border-color: rgba(139, 92, 246, 0.22) !important;
-}
-.dark-theme .border-\[\#8B5CF6\]\/25 {
-  border-color: rgba(139, 92, 246, 0.28) !important;
-}
-.dark-theme .border-\[\#130E20\]\/5 {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-}
+/* Ambient glows — dim in light mode */
+.admin-light .bg-\[#6B3FC0\]\/15 { opacity: 0.4 !important; }
+.admin-light .bg-\[#E8721A\]\/10 { opacity: 0.3 !important; }
+.admin-light .bg-\[#8B5CF6\]\/8 { opacity: 0.2 !important; }
 
-/* Text Color Overrides */
-.dark-theme .text-\[\#1A0E35\] {
-  color: #EAE6F3 !important;
+/* Inputs */
+.admin-light .bg-\[#130E26\]\/50 {
+  background-color: rgba(107,63,192,0.06) !important;
+  color: #1A0E35 !important;
+  border-color: rgba(107,63,192,0.2) !important;
 }
-.dark-theme .text-\[\#3D2A6E\] {
-  color: #B5A8D3 !important;
+.admin-light input::placeholder,
+.admin-light textarea::placeholder {
+  color: rgba(26,14,53,0.35) !important;
 }
-.dark-theme .text-\[\#3B334C\]\/50 {
-  color: rgba(234, 230, 243, 0.5) !important;
-}
-.dark-theme .text-slate-800 {
-  color: #F1F5F9 !important;
-}
-
-/* Hover and Menus */
-.dark-theme .hover\:bg-\[\#C4A8E8\]\/25:hover {
-  background-color: rgba(139, 92, 246, 0.2) !important;
-}
-.dark-theme .mobile-menu {
-  background: rgba(14, 10, 26, 0.97) !important;
-  border-color: rgba(139, 92, 246, 0.25) !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
-}
-
-/* Background floating glow spots overrides */
-.dark-theme .bg-\[\#C4A8E8\]\/25 {
-  background-color: rgba(139, 92, 246, 0.08) !important;
-}
-.dark-theme .bg-\[\#C4A8E8\]\/30 {
-  background-color: rgba(139, 92, 246, 0.1) !important;
-}
-.dark-theme .bg-\[\#C4A8E8\]\/35 {
-  background-color: rgba(139, 92, 246, 0.12) !important;
-}
-
-/* Contact form inputs and placeholders */
-.dark-theme .bg-\[\#E4DAEF\]\/20 {
-  background-color: rgba(255, 255, 255, 0.03) !important;
-}
-.dark-theme .text-\[\#1A0E35\]::placeholder,
-.dark-theme .placeholder-\[\#3B334C\]\/50::placeholder {
-  color: rgba(234, 230, 243, 0.4) !important;
-}
-
-.dark-theme input,
-.dark-theme textarea,
-.dark-theme select {
-  color: #EAE6F3 !important;
-}
+.admin-light input, .admin-light textarea, .admin-light select {
+  color: #1A0E35 !important;
+}

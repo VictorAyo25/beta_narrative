@@ -54,18 +54,8 @@ export function ContentProvider({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const isDark = content.theme === 'dark';
-            if (isDark) {
-                document.documentElement.classList.add('dark-theme');
-                document.documentElement.classList.remove('light-theme');
-            } else {
-                document.documentElement.classList.add('light-theme');
-                document.documentElement.classList.remove('dark-theme');
-            }
-        }
-    }, [content.theme]);
+
+
 
 
     return (

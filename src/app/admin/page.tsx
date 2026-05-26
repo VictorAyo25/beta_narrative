@@ -272,6 +272,18 @@ export default function AdminDashboardPage() {
     const [offerActiveTab, setOfferActiveTab] = useState<number>(0);
     const [showPreviewOnMobile, setShowPreviewOnMobile] = useState(false);
 
+    // Admin panel theme — stored in localStorage, never touches Firestore
+    const [adminTheme, setAdminTheme] = useState<'dark' | 'light'>('dark');
+
+    useEffect(() => {
+        const saved = localStorage.getItem('admin-theme') as 'dark' | 'light' | null;
+        if (saved === 'light' || saved === 'dark') setAdminTheme(saved);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('admin-theme', adminTheme);
+    }, [adminTheme]);
+
     const fetchContent = async () => {
         try {
             setLoading(true);
@@ -348,7 +360,6 @@ export default function AdminDashboardPage() {
                 body: JSON.stringify({
                     action,
                     content: {
-                        theme: content.theme || 'light',
                         hero: content.hero,
                         pain: content.pain,
                         value: content.value,
@@ -575,7 +586,7 @@ export default function AdminDashboardPage() {
     };
 
     return (
-        <div className="h-screen bg-[#07050F] flex flex-col md:flex-row text-white antialiased relative overflow-hidden">
+        <div className={`h-screen flex flex-col md:flex-row antialiased relative overflow-hidden transition-colors duration-300 ${adminTheme === 'light' ? 'admin-light' : 'admin-dark'}`}>
             
             {/* Ambient Background Glows */}
             <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-[#6B3FC0]/15 blur-[150px] pointer-events-none" />
@@ -768,32 +779,32 @@ export default function AdminDashboardPage() {
                                     
                                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                         <div className="space-y-1">
-                                            <span className="text-[9px] font-bold text-[#8B5CF6] uppercase tracking-widest block">Website Appearance</span>
-                                            <h4 className="text-sm font-bold text-white">Active User-Side Theme</h4>
-                                            <p className="text-[11px] text-white/50">Control whether the live website loads in Dark or Light mode by default.</p>
+                                            <span className="text-[9px] font-bold text-[#8B5CF6] uppercase tracking-widest block">Admin Panel Appearance</span>
+                                            <h4 className="text-sm font-bold text-white">Admin Interface Theme</h4>
+                                            <p className="text-[11px] text-white/50">Toggle how <em>this</em> dashboard looks. Does not affect the live website.</p>
                                         </div>
-                                        <div className="flex items-center gap-2 bg-[#07050F]/60 p-1.5 rounded-2xl border border-white/5 self-start sm:self-center shrink-0">
+                                        <div className="flex items-center gap-2 bg-black/30 p-1.5 rounded-2xl border border-white/5 self-start sm:self-center shrink-0">
                                             <button
-                                                onClick={() => setContent(c => c ? { ...c, theme: 'light' } : null)}
+                                                onClick={() => setAdminTheme('light')}
                                                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
-                                                    content?.theme !== 'dark'
-                                                        ? 'bg-white text-black shadow-md'
+                                                    adminTheme === 'light'
+                                                        ? 'bg-white text-[#1A0E35] shadow-md'
                                                         : 'text-white/60 hover:text-white hover:bg-white/5'
                                                 }`}
                                             >
                                                 <Sun size={14} />
-                                                <span>Light Mode</span>
+                                                <span>Light</span>
                                             </button>
                                             <button
-                                                onClick={() => setContent(c => c ? { ...c, theme: 'dark' } : null)}
+                                                onClick={() => setAdminTheme('dark')}
                                                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
-                                                    content?.theme === 'dark'
+                                                    adminTheme === 'dark'
                                                         ? 'bg-gradient-to-r from-[#6B3FC0] to-[#8B5CF6] text-white shadow-md'
                                                         : 'text-white/60 hover:text-white hover:bg-white/5'
                                                 }`}
                                             >
                                                 <Moon size={14} />
-                                                <span>Dark Mode</span>
+                                                <span>Dark</span>
                                             </button>
                                         </div>
                                     </div>

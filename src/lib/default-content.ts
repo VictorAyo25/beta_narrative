@@ -8,7 +8,6 @@
 import { SiteContent } from '@/types';
 
 export const defaultSiteContent: Omit<SiteContent, 'id' | 'updatedAt'> = {
-    theme: 'light',
     hero: {
         eyebrow: 'Executive Brand Strategy',
         title: 'Your expertise is',
