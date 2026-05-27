@@ -141,24 +141,18 @@ export async function PUT(request: NextRequest) {
 
         // Update target content in Firestore
         const docRef = db.collection(CONTENT_COLLECTION).doc(docId);
-        await docRef.set(
-            {
-                ...content,
-                updatedAt: new Date(),
-            },
-            { merge: true }
-        );
+        await docRef.set({
+            ...content,
+            updatedAt: new Date(),
+        });
 
         // Keep draft synchronized if publishing live
         if (isPublish) {
             const draftRef = db.collection(CONTENT_COLLECTION).doc('site-content-draft');
-            await draftRef.set(
-                {
-                    ...content,
-                    updatedAt: new Date(),
-                },
-                { merge: true }
-            );
+            await draftRef.set({
+                ...content,
+                updatedAt: new Date(),
+            });
         }
 
         // Force Next.js to revalidate/regenerate the homepage and admin cache
