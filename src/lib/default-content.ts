@@ -132,6 +132,6 @@ export const defaultSiteContent: Omit<SiteContent, 'id' | 'updatedAt'> = {
         titleEmphasis: 'found?',
         subtitle: 'We work with a limited number of leaders per cohort to ensure every brand gets the depth it deserves.',
         finePrint: 'Limited spots available at beta pricing. Once the cohort is full, the offer closes.',
-        calendlyUrl: 'https://calendly.com/egbogunfavour',
+        calendlyUrl: 'https://calendly.com/egbogunfavour/30min',
     },
 };

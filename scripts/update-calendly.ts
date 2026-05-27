@@ -32,7 +32,7 @@ async function updateCalendly() {
     const liveDoc = await liveDocRef.get();
     if (liveDoc.exists) {
         const contact = liveDoc.data()?.contact || {};
-        contact.calendlyUrl = 'https://calendly.com/egbogunfavour';
+        contact.calendlyUrl = 'https://calendly.com/egbogunfavour/30min';
         await liveDocRef.update({ contact });
         console.log('✅ Updated site-content live document.');
     }
@@ -42,7 +42,7 @@ async function updateCalendly() {
     const draftDoc = await draftDocRef.get();
     if (draftDoc.exists) {
         const contact = draftDoc.data()?.contact || {};
-        contact.calendlyUrl = 'https://calendly.com/egbogunfavour';
+        contact.calendlyUrl = 'https://calendly.com/egbogunfavour/30min';
         await draftDocRef.update({ contact });
         console.log('✅ Updated site-content-draft document.');
     }

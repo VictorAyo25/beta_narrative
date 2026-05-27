@@ -11,7 +11,7 @@ interface CalendlyEmbedProps {
 }
 
 export default function CalendlyEmbed({
-    url = 'https://calendly.com/egbogunfavour',
+    url = 'https://calendly.com/egbogunfavour/30min',
     prefillName = '',
     prefillEmail = '',
     className = '',
