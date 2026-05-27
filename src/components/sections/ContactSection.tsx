@@ -83,7 +83,7 @@ export default function ContactSection() {
                 setSubmittedData(data);
                 setSubmitStatus('success');
                 // Move to Step 2 if Calendly URL is configured, else go straight to Step 3
-                if (contact.calendlyUrl || 'https://calendly.com/favour-egbogun/30min') {
+                if (contact.calendlyUrl || 'https://calendly.com/egbogunfavour') {
                     setStep(2);
                 } else {
                     setStep(3);
@@ -138,7 +138,7 @@ export default function ContactSection() {
                     <div className="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#E8721A]/40 to-transparent" />
 
                     {/* Step Progress Tracker */}
-                    {(contact.calendlyUrl || 'https://calendly.com/favour-egbogun/30min') && (
+                    {(contact.calendlyUrl || 'https://calendly.com/egbogunfavour') && (
                         <div className="relative mb-12 max-w-md mx-auto px-4 select-none">
                             {/* Connecting Progress Bar */}
                             <div className="absolute left-10 right-10 top-5 h-[3px] bg-[#8B5CF6]/10 rounded-full -translate-y-1/2" />
@@ -396,7 +396,7 @@ export default function ContactSection() {
                                     Thanks <span className="font-semibold text-[#E8721A]">{submittedData?.fullName}</span>! Choose a time below to finalize your discovery session.
                                 </p>
                                 <CalendlyEmbed
-                                    url={contact.calendlyUrl || 'https://calendly.com/favour-egbogun/30min'}
+                                    url={contact.calendlyUrl || 'https://calendly.com/egbogunfavour'}
                                     prefillName={submittedData?.fullName}
                                     prefillEmail={submittedData?.email}
                                     height="650px"
