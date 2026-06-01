@@ -82,12 +82,25 @@ export default function ValueSection() {
                                 <em className="italic text-[#E8721A]">{value.titleEmphasis}</em>
                             </h2>
                         </div>
-                        <div className="space-y-5 text-base text-[#1A0E35]/80 font-normal leading-relaxed">
-                            {value.body.split('\n\n').map((paragraph, idx) => (
-                                <p key={idx}>
-                                    {paragraph}
-                                </p>
-                            ))}
+                        <div className="text-base text-[#1A0E35]/80 font-normal leading-relaxed">
+                            {(() => {
+                                // Split on one-or-more blank lines, preserving the separator
+                                // so we can measure how many blank lines the author added.
+                                const parts = value.body.split(/(\n{2,})/);
+                                const paragraphs: { text: string; gapEm: number }[] = [];
+                                for (let i = 0; i < parts.length; i++) {
+                                    if (/^\n+$/.test(parts[i])) continue; // separator — handled below
+                                    const blankLines = parts[i + 1] ? (parts[i + 1].match(/\n/g) || []).length - 1 : 0;
+                                    // base 1.25em gap per blank line (min 1.25, max 5em)
+                                    const gapEm = Math.min(Math.max(blankLines, 1) * 1.25, 5);
+                                    paragraphs.push({ text: parts[i], gapEm });
+                                }
+                                return paragraphs.map(({ text, gapEm }, idx) => (
+                                    <p key={idx} style={{ marginBottom: idx < paragraphs.length - 1 ? `${gapEm}em` : 0 }}>
+                                        {text}
+                                    </p>
+                                ));
+                            })()}
                         </div>
                     </motion.div>
 
