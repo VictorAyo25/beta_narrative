@@ -3,6 +3,7 @@
 import { motion, useScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useContent } from '@/context/ContentContext';
+import { trackEvent } from '@/lib/analytics';
 
 export default function FloatingCTA() {
     const { scrollY } = useScroll();
@@ -69,6 +70,7 @@ export default function FloatingCTA() {
         >
             <a
                 href="#contact"
+                onClick={() => trackEvent('cta_click', 'floating_cta')}
                 className="inline-flex items-center justify-center text-sm font-semibold tracking-[0.12em] uppercase text-white bg-[#E8721A] px-6 sm:px-8 py-3.5 sm:py-4 rounded-full hover:bg-[#C05A0E] hover:shadow-[0_0_40px_rgba(232,114,26,0.5)] hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_24px_rgba(232,114,26,0.4)]"
             >
                 <span className="hidden sm:inline">Secure Your Spot</span>

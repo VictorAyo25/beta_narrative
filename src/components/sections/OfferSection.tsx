@@ -5,6 +5,7 @@ import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
 import { Check, Plus } from 'lucide-react';
 import { defaultSiteContent } from '@/lib/default-content';
+import { trackEvent } from '@/lib/analytics';
 
 export default function OfferSection() {
     const { content } = useContent();
@@ -145,6 +146,7 @@ export default function OfferSection() {
                                     <a
                                         id={`offer-cta-btn-${index}`}
                                         href="#contact"
+                                        onClick={() => trackEvent('cta_click', `package:${plan.packageName.toLowerCase().replace(/\s+/g, '_')}`)}
                                         className={`w-full group relative inline-flex items-center justify-center text-xs sm:text-sm font-semibold tracking-[0.12em] uppercase px-8 py-4 rounded-full transition-all duration-300 ${
                                             isExecutive
                                                 ? 'text-white bg-[#E8721A] hover:bg-[#C05A0E] hover:shadow-[0_0_40px_rgba(232,114,26,0.45)] hover:scale-[1.02] shadow-[0_4px_24px_rgba(232,114,26,0.3)]'

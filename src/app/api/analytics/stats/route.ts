@@ -85,16 +85,23 @@ export async function GET(req: NextRequest) {
     const rangeMs = range === '24h' ? 24 * 60 * 60 * 1000 : 7 * 24 * 60 * 60 * 1000;
     const startTime = new Date(now - rangeMs);
 
-    // 3. Fetch recent visits (capped to avoid memory/read issues)
-    const snapshot = await db.collection('analytics_visits')
-      .orderBy('timestamp', 'desc')
-      .limit(3000)
-      .get();
+    // 3. Fetch recent visits and events (capped to avoid memory/read issues)
+    const [snapshot, eventsSnapshot] = await Promise.all([
+      db.collection('analytics_visits')
+        .orderBy('timestamp', 'desc')
+        .limit(3000)
+        .get(),
+      db.collection('analytics_events')
+        .orderBy('timestamp', 'desc')
+        .limit(3000)
+        .get()
+    ]);
 
     // 4. Process records in memory
     const pageViewsMap: Record<string, { views: number; visitors: Set<string> }> = {};
     const countryMap: Record<string, { views: number; visitors: Set<string> }> = {};
     const cityMap: Record<string, { views: number; country: string; visitors: Set<string> }> = {};
+    const referrerMap: Record<string, number> = {};
     const uniqueVisitorsSet = new Set<string>();
     const visitsList: any[] = [];
 
@@ -162,6 +169,27 @@ export async function GET(req: NextRequest) {
       cityMap[cityKey].views += 1;
       cityMap[cityKey].visitors.add(visitorId);
 
+      // Track referrer channels
+      let referrer = 'Direct';
+      if (data.referrer) {
+        try {
+          const ref = data.referrer.trim();
+          if (ref) {
+            const url = new URL(ref);
+            if (url.hostname.includes('linkedin.com')) {
+              referrer = 'LinkedIn';
+            } else if (url.hostname.includes('google.com')) {
+              referrer = 'Google Search';
+            } else {
+              referrer = url.hostname.replace('www.', '');
+            }
+          }
+        } catch (e) {
+          referrer = 'Other';
+        }
+      }
+      referrerMap[referrer] = (referrerMap[referrer] || 0) + 1;
+
       // Track traffic history bucket
       let bucketLabel: string;
       if (range === '24h') {
@@ -178,7 +206,30 @@ export async function GET(req: NextRequest) {
 
       // Save to recent visits list (cap at 50)
       if (visitsList.length < 50) {
-        visitsList.push({ id: doc.id, visitorId, page, city, country, flagUrl, ip, timestamp });
+        visitsList.push({ id: doc.id, visitorId, page, city, country, flagUrl, ip, timestamp, referrer });
+      }
+    });
+
+    // Process events for conversions and CTA clicks
+    let formSubmissions = 0;
+    let bookingsCompleted = 0;
+    const ctaClicksMap: Record<string, number> = {};
+
+    eventsSnapshot.forEach((doc) => {
+      const data = doc.data();
+      const timestamp = data.timestamp?.toDate?.() || new Date();
+
+      if (timestamp < startTime) return;
+
+      const eventType = data.eventType;
+      const eventDetails = data.eventDetails || '';
+
+      if (eventType === 'form_submit') {
+        formSubmissions++;
+      } else if (eventType === 'booking_complete') {
+        bookingsCompleted++;
+      } else if (eventType === 'cta_click') {
+        ctaClicksMap[eventDetails] = (ctaClicksMap[eventDetails] || 0) + 1;
       }
     });
 
@@ -223,6 +274,14 @@ export async function GET(req: NextRequest) {
       visitors: stats.visitors.size,
     }));
 
+    const ctaClicks = Object.entries(ctaClicksMap)
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count);
+
+    const referrers = Object.entries(referrerMap)
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count);
+
     // Total filtered views = sum of all page view counts
     const totalFilteredViews = Object.values(pageViewsMap).reduce((sum, p) => sum + p.views, 0);
 
@@ -237,6 +296,12 @@ export async function GET(req: NextRequest) {
         cities,
         recentVisits: visitsList,
         trafficHistory,
+        conversions: {
+          formSubmissions,
+          bookingsCompleted,
+        },
+        ctaClicks,
+        referrers,
       },
     });
   } catch (error) {

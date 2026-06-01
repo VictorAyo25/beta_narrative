@@ -24,8 +24,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true, message: 'Ignored bot' });
     }
 
-    const { page, visitorId } = await req.json();
+    const { page, visitorId, eventType = 'page_view', eventDetails = '', referrer = '' } = await req.json();
     const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+
+    const isView = eventType === 'page_view';
 
     let city = 'Unknown';
     let country = 'Unknown';
@@ -73,7 +75,7 @@ export async function POST(req: NextRequest) {
     // Save to Firestore using adminDb
     const db = getAdminDb();
     if (db) {
-      await db.collection('analytics_visits').add({
+      const basePayload = {
         visitorId,
         ip,
         city,
@@ -81,7 +83,20 @@ export async function POST(req: NextRequest) {
         countryCode: countryCode.toUpperCase(),
         page,
         timestamp: new Date(),
-      });
+      };
+
+      if (isView) {
+        await db.collection('analytics_visits').add({
+          ...basePayload,
+          referrer,
+        });
+      } else {
+        await db.collection('analytics_events').add({
+          ...basePayload,
+          eventType,
+          eventDetails,
+        });
+      }
     }
 
     return NextResponse.json({ success: true });

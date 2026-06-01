@@ -1058,6 +1058,112 @@ export default function AdminDashboardPage() {
                                             </div>
                                         </div>
 
+                                        {/* Conversion Funnel & CTA Analytics */}
+                                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                            {/* Conversion Funnel */}
+                                            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex flex-col justify-between">
+                                                <div>
+                                                    <div className="flex items-center gap-2 mb-4">
+                                                        <Target size={15} className="text-[#E8721A]" />
+                                                        <h4 className="text-xs font-bold text-white uppercase tracking-wider">Conversion Funnel</h4>
+                                                    </div>
+                                                    <div className="space-y-4">
+                                                        {/* Stage 1: Views */}
+                                                        <div>
+                                                            <div className="flex justify-between text-xs mb-1">
+                                                                <span className="text-white/75">1. Total Visitors</span>
+                                                                <span className="text-white/50">{analyticsStats.uniqueVisitors}</span>
+                                                            </div>
+                                                            <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                                                                <div className="h-full bg-indigo-500 rounded-full w-full" />
+                                                            </div>
+                                                        </div>
+                                                        {/* Stage 2: Form Submit */}
+                                                        <div>
+                                                            <div className="flex justify-between text-xs mb-1">
+                                                                <span className="text-white/75">2. Profiles Submitted</span>
+                                                                <span className="text-white/50 text-[11px]">
+                                                                    {analyticsStats.conversions?.formSubmissions || 0}{' '}
+                                                                    <span className="text-[10px] text-[#E8721A] font-semibold">
+                                                                        ({analyticsStats.uniqueVisitors > 0 ? Math.round(((analyticsStats.conversions?.formSubmissions || 0) / analyticsStats.uniqueVisitors) * 100) : 0}%)
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                            <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                                                                <div 
+                                                                    className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all duration-500" 
+                                                                    style={{ width: `${analyticsStats.uniqueVisitors > 0 ? Math.min(Math.round(((analyticsStats.conversions?.formSubmissions || 0) / analyticsStats.uniqueVisitors) * 100), 100) : 0}%` }}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        {/* Stage 3: Bookings */}
+                                                        <div>
+                                                            <div className="flex justify-between text-xs mb-1">
+                                                                <span className="text-white/75">3. Calls Scheduled</span>
+                                                                <span className="text-white/50 text-[11px]">
+                                                                    {analyticsStats.conversions?.bookingsCompleted || 0}{' '}
+                                                                    <span className="text-[10px] text-emerald-400 font-semibold">
+                                                                        ({analyticsStats.uniqueVisitors > 0 ? Math.round(((analyticsStats.conversions?.bookingsCompleted || 0) / analyticsStats.uniqueVisitors) * 100) : 0}%)
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                            <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                                                                <div 
+                                                                    className="h-full bg-gradient-to-r from-purple-500 to-emerald-400 rounded-full transition-all duration-500" 
+                                                                    style={{ width: `${analyticsStats.uniqueVisitors > 0 ? Math.min(Math.round(((analyticsStats.conversions?.bookingsCompleted || 0) / analyticsStats.uniqueVisitors) * 100), 100) : 0}%` }}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p className="text-[9px] text-white/35 mt-4">Conversion rate = actions divided by unique visitors</p>
+                                            </div>
+
+                                            {/* Referral Channels */}
+                                            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex flex-col justify-between">
+                                                <div>
+                                                    <div className="flex items-center gap-2 mb-4">
+                                                        <Compass size={15} className="text-[#E8721A]" />
+                                                        <h4 className="text-xs font-bold text-white uppercase tracking-wider">Referral Sources</h4>
+                                                    </div>
+                                                    <div className="space-y-2.5 max-h-[160px] overflow-y-auto pr-1 custom-scrollbar text-xs">
+                                                        {(analyticsStats.referrers || []).map((ref: any, idx: number) => (
+                                                            <div key={idx} className="flex justify-between items-center py-1 border-b border-white/[0.02] last:border-0">
+                                                                <span className="text-white/70 font-medium">{ref.name}</span>
+                                                                <span className="text-white/40 font-mono text-[10px]">{ref.count} views</span>
+                                                            </div>
+                                                        ))}
+                                                        {(!analyticsStats.referrers || analyticsStats.referrers.length === 0) && (
+                                                            <p className="text-center text-white/30 italic py-6">All traffic is direct.</p>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                                <p className="text-[9px] text-white/35 mt-4">Top websites referring traffic to your brand site</p>
+                                            </div>
+
+                                            {/* CTA Button Clicks */}
+                                            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex flex-col justify-between">
+                                                <div>
+                                                    <div className="flex items-center gap-2 mb-4">
+                                                        <TrendingUp size={15} className="text-[#E8721A]" />
+                                                        <h4 className="text-xs font-bold text-white uppercase tracking-wider">CTA Button Engagement</h4>
+                                                    </div>
+                                                    <div className="space-y-2.5 max-h-[160px] overflow-y-auto pr-1 custom-scrollbar text-xs">
+                                                        {(analyticsStats.ctaClicks || []).map((cta: any, idx: number) => (
+                                                            <div key={idx} className="flex justify-between items-center py-1 border-b border-white/[0.02] last:border-0">
+                                                                <span className="text-white/70 font-medium capitalize">{cta.name.replace('package:', '').replace('_', ' ')}</span>
+                                                                <span className="text-white/40 font-mono text-[10px]">{cta.count} clicks</span>
+                                                            </div>
+                                                        ))}
+                                                        {(!analyticsStats.ctaClicks || analyticsStats.ctaClicks.length === 0) && (
+                                                            <p className="text-center text-white/30 italic py-6">No CTA interactions yet.</p>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                                <p className="text-[9px] text-white/35 mt-4">Clicks on package options or booking buttons</p>
+                                            </div>
+                                        </div>
+
                                         {/* Traffic Over Time Chart */}
                                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-6">
                                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">

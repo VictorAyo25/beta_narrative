@@ -10,6 +10,7 @@ import SectionLabel from '../SectionLabel';
 import { ContactFormData } from '@/types';
 import { Send, CheckCircle, AlertCircle, ChevronDown, ChevronRight, Check } from 'lucide-react';
 import CalendlyEmbed from '../CalendlyEmbed';
+import { trackEvent } from '@/lib/analytics';
 
 const contactSchema = z.object({
     fullName: z.string().min(2, 'Name must be at least 2 characters'),
@@ -40,6 +41,7 @@ export default function ContactSection() {
         const handleCalendlyEvent = (e: MessageEvent) => {
             if (e.data.event === 'calendly.event_scheduled') {
                 setStep(3);
+                trackEvent('booking_complete');
             }
         };
 
@@ -82,11 +84,13 @@ export default function ContactSection() {
             if (response.ok) {
                 setSubmittedData(data);
                 setSubmitStatus('success');
+                trackEvent('form_submit', `journey:${data.journey}`);
                 // Move to Step 2 if Calendly URL is configured, else go straight to Step 3
                 if (contact.calendlyUrl || 'https://calendly.com/egbogunfavour/30min') {
                     setStep(2);
                 } else {
                     setStep(3);
+                    trackEvent('booking_complete');
                 }
                 reset();
             } else {
