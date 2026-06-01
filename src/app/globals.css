@@ -352,62 +352,69 @@ select {
   color: #1A0E35 !important;
 }
 
-/* Ensure the sidebar remains dark even in light mode */
+/* Ensure the sidebar matches the light theme in light mode */
 .admin-light aside {
-  background-color: rgb(14, 10, 30) !important;
-  border-color: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(107, 63, 192, 0.12) !important;
 }
 .admin-light aside .text-white {
+  color: #1A0E35 !important;
+}
+/* Keep active gradient button text white */
+.admin-light aside .bg-gradient-to-r {
   color: #ffffff !important;
 }
 .admin-light aside .text-white\/80 {
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: rgba(26, 14, 53, 0.85) !important;
 }
 .admin-light aside .text-white\/70 {
-  color: rgba(255, 255, 255, 0.7) !important;
+  color: rgba(26, 14, 53, 0.75) !important;
 }
 .admin-light aside .text-white\/60 {
-  color: rgba(255, 255, 255, 0.6) !important;
+  color: rgba(26, 14, 53, 0.65) !important;
 }
 .admin-light aside .text-white\/50 {
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: rgba(26, 14, 53, 0.55) !important;
 }
 .admin-light aside .text-white\/40 {
-  color: rgba(255, 255, 255, 0.4) !important;
+  color: rgba(26, 14, 53, 0.45) !important;
 }
 .admin-light aside .text-white\/30 {
-  color: rgba(255, 255, 255, 0.3) !important;
+  color: rgba(26, 14, 53, 0.35) !important;
 }
 .admin-light aside .bg-white\/\[0\.02\] {
-  background-color: rgba(255, 255, 255, 0.02) !important;
+  background-color: rgba(107, 63, 192, 0.04) !important;
 }
 .admin-light aside .bg-white\/5 {
-  background-color: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(107, 63, 192, 0.06) !important;
 }
 .admin-light aside .bg-white\/10 {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(107, 63, 192, 0.1) !important;
 }
 .admin-light aside .bg-black\/20 {
-  background-color: rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(107, 63, 192, 0.03) !important;
 }
 .admin-light aside .bg-black\/30 {
-  background-color: rgba(0, 0, 0, 0.3) !important;
+  background-color: rgba(107, 63, 192, 0.05) !important;
 }
 .admin-light aside .border-white\/5 {
-  border-color: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(107, 63, 192, 0.08) !important;
 }
 .admin-light aside .border-white\/\[0\.06\] {
-  border-color: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(107, 63, 192, 0.12) !important;
 }
 .admin-light aside .border-white\/10 {
-  border-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(107, 63, 192, 0.15) !important;
 }
 .admin-light aside .border-white\/20 {
-  border-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(107, 63, 192, 0.22) !important;
 }
 .admin-light aside .border-white\/30 {
-  border-color: rgba(255, 255, 255, 0.3) !important;
+  border-color: rgba(107, 63, 192, 0.3) !important;
 }
 .admin-light aside .hover\:bg-white\/5:hover {
-  background-color: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(107, 63, 192, 0.06) !important;
+}
+.admin-light aside .hover\:text-white:hover {
+  color: #1A0E35 !important;
 }
