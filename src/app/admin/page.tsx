@@ -2202,7 +2202,7 @@ export default function AdminDashboardPage() {
                 </AnimatePresence>
 
                 {/* Mobile Preview Toggle Pill */}
-                {activeTab !== 'dashboard' && (
+                {activeTab !== 'dashboard' && activeTab !== 'analytics' && (
                     <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#0E0A1E]/85 backdrop-blur-xl border border-white/10 p-1.5 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.5)] flex items-center gap-1 select-none">
                         <button
                             onClick={() => setShowPreviewOnMobile(false)}
