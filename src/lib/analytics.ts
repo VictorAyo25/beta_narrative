@@ -16,7 +16,12 @@ export function getVisitorId(): string {
 
 export function shouldIgnoreAnalytics(): boolean {
     if (typeof window === 'undefined') return false;
-    return localStorage.getItem('ignore_analytics') === 'true' || window.location.pathname.startsWith('/admin');
+    // Clear the old persistent localStorage flag if present (migration from old behaviour)
+    if (localStorage.getItem('ignore_analytics')) {
+        localStorage.removeItem('ignore_analytics');
+    }
+    // Only ignore if the current tab is an admin session (sessionStorage is tab-scoped)
+    return sessionStorage.getItem('ignore_analytics') === 'true' || window.location.pathname.startsWith('/admin');
 }
 
 export async function trackEvent(

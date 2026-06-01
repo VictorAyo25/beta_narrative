@@ -21,9 +21,13 @@ export default function AdminLayout({
     const isLoginPage = pathname === '/admin/login';
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('ignore_analytics', 'true');
-        }
+        if (typeof window === 'undefined') return;
+        // Use sessionStorage so this flag is tab-scoped and never bleeds
+        // over to the main site after the admin tab is closed.
+        sessionStorage.setItem('ignore_analytics', 'true');
+        return () => {
+            sessionStorage.removeItem('ignore_analytics');
+        };
     }, []);
 
     useEffect(() => {

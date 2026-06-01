@@ -266,6 +266,7 @@ export default function AdminDashboardPage() {
     const [analyticsLoading, setAnalyticsLoading] = useState(false);
     const [analyticsError, setAnalyticsError] = useState<string>('');
     const [analyticsTimeRange, setAnalyticsTimeRange] = useState<'24h' | '7d'>('7d');
+    const [analyticsSubTab, setAnalyticsSubTab] = useState<'overview' | 'funnel' | 'geography' | 'activity'>('overview');
 
     // Customizer layout states
     const [activeTab, setActiveTab] = useState<TabType>('dashboard');
@@ -1001,14 +1002,28 @@ export default function AdminDashboardPage() {
                         {/* 1B. ANALYTICS VIEW */}
                         {activeTab === 'analytics' && (
                             <div className="space-y-8">
-                                {/* Header with Action */}
-                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-white/10 pb-4">
+                                {/* Header */}
+                                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 border-b border-white/10 pb-5">
                                     <div>
                                         <h3 className="font-serif text-2xl text-white">Visitor Analytics</h3>
-                                        <p className="text-xs text-white/50 mt-1">Real-time engagement, page path performance, and reader demographics.</p>
+                                        <p className="text-xs text-white/40 mt-1">Track engagement, conversions, and audience demographics.</p>
                                     </div>
                                     <div className="flex items-center gap-2 shrink-0">
-                                        {/* Download PDF Report */}
+                                        {/* Time range */}
+                                        <div className="flex items-center bg-black/30 rounded-xl p-1 border border-white/5 gap-1">
+                                            {(['24h', '7d'] as const).map(r => (
+                                                <button
+                                                    key={r}
+                                                    onClick={() => setAnalyticsTimeRange(r)}
+                                                    className={`px-3 py-1.5 rounded-lg text-[10px] font-bold tracking-wider uppercase cursor-pointer transition-all duration-200 ${
+                                                        analyticsTimeRange === r
+                                                            ? 'bg-gradient-to-r from-[#6B3FC0] to-[#8B5CF6] text-white shadow'
+                                                            : 'text-white/50 hover:text-white hover:bg-white/5'
+                                                    }`}
+                                                >{r}</button>
+                                            ))}
+                                        </div>
+                                        {/* Download */}
                                         <button
                                             onClick={async () => {
                                                 if (!analyticsStats) return;
@@ -1016,23 +1031,45 @@ export default function AdminDashboardPage() {
                                                 generateAnalyticsPdf(analyticsStats, analyticsTimeRange);
                                             }}
                                             disabled={!analyticsStats || analyticsLoading}
-                                            title="Download a detailed PDF analytics report"
-                                            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#8B5CF6]/40 disabled:opacity-40 disabled:cursor-not-allowed text-white/80 hover:text-white rounded-xl text-xs font-bold transition-all"
+                                            title="Download PDF report"
+                                            className="inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-white/5 border border-white/10 hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed text-white/80 hover:text-white rounded-xl text-xs font-bold transition-all"
                                         >
                                             <Download size={13} />
-                                            <span className="hidden sm:inline">Download Report</span>
-                                            <span className="sm:hidden">PDF</span>
+                                            <span className="hidden sm:inline">Export PDF</span>
                                         </button>
                                         {/* Refresh */}
                                         <button
                                             onClick={() => fetchAnalyticsStats()}
                                             disabled={analyticsLoading}
-                                            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#E8721A] to-[#F08C3A] hover:shadow-[0_0_15px_rgba(232,114,26,0.3)] disabled:opacity-50 text-white rounded-xl text-xs font-bold transition-all"
+                                            className="inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-gradient-to-r from-[#E8721A] to-[#F08C3A] hover:shadow-[0_0_15px_rgba(232,114,26,0.3)] disabled:opacity-50 text-white rounded-xl text-xs font-bold transition-all"
                                         >
                                             <RefreshCw size={13} className={analyticsLoading ? 'animate-spin' : ''} />
-                                            <span>Refresh Stats</span>
+                                            <span className="hidden sm:inline">Refresh</span>
                                         </button>
                                     </div>
+                                </div>
+
+                                {/* Sub-nav */}
+                                <div className="flex items-center gap-1 p-1 bg-black/20 rounded-2xl border border-white/[0.04]">
+                                    {([
+                                        { id: 'overview',   label: 'Overview',   icon: BarChart },
+                                        { id: 'funnel',     label: 'Funnel',     icon: Target },
+                                        { id: 'geography',  label: 'Geography',  icon: Compass },
+                                        { id: 'activity',   label: 'Activity',   icon: TrendingUp },
+                                    ] as const).map(({ id, label, icon: Icon }) => (
+                                        <button
+                                            key={id}
+                                            onClick={() => setAnalyticsSubTab(id)}
+                                            className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-bold tracking-wide transition-all duration-200 ${
+                                                analyticsSubTab === id
+                                                    ? 'bg-white/[0.06] text-white shadow-sm border border-white/[0.08]'
+                                                    : 'text-white/40 hover:text-white/70'
+                                            }`}
+                                        >
+                                            <Icon size={12} />
+                                            <span className="hidden sm:inline">{label}</span>
+                                        </button>
+                                    ))}
                                 </div>
 
                                 {analyticsError && (
@@ -1053,8 +1090,11 @@ export default function AdminDashboardPage() {
                                     </div>
                                 ) : (
                                     <>
-                                        {/* Key Metrics Grid */}
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {/* ── OVERVIEW TAB ── */}
+                                        {analyticsSubTab === 'overview' && (<div className="space-y-6">
+
+                                        {/* Key Metrics */}
+                                        <div className="grid grid-cols-2 gap-4">
                                             {/* Unique Visitors */}
                                             <div className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/[0.08] relative overflow-hidden group">
                                                 <div className="absolute top-0 right-0 w-24 h-24 bg-[#6B3FC0]/5 rounded-bl-full pointer-events-none" />
@@ -1075,6 +1115,10 @@ export default function AdminDashboardPage() {
                                                 <p className="text-[10px] text-white/50 mt-2">All recorded tracking requests</p>
                                             </div>
                                         </div>
+
+                                        {/* ── FUNNEL TAB ── */}
+                                        </div>)}
+                                        {(analyticsSubTab === 'funnel' || analyticsSubTab === 'overview') && (<div className="space-y-6">
 
                                         {/* Conversion Funnel & CTA Analytics */}
                                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -1194,33 +1238,14 @@ export default function AdminDashboardPage() {
                                                         </span>
                                                     </h4>
                                                 </div>
-                                                <div className="flex items-center gap-3">
-                                                    {/* Range toggle */}
-                                                    <div className="flex items-center bg-black/30 rounded-xl p-1 border border-white/5 gap-1">
-                                                        {(['24h', '7d'] as const).map(r => (
-                                                            <button
-                                                                key={r}
-                                                                onClick={() => setAnalyticsTimeRange(r)}
-                                                                className={`px-3 py-1 rounded-lg text-[10px] font-bold tracking-wider uppercase cursor-pointer transition-all duration-200 ${
-                                                                    analyticsTimeRange === r
-                                                                        ? 'bg-gradient-to-r from-[#6B3FC0] to-[#8B5CF6] text-white shadow'
-                                                                        : 'text-white/50 hover:text-white hover:bg-white/5'
-                                                                }`}
-                                                            >
-                                                                {r}
-                                                            </button>
-                                                        ))}
+                                                <div className="flex items-center gap-4 text-[10px] uppercase font-bold tracking-wider">
+                                                    <div className="flex items-center gap-1.5">
+                                                        <span className="w-2.5 h-2.5 rounded-full bg-[#E8721A]" />
+                                                        <span className="text-white/60">Page Views</span>
                                                     </div>
-                                                    {/* Legend */}
-                                                    <div className="hidden sm:flex items-center gap-4 text-[10px] uppercase font-bold tracking-wider">
-                                                        <div className="flex items-center gap-1.5">
-                                                            <span className="w-2.5 h-2.5 rounded-full bg-[#E8721A]" />
-                                                            <span className="text-white/60">Page Views</span>
-                                                        </div>
-                                                        <div className="flex items-center gap-1.5">
-                                                            <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6]" />
-                                                            <span className="text-white/60">Unique Visitors</span>
-                                                        </div>
+                                                    <div className="flex items-center gap-1.5">
+                                                        <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6]" />
+                                                        <span className="text-white/60">Unique Visitors</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1348,7 +1373,12 @@ export default function AdminDashboardPage() {
                                              )}
                                          </div>
 
-                                        {/* Geolocation Breakdown — full width (single-page site) */}
+                                        </div>)}
+
+                                        {/* ── GEOGRAPHY TAB ── */}
+                                        {analyticsSubTab === 'geography' && (<div className="space-y-6">
+
+                                        {/* Geolocation Breakdown */}
                                         <div className="grid grid-cols-1 gap-8">
                                             {/* Demographics */}
                                             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-4">
@@ -1409,42 +1439,49 @@ export default function AdminDashboardPage() {
                                             </div>
                                         </div>
 
+                                        </div>)}
+
+                                        {/* ── ACTIVITY TAB ── */}
+                                        {analyticsSubTab === 'activity' && (<div className="space-y-6">
+
                                         {/* Activity Log Feed */}
                                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-4">
+                                            <div className="flex items-center justify-between">
                                             <div className="flex items-center gap-2">
                                                 <TrendingUp size={15} className="text-emerald-400" />
-                                                <h4 className="text-xs font-bold text-white uppercase tracking-wider">Recent Activity Feed</h4>
+                                                <h4 className="text-xs font-bold text-white uppercase tracking-wider">Recent Visitor Log</h4>
+                                            </div>
+                                            <p className="text-[10px] text-white/30">Showing last {analyticsStats.recentVisits.length} page views</p>
                                             </div>
                                             <div className="overflow-x-auto">
                                                 <table className="w-full text-left text-xs">
                                                     <thead>
                                                         <tr className="border-b border-white/5 text-white/40 font-bold uppercase tracking-wider">
-                                                            <th className="py-2.5">Time</th>
-                                                            <th className="py-2.5">Visitor ID</th>
-                                                            <th className="py-2.5">IP</th>
-                                                            <th className="py-2.5">Location</th>
+                                                            <th className="py-2.5 pr-4">Time</th>
+                                                            <th className="py-2.5 pr-4">Location</th>
+                                                            <th className="py-2.5 pr-4">Referrer</th>
+                                                            <th className="py-2.5">Visitor</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody className="divide-y divide-white/5 text-white/80">
                                                         {analyticsStats.recentVisits.map((item: any) => (
-                                                            <tr key={item.id} className="hover:bg-white/[0.01] transition-colors">
-                                                                <td className="py-3 text-white/50 text-[10px] whitespace-nowrap">
-                                                                    {new Date(item.timestamp).toLocaleDateString(undefined, {
+                                                            <tr key={item.id} className="hover:bg-white/[0.02] transition-colors">
+                                                                <td className="py-3 text-white/50 text-[10px] whitespace-nowrap pr-4">
+                                                                    {new Date(item.timestamp).toLocaleString(undefined, {
                                                                         month: 'short',
                                                                         day: 'numeric',
                                                                         hour: '2-digit',
                                                                         minute: '2-digit',
-                                                                        second: '2-digit'
                                                                     })}
                                                                 </td>
-                                                                <td className="py-3 font-mono text-[10px] text-purple-300">
-                                                                    {item.visitorId.slice(0, 10)}...
-                                                                </td>
-                                                                <td className="py-3 font-mono text-white/50 text-[10px]">
-                                                                    {item.ip}
-                                                                </td>
-                                                                <td className="py-3 text-[11px] whitespace-nowrap text-white/70">
+                                                                <td className="py-3 text-[11px] whitespace-nowrap text-white/70 pr-4">
                                                                     <span className="inline-flex items-center gap-1.5"><img src={item.flagUrl} alt={item.country} className="w-4 h-3 rounded-[2px] object-cover shadow-sm" />{item.city}, {item.country}</span>
+                                                                </td>
+                                                                <td className="py-3 text-[10px] text-white/50 pr-4">
+                                                                    {item.referrer || <span className="italic text-white/25">Direct</span>}
+                                                                </td>
+                                                                <td className="py-3 font-mono text-[10px] text-purple-300">
+                                                                    {item.visitorId?.slice(0, 8)}…
                                                                 </td>
                                                             </tr>
                                                         ))}
@@ -1457,6 +1494,8 @@ export default function AdminDashboardPage() {
                                                 </table>
                                             </div>
                                         </div>
+
+                                        </div>)}
                                     </>
                                 )}
                             </div>
