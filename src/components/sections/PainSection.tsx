@@ -41,7 +41,7 @@ export default function PainSection() {
                                 {pain.title}{' '}
                                 <em className="italic text-[#E8721A]">{pain.titleEmphasis}</em>
                             </h2>
-                            <p className="text-base text-[#6B3FC0]/85 font-normal leading-relaxed">
+                            <p className="text-base text-[#6B3FC0]/85 font-normal leading-relaxed whitespace-pre-line">
                                 {pain.lead}
                             </p>
                         </motion.div>
@@ -63,7 +63,7 @@ export default function PainSection() {
                                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#E8721A]/10 border border-[#E8721A]/20 flex items-center justify-center mt-0.5 group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 group-hover:shadow-[0_0_12px_rgba(232,114,26,0.5)] transition-all duration-300 relative z-10">
                                         <AlertTriangle size={14} className="text-[#E8721A]" />
                                     </div>
-                                    <p className="text-sm text-[#1A0E35]/90 leading-relaxed group-hover:text-[#1A0E35] transition-colors duration-300 relative z-10">
+                                    <p className="text-sm text-[#1A0E35]/90 leading-relaxed group-hover:text-[#1A0E35] transition-colors duration-300 relative z-10 whitespace-pre-line">
                                         {item}
                                     </p>
                                 </motion.div>

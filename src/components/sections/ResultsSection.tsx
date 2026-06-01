@@ -61,7 +61,7 @@ export default function ResultsSection() {
                             <div className="font-sans text-2xl sm:text-3xl font-bold text-[#E8721A] mb-3">
                                 {result.stat}
                             </div>
-                            <p className="text-sm text-[#3D2A6E]/85 font-normal leading-relaxed">
+                            <p className="text-sm text-[#3D2A6E]/85 font-normal leading-relaxed whitespace-pre-line">
                                 {result.description}
                             </p>
                         </GlowCard>

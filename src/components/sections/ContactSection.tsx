@@ -121,7 +121,7 @@ export default function ContactSection() {
                         {contact.title}{' '}
                         <em className="italic text-[#E8721A]">{contact.titleEmphasis}</em>
                     </h2>
-                    <p className="text-sm text-[#1A0E35]/80 font-normal max-w-md mx-auto leading-relaxed">
+                    <p className="text-sm text-[#1A0E35]/80 font-normal max-w-md mx-auto leading-relaxed whitespace-pre-line">
                         {contact.subtitle}
                     </p>
                 </motion.div>
@@ -375,7 +375,7 @@ export default function ContactSection() {
                                     )}
 
                                     {/* Fine Print */}
-                                    <p className="text-[11px] text-[#3D2A6E]/60 text-center pt-2 leading-relaxed">
+                                    <p className="text-[11px] text-[#3D2A6E]/60 text-center pt-2 leading-relaxed whitespace-pre-line">
                                         {contact.finePrint}
                                     </p>
                                 </form>
