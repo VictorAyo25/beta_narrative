@@ -47,9 +47,13 @@ export function ContentProvider({
     };
 
     useEffect(() => {
-        // Always do a live client-side fetch after hydration so published
-        // CMS changes are visible without needing a full redeploy.
-        fetchContent();
+        // Only run a client-side fetch if the server didn't supply content.
+        // When initialContent is present it came from a fresh Admin SDK read on
+        // the server — re-fetching on the client risks overwriting that with a
+        // stale browser-cached (IndexedDB) Firestore snapshot.
+        if (!initialContent) {
+            fetchContent();
+        }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
