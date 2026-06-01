@@ -111,7 +111,7 @@ export default function OfferSection() {
                                     </div>
 
                                     {/* Description */}
-                                    <p className="text-xs sm:text-sm text-[#3D2A6E]/90 font-normal leading-relaxed mb-8">
+                                    <p className="text-xs sm:text-sm text-[#3D2A6E]/90 font-normal leading-relaxed mb-8 whitespace-pre-line">
                                         {plan.description}
                                     </p>
 

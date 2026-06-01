@@ -47,7 +47,7 @@ export default function HeroSection() {
                         <span className="text-[#6B3FC0]">{hero.titleHighlight}</span>
                     </motion.h1>
 
-                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }} className="text-base sm:text-lg text-[#1A0E35] max-w-xl mb-12 font-normal leading-relaxed">
+                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }} className="text-base sm:text-lg text-[#1A0E35] max-w-xl mb-12 font-normal leading-relaxed whitespace-pre-line">
                         {hero.subtitle}
                     </motion.p>
 
