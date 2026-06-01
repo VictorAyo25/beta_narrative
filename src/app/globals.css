@@ -350,4 +350,64 @@ select {
 }
 .admin-light input, .admin-light textarea, .admin-light select {
   color: #1A0E35 !important;
-}
+}
+
+/* Ensure the sidebar remains dark even in light mode */
+.admin-light aside {
+  background-color: rgb(14, 10, 30) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+.admin-light aside .text-white {
+  color: #ffffff !important;
+}
+.admin-light aside .text-white\/80 {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+.admin-light aside .text-white\/70 {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+.admin-light aside .text-white\/60 {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+.admin-light aside .text-white\/50 {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+.admin-light aside .text-white\/40 {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+.admin-light aside .text-white\/30 {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+.admin-light aside .bg-white\/\[0\.02\] {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+.admin-light aside .bg-white\/5 {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+.admin-light aside .bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+.admin-light aside .bg-black\/20 {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+.admin-light aside .bg-black\/30 {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+.admin-light aside .border-white\/5 {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+.admin-light aside .border-white\/\[0\.06\] {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+.admin-light aside .border-white\/10 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.admin-light aside .border-white\/20 {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+.admin-light aside .border-white\/30 {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+.admin-light aside .hover\:bg-white\/5:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
