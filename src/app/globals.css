@@ -418,3 +418,29 @@ select {
 .admin-light aside .hover\:text-white:hover {
   color: #1A0E35 !important;
 }
+
+/* Improve visibility of low-contrast elements in light mode */
+.admin-light .text-\[\#A78BFA\] {
+  color: #6B3FC0 !important;
+}
+.admin-light .text-purple-300 {
+  color: #6B3FC0 !important;
+}
+.admin-light .text-emerald-400 {
+  color: #059669 !important;
+}
+.admin-light .text-rose-300 {
+  color: #b91c1c !important;
+}
+.admin-light svg circle {
+  fill: #ffffff !important;
+}
+.admin-light .custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(107, 63, 192, 0.03) !important;
+}
+.admin-light .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(107, 63, 192, 0.2) !important;
+}
+.admin-light .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 114, 26, 0.7) !important;
+}
