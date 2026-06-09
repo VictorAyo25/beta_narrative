@@ -44,7 +44,7 @@ export default function ValueSection() {
                         transition={{ duration: 0.7, ease }}
                         className="lg:col-span-7 order-2 lg:order-1"
                     >
-                        <SectionLabel index="(03)">{value.sectionLabel}</SectionLabel>
+                        <SectionLabel>{value.sectionLabel}</SectionLabel>
                         <h2 className="display text-[clamp(1.9rem,4.2vw,3.3rem)] text-[#16121F] mt-6 mb-8" style={{ lineHeight: 1.08 }}>
                             {value.title}{' '}
                             <span className="text-[#E8721A]">{value.titleEmphasis}</span>
