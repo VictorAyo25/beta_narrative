@@ -3,8 +3,7 @@
 import { motion } from 'framer-motion';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
-import { TrendingUp, ArrowUpRight } from 'lucide-react';
-import GlowCard from '../GlowCard';
+import { ArrowUpRight } from 'lucide-react';
 
 export default function ResultsSection() {
     const { content } = useContent();
@@ -22,49 +21,49 @@ export default function ResultsSection() {
         ],
     };
 
-    return (
-        <section id="results" className="relative pt-16 sm:pt-20 pb-16 sm:pb-20 px-5 sm:px-8 lg:px-10 bg-[#E4DAEF] overflow-hidden">
-            {/* Background accent */}
-            <div className="absolute bottom-0 left-[20%] w-[500px] h-[300px] rounded-full bg-[#C4A8E8]/25 blur-[100px] pointer-events-none" />
+    const ease = [0.16, 1, 0.3, 1] as const;
 
-            <div className="max-w-6xl mx-auto relative">
+    return (
+        <section id="results" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-white border-t border-[#16121F]/14">
+            <div className="max-w-[1400px] mx-auto">
                 {/* Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 24 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                    className="max-w-2xl mb-16"
+                    transition={{ duration: 0.6, ease }}
+                    className="mb-12 lg:mb-16 max-w-3xl"
                 >
                     <SectionLabel>{results.sectionLabel}</SectionLabel>
-                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#1A0E35] mt-5">
+                    <h2 className="display text-[clamp(1.9rem,4.2vw,3.3rem)] text-[#16121F] mt-6" style={{ lineHeight: 1.08 }}>
                         {results.title}{' '}
-                        <em className="italic text-[#E8721A]">{results.titleEmphasis}</em>
+                        <span className="text-[#E8721A]">{results.titleEmphasis}</span>
                         {results.titleEmphasisEnd && ` ${results.titleEmphasisEnd}`}
                     </h2>
                 </motion.div>
 
-                {/* Results Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                {/* Matrix */}
+                <div className="grid sm:grid-cols-2 border-t border-l border-[#16121F]/14">
                     {results.results.map((result, index) => (
-                        <GlowCard
+                        <motion.div
                             key={index}
-                            delay={0.1 * index}
-                            className="group"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.06 * index, ease }}
+                            className="group relative border-r border-b border-[#16121F]/14 p-7 sm:p-10 hover:bg-[#F2F0F6] transition-colors duration-300"
                         >
-                            <div className="flex items-start justify-between mb-5">
-                                <div className="w-10 h-10 rounded-xl border border-[#E8721A]/20 bg-[#E8721A]/10 flex items-center justify-center group-hover:bg-[#E8721A]/20 group-hover:border-[#E8721A]/40 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(232,114,26,0.5)]">
-                                    <TrendingUp size={16} className="text-[#E8721A]" />
-                                </div>
-                                <ArrowUpRight size={16} className="text-[#6B3FC0]/75 group-hover:text-[#E8721A] transition-colors duration-300 mt-1" />
+                            <span className="absolute left-0 top-0 h-full w-[3px] bg-[#E8721A] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                            <div className="flex items-start justify-end mb-7">
+                                <ArrowUpRight size={20} className="text-[#16121F]/25 group-hover:text-[#E8721A] transition-colors duration-300" />
                             </div>
-                            <div className="font-sans text-2xl sm:text-3xl font-bold text-[#E8721A] mb-3">
+                            <div className="display text-[clamp(1.8rem,3vw,2.6rem)] text-[#16121F] leading-none mb-5">
                                 {result.stat}
                             </div>
-                            <p className="text-sm text-[#3D2A6E]/85 font-normal leading-relaxed whitespace-pre-line">
+                            <p className="font-sans text-[14px] sm:text-[15px] text-[#6F6783] leading-relaxed whitespace-pre-line max-w-md">
                                 {result.description}
                             </p>
-                        </GlowCard>
+                        </motion.div>
                     ))}
                 </div>
             </div>

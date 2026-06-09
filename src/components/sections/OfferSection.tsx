@@ -15,142 +15,104 @@ export default function OfferSection() {
         : defaultSiteContent.offer;
 
     const { sectionLabel, title, titleEmphasis, offers = [] } = offerSection;
+    const ease = [0.16, 1, 0.3, 1] as const;
 
     return (
-        <section id="offer" className="relative pt-16 sm:pt-20 pb-16 sm:pb-20 px-5 sm:px-8 lg:px-10 bg-[#EEE8F8] overflow-hidden">
-            {/* Background accents */}
-            <div className="absolute top-[10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#E8721A]/6 blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-[10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#C4A8E8]/30 blur-[100px] pointer-events-none" />
-
-            <div className="max-w-6xl mx-auto relative">
+        <section id="offer" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#F2F0F6] border-t border-[#16121F]/14">
+            <div className="max-w-[1400px] mx-auto">
                 {/* Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 24 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                    className="max-w-2xl mb-16"
+                    transition={{ duration: 0.6, ease }}
+                    className="mb-12 lg:mb-16 max-w-3xl"
                 >
                     <SectionLabel>{sectionLabel}</SectionLabel>
-                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-normal leading-[1.15] text-[#1A0E35] mt-5">
+                    <h2 className="display text-[clamp(1.9rem,4.2vw,3.3rem)] text-[#16121F] mt-6" style={{ lineHeight: 1.08 }}>
                         {title}{' '}
-                        <em className="italic text-[#E8721A]">{titleEmphasis}</em>
+                        <span className="text-[#E8721A]">{titleEmphasis}</span>
                     </h2>
                 </motion.div>
 
-                {/* Offer Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+                {/* Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-[#16121F]/14">
                     {offers.map((plan, index) => {
                         const isExecutive = plan.packageName.toUpperCase().includes('EXECUTIVE');
                         return (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 30 }}
+                                initial={{ opacity: 0, y: 22 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-100px' }}
-                                transition={{ duration: 0.7, delay: 0.15 * index, ease: [0.16, 1, 0.3, 1] }}
-                                className={`relative rounded-3xl border flex flex-col justify-between overflow-hidden transition-all duration-300 ${
-                                    isExecutive
-                                        ? 'border-[#E8721A]/40 bg-gradient-to-br from-[#FFFFFF] via-[#EAE1F5] to-[#E4DAEF] shadow-[0_12px_40px_rgba(232,114,26,0.15)] hover:shadow-[0_20px_50px_rgba(232,114,26,0.25)] hover:scale-[1.01]'
-                                        : 'border-[#8B5CF6]/20 bg-gradient-to-br from-[#FFFFFF] via-[#FAF8FD] to-[#EEE8F8] shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_40px_rgba(139,92,246,0.12)] hover:scale-[1.01]'
-                                }`}
+                                transition={{ duration: 0.6, delay: 0.1 * index, ease }}
+                                className="relative flex flex-col justify-between border-r border-b border-[#16121F]/14 bg-white"
                             >
-                                {/* Top accent line for Executive */}
-                                {isExecutive && (
-                                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#E8721A] via-[#8B5CF6] to-[#E8721A]" />
-                                )}
+                                {/* Top bar */}
+                                <div className={`flex items-center px-7 sm:px-9 py-4 border-b ${isExecutive ? 'bg-[#E8721A] border-[#E8721A]' : 'border-[#16121F]/14'}`}>
+                                    <span className={`font-mono text-[11px] uppercase tracking-[0.1em] ${isExecutive ? 'text-white' : 'text-[#6B3FC0]'}`}>
+                                        {plan.badge}
+                                    </span>
+                                </div>
 
-                                <div className="p-6 sm:p-8 lg:p-10 flex-grow">
-                                    {/* Header Info */}
-                                    <div className="flex justify-between items-start gap-4 mb-6">
-                                        <div>
-                                            <span className={`inline-block text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1.5 rounded-full ${
-                                                isExecutive 
-                                                    ? 'bg-[#E8721A]/10 text-[#E8721A] border border-[#E8721A]/20' 
-                                                    : 'bg-[#6B3FC0]/10 text-[#6B3FC0] border border-[#6B3FC0]/20'
-                                            }`}>
-                                                {plan.badge}
-                                            </span>
-                                            <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1A0E35] mt-4">
-                                                {plan.packageName}
-                                            </h3>
-                                            <p className="text-xs text-[#3D2A6E]/80 mt-1 font-medium italic">
-                                                {plan.tagline}
-                                            </p>
-                                        </div>
-                                    </div>
+                                <div className="p-7 sm:p-9 lg:p-10 flex-grow">
+                                    <h3 className="display text-3xl sm:text-4xl text-[#16121F]">
+                                        {plan.packageName}
+                                    </h3>
+                                    <p className="font-mono text-[11px] uppercase tracking-[0.06em] text-[#6E6587] mt-2">
+                                        {plan.tagline}
+                                    </p>
 
-                                    {/* Price Card */}
-                                    <div className="border-y border-[#8B5CF6]/15 py-5 my-6">
+                                    {/* Price */}
+                                    <div className="border-y border-[#16121F]/14 py-6 my-7">
                                         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                                            <span className="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold text-gradient leading-none tracking-tight">
+                                            <span className="display text-4xl sm:text-5xl text-[#16121F]">
                                                 {plan.price}
                                             </span>
                                             {plan.priceSecond && (
                                                 <>
-                                                    <span className="text-sm font-medium text-[#3D2A6E]/60">or</span>
-                                                    <span className="font-sans text-xl sm:text-2xl font-bold text-[#E8721A] leading-none tracking-tight">
-                                                        {plan.priceSecond}
-                                                    </span>
+                                                    <span className="font-mono text-[12px] text-[#6E6587]">/ or</span>
+                                                    <span className="display text-2xl text-[#E8721A]">{plan.priceSecond}</span>
                                                 </>
                                             )}
                                         </div>
-                                        <p className="text-xs text-[#3D2A6E]/85 tracking-wide mt-2 font-medium">
+                                        <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-[#6E6587] mt-3">
                                             {plan.priceNote}
                                         </p>
                                     </div>
 
-                                    {/* Quote / Hook */}
-                                    <div className={`p-4 rounded-xl mb-6 border ${
-                                        isExecutive 
-                                            ? 'bg-[#E8721A]/5 border-[#E8721A]/15' 
-                                            : 'bg-[#6B3FC0]/5 border-[#6B3FC0]/10'
-                                    }`}>
-                                        <p className="text-xs sm:text-sm font-medium text-[#1A0E35] leading-relaxed italic">
-                                            {plan.hook}
-                                        </p>
-                                    </div>
+                                    {/* Hook */}
+                                    <p className={`font-sans text-[15px] sm:text-base text-[#16121F] leading-relaxed mb-6 pl-4 border-l-2 ${isExecutive ? 'border-[#E8721A]' : 'border-[#6B3FC0]'}`}>
+                                        {plan.hook}
+                                    </p>
 
                                     {/* Description */}
-                                    <p className="text-xs sm:text-sm text-[#3D2A6E]/90 font-normal leading-relaxed mb-8 whitespace-pre-line">
+                                    <p className="font-sans text-[14px] text-[#6F6783] leading-relaxed mb-8 whitespace-pre-line">
                                         {plan.description}
                                     </p>
 
-                                    {/* What's Included */}
-                                    <div>
-                                        <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#3D2A6E] mb-4">
-                                            What's Included
-                                        </p>
-                                        <div className="space-y-3.5">
-                                            {plan.includes.filter((item) => item && item.trim() !== '').map((item, index) => (
-                                                <div
-                                                    key={index}
-                                                    className="flex items-start gap-3 group"
-                                                >
-                                                    <div className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 ${
-                                                        isExecutive ? 'bg-[#E8721A]/10' : 'bg-[#6B3FC0]/10'
-                                                    }`}>
-                                                        <Check size={10} className={isExecutive ? 'text-[#E8721A]' : 'text-[#6B3FC0]'} />
-                                                    </div>
-                                                    <span className="text-xs sm:text-sm text-[#3D2A6E]/85 font-normal leading-snug group-hover:text-[#3D2A6E] transition-colors">
-                                                        {item}
-                                                    </span>
-                                                </div>
-                                            ))}
-                                        </div>
+                                    {/* Includes */}
+                                    <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#6E6587] mb-5">What&apos;s Included</p>
+                                    <div className="space-y-3">
+                                        {plan.includes.filter((item) => item && item.trim() !== '').map((item, i) => (
+                                            <div key={i} className="flex items-start gap-3">
+                                                <Check size={15} strokeWidth={2.5} className={`flex-shrink-0 mt-0.5 ${isExecutive ? 'text-[#E8721A]' : 'text-[#6B3FC0]'}`} />
+                                                <span className="font-sans text-[14px] text-[#423B52] leading-snug">{item}</span>
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
 
-                                {/* CTA Action */}
-                                <div className="p-6 sm:p-8 lg:p-10 pt-0">
+                                {/* CTA */}
+                                <div className="p-7 sm:p-9 lg:p-10 pt-0">
                                     <a
                                         id={`offer-cta-btn-${index}`}
                                         href="#contact"
                                         onClick={() => trackEvent('cta_click', `package:${plan.packageName.toLowerCase().replace(/\s+/g, '_')}`)}
-                                        className={`w-full group relative inline-flex items-center justify-center text-xs sm:text-sm font-semibold tracking-[0.12em] uppercase px-8 py-4 rounded-full transition-all duration-300 ${
+                                        className={`w-full flex items-center justify-center gap-2 font-mono text-[12px] uppercase tracking-[0.12em] px-8 py-4 transition-colors duration-300 ${
                                             isExecutive
-                                                ? 'text-white bg-[#E8721A] hover:bg-[#C05A0E] hover:shadow-[0_0_40px_rgba(232,114,26,0.45)] hover:scale-[1.02] shadow-[0_4px_24px_rgba(232,114,26,0.3)]'
-                                                : 'text-[#6B3FC0] bg-[#6B3FC0]/10 hover:bg-[#6B3FC0]/20 hover:scale-[1.01] border border-[#6B3FC0]/20 hover:border-[#6B3FC0]/45'
+                                                ? 'bg-[#E8721A] text-white hover:bg-[#16121F] border border-[#E8721A] hover:border-[#16121F]'
+                                                : 'bg-transparent text-[#16121F] border border-[#16121F]/24 hover:border-[#E8721A] hover:text-[#E8721A]'
                                         }`}
                                     >
                                         Secure Your Spot
@@ -161,32 +123,18 @@ export default function OfferSection() {
                     })}
                 </div>
 
-                {/* Optional Add-Ons Footer */}
-                <div className="mt-12 rounded-3xl border border-[#8B5CF6]/20 bg-[#130E20]/[0.02] p-6 sm:p-8 lg:px-10 lg:py-7 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#130E20]/[0.01] to-transparent pointer-events-none" />
-                    <div className="relative z-10 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10">
+                {/* Add-ons */}
+                <div className="border-l border-r border-b border-[#16121F]/14 bg-white p-7 sm:p-9 lg:px-10">
+                    <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12">
                         <div className="flex-shrink-0">
-                            <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#3D2A6E] mb-1">
-                                Enhancements
-                            </p>
-                            <h4 className="text-base sm:text-lg font-serif text-[#1A0E35]">
-                                Optional Add-Ons
-                            </h4>
+                            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#6E6587] mb-2">Enhancements</p>
+                            <h4 className="display text-xl sm:text-2xl text-[#16121F]">Optional Add-Ons</h4>
                         </div>
-                        <div className="flex flex-wrap gap-2 sm:gap-3">
-                            {[
-                                'Media advisory',
-                                'Event coverage',
-                                'Professional photography',
-                                'PR amplification',
-                                'Conference visibility support'
-                            ].map((item, index) => (
-                                <div 
-                                    key={index} 
-                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#6B3FC0]/5 border border-[#6B3FC0]/15 hover:border-[#E8721A]/30 hover:bg-[#130E20]/5 transition-all duration-300 group cursor-default"
-                                >
+                        <div className="flex flex-wrap gap-2.5">
+                            {['Media advisory', 'Event coverage', 'Professional photography', 'PR amplification', 'Conference visibility support'].map((item, index) => (
+                                <div key={index} className="inline-flex items-center gap-2 px-4 py-2.5 border border-[#16121F]/14 hover:border-[#E8721A] transition-colors duration-300 group">
                                     <Plus size={12} className="text-[#6B3FC0] group-hover:text-[#E8721A] transition-colors" />
-                                    <span className="text-xs sm:text-sm text-[#3D2A6E]/90 group-hover:text-[#1A0E35] transition-colors">{item}</span>
+                                    <span className="font-mono text-[12px] uppercase tracking-[0.04em] text-[#423B52]">{item}</span>
                                 </div>
                             ))}
                         </div>

@@ -7,6 +7,7 @@ import ResultsSection from '@/components/sections/ResultsSection';
 import OfferSection from '@/components/sections/OfferSection';
 import ContactSection from '@/components/sections/ContactSection';
 import FloatingCTA from '@/components/FloatingCTA';
+import Marquee from '@/components/Marquee';
 import { ContentProvider } from '@/context/ContentContext';
 import { getAdminDb } from '@/lib/firebase-admin';
 import { defaultSiteContent } from '@/lib/default-content';
@@ -58,11 +59,11 @@ export default async function HomePage({
   return (
     <ContentProvider initialContent={content}>
       {isPreview && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-[#1A0E35]/95 border border-[#E8721A]/30 text-white px-4 py-2.5 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-md flex items-center gap-3 text-xs font-semibold select-none">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#E8721A] animate-pulse shadow-[0_0_10px_rgba(232,114,26,0.8)]" />
-          <span>Viewing Site Draft Preview</span>
-          <div className="w-[1px] h-3 bg-white/20" />
-          <a href="/admin" className="text-[#E8721A] hover:text-[#E8721A]/80 transition-colors underline font-bold">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-[#16121F] text-white px-4 py-2.5 shadow-[0_14px_36px_-14px_rgba(22,18,31,0.5)] flex items-center gap-3 select-none">
+          <span className="block w-2 h-2 bg-[#E8721A]" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.1em]">Viewing Site Draft Preview</span>
+          <span className="block w-px h-3 bg-white/20" />
+          <a href="/admin" className="font-mono text-[11px] uppercase tracking-[0.1em] text-[#E8721A] hover:text-white transition-colors">
             Return to CMS
           </a>
         </div>
@@ -70,6 +71,7 @@ export default async function HomePage({
       <Navbar />
       <main>
         <HeroSection />
+        <Marquee />
         <PainSection />
         <ValueSection />
         <ResultsSection />

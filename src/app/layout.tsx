@@ -1,17 +1,27 @@
 import type { Metadata } from 'next';
-import { Outfit, DM_Sans } from 'next/font/google';
+import { Space_Grotesk, Space_Mono, DM_Sans } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 
 export const dynamic = 'force-dynamic';
 
 // Font configurations
-const outfit = Outfit({
+// Space Grotesk — grotesque display used for headlines
+const grotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-playfair', // Keeping the variable name so Tailwind mappings in globals.css stay intact
+  variable: '--font-grotesk',
   display: 'swap',
 });
 
+// Space Mono — structural labels, kickers, index numbers
+const spaceMono = Space_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-space-mono',
+  display: 'swap',
+});
+
+// DM Sans — body copy
 const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
@@ -59,8 +69,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${dmSans.variable}`}>
-      <body className="font-sans bg-[#EEE8F8] text-[#1A0E35] antialiased">
+    <html lang="en" className={`${grotesk.variable} ${spaceMono.variable} ${dmSans.variable}`}>
+      <body className="font-sans bg-[#F2F0F6] text-[#423B52] antialiased">
         <AuthProvider>
           <AnalyticsTracker />
           {children}

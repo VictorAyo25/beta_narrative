@@ -27,9 +27,9 @@ export default function CalendlyEmbed({
     const params = new URLSearchParams();
 
     // Custom aesthetics to match the site's design palette
-    params.append('background_color', 'faf7ff'); // matching form card background #FAF7FF
-    params.append('text_color', '1a0e35');       // matching main text #1A0E35
-    params.append('primary_color', 'e8721a');    // matching orange theme #E8721A
+    params.append('background_color', 'ffffff'); // white form card background
+    params.append('text_color', '16121f');       // matching ink text #16121F
+    params.append('primary_color', 'e8721a');    // matching orange accent #E8721A
     params.append('hide_landing_page_details', '1');
     params.append('hide_gdpr_banner', '1');
 
@@ -43,13 +43,13 @@ export default function CalendlyEmbed({
     const embedUrl = `${cleanUrl}?${params.toString()}`;
 
     return (
-        <div className={`relative w-full overflow-hidden rounded-2xl ${className}`} style={{ height }}>
-            {/* Premium Loading Skeleton */}
+        <div className={`relative w-full overflow-hidden ${className}`} style={{ height }}>
+            {/* Loading Skeleton */}
             {isLoading && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#FAF7FF] border border-[#8B5CF6]/15 rounded-2xl animate-pulse">
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-white border border-[#16121F]/14 animate-pulse">
                     <div className="w-12 h-12 rounded-full border-2 border-[#E8721A]/20 border-t-[#E8721A] animate-spin mb-4" />
-                    <p className="text-xs font-semibold text-[#1A0E35]/60 tracking-wider uppercase">
-                        Loading Calendar...
+                    <p className="font-mono text-[11px] text-[#16121F]/60 tracking-[0.12em] uppercase">
+                        Loading Calendar…
                     </p>
                 </div>
             )}

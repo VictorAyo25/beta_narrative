@@ -6,7 +6,7 @@
  * 2. Logs submission to Google Sheets (optional)
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, after } from 'next/server';
 import nodemailer from 'nodemailer';
 
 // Initialize Gmail SMTP transporter
@@ -19,6 +19,10 @@ async function getEmailTransporter() {
             user: process.env.GMAIL_SMTP_USER,
             pass: process.env.GMAIL_SMTP_PASSWORD,
         },
+        // Fail fast instead of hanging if SMTP is unreachable/slow.
+        connectionTimeout: 7000, // time to establish the TCP connection
+        greetingTimeout: 7000,   // time to receive the SMTP greeting
+        socketTimeout: 10000,    // idle time before the socket is killed
     });
 }
 
@@ -173,15 +177,19 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Send email and log to sheets in parallel, but handle errors gracefully so booking isn't blocked
-        try {
-            await Promise.all([
-                sendEmailNotification({ fullName, email, role, journey, challenge }),
-                logToGoogleSheets({ fullName, email, role, journey, challenge }),
-            ]);
-        } catch (deliveryError) {
-            console.error('Non-blocking contact submission error (email/sheets delivery failed):', deliveryError);
-        }
+        // Deliver the notification email + log to Google Sheets AFTER the response is sent,
+        // so the user isn't blocked waiting on SMTP. after() keeps this work alive on
+        // serverless platforms (unlike a naive un-awaited promise, which can be killed).
+        after(async () => {
+            try {
+                await Promise.all([
+                    sendEmailNotification({ fullName, email, role, journey, challenge }),
+                    logToGoogleSheets({ fullName, email, role, journey, challenge }),
+                ]);
+            } catch (deliveryError) {
+                console.error('Contact delivery (email/sheets) failed:', deliveryError);
+            }
+        });
 
         return NextResponse.json(
             { success: true, message: 'Application submitted successfully' },

@@ -1,21 +1,48 @@
 @import "tailwindcss";
 
+/* =========================================================================
+   BETA NARRATIVE — Swiss Grotesque Design System
+   Light paper canvas · structural grid · mono labels · solid orange blocks
+   ========================================================================= */
+
 :root {
-  --purple: #6B3FC0;
-  --purple-mid: #8B5CF6;
-  --purple-light: #C4A8E8;
-  --purple-pale: #EEE8F8;
+  /* Canvas */
+  --paper: #F2F0F6;           /* primary background — cool light lilac-gray */
+  --paper-alt: #FFFFFF;       /* alternating / surface */
+  --paper-tint: #E9E4F3;      /* soft violet band */
+  --surface: #FFFFFF;
+
+  /* Ink */
+  --ink: #16121F;             /* near-black, warm violet undertone */
+  --ink-body: #423B52;        /* body copy */
+  --ink-muted: #6F6783;       /* secondary */
+  --ink-faint: #6E6587;       /* tertiary / captions (AA on light canvas) */
+
+  /* Brand */
+  --violet: #6B3FC0;
+  --violet-mid: #8B5CF6;
+  --violet-light: #C4A8E8;
   --orange: #E8721A;
   --orange-light: #F5943A;
-  --orange-pale: #FDEEDD;
   --orange-dark: #C05A0E;
-  --ink: #EEE8F8;
-  --ink-soft: #E4DAEF;
-  --ink-card: #FAF7FF;
-  --warm-white: #1A0E35;
-  --muted: #3D2A6E;
-  --font-heading: var(--font-playfair, 'Outfit', sans-serif);
-  --font-dm-sans: 'DM Sans', sans-serif;
+
+  /* Structural lines (more visible — Swiss grid) */
+  --line: rgba(22, 18, 31, 0.14);
+  --line-soft: rgba(22, 18, 31, 0.09);
+  --line-strong: rgba(22, 18, 31, 0.24);
+
+  /* Legacy aliases */
+  --purple: #6B3FC0;
+  --ink-soft: #423B52;
+  --warm-white: #16121F;
+  --muted: #6F6783;
+
+  /* Type */
+  --font-display: var(--font-grotesk, 'Space Grotesk', sans-serif);
+  --font-mono: var(--font-space-mono, 'Space Mono', monospace);
+  --font-body: var(--font-dm-sans, 'DM Sans', sans-serif);
+  /* Back-compat: anything still using .font-serif gets the grotesque display */
+  --font-serif: var(--font-grotesk, 'Space Grotesk', sans-serif);
 }
 
 html {
@@ -23,50 +50,73 @@ html {
 }
 
 body {
-  font-family: var(--font-dm-sans), sans-serif;
-  background-color: var(--ink);
-  color: var(--warm-white);
+  font-family: var(--font-body), sans-serif;
+  background-color: var(--paper);
+  color: var(--ink-body);
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.font-serif {
-  font-family: var(--font-playfair), sans-serif;
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
 }
 
 .font-sans {
-  font-family: var(--font-dm-sans), sans-serif;
+  font-family: var(--font-body), sans-serif;
+}
+
+/* keep old class working — maps to the grotesque display */
+.font-serif {
+  font-family: var(--font-display), sans-serif;
+}
+
+/* Big Swiss display headings: tight tracking */
+.display {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+}
+
+/* Mono kicker / label */
+.kicker {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 ::selection {
   background-color: var(--orange);
-  color: var(--ink);
+  color: #fff;
 }
 
+/* Scrollbar — squared, structural */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 10px;
 }
-
 ::-webkit-scrollbar-track {
+  background: var(--paper);
+  border-left: 1px solid var(--line-soft);
+}
+::-webkit-scrollbar-thumb {
   background: var(--ink);
 }
-
-::-webkit-scrollbar-thumb {
-  background: var(--purple-mid);
-  border-radius: 3px;
-}
-
 ::-webkit-scrollbar-thumb:hover {
   background: var(--orange);
 }
 
 *:focus-visible {
   outline: 2px solid var(--orange);
-  outline-offset: 3px;
-  border-radius: 2px;
+  outline-offset: 2px;
 }
 
 input,
@@ -76,7 +126,6 @@ select {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
@@ -87,173 +136,123 @@ select {
   }
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, #E8721A 0%, #C4660F 30%, #9B6ED9 70%, #6B3FC0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* =========================================================================
+   Structural utilities
+   ========================================================================= */
+
+/* Orange marker highlight behind a word */
+.marker {
+  background-image: linear-gradient(transparent 58%, rgba(232, 114, 26, 0.42) 58%);
+  padding: 0 0.08em;
 }
 
-.text-gradient-purple {
-  background: linear-gradient(135deg, #8B5CF6 0%, #E8721A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Solid square button */
+.btn-solid {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--orange);
+  color: #fff;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 1rem 1.6rem;
+  border: 1px solid var(--orange);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.btn-solid:hover {
+  background: var(--ink);
+  border-color: var(--ink);
 }
 
-.glass {
-  background: rgba(238, 232, 248, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(139, 92, 246, 0.15);
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 1rem 1.6rem;
+  border: 1px solid var(--line-strong);
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+.btn-ghost:hover {
+  border-color: var(--orange);
+  color: var(--orange);
 }
 
-.glass-light {
-  background: rgba(250, 247, 255, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(139, 92, 246, 0.1);
-}
-
-.mobile-menu {
-  background: rgba(238, 232, 248, 0.97);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(107, 63, 192, 0.2);
-  box-shadow: 0 25px 50px -12px rgba(26, 14, 53, 0.12), 0 0 40px rgba(107, 63, 192, 0.06);
-}
-
-.glow-orange {
-  box-shadow: 0 0 40px rgba(232, 114, 26, 0.2), 0 0 80px rgba(232, 114, 26, 0.08);
-}
-
-.glow-purple {
-  box-shadow: 0 0 40px rgba(107, 63, 192, 0.25), 0 0 80px rgba(107, 63, 192, 0.1);
-}
-
-.card-hover {
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(107, 63, 192, 0.12), 0 0 40px rgba(232, 114, 26, 0.1);
+/* Running header rule with section index */
+.rule {
+  height: 1px;
+  background: var(--line);
 }
 
 .link-underline {
   position: relative;
 }
-
 .link-underline::after {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: -3px;
   left: 0;
   width: 0;
   height: 1px;
   background: var(--orange);
-  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .link-underline:hover::after {
   width: 100%;
 }
 
+/* glass kept (used by mobile menu) */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+}
+.mobile-menu {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--line);
+}
+
+/* =========================================================================
+   Keyframes / animation utilities
+   ========================================================================= */
+
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-@keyframes float {
+.animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-fade-in { animation: fadeIn 0.7s ease both; }
+.animate-marquee { animation: marquee 32s linear infinite; }
 
-  0%,
-  100% {
-    transform: translateY(0);
-  }
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
 
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
-@keyframes pulse-glow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(232, 114, 26, 0.2);
-  }
-
-  50% {
-    box-shadow: 0 0 40px rgba(232, 114, 26, 0.4);
-  }
-}
-
-.animate-fade-up {
-  animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.7s ease both;
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
-}
-
-.delay-100 {
-  animation-delay: 0.1s;
-}
-
-.delay-200 {
-  animation-delay: 0.2s;
-}
-
-.delay-300 {
-  animation-delay: 0.3s;
-}
-
-.delay-400 {
-  animation-delay: 0.4s;
-}
-
-.delay-500 {
-  animation-delay: 0.5s;
-}
-
-.delay-600 {
-  animation-delay: 0.6s;
-}
-
-.delay-700 {
-  animation-delay: 0.7s;
-}
-
-.delay-800 {
-  animation-delay: 0.8s;
-}
-
-/* Custom scrollbar for analytics tables/lists */
+/* Custom scrollbar for analytics tables/lists (admin) */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
   height: 4px;
@@ -334,12 +333,12 @@ select {
 }
 
 /* Ambient glows — dim in light mode */
-.admin-light .bg-\[#6B3FC0\]\/15 { opacity: 0.4 !important; }
-.admin-light .bg-\[#E8721A\]\/10 { opacity: 0.3 !important; }
-.admin-light .bg-\[#8B5CF6\]\/8 { opacity: 0.2 !important; }
+.admin-light .bg-\[\#6B3FC0\]\/15 { opacity: 0.4 !important; }
+.admin-light .bg-\[\#E8721A\]\/10 { opacity: 0.3 !important; }
+.admin-light .bg-\[\#8B5CF6\]\/8 { opacity: 0.2 !important; }
 
 /* Inputs */
-.admin-light .bg-\[#130E26\]\/50 {
+.admin-light .bg-\[\#130E26\]\/50 {
   background-color: rgba(107,63,192,0.06) !important;
   color: #1A0E35 !important;
   border-color: rgba(107,63,192,0.2) !important;
@@ -360,7 +359,6 @@ select {
 .admin-light aside .text-white {
   color: #1A0E35 !important;
 }
-/* Keep active gradient button text white */
 .admin-light aside .bg-gradient-to-r {
   color: #ffffff !important;
 }
