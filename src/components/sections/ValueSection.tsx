@@ -33,7 +33,7 @@ export default function ValueSection() {
     const hasCredentials = value.credentials && value.credentials.length > 0;
 
     return (
-        <section id="why" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#F2F0F6] border-t border-[#16121F]/14">
+        <section id="why" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#E9E3F4] border-t border-[#2A2342]/14">
             <div className="max-w-[1400px] mx-auto">
                 <div className={`grid lg:grid-cols-12 gap-10 lg:gap-14 items-start ${hasCredentials ? 'mb-16 lg:mb-20' : ''}`}>
                     {/* Text */}
@@ -45,11 +45,11 @@ export default function ValueSection() {
                         className="lg:col-span-7 order-2 lg:order-1"
                     >
                         <SectionLabel>{value.sectionLabel}</SectionLabel>
-                        <h2 className="display text-[clamp(1.9rem,4.2vw,3.3rem)] text-[#16121F] mt-6 mb-8" style={{ lineHeight: 1.08 }}>
+                        <h2 className="display text-[clamp(1.6rem,3.2vw,2.6rem)] text-[#2A2342] mt-6 mb-8" style={{ lineHeight: 1.12 }}>
                             {value.title}{' '}
                             <span className="text-[#E8721A]">{value.titleEmphasis}</span>
                         </h2>
-                        <div className="font-sans text-[15px] sm:text-base text-[#423B52] leading-relaxed max-w-2xl">
+                        <div className="font-sans text-[15px] sm:text-base text-[#4A4163] leading-relaxed max-w-2xl">
                             {(() => {
                                 const parts = value.body.split(/(\n{2,})/);
                                 const paragraphs: { text: string; gapEm: number }[] = [];
@@ -76,7 +76,7 @@ export default function ValueSection() {
                         transition={{ duration: 0.8, delay: 0.15, ease }}
                         className="lg:col-span-5 order-1 lg:order-2"
                     >
-                        <div className="relative border border-[#16121F]/14 bg-white">
+                        <div className="relative border border-[#2A2342]/12 bg-[#F6F2FC]">
                             <div className="relative aspect-[4/5] overflow-hidden">
                                 <Image
                                     src={value.profileImage || "/images/Favour.JPG"}
@@ -91,13 +91,13 @@ export default function ValueSection() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={`${value.profileName || "Favour Egbogun"} on LinkedIn`}
-                                className="group flex items-stretch justify-between border-t border-[#16121F]/14 hover:bg-[#F2F0F6] transition-colors duration-300"
+                                className="group flex items-stretch justify-between border-t border-[#2A2342]/12 hover:bg-[#EFE9F8] transition-colors duration-300"
                             >
                                 <div className="px-4 py-3.5">
-                                    <p className="font-mono text-[11px] uppercase tracking-[0.06em] text-[#16121F] group-hover:text-[#E8721A] transition-colors duration-300">{value.profileName || "Favour Egbogun"}</p>
-                                    <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-[#6E6587] mt-1">{value.profileRole || "Communications Strategist"}</p>
+                                    <p className="font-sans text-[14px] font-medium text-[#2A2342] group-hover:text-[#E8721A] transition-colors duration-300">{value.profileName || "Favour Egbogun"}</p>
+                                    <p className="font-sans text-[12px] text-[#6E6587] mt-0.5">{value.profileRole || "Communications Strategist"}</p>
                                 </div>
-                                <span className="flex items-center justify-center w-14 border-l border-[#16121F]/14 text-[#6B3FC0] group-hover:bg-[#E8721A] group-hover:text-white transition-colors duration-300">
+                                <span className="flex items-center justify-center w-14 border-l border-[#2A2342]/12 text-[#6B3FC0] group-hover:bg-[#E8721A] group-hover:text-white transition-colors duration-300">
                                     <LinkedInIcon size={16} />
                                 </span>
                             </a>
@@ -107,7 +107,7 @@ export default function ValueSection() {
 
                 {/* Credentials matrix */}
                 {hasCredentials && (
-                    <div className="grid grid-cols-1 sm:grid-cols-3 border-t border-l border-[#16121F]/14">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 border-t border-l border-[#2A2342]/10">
                         {value.credentials.map((cred, index) => (
                             <motion.div
                                 key={index}
@@ -115,12 +115,12 @@ export default function ValueSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: 0.08 * index, ease }}
-                                className="border-r border-b border-[#16121F]/14 p-7 sm:p-9 bg-white"
+                                className="border-r border-b border-[#2A2342]/10 p-7 sm:p-9 bg-[#F6F2FC]"
                             >
-                                <div className="display text-5xl sm:text-6xl text-[#E8721A] leading-none mb-5">
+                                <div className="display text-4xl sm:text-5xl text-[#E8721A] leading-none mb-4">
                                     <AnimatedCounter value={cred.number} />
                                 </div>
-                                <p className="font-mono text-[11px] uppercase tracking-[0.06em] text-[#6F6783] leading-relaxed">
+                                <p className="font-sans text-[13px] text-[#6E6587] leading-relaxed">
                                     {cred.label}
                                 </p>
                             </motion.div>

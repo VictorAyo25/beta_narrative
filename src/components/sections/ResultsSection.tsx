@@ -24,7 +24,7 @@ export default function ResultsSection() {
     const ease = [0.16, 1, 0.3, 1] as const;
 
     return (
-        <section id="results" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-white border-t border-[#16121F]/14">
+        <section id="results" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#F1ECF9] border-t border-[#2A2342]/10">
             <div className="max-w-[1400px] mx-auto">
                 {/* Header */}
                 <motion.div
@@ -35,7 +35,7 @@ export default function ResultsSection() {
                     className="mb-12 lg:mb-16 max-w-3xl"
                 >
                     <SectionLabel>{results.sectionLabel}</SectionLabel>
-                    <h2 className="display text-[clamp(1.9rem,4.2vw,3.3rem)] text-[#16121F] mt-6" style={{ lineHeight: 1.08 }}>
+                    <h2 className="display text-[clamp(1.6rem,3.2vw,2.6rem)] text-[#2A2342] mt-6" style={{ lineHeight: 1.12 }}>
                         {results.title}{' '}
                         <span className="text-[#E8721A]">{results.titleEmphasis}</span>
                         {results.titleEmphasisEnd && ` ${results.titleEmphasisEnd}`}
@@ -43,7 +43,7 @@ export default function ResultsSection() {
                 </motion.div>
 
                 {/* Matrix */}
-                <div className="grid sm:grid-cols-2 border-t border-l border-[#16121F]/14">
+                <div className="grid sm:grid-cols-2 border-t border-l border-[#2A2342]/10">
                     {results.results.map((result, index) => (
                         <motion.div
                             key={index}
@@ -51,16 +51,15 @@ export default function ResultsSection() {
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.06 * index, ease }}
-                            className="group relative border-r border-b border-[#16121F]/14 p-7 sm:p-10 hover:bg-[#F2F0F6] transition-colors duration-300"
+                            className="group border-r border-b border-[#2A2342]/10 p-8 sm:p-10"
                         >
-                            <span className="absolute left-0 top-0 h-full w-[3px] bg-[#E8721A] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]" />
-                            <div className="flex items-start justify-end mb-7">
-                                <ArrowUpRight size={20} className="text-[#16121F]/25 group-hover:text-[#E8721A] transition-colors duration-300" />
+                            <div className="flex items-start justify-between mb-6">
+                                <div className="display text-[clamp(1.6rem,2.6vw,2.3rem)] text-[#2A2342] leading-none">
+                                    {result.stat}
+                                </div>
+                                <ArrowUpRight size={18} className="text-[#6B3FC0]/40 mt-1 flex-shrink-0" />
                             </div>
-                            <div className="display text-[clamp(1.8rem,3vw,2.6rem)] text-[#16121F] leading-none mb-5">
-                                {result.stat}
-                            </div>
-                            <p className="font-sans text-[14px] sm:text-[15px] text-[#6F6783] leading-relaxed whitespace-pre-line max-w-md">
+                            <p className="font-sans text-[14px] sm:text-[15px] text-[#6E6587] leading-relaxed whitespace-pre-line max-w-md">
                                 {result.description}
                             </p>
                         </motion.div>

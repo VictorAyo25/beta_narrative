@@ -71,7 +71,7 @@ export default function FloatingCTA() {
             <a
                 href="#contact"
                 onClick={() => trackEvent('cta_click', 'floating_cta')}
-                className="inline-flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-white bg-[#E8721A] px-6 sm:px-7 py-4 hover:bg-[#16121F] transition-colors duration-300 shadow-[0_14px_36px_-14px_rgba(22,18,31,0.5)]"
+                className="inline-flex items-center justify-center gap-2 font-sans text-[13px] font-semibold text-white bg-[#E8721A] px-6 sm:px-7 py-3.5 rounded hover:bg-[#C05A0E] transition-colors duration-300 shadow-[0_14px_36px_-16px_rgba(42,35,66,0.45)]"
             >
                 <span className="hidden sm:inline">Secure Your Spot</span>
                 <span className="sm:hidden">Apply</span>

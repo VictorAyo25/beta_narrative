@@ -6,17 +6,17 @@
    ========================================================================= */
 
 :root {
-  /* Canvas */
-  --paper: #F2F0F6;           /* primary background — cool light lilac-gray */
-  --paper-alt: #FFFFFF;       /* alternating / surface */
-  --paper-tint: #E9E4F3;      /* soft violet band */
-  --surface: #FFFFFF;
+  /* Canvas — lilac */
+  --paper: #E9E3F4;           /* primary background — soft lilac */
+  --paper-alt: #F1ECF9;       /* alternating band — lighter lilac */
+  --paper-tint: #E1D7EF;      /* deeper lilac */
+  --surface: #F6F2FC;         /* cards / panels — pale lilac (not white) */
 
-  /* Ink */
-  --ink: #16121F;             /* near-black, warm violet undertone */
-  --ink-body: #423B52;        /* body copy */
-  --ink-muted: #6F6783;       /* secondary */
-  --ink-faint: #6E6587;       /* tertiary / captions (AA on light canvas) */
+  /* Ink — deep aubergine, softer than near-black */
+  --ink: #2A2342;             /* headings / primary */
+  --ink-body: #4A4163;        /* body copy */
+  --ink-muted: #6E6588;       /* secondary */
+  --ink-faint: #6E6587;       /* tertiary / captions (AA on lilac) */
 
   /* Brand */
   --violet: #6B3FC0;
@@ -26,16 +26,16 @@
   --orange-light: #F5943A;
   --orange-dark: #C05A0E;
 
-  /* Structural lines (more visible — Swiss grid) */
-  --line: rgba(22, 18, 31, 0.14);
-  --line-soft: rgba(22, 18, 31, 0.09);
-  --line-strong: rgba(22, 18, 31, 0.24);
+  /* Hairlines — soft */
+  --line: rgba(42, 35, 66, 0.12);
+  --line-soft: rgba(42, 35, 66, 0.07);
+  --line-strong: rgba(42, 35, 66, 0.18);
 
   /* Legacy aliases */
   --purple: #6B3FC0;
-  --ink-soft: #423B52;
-  --warm-white: #16121F;
-  --muted: #6F6783;
+  --ink-soft: #4A4163;
+  --warm-white: #2A2342;
+  --muted: #6E6588;
 
   /* Type */
   --font-display: var(--font-grotesk, 'Space Grotesk', sans-serif);
@@ -77,12 +77,12 @@ body {
   font-family: var(--font-display), sans-serif;
 }
 
-/* Big Swiss display headings: tight tracking */
+/* Display headings — lighter weight, gentler tracking */
 .display {
   font-family: var(--font-display), sans-serif;
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 0.98;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.0;
 }
 
 /* Mono kicker / label */
@@ -99,19 +99,20 @@ body {
   color: #fff;
 }
 
-/* Scrollbar — squared, structural */
+/* Scrollbar — soft lilac */
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
   background: var(--paper);
-  border-left: 1px solid var(--line-soft);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--ink);
+  background: var(--violet-light);
+  border-radius: 8px;
+  border: 2px solid var(--paper);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--orange);
+  background: var(--violet-mid);
 }
 
 *:focus-visible {
@@ -140,45 +141,47 @@ select {
    Structural utilities
    ========================================================================= */
 
-/* Orange marker highlight behind a word */
+/* Soft accent underline behind a word */
 .marker {
-  background-image: linear-gradient(transparent 58%, rgba(232, 114, 26, 0.42) 58%);
-  padding: 0 0.08em;
+  background-image: linear-gradient(transparent 62%, rgba(107, 63, 192, 0.16) 62%);
+  padding: 0 0.06em;
 }
 
-/* Solid square button */
+/* Buttons — calm, sentence-case */
 .btn-solid {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   background: var(--orange);
   color: #fff;
-  font-family: var(--font-mono), monospace;
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 1rem 1.6rem;
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 0.85rem 1.6rem;
+  border-radius: 4px;
   border: 1px solid var(--orange);
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 .btn-solid:hover {
-  background: var(--ink);
-  border-color: var(--ink);
+  background: var(--orange-dark);
+  border-color: var(--orange-dark);
 }
 
 .btn-ghost {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   background: transparent;
   color: var(--ink);
-  font-family: var(--font-mono), monospace;
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 1rem 1.6rem;
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 0.85rem 1.6rem;
+  border-radius: 4px;
   border: 1px solid var(--line-strong);
-  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+  transition: border-color 0.25s ease, color 0.25s ease;
 }
 .btn-ghost:hover {
   border-color: var(--orange);
@@ -210,13 +213,13 @@ select {
 
 /* glass kept (used by mobile menu) */
 .glass {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(246, 242, 252, 0.85);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid var(--line);
 }
 .mobile-menu {
-  background: rgba(255, 255, 255, 0.97);
+  background: rgba(246, 242, 252, 0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--line);

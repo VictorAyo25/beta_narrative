@@ -21,7 +21,7 @@ export default function HeroSection() {
         ]).slice(0, 3);
 
     return (
-        <section className="relative min-h-screen flex flex-col bg-[#F2F0F6] overflow-hidden">
+        <section className="relative min-h-screen flex flex-col bg-[#E9E3F4] overflow-hidden">
             {/* Background portrait */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute right-0 top-0 h-full w-full lg:w-[52%]">
@@ -34,18 +34,11 @@ export default function HeroSection() {
                         sizes="100vw"
                     />
                     <div className="absolute inset-0 bg-[#6B3FC0]/10 mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-[#16121F]/5" />
+                    <div className="absolute inset-0 bg-[#2A2342]/5" />
                 </div>
                 {/* Legibility scrims */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#F2F0F6] from-30% via-[#F2F0F6]/80 to-transparent" />
-                <div className="absolute inset-0 bg-[#F2F0F6]/45 lg:bg-transparent" />
-            </div>
-
-            {/* Rotated edge wordmark — Swiss signature */}
-            <div className="hidden lg:block absolute left-3 top-1/2 -translate-y-1/2 z-20 origin-center -rotate-90">
-                <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-[#6E6587] whitespace-nowrap">
-                    Beta Narrative — © 2026
-                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#E9E3F4] from-30% via-[#E9E3F4]/80 to-transparent" />
+                <div className="absolute inset-0 bg-[#E9E3F4]/45 lg:bg-transparent" />
             </div>
 
             {/* ── Top meta rule (masthead) ── */}
@@ -53,14 +46,11 @@ export default function HeroSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, ease }}
-                className="relative z-20 border-b border-[#16121F]/14 bg-[#F2F0F6]/70 backdrop-blur-sm pt-24 sm:pt-28"
+                className="relative z-20 border-b border-[#2A2342]/12 bg-[#E9E3F4]/70 backdrop-blur-sm pt-24 sm:pt-28"
             >
-                <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pb-5 flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                        <span className="block w-2.5 h-2.5 bg-[#E8721A]" />
-                        <span className="kicker text-[#16121F]">{hero.eyebrow}</span>
-                    </div>
-                    <span className="hidden sm:block kicker text-[#6E6587] text-right">Stop blending in</span>
+                <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pb-5 flex items-center gap-2.5">
+                    <span className="block w-6 h-px bg-[#E8721A]" />
+                    <span className="kicker text-[#6B3FC0]">{hero.eyebrow}</span>
                 </div>
             </motion.div>
 
@@ -71,12 +61,12 @@ export default function HeroSection() {
                         initial={{ opacity: 0, y: 22 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.85, delay: 0.08, ease }}
-                        className="display text-[clamp(2.5rem,6.6vw,5.2rem)] text-[#16121F] max-w-5xl"
-                        style={{ lineHeight: 1.03 }}
+                        className="display text-[clamp(2.1rem,4.8vw,3.9rem)] text-[#2A2342] max-w-4xl"
+                        style={{ lineHeight: 1.08 }}
                     >
                         {hero.title}{' '}
-                        <span className="marker">{hero.titleEmphasis}</span>
-                        <span className="block text-[#6B3FC0] mt-2 lg:pl-[16%]">{hero.titleHighlight}</span>
+                        <span className="text-[#E8721A]">{hero.titleEmphasis}</span>
+                        <span className="block text-[#6B3FC0] mt-1.5 lg:pl-[8%]">{hero.titleHighlight}</span>
                     </motion.h1>
                 </div>
             </div>
@@ -86,12 +76,12 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.28, ease }}
-                className="relative z-20 border-t border-[#16121F]/14 bg-[#F2F0F6]/85 backdrop-blur-sm"
+                className="relative z-20 border-t border-[#2A2342]/14 bg-[#E9E3F4]/85 backdrop-blur-sm"
             >
                 <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
                     <div className="grid lg:grid-cols-12">
-                        <div className="lg:col-span-7 lg:border-r border-[#16121F]/14 py-7 lg:pr-12">
-                            <p className="font-sans text-[15px] sm:text-base text-[#423B52] max-w-xl leading-relaxed whitespace-pre-line">
+                        <div className="lg:col-span-7 lg:border-r border-[#2A2342]/14 py-7 lg:pr-12">
+                            <p className="font-sans text-[15px] sm:text-base text-[#4A4163] max-w-xl leading-relaxed whitespace-pre-line">
                                 {hero.subtitle}
                             </p>
                         </div>
@@ -116,17 +106,17 @@ export default function HeroSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.42, ease }}
-                className="relative z-20 border-t border-[#16121F]/14 bg-[#F2F0F6]/85 backdrop-blur-sm"
+                className="relative z-20 border-t border-[#2A2342]/14 bg-[#E9E3F4]/85 backdrop-blur-sm"
             >
                 <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
                     <div className="grid grid-cols-1 sm:grid-cols-3">
                         {stats.map((s, i) => (
                             <div
                                 key={i}
-                                className="flex items-baseline gap-4 py-6 border-t sm:border-t-0 sm:border-l border-[#16121F]/14 first:border-l-0 first:border-t-0 sm:pl-8 first:pl-0"
+                                className="flex items-baseline gap-4 py-6 border-t sm:border-t-0 sm:border-l border-[#2A2342]/14 first:border-l-0 first:border-t-0 sm:pl-8 first:pl-0"
                             >
-                                <AnimatedCounter value={s.number} className="display text-4xl sm:text-5xl text-[#16121F]" />
-                                <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-[#6F6783] leading-snug max-w-[12rem]">{s.label}</span>
+                                <AnimatedCounter value={s.number} className="display text-4xl sm:text-5xl text-[#2A2342]" />
+                                <span className="font-sans text-[13px] text-[#6E6587] leading-snug max-w-[12rem]">{s.label}</span>
                             </div>
                         ))}
                     </div>

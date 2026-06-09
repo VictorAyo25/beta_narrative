@@ -74,7 +74,7 @@ export default function Navbar() {
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                ? 'py-3.5 bg-[#F2F0F6]/90 backdrop-blur-md border-b border-[#16121F]/14'
+                ? 'py-3.5 bg-[#E9E3F4]/90 backdrop-blur-md border-b border-[#2A2342]/14'
                 : 'py-5 bg-transparent border-b border-transparent'
                 }`}
         >
@@ -84,11 +84,10 @@ export default function Navbar() {
                     <a
                         href="#"
                         onClick={scrollToTop}
-                        className="flex-shrink-0 group cursor-pointer flex items-center gap-2.5"
+                        className="flex-shrink-0 group cursor-pointer"
                     >
-                        <span className="block w-2.5 h-2.5 bg-[#E8721A] group-hover:rotate-45 transition-transform duration-300" />
-                        <span className="font-display text-[15px] font-bold tracking-[-0.01em] uppercase text-[#16121F]">
-                            Beta<span className="text-[#6B3FC0]"> Narrative</span>
+                        <span className="font-display text-[19px] font-medium tracking-[-0.01em] text-[#2A2342]">
+                            Beta <span className="text-[#6B3FC0]">Narrative</span>
                         </span>
                     </a>
 
@@ -102,7 +101,7 @@ export default function Navbar() {
                                         key={link.href}
                                         href={link.href}
                                         onClick={(e) => scrollToSection(e, link.href)}
-                                        className={`link-underline font-mono text-[11px] uppercase tracking-[0.1em] transition-colors duration-300 ${isActive ? 'text-[#E8721A]' : 'text-[#423B52] hover:text-[#16121F]'}`}
+                                        className={`link-underline font-sans text-[14px] transition-colors duration-300 ${isActive ? 'text-[#E8721A]' : 'text-[#4A4163] hover:text-[#2A2342]'}`}
                                     >
                                         {link.label}
                                     </a>
@@ -112,7 +111,7 @@ export default function Navbar() {
                         <a
                             href="#contact"
                             onClick={(e) => scrollToSection(e, '#contact')}
-                            className="font-mono text-[11px] uppercase tracking-[0.1em] text-white bg-[#E8721A] hover:bg-[#16121F] px-5 py-3 transition-colors duration-300"
+                            className="font-sans text-[13px] font-semibold text-white bg-[#E8721A] hover:bg-[#C05A0E] px-5 py-2.5 rounded transition-colors duration-300"
                         >
                             Claim Your Spot
                         </a>
@@ -121,7 +120,7 @@ export default function Navbar() {
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden relative w-10 h-10 flex items-center justify-center text-[#16121F] hover:text-[#E8721A] transition-colors"
+                        className="md:hidden relative w-10 h-10 flex items-center justify-center text-[#2A2342] hover:text-[#E8721A] transition-colors"
                         aria-label="Toggle menu"
                     >
                         <AnimatePresence mode="wait">
@@ -164,9 +163,8 @@ export default function Navbar() {
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.05 }}
-                                    className="flex items-center gap-3 px-3 py-3 font-mono text-[12px] uppercase tracking-[0.1em] text-[#423B52] hover:text-[#E8721A] hover:bg-[#16121F]/[0.03] transition-all duration-200"
+                                    className="block px-3 py-3 font-sans text-[15px] text-[#4A4163] hover:text-[#E8721A] hover:bg-[#2A2342]/[0.03] transition-all duration-200"
                                 >
-                                    <span className="block w-1.5 h-1.5 bg-[#E8721A]" />
                                     {link.label}
                                 </motion.a>
                             ))}
@@ -174,7 +172,7 @@ export default function Navbar() {
                                 <a
                                     href="#contact"
                                     onClick={(e) => scrollToSection(e, '#contact')}
-                                    className="block text-center font-mono text-[11px] uppercase tracking-[0.1em] text-white bg-[#E8721A] px-6 py-3.5"
+                                    className="block text-center font-sans text-[14px] font-semibold text-white bg-[#E8721A] px-6 py-3.5 rounded"
                                 >
                                     Claim Your Spot
                                 </a>

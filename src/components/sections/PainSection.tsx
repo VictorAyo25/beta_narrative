@@ -23,7 +23,7 @@ export default function PainSection() {
     const ease = [0.16, 1, 0.3, 1] as const;
 
     return (
-        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-white border-t border-[#16121F]/14">
+        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#F1ECF9] border-t border-[#2A2342]/10">
             <div className="max-w-[1400px] mx-auto">
                 {/* Split header */}
                 <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-12 lg:mb-16">
@@ -35,7 +35,7 @@ export default function PainSection() {
                         className="lg:col-span-7"
                     >
                         <SectionLabel>{pain.sectionLabel}</SectionLabel>
-                        <h2 className="display text-[clamp(1.9rem,4.2vw,3.3rem)] text-[#16121F] mt-6" style={{ lineHeight: 1.08 }}>
+                        <h2 className="display text-[clamp(1.6rem,3.2vw,2.6rem)] text-[#2A2342] mt-6" style={{ lineHeight: 1.12 }}>
                             {pain.title}{' '}
                             <span className="text-[#E8721A]">{pain.titleEmphasis}</span>
                         </h2>
@@ -54,7 +54,7 @@ export default function PainSection() {
                 </div>
 
                 {/* Matrix */}
-                <div className="grid sm:grid-cols-2 border-t border-l border-[#16121F]/14">
+                <div className="grid sm:grid-cols-2 border-t border-l border-[#2A2342]/10">
                     {pain.items.map((item, index) => (
                         <motion.div
                             key={index}
@@ -62,13 +62,9 @@ export default function PainSection() {
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.06 * index, ease }}
-                            className="group relative border-r border-b border-[#16121F]/14 p-7 sm:p-9 hover:bg-[#F2F0F6] transition-colors duration-300"
+                            className="border-r border-b border-[#2A2342]/10 p-8 sm:p-10"
                         >
-                            <span className="absolute left-0 top-0 h-full w-[3px] bg-[#E8721A] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]" />
-                            <div className="mb-6">
-                                <span className="block w-2 h-2 bg-[#16121F]/20 group-hover:bg-[#E8721A] transition-colors duration-300" />
-                            </div>
-                            <p className="font-sans text-[16px] sm:text-[17px] text-[#16121F] leading-relaxed whitespace-pre-line">
+                            <p className="font-sans text-[16px] sm:text-[17px] text-[#4A4163] leading-relaxed whitespace-pre-line">
                                 {item}
                             </p>
                         </motion.div>

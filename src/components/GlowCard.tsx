@@ -21,11 +21,9 @@ export default function GlowCard({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }}
-            className={`group relative p-7 bg-white border border-[#16121F]/[0.14] hover:border-[#E8721A] transition-colors duration-300 ${className}`}
+            className={`group relative p-7 bg-[#F6F2FC] border border-[#2A2342]/[0.12] hover:border-[#6B3FC0]/40 transition-colors duration-300 ${className}`}
             {...props}
         >
-            {/* corner tick that appears on hover */}
-            <span className="pointer-events-none absolute top-0 right-0 w-0 h-0 border-t-[14px] border-l-[14px] border-t-[#E8721A] border-l-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="relative z-10 w-full h-full">
                 {children}
             </div>

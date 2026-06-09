@@ -5,9 +5,9 @@ interface SectionLabelProps {
 
 export default function SectionLabel({ children, className = '' }: SectionLabelProps) {
     return (
-        <div className={`inline-flex items-center gap-3 ${className}`}>
-            <span className="block w-2 h-2 bg-[#E8721A]" />
-            <span className="kicker text-[#16121F]">{children}</span>
+        <div className={`inline-flex items-center gap-2.5 ${className}`}>
+            <span className="block w-6 h-px bg-[#E8721A]" />
+            <span className="kicker text-[#6B3FC0]">{children}</span>
         </div>
     );
 }
