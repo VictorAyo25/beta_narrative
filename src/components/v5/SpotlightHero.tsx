@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useContent } from '@/context/ContentContext';
 import { EASE, scrollToScene } from './primitives';
+import Eyebrow from './Eyebrow';
 
 /** Grand, airy opening scene — layered headline + a tall framed portrait. */
 export default function SpotlightHero() {
@@ -16,15 +17,13 @@ export default function SpotlightHero() {
     return (
         <div className="mx-auto grid w-full max-w-[1180px] items-center gap-12 lg:grid-cols-[1.12fr_0.88fr]">
             <div>
-                <motion.span
+                <motion.div
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: EASE }}
-                    className="inline-flex items-center gap-2.5 font-sans text-[12px] uppercase tracking-[0.22em] text-[#6B3FC0]"
                 >
-                    <span aria-hidden className="block h-px w-7 bg-[#6B3FC0]/50" />
-                    {hero.eyebrow}
-                </motion.span>
+                    <Eyebrow>{hero.eyebrow}</Eyebrow>
+                </motion.div>
 
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}

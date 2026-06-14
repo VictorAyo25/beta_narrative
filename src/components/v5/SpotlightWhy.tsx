@@ -2,22 +2,21 @@
 
 import { useContent } from '@/context/ContentContext';
 import AnimatedCounter from '@/components/AnimatedCounter';
+import { resolveCredentials } from '@/lib/credentials';
 import { Reveal } from './primitives';
+import Eyebrow from './Eyebrow';
 
 /** Why-us scene: layered heading + body paragraphs, then a big credentials row. */
 export default function SpotlightWhy() {
     const { content } = useContent();
     const { value } = content;
     const paragraphs = (value.body ?? '').split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
-    const creds = (value.credentials ?? []).slice(0, 3);
+    const creds = resolveCredentials(value.credentials).slice(0, 3);
 
     return (
         <div className="mx-auto w-full max-w-[920px]">
             <Reveal>
-                <span className="inline-flex items-center gap-2.5 font-sans text-[12px] uppercase tracking-[0.22em] text-[#6B3FC0]">
-                    <span aria-hidden className="block h-px w-7 bg-[#6B3FC0]/50" />
-                    {value.sectionLabel}
-                </span>
+                <Eyebrow>{value.sectionLabel}</Eyebrow>
                 <h2 className="mt-6 max-w-[20ch] font-display text-[clamp(2rem,4vw,3.2rem)] font-light leading-[1.08] tracking-[-0.02em] text-[#2A2342]">
                     {value.title} <span className="text-[#E8721A]">{value.titleEmphasis}</span>
                 </h2>

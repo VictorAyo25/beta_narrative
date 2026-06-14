@@ -2,6 +2,7 @@
 
 import { useContent } from '@/context/ContentContext';
 import { Reveal } from './primitives';
+import Eyebrow from './Eyebrow';
 
 /** A calm statement scene — centered heading, then the pains as quiet rows. */
 export default function SpotlightProblem() {
@@ -12,10 +13,7 @@ export default function SpotlightProblem() {
     return (
         <div className="mx-auto w-full max-w-[900px] text-center">
             <Reveal>
-                <span className="inline-flex items-center gap-2.5 font-sans text-[12px] uppercase tracking-[0.22em] text-[#6B3FC0]">
-                    <span aria-hidden className="block h-px w-7 bg-[#6B3FC0]/50" />
-                    {pain.sectionLabel}
-                </span>
+                <Eyebrow>{pain.sectionLabel}</Eyebrow>
                 <h2 className="mx-auto mt-6 max-w-[18ch] font-display text-[clamp(2rem,4vw,3.2rem)] font-light leading-[1.08] tracking-[-0.02em] text-[#2A2342]">
                     {pain.title} <span className="text-[#E8721A]">{pain.titleEmphasis}</span>
                 </h2>

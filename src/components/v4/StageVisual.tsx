@@ -2,6 +2,7 @@
 
 import { useContent } from '@/context/ContentContext';
 import AnimatedCounter from '@/components/AnimatedCounter';
+import { resolveCredentials } from '@/lib/credentials';
 import PortraitFrame from './PortraitFrame';
 import type { FrameSectionId } from './frame-shared';
 
@@ -17,8 +18,7 @@ interface StageVisualProps {
 /** Small mono-style index label used to orient each stage beat. */
 function StageKicker({ children }: { children: string }) {
     return (
-        <span className="inline-flex items-center gap-2.5 font-mono text-[10.5px] uppercase tracking-[0.16em] text-[#6E6588]">
-            <span aria-hidden className="block h-px w-7 bg-[#6B3FC0]/45" />
+        <span className="inline-block border-b-2 border-[#E8721A]/55 pb-1 font-mono text-[10.5px] uppercase tracking-[0.18em] text-[#6B3FC0]">
             {children}
         </span>
     );
@@ -31,7 +31,7 @@ function StageKicker({ children }: { children: string }) {
  */
 export default function StageVisual({ section, variant }: StageVisualProps) {
     const { content } = useContent();
-    const { hero, pain, value, results, offer } = content;
+    const { pain, value, results, offer } = content;
 
     const isSticky = variant === 'sticky';
     const portraitSizes = isSticky
@@ -83,7 +83,7 @@ export default function StageVisual({ section, variant }: StageVisualProps) {
         /* ------------------------------------------------------ WHY --- */
         // Credentials as big stacked numbers (AnimatedCounter) beneath a small portrait cue.
         case 'why': {
-            const creds = (value.credentials ?? []).slice(0, 3);
+            const creds = resolveCredentials(value.credentials).slice(0, 3);
             return (
                 <div className="relative w-full max-w-[460px] rounded-[2rem] border border-[#2A2342]/12 bg-[#F6F2FC] p-8 sm:p-10 shadow-[0_40px_90px_-50px_rgba(42,35,66,0.5)]">
                     <div

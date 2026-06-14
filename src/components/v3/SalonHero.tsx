@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useContent } from '@/context/ContentContext';
+import { resolveCredentials } from '@/lib/credentials';
 import Eyebrow from './Eyebrow';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -14,7 +15,7 @@ export default function SalonHero() {
     const portrait = value.profileImage || '/images/Favour.JPG';
 
     // Up to three credential chips flanking the portrait.
-    const chips = (value.credentials ?? []).slice(0, 3);
+    const chips = resolveCredentials(value.credentials).slice(0, 3);
 
     return (
         <section id="top" className="relative overflow-hidden px-5 sm:px-8 pt-36 sm:pt-40 pb-20 sm:pb-28">

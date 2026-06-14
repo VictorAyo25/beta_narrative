@@ -3,13 +3,12 @@ interface KickerProps {
     className?: string;
 }
 
-/** Calm mono kicker with a short leading rule — orients each narrative beat. */
+/** Frame eyebrow — a tracked mono label seated on a short orange underline. */
 export default function Kicker({ children, className = '' }: KickerProps) {
     return (
         <span
-            className={`inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.16em] text-[#6E6588] ${className}`}
+            className={`inline-block border-b-2 border-[#E8721A]/60 pb-1 font-mono text-[11px] uppercase tracking-[0.18em] text-[#6B3FC0] ${className}`}
         >
-            <span aria-hidden className="block h-px w-8 bg-[#6B3FC0]/50" />
             {children}
         </span>
     );

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, Check } from 'lucide-react';
 import { useContent } from '@/context/ContentContext';
 import AnimatedCounter from '@/components/AnimatedCounter';
+import { resolveCredentials } from '@/lib/credentials';
 import type { ReactNode } from 'react';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -31,12 +32,12 @@ function Reveal({
     );
 }
 
-/** Mono kicker with a short orange rule — the section eyebrow. */
+/** Section eyebrow — a vertical orange blade leading a tracked mono label. */
 function Eyebrow({ children }: { children: ReactNode }) {
     return (
-        <div className="inline-flex items-center gap-2.5">
-            <span className="block h-px w-6 bg-[#E8721A]" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#6B3FC0]">
+        <div className="inline-flex items-center gap-3">
+            <span aria-hidden className="block h-3.5 w-[3px] bg-[#E8721A]" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#6B3FC0]">
                 {children}
             </span>
         </div>
@@ -89,11 +90,11 @@ export default function AtelierSections() {
                     </div>
                 </Reveal>
 
-                {value.credentials.length > 0 && (
+                {resolveCredentials(value.credentials).length > 0 && (
                     <Reveal delay={0.2}>
                         <div className="mt-12 border-t border-[#2A2342]/12 pt-8">
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-                                {value.credentials.map((cred) => (
+                                {resolveCredentials(value.credentials).map((cred) => (
                                     <div key={`${cred.number}-${cred.label}`}>
                                         <AnimatedCounter
                                             value={cred.number}
@@ -171,10 +172,10 @@ export default function AtelierSections() {
                     </div>
                 </Reveal>
 
-                {value.credentials.length > 0 && (
+                {resolveCredentials(value.credentials).length > 0 && (
                     <Reveal delay={0.15}>
                         <div className="mt-12 grid grid-cols-1 gap-8 border-t border-[#2A2342]/12 pt-9 sm:grid-cols-3">
-                            {value.credentials.map((cred) => (
+                            {resolveCredentials(value.credentials).map((cred) => (
                                 <div key={`${cred.number}-${cred.label}`}>
                                     <AnimatedCounter
                                         value={cred.number}

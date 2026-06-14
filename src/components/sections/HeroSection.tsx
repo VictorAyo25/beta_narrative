@@ -31,7 +31,7 @@ export default function HeroSection() {
                         fill
                         className="object-cover object-[center_18%]"
                         priority
-                        sizes="100vw"
+                        sizes="(max-width: 1024px) 100vw, 58vw"
                     />
                     <div className="absolute inset-0 bg-[#6B3FC0]/10 mix-blend-multiply" />
                     <div className="absolute inset-0 bg-[#2A2342]/5" />
@@ -48,9 +48,10 @@ export default function HeroSection() {
                 transition={{ duration: 0.6, ease }}
                 className="relative z-20 border-b border-[#2A2342]/12 bg-[#E9E3F4]/70 backdrop-blur-sm pt-24 sm:pt-28"
             >
-                <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pb-5 flex items-center gap-2.5">
-                    <span className="block w-6 h-px bg-[#E8721A]" />
-                    <span className="kicker text-[#6B3FC0]">{hero.eyebrow}</span>
+                <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pb-5 flex items-center gap-4">
+                    <span className="kicker text-[#6B3FC0] whitespace-nowrap">{hero.eyebrow}</span>
+                    <span aria-hidden className="h-px flex-1 bg-[#2A2342]/14" />
+                    <span aria-hidden className="block h-1.5 w-1.5 rotate-45 bg-[#E8721A] flex-shrink-0" />
                 </div>
             </motion.div>
 

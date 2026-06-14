@@ -3,6 +3,7 @@
 import { Check } from 'lucide-react';
 import { useContent } from '@/context/ContentContext';
 import { Reveal, scrollToScene } from './primitives';
+import Eyebrow from './Eyebrow';
 
 /** Offer scene: two elevated pricing cards, Executive highlighted. */
 export default function SpotlightOffer() {
@@ -13,10 +14,7 @@ export default function SpotlightOffer() {
     return (
         <div className="mx-auto w-full max-w-[980px]">
             <Reveal className="text-center">
-                <span className="inline-flex items-center gap-2.5 font-sans text-[12px] uppercase tracking-[0.22em] text-[#6B3FC0]">
-                    <span aria-hidden className="block h-px w-7 bg-[#6B3FC0]/50" />
-                    {offer.sectionLabel}
-                </span>
+                <Eyebrow>{offer.sectionLabel}</Eyebrow>
                 <h2 className="mx-auto mt-6 max-w-[20ch] font-display text-[clamp(2rem,4vw,3.2rem)] font-light leading-[1.08] tracking-[-0.02em] text-[#2A2342]">
                     {offer.title} <span className="text-[#E8721A]">{offer.titleEmphasis}</span>
                 </h2>

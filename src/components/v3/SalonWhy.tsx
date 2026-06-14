@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
 import AnimatedCounter from '@/components/AnimatedCounter';
+import { resolveCredentials } from '@/lib/credentials';
 import Eyebrow from './Eyebrow';
 import Reveal from './Reveal';
 import LinkedInIcon from './LinkedInIcon';
@@ -12,6 +13,7 @@ export default function SalonWhy() {
     const { value } = content;
     const portrait = value.profileImage || '/images/Favour.JPG';
     const paragraphs = value.body.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
+    const creds = resolveCredentials(value.credentials);
 
     return (
         <section id="why" className="relative px-5 sm:px-8 py-24 sm:py-32 bg-[#F1ECF9]">
@@ -77,10 +79,10 @@ export default function SalonWhy() {
                             </div>
                         </Reveal>
 
-                        {value.credentials?.length > 0 && (
+                        {creds.length > 0 && (
                             <Reveal delay={0.15}>
                                 <div className="mt-9 grid grid-cols-3 gap-5 border-t border-[#2A2342]/12 pt-7">
-                                    {value.credentials.map((c) => (
+                                    {creds.map((c) => (
                                         <div key={c.label}>
                                             <AnimatedCounter
                                                 value={c.number}

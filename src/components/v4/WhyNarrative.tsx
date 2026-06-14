@@ -1,6 +1,7 @@
 'use client';
 
 import { useContent } from '@/context/ContentContext';
+import { resolveCredentials } from '@/lib/credentials';
 import Kicker from './Kicker';
 import Reveal from './Reveal';
 
@@ -14,7 +15,7 @@ export default function WhyNarrative() {
         .map((p) => p.trim())
         .filter(Boolean);
 
-    const creds = value.credentials ?? [];
+    const creds = resolveCredentials(value.credentials);
 
     return (
         <div>
