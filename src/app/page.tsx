@@ -7,44 +7,11 @@ import ResultsSection from '@/components/sections/ResultsSection';
 import OfferSection from '@/components/sections/OfferSection';
 import ContactSection from '@/components/sections/ContactSection';
 import FloatingCTA from '@/components/FloatingCTA';
+import VersionSwitcher from '@/components/VersionSwitcher';
 import { ContentProvider } from '@/context/ContentContext';
-import { getAdminDb } from '@/lib/firebase-admin';
-import { defaultSiteContent } from '@/lib/default-content';
-import { SiteContent } from '@/types';
+import { getServerSiteContent } from '@/lib/server-content';
 
 export const dynamic = 'force-dynamic';
-
-async function getServerContent(isPreview: boolean): Promise<SiteContent> {
-  try {
-    const db = getAdminDb();
-    if (!db) throw new Error('Admin DB unavailable');
-
-    const docId = isPreview ? 'site-content-draft' : 'site-content';
-    let docSnap = await db.collection('content').doc(docId).get();
-
-    // Fallback if draft document doesn't exist yet
-    if (!docSnap.exists && isPreview) {
-      docSnap = await db.collection('content').doc('site-content').get();
-    }
-
-    if (docSnap.exists) {
-      const data = docSnap.data()!;
-      return {
-        id: docSnap.id,
-        ...data,
-        updatedAt: data.updatedAt?.toDate?.() ?? new Date(),
-      } as SiteContent;
-    }
-  } catch (err) {
-    console.error('Error fetching Firestore content:', err);
-  }
-
-  return {
-    id: 'default',
-    ...defaultSiteContent,
-    updatedAt: new Date(),
-  };
-}
 
 export default async function HomePage({
   searchParams,
@@ -53,7 +20,7 @@ export default async function HomePage({
 }) {
   const resolvedParams = await searchParams;
   const isPreview = resolvedParams?.preview === 'true';
-  const content = await getServerContent(isPreview);
+  const content = await getServerSiteContent(isPreview);
 
   return (
     <ContentProvider initialContent={content}>
@@ -78,6 +45,7 @@ export default async function HomePage({
         <FloatingCTA />
       </main>
       <Footer />
+      <VersionSwitcher />
     </ContentProvider>
   );
 }

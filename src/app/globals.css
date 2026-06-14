@@ -77,6 +77,11 @@ body {
   font-family: var(--font-display), sans-serif;
 }
 
+/* Fraunces editorial serif — used by the Salon (/v3) layout */
+.font-fraunces {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
 /* Display headings — lighter weight, gentler tracking */
 .display {
   font-family: var(--font-display), sans-serif;

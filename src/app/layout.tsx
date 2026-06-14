@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk, Space_Mono, DM_Sans } from 'next/font/google';
+import { Space_Grotesk, Space_Mono, DM_Sans, Fraunces } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 
@@ -26,6 +26,14 @@ const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
   display: 'swap',
+});
+
+// Fraunces — editorial serif used by the "Salon" layout variant (/v3)
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  display: 'swap',
+  style: ['normal', 'italic'],
 });
 
 // Metadata for SEO
@@ -69,7 +77,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${grotesk.variable} ${spaceMono.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${grotesk.variable} ${spaceMono.variable} ${dmSans.variable} ${fraunces.variable}`}>
       <body className="font-sans bg-[#E9E3F4] text-[#4A4163] antialiased">
         <AuthProvider>
           <AnalyticsTracker />
