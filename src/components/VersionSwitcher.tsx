@@ -7,6 +7,8 @@ const options = [
     { href: '/', label: '1', name: 'Editorial Grid' },
     { href: '/v2', label: '2', name: 'Atelier' },
     { href: '/v3', label: '3', name: 'Salon' },
+    { href: '/v4', label: '4', name: 'Frame' },
+    { href: '/v5', label: '5', name: 'Spotlight' },
 ];
 
 export default function VersionSwitcher() {
@@ -24,16 +26,14 @@ export default function VersionSwitcher() {
                         key={o.href}
                         href={o.href}
                         title={o.name}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors duration-200 ${
+                        className={`flex items-center gap-1.5 rounded-full text-xs font-medium transition-colors duration-200 ${
                             active
-                                ? 'bg-[#E8721A] text-white'
-                                : 'text-white/65 hover:text-white hover:bg-white/10'
+                                ? 'bg-[#E8721A] text-white px-3 py-1.5'
+                                : 'text-white/65 hover:text-white hover:bg-white/10 px-2.5 py-1.5'
                         }`}
                     >
                         <span>{o.label}</span>
-                        <span className={`hidden md:inline text-[11px] ${active ? 'text-white/90' : 'text-white/40'}`}>
-                            {o.name}
-                        </span>
+                        {active && <span className="hidden sm:inline text-[11px] text-white/90">{o.name}</span>}
                     </Link>
                 );
             })}
