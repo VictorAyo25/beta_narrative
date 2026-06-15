@@ -7,10 +7,10 @@
 
 :root {
   /* Canvas — lilac */
-  --paper: #E9E3F4;           /* primary background — soft lilac */
-  --paper-alt: #F1ECF9;       /* alternating band — lighter lilac */
-  --paper-tint: #E1D7EF;      /* deeper lilac */
-  --surface: #F6F2FC;         /* cards / panels — pale lilac (not white) */
+  --paper: #E1D3F2;           /* primary background — soft lilac */
+  --paper-alt: #E9DFF8;       /* alternating band — lighter lilac */
+  --paper-tint: #D5C4EC;      /* deeper lilac */
+  --surface: #F1EBFB;         /* cards / panels — pale lilac (not white) */
 
   /* Ink — deep aubergine, softer than near-black */
   --ink: #2A2342;             /* headings / primary */
@@ -218,13 +218,13 @@ select {
 
 /* glass kept (used by mobile menu) */
 .glass {
-  background: rgba(246, 242, 252, 0.85);
+  background: rgba(241, 235, 251, 0.85);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid var(--line);
 }
 .mobile-menu {
-  background: rgba(246, 242, 252, 0.97);
+  background: rgba(241, 235, 251, 0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--line);

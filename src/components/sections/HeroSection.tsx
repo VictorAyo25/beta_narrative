@@ -21,7 +21,7 @@ export default function HeroSection() {
         ]).slice(0, 3);
 
     return (
-        <section className="relative min-h-screen flex flex-col bg-[#E9E3F4] overflow-hidden">
+        <section className="relative min-h-screen flex flex-col bg-[#E1D3F2] overflow-hidden">
             {/* Background portrait */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute right-0 top-0 h-full w-full lg:w-[52%]">
@@ -37,8 +37,8 @@ export default function HeroSection() {
                     <div className="absolute inset-0 bg-[#2A2342]/5" />
                 </div>
                 {/* Legibility scrims */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#E9E3F4] from-30% via-[#E9E3F4]/80 to-transparent" />
-                <div className="absolute inset-0 bg-[#E9E3F4]/45 lg:bg-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#E1D3F2] from-30% via-[#E1D3F2]/80 to-transparent" />
+                <div className="absolute inset-0 bg-[#E1D3F2]/45 lg:bg-transparent" />
             </div>
 
             {/* ── Top meta rule (masthead) ── */}
@@ -46,7 +46,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, ease }}
-                className="relative z-20 border-b border-[#2A2342]/12 bg-[#E9E3F4]/70 backdrop-blur-sm pt-24 sm:pt-28"
+                className="relative z-20 border-b border-[#2A2342]/12 bg-[#E1D3F2]/70 backdrop-blur-sm pt-24 sm:pt-28"
             >
                 <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pb-5 flex items-center gap-4">
                     <span className="kicker text-[#6B3FC0] whitespace-nowrap">{hero.eyebrow}</span>
@@ -77,7 +77,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.28, ease }}
-                className="relative z-20 border-t border-[#2A2342]/14 bg-[#E9E3F4]/85 backdrop-blur-sm"
+                className="relative z-20 border-t border-[#2A2342]/14 bg-[#E1D3F2]/85 backdrop-blur-sm"
             >
                 <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
                     <div className="grid lg:grid-cols-12">
@@ -107,7 +107,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.42, ease }}
-                className="relative z-20 border-t border-[#2A2342]/14 bg-[#E9E3F4]/85 backdrop-blur-sm"
+                className="relative z-20 border-t border-[#2A2342]/14 bg-[#E1D3F2]/85 backdrop-blur-sm"
             >
                 <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
                     <div className="grid grid-cols-1 sm:grid-cols-3">

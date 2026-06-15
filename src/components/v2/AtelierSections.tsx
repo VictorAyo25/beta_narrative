@@ -248,7 +248,7 @@ export default function AtelierSections() {
                         return (
                             <Reveal key={pkg.packageName} delay={0.05 * i}>
                                 <div
-                                    className={`relative rounded-xl border bg-[#F6F2FC] p-7 shadow-[0_18px_44px_-26px_rgba(42,35,66,0.4)] sm:p-9 ${
+                                    className={`relative rounded-xl border bg-[#F1EBFB] p-7 shadow-[0_18px_44px_-26px_rgba(42,35,66,0.4)] sm:p-9 ${
                                         isHighlight
                                             ? 'border-[#E8721A]/40 ring-1 ring-[#E8721A]/30'
                                             : 'border-[#2A2342]/12'
@@ -259,7 +259,7 @@ export default function AtelierSections() {
                                             className={`inline-flex items-center rounded-full px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.12em] ${
                                                 isHighlight
                                                     ? 'bg-[#E8721A]/12 text-[#C05A0E]'
-                                                    : 'bg-[#E1D7EF] text-[#6B3FC0]'
+                                                    : 'bg-[#D5C4EC] text-[#6B3FC0]'
                                             }`}
                                         >
                                             {pkg.badge}

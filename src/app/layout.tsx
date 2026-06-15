@@ -78,7 +78,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" className={`${grotesk.variable} ${spaceMono.variable} ${dmSans.variable} ${fraunces.variable}`}>
-      <body className="font-sans bg-[#E9E3F4] text-[#4A4163] antialiased">
+      <body className="font-sans bg-[#E1D3F2] text-[#4A4163] antialiased">
         <AuthProvider>
           <AnalyticsTracker />
           {children}

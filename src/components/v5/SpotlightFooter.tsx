@@ -14,7 +14,7 @@ const links = [
 export default function SpotlightFooter() {
     const year = new Date().getFullYear();
     return (
-        <footer className="border-t border-[#2A2342]/12 bg-[#E9E3F4] px-5 py-14 text-center sm:px-8">
+        <footer className="border-t border-[#2A2342]/12 bg-[#E1D3F2] px-5 py-14 text-center sm:px-8">
             <button onClick={() => scrollToScene('top')} className="font-display text-[22px] text-[#2A2342]">
                 Beta <span className="text-[#6B3FC0]">Narrative</span>
             </button>

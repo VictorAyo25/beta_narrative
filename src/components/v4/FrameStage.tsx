@@ -16,7 +16,7 @@ export default function FrameStage() {
     return (
         <aside className="sticky top-0 hidden h-screen lg:flex lg:w-[46%] xl:w-[48%]">
             {/* Calm matting around the focal element */}
-            <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-[#F1ECF9] px-10 xl:px-16">
+            <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-[#E9DFF8] px-10 xl:px-16">
                 {/* Ambient lilac wash + hairline seam toward the narrative pane */}
                 <div aria-hidden className="pointer-events-none absolute inset-0">
                     <div className="absolute -left-24 top-1/4 h-[460px] w-[460px] rounded-full bg-[#C4A8E8]/25 blur-[130px]" />

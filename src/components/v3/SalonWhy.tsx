@@ -16,7 +16,7 @@ export default function SalonWhy() {
     const creds = resolveCredentials(value.credentials);
 
     return (
-        <section id="why" className="relative px-5 sm:px-8 py-24 sm:py-32 bg-[#F1ECF9]">
+        <section id="why" className="relative px-5 sm:px-8 py-24 sm:py-32 bg-[#E9DFF8]">
             <div className="mx-auto max-w-[1100px]">
                 <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] gap-12 lg:gap-16 items-center">
                     {/* Framed portrait, linked to LinkedIn */}
@@ -29,7 +29,7 @@ export default function SalonWhy() {
                             aria-label={`${value.profileName || 'Favour Egbogun'} on LinkedIn`}
                         >
                             <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[2.25rem] bg-gradient-to-b from-[#C4A8E8]/35 to-transparent blur-2xl" />
-                            <div className="relative overflow-hidden rounded-[2rem] border border-[#2A2342]/10 bg-[#F6F2FC] shadow-[0_36px_80px_-44px_rgba(42,35,66,0.5)]">
+                            <div className="relative overflow-hidden rounded-[2rem] border border-[#2A2342]/10 bg-[#F1EBFB] shadow-[0_36px_80px_-44px_rgba(42,35,66,0.5)]">
                                 <div className="relative aspect-[4/5] w-full">
                                     <Image
                                         src={portrait}

@@ -28,7 +28,7 @@ export default function OfferNarrative() {
                     return (
                         <Reveal key={plan.packageName} delay={0.06 * i}>
                             <div
-                                className={`rounded-2xl border bg-[#F6F2FC] p-7 sm:p-8 ${
+                                className={`rounded-2xl border bg-[#F1EBFB] p-7 sm:p-8 ${
                                     highlighted
                                         ? 'border-[#E8721A]/35 shadow-[0_30px_70px_-44px_rgba(232,114,26,0.5)] ring-1 ring-[#E8721A]/15'
                                         : 'border-[#2A2342]/12 shadow-[0_24px_60px_-44px_rgba(42,35,66,0.5)]'

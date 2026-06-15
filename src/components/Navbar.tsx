@@ -74,7 +74,7 @@ export default function Navbar() {
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                ? 'py-3.5 bg-[#E9E3F4]/90 backdrop-blur-md border-b border-[#2A2342]/14'
+                ? 'py-3.5 bg-[#E1D3F2]/90 backdrop-blur-md border-b border-[#2A2342]/14'
                 : 'py-5 bg-transparent border-b border-transparent'
                 }`}
         >

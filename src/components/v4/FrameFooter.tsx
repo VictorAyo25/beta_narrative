@@ -10,7 +10,7 @@ const links = [
 export default function FrameFooter() {
     const year = new Date().getFullYear();
     return (
-        <footer className="border-t border-[#2A2342]/12 bg-[#F1ECF9] px-5 py-12 sm:px-8 lg:px-14 xl:px-20">
+        <footer className="border-t border-[#2A2342]/12 bg-[#E9DFF8] px-5 py-12 sm:px-8 lg:px-14 xl:px-20">
             <div className="mx-auto flex max-w-[1400px] flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                 <a href="#top" className="font-display text-[19px] text-[#2A2342]">
                     Beta <span className="text-[#6B3FC0]">Narrative</span>

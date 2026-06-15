@@ -568,7 +568,7 @@ export default function AdminDashboardPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#EEE8F8] flex flex-col items-center justify-center">
+            <div className="min-h-screen bg-[#E5DAF5] flex flex-col items-center justify-center">
                 <RefreshCw className="w-8 h-8 text-[#E8721A] animate-spin mb-4" />
                 <div className="text-[#3D2A6E] font-medium text-sm tracking-wide">Loading Beta Narrative Dashboard...</div>
             </div>

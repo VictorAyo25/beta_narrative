@@ -33,7 +33,7 @@ export default function ValueSection() {
     const hasCredentials = value.credentials && value.credentials.length > 0;
 
     return (
-        <section id="why" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#E9E3F4] border-t border-[#2A2342]/14">
+        <section id="why" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#E1D3F2] border-t border-[#2A2342]/14">
             <div className="max-w-[1400px] mx-auto">
                 <div className={`grid lg:grid-cols-12 gap-10 lg:gap-14 items-start ${hasCredentials ? 'mb-16 lg:mb-20' : ''}`}>
                     {/* Text */}
@@ -76,7 +76,7 @@ export default function ValueSection() {
                         transition={{ duration: 0.8, delay: 0.15, ease }}
                         className="lg:col-span-5 order-1 lg:order-2"
                     >
-                        <div className="relative border border-[#2A2342]/12 bg-[#F6F2FC]">
+                        <div className="relative border border-[#2A2342]/12 bg-[#F1EBFB]">
                             <div className="relative aspect-[4/5] overflow-hidden">
                                 <Image
                                     src={value.profileImage || "/images/Favour.JPG"}
@@ -91,7 +91,7 @@ export default function ValueSection() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={`${value.profileName || "Favour Egbogun"} on LinkedIn`}
-                                className="group flex items-stretch justify-between border-t border-[#2A2342]/12 hover:bg-[#EFE9F8] transition-colors duration-300"
+                                className="group flex items-stretch justify-between border-t border-[#2A2342]/12 hover:bg-[#E6DBF6] transition-colors duration-300"
                             >
                                 <div className="px-4 py-3.5">
                                     <p className="font-sans text-[14px] font-medium text-[#2A2342] group-hover:text-[#E8721A] transition-colors duration-300">{value.profileName || "Favour Egbogun"}</p>
@@ -115,7 +115,7 @@ export default function ValueSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: 0.08 * index, ease }}
-                                className="border-r border-b border-[#2A2342]/10 p-7 sm:p-9 bg-[#F6F2FC]"
+                                className="border-r border-b border-[#2A2342]/10 p-7 sm:p-9 bg-[#F1EBFB]"
                             >
                                 <div className="display text-4xl sm:text-5xl text-[#E8721A] leading-none mb-4">
                                     <AnimatedCounter value={cred.number} />

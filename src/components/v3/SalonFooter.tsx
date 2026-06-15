@@ -17,7 +17,7 @@ export default function SalonFooter() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="border-t border-[#2A2342]/10 bg-[#E9E3F4] px-5 sm:px-8 py-16">
+        <footer className="border-t border-[#2A2342]/10 bg-[#E1D3F2] px-5 sm:px-8 py-16">
             <div className="mx-auto flex max-w-[1100px] flex-col items-center text-center">
                 <a href="#top" className="font-fraunces text-[24px] font-semibold tracking-tight text-[#2A2342]">
                     Beta <span className="italic">Narrative</span>
@@ -44,7 +44,7 @@ export default function SalonFooter() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="LinkedIn"
-                        className="mt-7 flex h-10 w-10 items-center justify-center rounded-full border border-[#2A2342]/12 bg-[#F6F2FC] text-[#4A4163] hover:text-[#E8721A] hover:border-[#E8721A]/30 transition-colors"
+                        className="mt-7 flex h-10 w-10 items-center justify-center rounded-full border border-[#2A2342]/12 bg-[#F1EBFB] text-[#4A4163] hover:text-[#E8721A] hover:border-[#E8721A]/30 transition-colors"
                     >
                         <LinkedInIcon size={17} />
                     </a>

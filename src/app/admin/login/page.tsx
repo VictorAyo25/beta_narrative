@@ -52,7 +52,7 @@ export default function AdminLoginPage() {
     const displayError = localError || error;
 
     return (
-        <div className="min-h-screen bg-[#EEE8F8] flex items-center justify-center px-5 relative overflow-hidden">
+        <div className="min-h-screen bg-[#E5DAF5] flex items-center justify-center px-5 relative overflow-hidden">
             {/* Background accents */}
             <div className="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#C4A8E8]/30 blur-[100px] pointer-events-none" />
             <div className="absolute bottom-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#E8721A]/6 blur-[80px] pointer-events-none" />

@@ -39,7 +39,7 @@ export default function SalonNav() {
                 initial={{ opacity: 0, y: -16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className={`w-full max-w-3xl rounded-full border border-[#2A2342]/12 bg-[#F6F2FC]/80 backdrop-blur-xl transition-shadow duration-300 ${
+                className={`w-full max-w-3xl rounded-full border border-[#2A2342]/12 bg-[#F1EBFB]/80 backdrop-blur-xl transition-shadow duration-300 ${
                     scrolled
                         ? 'shadow-[0_18px_50px_-22px_rgba(42,35,66,0.45)]'
                         : 'shadow-[0_10px_34px_-22px_rgba(42,35,66,0.4)]'
@@ -92,7 +92,7 @@ export default function SalonNav() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -12 }}
                         transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                        className="md:hidden absolute top-[76px] inset-x-4 rounded-3xl border border-[#2A2342]/12 bg-[#F6F2FC]/95 backdrop-blur-xl shadow-[0_24px_60px_-24px_rgba(42,35,66,0.5)] p-3"
+                        className="md:hidden absolute top-[76px] inset-x-4 rounded-3xl border border-[#2A2342]/12 bg-[#F1EBFB]/95 backdrop-blur-xl shadow-[0_24px_60px_-24px_rgba(42,35,66,0.5)] p-3"
                     >
                         <nav className="flex flex-col">
                             {links.map((l) => (

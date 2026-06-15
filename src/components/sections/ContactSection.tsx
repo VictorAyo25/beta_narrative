@@ -31,7 +31,7 @@ const journeyOptions = [
 const STEPS = ['Profile', 'Schedule', 'Confirm'] as const;
 
 const inputClasses =
-    'w-full px-5 py-4 rounded-md bg-[#EFE9F8] border border-[#2A2342]/12 text-sm text-[#2A2342] placeholder-[#6E6587] focus:border-[#E8721A] focus:bg-white/60 focus:outline-none transition-colors duration-200';
+    'w-full px-5 py-4 rounded-md bg-[#E6DBF6] border border-[#2A2342]/12 text-sm text-[#2A2342] placeholder-[#6E6587] focus:border-[#E8721A] focus:bg-white/60 focus:outline-none transition-colors duration-200';
 
 export default function ContactSection() {
     const { content } = useContent();
@@ -109,7 +109,7 @@ export default function ContactSection() {
     const ease = [0.16, 1, 0.3, 1] as const;
 
     return (
-        <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#F1ECF9] border-t border-[#2A2342]/10 overflow-hidden">
+        <section id="contact" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#E9DFF8] border-t border-[#2A2342]/10 overflow-hidden">
             <div className="max-w-2xl mx-auto relative">
                 {/* Header */}
                 <motion.div
@@ -137,7 +137,7 @@ export default function ContactSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.12, ease }}
-                    className="relative rounded-xl border border-[#2A2342]/10 bg-[#F6F2FC] p-7 sm:p-10"
+                    className="relative rounded-xl border border-[#2A2342]/10 bg-[#F1EBFB] p-7 sm:p-10"
                 >
                     {/* Step Progress Tracker */}
                     {calendlyUrl && (
@@ -155,7 +155,7 @@ export default function ContactSection() {
                                                         ? 'bg-[#6B3FC0] text-white border-[#6B3FC0]'
                                                         : isActive
                                                         ? 'bg-[#E8721A] text-white border-[#E8721A]'
-                                                        : 'bg-[#EFE9F8] text-[#6E6587] border-[#2A2342]/15'
+                                                        : 'bg-[#E6DBF6] text-[#6E6587] border-[#2A2342]/15'
                                                 }`}
                                             >
                                                 {isDone ? <Check size={14} className="stroke-[3px]" /> : <span>{stepNum}</span>}
@@ -204,7 +204,7 @@ export default function ContactSection() {
                                         <button
                                             type="button"
                                             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                                            className={`w-full px-5 py-4 rounded-md bg-[#EFE9F8] border ${isDropdownOpen ? 'border-[#E8721A] bg-white/60' : 'border-[#2A2342]/12'} text-sm flex items-center justify-between focus:outline-none transition-colors duration-200`}
+                                            className={`w-full px-5 py-4 rounded-md bg-[#E6DBF6] border ${isDropdownOpen ? 'border-[#E8721A] bg-white/60' : 'border-[#2A2342]/12'} text-sm flex items-center justify-between focus:outline-none transition-colors duration-200`}
                                         >
                                             <span className={selectedJourney ? 'text-[#2A2342]' : 'text-[#6E6587]'}>
                                                 {selectedJourney ? journeyOptions.find(o => o.value === selectedJourney)?.label : 'Where are you in your leadership journey?'}
@@ -214,7 +214,7 @@ export default function ContactSection() {
                                         {isDropdownOpen && (
                                             <>
                                                 <div className="fixed inset-0 z-40" onClick={() => setIsDropdownOpen(false)} />
-                                                <div className="absolute z-50 w-full mt-1 rounded-md bg-[#F6F2FC] border border-[#2A2342]/12 shadow-[0_20px_50px_-20px_rgba(42,35,66,0.25)] overflow-hidden">
+                                                <div className="absolute z-50 w-full mt-1 rounded-md bg-[#F1EBFB] border border-[#2A2342]/12 shadow-[0_20px_50px_-20px_rgba(42,35,66,0.25)] overflow-hidden">
                                                     <div className="max-h-60 overflow-y-auto">
                                                         {journeyOptions.filter(o => o.value !== '').map((option) => (
                                                             <button
@@ -224,7 +224,7 @@ export default function ContactSection() {
                                                                     setValue('journey', option.value, { shouldValidate: true });
                                                                     setIsDropdownOpen(false);
                                                                 }}
-                                                                className={`w-full text-left px-5 py-3.5 text-sm hover:bg-[#E9E3F4] transition-colors duration-200 border-b border-[#2A2342]/[0.08] last:border-0 ${selectedJourney === option.value ? 'bg-[#E8721A]/10 text-[#E8721A] font-medium' : 'text-[#4A4163]'}`}
+                                                                className={`w-full text-left px-5 py-3.5 text-sm hover:bg-[#E1D3F2] transition-colors duration-200 border-b border-[#2A2342]/[0.08] last:border-0 ${selectedJourney === option.value ? 'bg-[#E8721A]/10 text-[#E8721A] font-medium' : 'text-[#4A4163]'}`}
                                                             >
                                                                 {option.label}
                                                             </button>

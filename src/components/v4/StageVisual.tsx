@@ -64,7 +64,7 @@ export default function StageVisual({ section, variant }: StageVisualProps) {
         // An art-directed pull-statement, not a list — "the cost of invisibility".
         case 'problem':
             return (
-                <div className="relative w-full max-w-[460px] rounded-[2rem] border border-[#2A2342]/12 bg-[#F6F2FC] p-9 sm:p-11 shadow-[0_40px_90px_-50px_rgba(42,35,66,0.5)]">
+                <div className="relative w-full max-w-[460px] rounded-[2rem] border border-[#2A2342]/12 bg-[#F1EBFB] p-9 sm:p-11 shadow-[0_40px_90px_-50px_rgba(42,35,66,0.5)]">
                     <div
                         aria-hidden
                         className="pointer-events-none absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-br from-[#C4A8E8]/30 to-transparent blur-2xl"
@@ -85,7 +85,7 @@ export default function StageVisual({ section, variant }: StageVisualProps) {
         case 'why': {
             const creds = resolveCredentials(value.credentials).slice(0, 3);
             return (
-                <div className="relative w-full max-w-[460px] rounded-[2rem] border border-[#2A2342]/12 bg-[#F6F2FC] p-8 sm:p-10 shadow-[0_40px_90px_-50px_rgba(42,35,66,0.5)]">
+                <div className="relative w-full max-w-[460px] rounded-[2rem] border border-[#2A2342]/12 bg-[#F1EBFB] p-8 sm:p-10 shadow-[0_40px_90px_-50px_rgba(42,35,66,0.5)]">
                     <div
                         aria-hidden
                         className="pointer-events-none absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-br from-[#C4A8E8]/30 to-[#E8721A]/10 blur-2xl"
@@ -117,7 +117,7 @@ export default function StageVisual({ section, variant }: StageVisualProps) {
             const [featured, ...rest] = list;
             const supporting = rest.slice(0, 2);
             return (
-                <div className="relative w-full max-w-[460px] rounded-[2rem] border border-[#2A2342]/12 bg-[#F6F2FC] p-9 sm:p-11 shadow-[0_40px_90px_-50px_rgba(42,35,66,0.5)]">
+                <div className="relative w-full max-w-[460px] rounded-[2rem] border border-[#2A2342]/12 bg-[#F1EBFB] p-9 sm:p-11 shadow-[0_40px_90px_-50px_rgba(42,35,66,0.5)]">
                     <div
                         aria-hidden
                         className="pointer-events-none absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-br from-[#E8721A]/12 to-[#C4A8E8]/25 blur-2xl"
@@ -159,7 +159,7 @@ export default function StageVisual({ section, variant }: StageVisualProps) {
         case 'offer': {
             const offers = (offer.offers ?? []).slice(0, 2);
             return (
-                <div className="relative w-full max-w-[460px] rounded-[2rem] border border-[#2A2342]/12 bg-[#F6F2FC] p-8 sm:p-10 shadow-[0_40px_90px_-50px_rgba(42,35,66,0.5)]">
+                <div className="relative w-full max-w-[460px] rounded-[2rem] border border-[#2A2342]/12 bg-[#F1EBFB] p-8 sm:p-10 shadow-[0_40px_90px_-50px_rgba(42,35,66,0.5)]">
                     <div
                         aria-hidden
                         className="pointer-events-none absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-br from-[#C4A8E8]/30 to-[#E8721A]/12 blur-2xl"
@@ -178,7 +178,7 @@ export default function StageVisual({ section, variant }: StageVisualProps) {
                                     className={`flex items-center justify-between gap-4 rounded-xl border px-4 py-3.5 ${
                                         highlighted
                                             ? 'border-[#E8721A]/35 bg-[#E8721A]/[0.06]'
-                                            : 'border-[#2A2342]/10 bg-[#EFE9F8]/60'
+                                            : 'border-[#2A2342]/10 bg-[#E6DBF6]/60'
                                     }`}
                                 >
                                     <div>

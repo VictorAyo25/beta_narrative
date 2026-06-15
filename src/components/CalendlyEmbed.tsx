@@ -46,7 +46,7 @@ export default function CalendlyEmbed({
         <div className={`relative w-full overflow-hidden ${className}`} style={{ height }}>
             {/* Loading Skeleton */}
             {isLoading && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F6F2FC] border border-[#2A2342]/12 animate-pulse">
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F1EBFB] border border-[#2A2342]/12 animate-pulse">
                     <div className="w-12 h-12 rounded-full border-2 border-[#E8721A]/20 border-t-[#E8721A] animate-spin mb-4" />
                     <p className="font-sans text-[13px] text-[#6E6587]">
                         Loading calendar…

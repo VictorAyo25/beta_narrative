@@ -36,7 +36,7 @@ export default function PortraitFrame({
                 className="pointer-events-none absolute -inset-5 -z-10 rounded-[2.75rem] bg-gradient-to-b from-[#C4A8E8]/45 via-[#8B5CF6]/15 to-[#E8721A]/12 blur-2xl"
             />
 
-            <figure className="relative overflow-hidden rounded-[2rem] border border-[#2A2342]/12 bg-[#F6F2FC] shadow-[0_44px_90px_-46px_rgba(42,35,66,0.6)]">
+            <figure className="relative overflow-hidden rounded-[2rem] border border-[#2A2342]/12 bg-[#F1EBFB] shadow-[0_44px_90px_-46px_rgba(42,35,66,0.6)]">
                 <div className="relative aspect-[4/5] w-full">
                     <Image
                         src={src}

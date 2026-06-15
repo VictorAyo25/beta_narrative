@@ -18,7 +18,7 @@ export default function OfferSection() {
     const ease = [0.16, 1, 0.3, 1] as const;
 
     return (
-        <section id="offer" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#E9E3F4] border-t border-[#2A2342]/10">
+        <section id="offer" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#E1D3F2] border-t border-[#2A2342]/10">
             <div className="max-w-[1400px] mx-auto">
                 {/* Header */}
                 <motion.div
@@ -46,7 +46,7 @@ export default function OfferSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-100px' }}
                                 transition={{ duration: 0.6, delay: 0.1 * index, ease }}
-                                className="relative flex flex-col justify-between border-r border-b border-[#2A2342]/10 bg-[#F6F2FC]"
+                                className="relative flex flex-col justify-between border-r border-b border-[#2A2342]/10 bg-[#F1EBFB]"
                             >
                                 {isExecutive && <div className="h-0.5 bg-[#E8721A]" />}
                                 {/* Top bar */}
@@ -125,7 +125,7 @@ export default function OfferSection() {
                 </div>
 
                 {/* Add-ons */}
-                <div className="border-l border-r border-b border-[#2A2342]/10 bg-[#F6F2FC] p-7 sm:p-9 lg:px-10">
+                <div className="border-l border-r border-b border-[#2A2342]/10 bg-[#F1EBFB] p-7 sm:p-9 lg:px-10">
                     <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12">
                         <div className="flex-shrink-0">
                             <p className="font-sans text-[12px] font-semibold text-[#6E6587] mb-2">Enhancements</p>

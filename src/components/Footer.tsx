@@ -26,7 +26,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="relative bg-[#E9E3F4] border-t border-[#2A2342]/14">
+        <footer className="relative bg-[#E1D3F2] border-t border-[#2A2342]/14">
             <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
                 {/* Top: nav grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 border-b border-[#2A2342]/14">
@@ -35,7 +35,7 @@ export default function Footer() {
                             key={link.href}
                             href={link.href}
                             onClick={(e) => scrollToSection(e, link.href)}
-                            className="group flex items-center py-6 px-1 border-r border-[#2A2342]/12 last:border-r-0 hover:bg-[#F6F2FC] transition-colors duration-300"
+                            className="group flex items-center py-6 px-1 border-r border-[#2A2342]/12 last:border-r-0 hover:bg-[#F1EBFB] transition-colors duration-300"
                         >
                             <span className="font-sans text-[14px] text-[#4A4163] group-hover:text-[#E8721A] transition-colors">{link.label}</span>
                         </a>

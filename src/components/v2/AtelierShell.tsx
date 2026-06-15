@@ -13,7 +13,7 @@ import AtelierFooter from './AtelierFooter';
  */
 export default function AtelierShell() {
     return (
-        <div className="min-h-screen bg-[#E9E3F4]">
+        <div className="min-h-screen bg-[#E1D3F2]">
             <AtelierSidebar />
 
             <div className="lg:ml-[340px]">

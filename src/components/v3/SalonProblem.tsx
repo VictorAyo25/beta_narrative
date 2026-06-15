@@ -37,8 +37,8 @@ export default function SalonProblem() {
                         const Icon = ICONS[i % ICONS.length];
                         return (
                             <Reveal key={i} delay={0.04 * i}>
-                                <div className="flex h-full items-start gap-4 rounded-2xl border border-[#2A2342]/10 bg-[#F6F2FC] p-6 shadow-[0_18px_46px_-30px_rgba(42,35,66,0.5)] transition-shadow duration-300 hover:shadow-[0_24px_56px_-28px_rgba(42,35,66,0.45)]">
-                                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#EFE9F8] text-[#6B3FC0]">
+                                <div className="flex h-full items-start gap-4 rounded-2xl border border-[#2A2342]/10 bg-[#F1EBFB] p-6 shadow-[0_18px_46px_-30px_rgba(42,35,66,0.5)] transition-shadow duration-300 hover:shadow-[0_24px_56px_-28px_rgba(42,35,66,0.45)]">
+                                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#E6DBF6] text-[#6B3FC0]">
                                         <Icon size={19} strokeWidth={1.75} />
                                     </span>
                                     <p className="font-sans text-[15px] leading-relaxed text-[#4A4163]">

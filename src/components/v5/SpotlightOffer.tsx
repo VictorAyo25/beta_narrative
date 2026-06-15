@@ -27,7 +27,7 @@ export default function SpotlightOffer() {
                     return (
                         <Reveal key={plan.packageName} delay={0.08 * i}>
                             <div
-                                className={`relative flex h-full flex-col rounded-[1.75rem] border bg-[#F6F2FC] p-8 sm:p-9 ${
+                                className={`relative flex h-full flex-col rounded-[1.75rem] border bg-[#F1EBFB] p-8 sm:p-9 ${
                                     highlighted
                                         ? 'border-[#E8721A]/40 shadow-[0_40px_90px_-50px_rgba(232,114,26,0.55)] ring-1 ring-[#E8721A]/20'
                                         : 'border-[#2A2342]/12 shadow-[0_30px_80px_-54px_rgba(42,35,66,0.5)]'

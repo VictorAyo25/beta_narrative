@@ -26,7 +26,7 @@ export default async function V4Page({
     return (
         <ContentProvider initialContent={content}>
             {/* Minimal top bar — kept quiet so the split experience breathes */}
-            <header className="fixed inset-x-0 top-0 z-40 flex items-center justify-between border-b border-[#2A2342]/[0.08] bg-[#E9E3F4]/80 px-5 py-4 backdrop-blur-md sm:px-8 lg:px-14 xl:px-20">
+            <header className="fixed inset-x-0 top-0 z-40 flex items-center justify-between border-b border-[#2A2342]/[0.08] bg-[#E1D3F2]/80 px-5 py-4 backdrop-blur-md sm:px-8 lg:px-14 xl:px-20">
                 <a href="#top" className="font-display text-[18px] text-[#2A2342]">
                     Beta <span className="text-[#6B3FC0]">Narrative</span>
                 </a>

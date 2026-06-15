@@ -32,8 +32,8 @@ export default function SpotlightResults() {
                             i % 3 === 1
                                 ? 'border-transparent bg-[#6B3FC0] text-white'
                                 : i % 3 === 2
-                                  ? 'border-[#E8721A]/30 bg-[#F6F2FC]'
-                                  : 'border-[#2A2342]/12 bg-[#F6F2FC]'
+                                  ? 'border-[#E8721A]/30 bg-[#F1EBFB]'
+                                  : 'border-[#2A2342]/12 bg-[#F1EBFB]'
                         }`}
                     >
                         <span

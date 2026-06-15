@@ -70,7 +70,7 @@ export default function SalonHero() {
                     </a>
                     <a
                         href="#results"
-                        className="inline-flex items-center justify-center rounded-full border border-[#2A2342]/15 bg-[#F6F2FC]/60 px-7 py-3.5 font-sans text-[14.5px] font-medium text-[#2A2342] hover:border-[#2A2342]/30 hover:bg-[#F6F2FC] transition-colors duration-200"
+                        className="inline-flex items-center justify-center rounded-full border border-[#2A2342]/15 bg-[#F1EBFB]/60 px-7 py-3.5 font-sans text-[14.5px] font-medium text-[#2A2342] hover:border-[#2A2342]/30 hover:bg-[#F1EBFB] transition-colors duration-200"
                     >
                         See the results
                     </a>
@@ -86,7 +86,7 @@ export default function SalonHero() {
                     {/* glow behind the frame */}
                     <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2.75rem] bg-gradient-to-b from-[#C4A8E8]/40 to-[#F5943A]/15 blur-2xl" />
 
-                    <div className="relative overflow-hidden rounded-[2.5rem] border border-[#2A2342]/10 bg-[#F6F2FC] shadow-[0_40px_90px_-44px_rgba(42,35,66,0.55)]">
+                    <div className="relative overflow-hidden rounded-[2.5rem] border border-[#2A2342]/10 bg-[#F1EBFB] shadow-[0_40px_90px_-44px_rgba(42,35,66,0.55)]">
                         <div className="relative aspect-[4/5] w-full">
                             <Image
                                 src={portrait}
@@ -116,7 +116,7 @@ export default function SalonHero() {
                             {chips.map((c, i) => (
                                 <div
                                     key={c.label}
-                                    className={`rounded-2xl border border-[#2A2342]/10 bg-[#F6F2FC]/85 backdrop-blur-sm px-4 py-3.5 text-center shadow-[0_16px_40px_-26px_rgba(42,35,66,0.5)] lg:absolute ${
+                                    className={`rounded-2xl border border-[#2A2342]/10 bg-[#F1EBFB]/85 backdrop-blur-sm px-4 py-3.5 text-center shadow-[0_16px_40px_-26px_rgba(42,35,66,0.5)] lg:absolute ${
                                         i === 0
                                             ? 'lg:-left-24 lg:top-10 lg:w-44 lg:text-left'
                                             : i === 1

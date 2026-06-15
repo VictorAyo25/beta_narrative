@@ -22,7 +22,7 @@ const TILE_STYLES = [
     // 1 — tall: surface
     {
         span: 'sm:row-span-2',
-        wrap: 'bg-[#F6F2FC] border-[#2A2342]/10',
+        wrap: 'bg-[#F1EBFB] border-[#2A2342]/10',
         stat: 'text-[#2A2342] text-[2rem] sm:text-[2.4rem]',
         desc: 'text-[#4A4163]',
         feature: false,
@@ -38,7 +38,7 @@ const TILE_STYLES = [
     // 3 — surface
     {
         span: 'sm:col-span-1',
-        wrap: 'bg-[#F6F2FC] border-[#2A2342]/10',
+        wrap: 'bg-[#F1EBFB] border-[#2A2342]/10',
         stat: 'text-[#2A2342] text-[1.9rem] sm:text-[2.2rem]',
         desc: 'text-[#4A4163]',
         feature: false,
@@ -48,7 +48,7 @@ const TILE_STYLES = [
 // Fallback styling for any tiles beyond the curated four.
 const EXTRA_STYLE = {
     span: 'sm:col-span-1',
-    wrap: 'bg-[#F6F2FC] border-[#2A2342]/10',
+    wrap: 'bg-[#F1EBFB] border-[#2A2342]/10',
     stat: 'text-[#2A2342] text-[1.9rem] sm:text-[2.2rem]',
     desc: 'text-[#4A4163]',
     feature: false,

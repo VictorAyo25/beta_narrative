@@ -82,7 +82,7 @@ export default function AtelierSidebar() {
     return (
         <>
             {/* ===== Desktop fixed rail (lg+) ===== */}
-            <aside className="hidden lg:flex fixed inset-y-0 left-0 z-40 w-[340px] flex-col justify-between border-r border-[#2A2342]/12 bg-[#E1D7EF] px-10 py-10">
+            <aside className="hidden lg:flex fixed inset-y-0 left-0 z-40 w-[340px] flex-col justify-between border-r border-[#2A2342]/12 bg-[#D5C4EC] px-10 py-10">
                 {/* Top — wordmark + positioning */}
                 <div>
                     {wordmark}
@@ -99,7 +99,7 @@ export default function AtelierSidebar() {
                     href={linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-3.5 rounded-xl border border-[#2A2342]/12 bg-[#F6F2FC] p-3 transition-colors duration-200 hover:border-[#2A2342]/20"
+                    className="group flex items-center gap-3.5 rounded-xl border border-[#2A2342]/12 bg-[#F1EBFB] p-3 transition-colors duration-200 hover:border-[#2A2342]/20"
                 >
                     <span className="relative block h-14 w-14 shrink-0 overflow-hidden rounded-lg">
                         <Image
@@ -154,14 +154,14 @@ export default function AtelierSidebar() {
             </aside>
 
             {/* ===== Mobile top bar (<lg) ===== */}
-            <div className="lg:hidden sticky top-0 z-50 flex items-center justify-between border-b border-[#2A2342]/12 bg-[#E1D7EF]/95 px-5 py-4 backdrop-blur-md">
+            <div className="lg:hidden sticky top-0 z-50 flex items-center justify-between border-b border-[#2A2342]/12 bg-[#D5C4EC]/95 px-5 py-4 backdrop-blur-md">
                 {wordmark}
                 <button
                     type="button"
                     onClick={() => setMenuOpen((v) => !v)}
                     aria-label={menuOpen ? 'Close menu' : 'Open menu'}
                     aria-expanded={menuOpen}
-                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#2A2342]/12 bg-[#F6F2FC] text-[#2A2342]"
+                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#2A2342]/12 bg-[#F1EBFB] text-[#2A2342]"
                 >
                     {menuOpen ? <X size={18} /> : <Menu size={18} />}
                 </button>
@@ -176,7 +176,7 @@ export default function AtelierSidebar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -12 }}
                         transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                        className="lg:hidden sticky top-[65px] z-40 border-b border-[#2A2342]/12 bg-[#F1ECF9] px-5 py-6"
+                        className="lg:hidden sticky top-[65px] z-40 border-b border-[#2A2342]/12 bg-[#E9DFF8] px-5 py-6"
                     >
                         <div className="-ml-4">{navList}</div>
                         <a

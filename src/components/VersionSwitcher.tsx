@@ -26,14 +26,14 @@ export default function VersionSwitcher() {
                         key={o.href}
                         href={o.href}
                         title={o.name}
-                        className={`flex items-center gap-1.5 rounded-full text-xs font-medium transition-colors duration-200 ${
+                        aria-label={`Layout ${o.label}`}
+                        className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-medium transition-colors duration-200 ${
                             active
-                                ? 'bg-[#E8721A] text-white px-3 py-1.5'
-                                : 'text-white/65 hover:text-white hover:bg-white/10 px-2.5 py-1.5'
+                                ? 'bg-[#E8721A] text-white'
+                                : 'text-white/65 hover:text-white hover:bg-white/10'
                         }`}
                     >
-                        <span>{o.label}</span>
-                        {active && <span className="hidden sm:inline text-[11px] text-white/90">{o.name}</span>}
+                        {o.label}
                     </Link>
                 );
             })}

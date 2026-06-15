@@ -27,8 +27,8 @@ function OfferCard({ offer, highlighted, index }: { offer: OfferContent; highlig
             transition={{ duration: 0.65, delay: 0.08 * index, ease: EASE }}
             className={`relative flex flex-col rounded-[2rem] border p-8 sm:p-9 ${
                 highlighted
-                    ? 'border-[#E8721A]/40 bg-[#F6F2FC] ring-1 ring-[#E8721A]/30 shadow-[0_44px_100px_-46px_rgba(232,114,26,0.5)]'
-                    : 'border-[#2A2342]/10 bg-[#F6F2FC] shadow-[0_30px_70px_-48px_rgba(42,35,66,0.5)]'
+                    ? 'border-[#E8721A]/40 bg-[#F1EBFB] ring-1 ring-[#E8721A]/30 shadow-[0_44px_100px_-46px_rgba(232,114,26,0.5)]'
+                    : 'border-[#2A2342]/10 bg-[#F1EBFB] shadow-[0_30px_70px_-48px_rgba(42,35,66,0.5)]'
             }`}
         >
             {highlighted && (
@@ -62,7 +62,7 @@ function OfferCard({ offer, highlighted, index }: { offer: OfferContent; highlig
                     <li key={i} className="flex items-start gap-3">
                         <span
                             className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
-                                highlighted ? 'bg-[#E8721A]/15 text-[#C05A0E]' : 'bg-[#EFE9F8] text-[#6B3FC0]'
+                                highlighted ? 'bg-[#E8721A]/15 text-[#C05A0E]' : 'bg-[#E6DBF6] text-[#6B3FC0]'
                             }`}
                         >
                             <Check size={12} strokeWidth={2.5} />
@@ -77,7 +77,7 @@ function OfferCard({ offer, highlighted, index }: { offer: OfferContent; highlig
                 className={`mt-8 inline-flex w-full items-center justify-center rounded-full px-6 py-3.5 font-sans text-[14px] font-medium transition-colors duration-200 ${
                     highlighted
                         ? 'bg-[#E8721A] text-white shadow-[0_14px_32px_-12px_rgba(232,114,26,0.8)] hover:bg-[#C05A0E]'
-                        : 'border border-[#2A2342]/15 bg-transparent text-[#2A2342] hover:border-[#2A2342]/35 hover:bg-[#EFE9F8]'
+                        : 'border border-[#2A2342]/15 bg-transparent text-[#2A2342] hover:border-[#2A2342]/35 hover:bg-[#E6DBF6]'
                 }`}
             >
                 Apply for this
@@ -91,7 +91,7 @@ export default function SalonOffer() {
     const { offer } = content;
 
     return (
-        <section id="offer" className="relative px-5 sm:px-8 py-24 sm:py-32 bg-[#F1ECF9]">
+        <section id="offer" className="relative px-5 sm:px-8 py-24 sm:py-32 bg-[#E9DFF8]">
             <div className="mx-auto max-w-[1100px]">
                 <div className="mx-auto max-w-[640px] text-center">
                     <Reveal className="flex justify-center">

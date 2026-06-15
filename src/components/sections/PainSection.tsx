@@ -23,7 +23,7 @@ export default function PainSection() {
     const ease = [0.16, 1, 0.3, 1] as const;
 
     return (
-        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#F1ECF9] border-t border-[#2A2342]/10">
+        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#E9DFF8] border-t border-[#2A2342]/10">
             <div className="max-w-[1400px] mx-auto">
                 {/* Split header */}
                 <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-12 lg:mb-16">
