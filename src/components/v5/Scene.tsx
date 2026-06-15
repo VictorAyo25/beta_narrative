@@ -15,7 +15,7 @@ export default function Scene({ id, children, tint = false, flush = false, class
     return (
         <section
             id={id}
-            className={`relative flex min-h-screen snap-start flex-col justify-center py-28 ${
+            className={`relative flex min-h-svh snap-start flex-col justify-center py-24 sm:py-28 ${
                 flush ? '' : 'px-5 sm:px-8 lg:px-12'
             } ${tint ? 'bg-[#E9DFF8]' : 'bg-[#E1D3F2]'} ${className}`}
         >

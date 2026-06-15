@@ -82,6 +82,64 @@ body {
   font-family: var(--font-fraunces), Georgia, serif;
 }
 
+/* =========================================================================
+   Per-variant type
+   Each layout variant gives itself a distinct typographic voice by remapping
+   the core type variables (--font-display / --font-body). Because every
+   component styles type through these variables (.display, .font-display,
+   .font-sans, .kicker), placing one .theme-* class on a variant's root re-skins
+   the entire variant — no per-component edits needed.
+   ========================================================================= */
+
+/* v1 · Editorial Grid — Swiss grotesque display + Inter body */
+.theme-grid {
+  --font-display: var(--font-grotesk, 'Space Grotesk', sans-serif);
+  --font-body: var(--font-inter, 'Inter', sans-serif);
+}
+
+/* v2 · Atelier — Cormorant Garamond serif display + DM Sans body */
+.theme-atelier {
+  --font-display: var(--font-cormorant, Georgia, serif);
+  --font-body: var(--font-dm-sans, 'DM Sans', sans-serif);
+}
+/* Cormorant reads light and small at headline sizes — give it more body and
+   tighter leading so the headings still command the page. */
+.theme-atelier .display,
+.theme-atelier .font-display {
+  font-weight: 500;
+}
+.theme-atelier .display {
+  letter-spacing: -0.005em;
+  line-height: 1.04;
+}
+
+/* v3 · Salon — Fraunces serif display + DM Sans body */
+.theme-salon {
+  --font-display: var(--font-fraunces, Georgia, serif);
+  --font-body: var(--font-dm-sans, 'DM Sans', sans-serif);
+}
+
+/* v4 · Frame — Syne display + Manrope body */
+.theme-frame {
+  --font-display: var(--font-syne, sans-serif);
+  --font-body: var(--font-manrope, 'Manrope', sans-serif);
+}
+/* Syne is wide and quiet at 400 — a hair more weight + tighter tracking gives
+   the gallery headings their edge. */
+.theme-frame .display {
+  font-weight: 600;
+  letter-spacing: -0.022em;
+}
+
+/* v5 · Spotlight — Bricolage Grotesque display + Plus Jakarta Sans body */
+.theme-spotlight {
+  --font-display: var(--font-bricolage, sans-serif);
+  --font-body: var(--font-jakarta, 'Plus Jakarta Sans', sans-serif);
+}
+.theme-spotlight .display {
+  letter-spacing: -0.02em;
+}
+
 /* Display headings — lighter weight, gentler tracking */
 .display {
   font-family: var(--font-display), sans-serif;

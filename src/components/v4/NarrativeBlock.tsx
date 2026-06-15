@@ -26,8 +26,8 @@ export default function NarrativeBlock({ section, children, isHero = false }: Na
             id={SECTION_ANCHOR[section]}
             className={`flex flex-col justify-center scroll-mt-24 px-5 sm:px-8 lg:px-14 xl:px-20 ${
                 isHero
-                    ? 'min-h-[88vh] lg:min-h-screen pt-28 pb-16 lg:pt-0 lg:pb-0'
-                    : 'min-h-[78vh] lg:min-h-[88vh] py-16 lg:py-24'
+                    ? 'min-h-[88svh] lg:min-h-screen pt-28 pb-16 lg:pt-0 lg:pb-0'
+                    : 'min-h-[78svh] lg:min-h-[88vh] py-16 lg:py-24'
             }`}
         >
             <div className="mx-auto w-full max-w-[560px] lg:mx-0">

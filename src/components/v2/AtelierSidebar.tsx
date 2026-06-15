@@ -154,7 +154,7 @@ export default function AtelierSidebar() {
             </aside>
 
             {/* ===== Mobile top bar (<lg) ===== */}
-            <div className="lg:hidden sticky top-0 z-50 flex items-center justify-between border-b border-[#2A2342]/12 bg-[#D5C4EC]/95 px-5 py-4 backdrop-blur-md">
+            <div className="lg:hidden sticky top-0 z-50 flex items-center justify-between border-b border-[#2A2342]/12 bg-[#D5C4EC]/95 px-5 pb-4 pt-[calc(1rem_+_env(safe-area-inset-top))] backdrop-blur-md">
                 {wordmark}
                 <button
                     type="button"
@@ -176,7 +176,7 @@ export default function AtelierSidebar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -12 }}
                         transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                        className="lg:hidden sticky top-[65px] z-40 border-b border-[#2A2342]/12 bg-[#E9DFF8] px-5 py-6"
+                        className="lg:hidden sticky top-[calc(65px_+_env(safe-area-inset-top))] z-40 border-b border-[#2A2342]/12 bg-[#E9DFF8] px-5 py-6"
                     >
                         <div className="-ml-4">{navList}</div>
                         <a

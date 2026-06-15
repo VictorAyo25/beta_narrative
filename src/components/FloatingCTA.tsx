@@ -66,7 +66,7 @@ export default function FloatingCTA() {
                 scale: isVisible ? 1 : 0.9,
             }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className={`fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 ${isVisible ? 'pointer-events-auto' : 'pointer-events-none'}`}
+            className={`fixed bottom-[calc(5rem_+_env(safe-area-inset-bottom))] right-5 sm:bottom-8 sm:right-8 z-50 ${isVisible ? 'pointer-events-auto' : 'pointer-events-none'}`}
         >
             <a
                 href="#contact"

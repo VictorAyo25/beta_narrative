@@ -15,7 +15,7 @@ export default function VersionSwitcher() {
     const pathname = usePathname();
 
     return (
-        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-[70] flex items-center gap-1 bg-[#2A2342]/92 backdrop-blur-md px-2 py-1.5 rounded-full shadow-[0_16px_40px_-12px_rgba(42,35,66,0.6)] border border-white/10 select-none">
+        <div className="fixed bottom-[calc(1.25rem_+_env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 z-[70] flex items-center gap-1 bg-[#2A2342]/92 backdrop-blur-md px-2 py-1.5 rounded-full shadow-[0_16px_40px_-12px_rgba(42,35,66,0.6)] border border-white/10 select-none">
             <span className="hidden sm:block text-[10px] uppercase tracking-[0.18em] text-white/45 pl-2.5 pr-1">
                 Layout
             </span>

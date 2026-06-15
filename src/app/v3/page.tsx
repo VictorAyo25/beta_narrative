@@ -23,7 +23,7 @@ export default async function V3Page({
 
     return (
         <ContentProvider initialContent={content}>
-            <div className="min-h-screen bg-[#E1D3F2]">
+            <div className="theme-salon min-h-screen bg-[#E1D3F2]">
                 <SalonNav />
                 <main>
                     <SalonHero />

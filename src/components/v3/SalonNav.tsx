@@ -34,7 +34,7 @@ export default function SalonNav() {
     }, [open]);
 
     return (
-        <header className="fixed top-0 inset-x-0 z-[60] flex justify-center px-4 pt-4 sm:pt-5">
+        <header className="fixed top-0 inset-x-0 z-[60] flex justify-center px-4 pt-[calc(1rem_+_env(safe-area-inset-top))] sm:pt-[calc(1.25rem_+_env(safe-area-inset-top))]">
             <motion.nav
                 initial={{ opacity: 0, y: -16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ export default function SalonNav() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -12 }}
                         transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                        className="md:hidden absolute top-[76px] inset-x-4 rounded-3xl border border-[#2A2342]/12 bg-[#F1EBFB]/95 backdrop-blur-xl shadow-[0_24px_60px_-24px_rgba(42,35,66,0.5)] p-3"
+                        className="md:hidden absolute top-[calc(76px_+_env(safe-area-inset-top))] inset-x-4 rounded-3xl border border-[#2A2342]/12 bg-[#F1EBFB]/95 backdrop-blur-xl shadow-[0_24px_60px_-24px_rgba(42,35,66,0.5)] p-3"
                     >
                         <nav className="flex flex-col">
                             {links.map((l) => (

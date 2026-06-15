@@ -9,7 +9,7 @@ export default function SpotlightTopBar() {
 
     return (
         <header className="fixed inset-x-0 top-0 z-50">
-            <div className="flex items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
+            <div className="flex items-center justify-between px-5 pb-4 pt-[calc(1rem_+_env(safe-area-inset-top))] sm:px-8 lg:px-12">
                 <button
                     onClick={() => scrollToScene('top')}
                     className="font-display text-[18px] text-[#2A2342]"

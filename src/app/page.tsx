@@ -34,17 +34,19 @@ export default async function HomePage({
           </a>
         </div>
       )}
-      <Navbar />
-      <main>
-        <HeroSection />
-        <PainSection />
-        <ValueSection />
-        <ResultsSection />
-        <OfferSection />
-        <ContactSection />
-        <FloatingCTA />
-      </main>
-      <Footer />
+      <div className="theme-grid">
+        <Navbar />
+        <main>
+          <HeroSection />
+          <PainSection />
+          <ValueSection />
+          <ResultsSection />
+          <OfferSection />
+          <ContactSection />
+          <FloatingCTA />
+        </main>
+        <Footer />
+      </div>
       <VersionSwitcher />
     </ContentProvider>
   );

@@ -26,6 +26,7 @@ export default async function V5Page({
 
     return (
         <ContentProvider initialContent={content}>
+          <div className="theme-spotlight">
             <SnapScroll />
             <SpotlightTopBar />
             <SceneDotNav />
@@ -50,6 +51,7 @@ export default async function V5Page({
             </main>
 
             <SpotlightFooter />
+          </div>
             <VersionSwitcher />
         </ContentProvider>
     );
