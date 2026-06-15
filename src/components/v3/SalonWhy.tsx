@@ -81,7 +81,7 @@ export default function SalonWhy() {
 
                         {creds.length > 0 && (
                             <Reveal delay={0.15}>
-                                <div className="mt-9 grid grid-cols-3 gap-5 border-t border-[#2A2342]/12 pt-7">
+                                <div className="mt-9 grid grid-cols-1 gap-5 border-t border-[#2A2342]/12 pt-7 min-[480px]:grid-cols-3">
                                     {creds.map((c) => (
                                         <div key={c.label}>
                                             <AnimatedCounter

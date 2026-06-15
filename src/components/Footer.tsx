@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 const footerLinks = [
     { href: '#problem', label: 'Problem' },
@@ -26,50 +27,62 @@ export default function Footer() {
     };
 
     return (
-        <footer className="relative bg-[#E1D3F2] border-t border-[#2A2342]/14">
-            <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-                {/* Top: nav grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 border-b border-[#2A2342]/14">
+        <footer className="relative px-4 pb-10 pt-2 sm:px-6 lg:px-8">
+            <div className="mx-auto grid w-full max-w-[1320px] grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-12">
+                {/* Wordmark / closing CTA tile */}
+                <div className="group relative flex flex-col justify-between gap-10 overflow-hidden rounded-[1.6rem] border border-[#2A2342] bg-[#2A2342] p-8 text-white shadow-[0_28px_64px_-42px_rgba(42,35,66,0.85)] sm:p-10 lg:col-span-8">
+                    <span
+                        aria-hidden
+                        className="pointer-events-none absolute -right-6 -top-10 select-none font-display text-[9rem] leading-none text-white/[0.05] sm:text-[12rem]"
+                    >
+                        BN
+                    </span>
+                    <div className="relative">
+                        <Link href="/" className="block">
+                            <h2 className="display text-[clamp(2.4rem,5vw,4rem)] text-white">
+                                Beta <span className="text-[#C4A8E8]">Narrative</span>
+                            </h2>
+                        </Link>
+                        <p className="mt-5 max-w-md font-sans text-[15px] leading-relaxed text-white/70">
+                            Strategic visibility for leaders ready to stop blending in — and start
+                            being sought after.
+                        </p>
+                    </div>
+                    <a
+                        href="#contact"
+                        onClick={(e) => scrollToSection(e, '#contact')}
+                        className="group/btn relative inline-flex w-fit items-center gap-2 rounded-full bg-[#E8721A] px-7 py-3.5 font-sans text-[14.5px] font-semibold text-white transition-colors duration-300 hover:bg-[#C05A0E]"
+                    >
+                        Claim your spot
+                        <ArrowRight
+                            size={16}
+                            className="transition-transform duration-300 group-hover/btn:translate-x-0.5"
+                        />
+                    </a>
+                </div>
+
+                {/* Navigation tile */}
+                <nav className="flex flex-col rounded-[1.6rem] border border-[#2A2342]/10 bg-[#F1EBFB] p-3 shadow-[0_26px_60px_-46px_rgba(42,35,66,0.65)] lg:col-span-4">
                     {footerLinks.map((link) => (
                         <a
                             key={link.href}
                             href={link.href}
                             onClick={(e) => scrollToSection(e, link.href)}
-                            className="group flex items-center py-6 px-1 border-r border-[#2A2342]/12 last:border-r-0 hover:bg-[#F1EBFB] transition-colors duration-300"
+                            className="group flex items-center justify-between rounded-2xl px-5 py-4 font-sans text-[15px] text-[#4A4163] transition-colors duration-200 hover:bg-[#E6DBF6] hover:text-[#E8721A]"
                         >
-                            <span className="font-sans text-[14px] text-[#4A4163] group-hover:text-[#E8721A] transition-colors">{link.label}</span>
+                            {link.label}
+                            <ArrowRight
+                                size={15}
+                                className="text-[#6B3FC0]/40 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-[#E8721A]"
+                            />
                         </a>
                     ))}
-                    <a
-                        href="#contact"
-                        onClick={(e) => scrollToSection(e, '#contact')}
-                        className="hidden lg:flex items-center gap-2 py-6 px-1 bg-[#E8721A] text-white hover:bg-[#C05A0E] transition-colors duration-300"
-                    >
-                        <span className="font-sans text-[14px] font-medium pl-1">Apply</span>
-                    </a>
-                </div>
-
-                {/* Wordmark */}
-                <div className="py-14 sm:py-20">
-                    <Link href="/" className="block">
-                        <h2 className="display text-4xl sm:text-5xl lg:text-6xl text-[#2A2342]">
-                            Beta <span className="text-[#6B3FC0]">Narrative</span>
-                        </h2>
-                    </Link>
-                    <p className="mt-5 max-w-md font-sans text-[15px] text-[#6F6783] leading-relaxed">
-                        Strategic visibility for leaders ready to stop blending in — and start
-                        being sought after.
-                    </p>
-                </div>
+                </nav>
 
                 {/* Bottom bar */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-6 border-t border-[#2A2342]/14">
-                    <p className="font-sans text-[12px] text-[#6E6587]">
-                        © {currentYear} Beta Narrative
-                    </p>
-                    <p className="font-sans text-[12px] text-[#6E6587]">
-                        Executive Brand Strategy
-                    </p>
+                <div className="flex flex-col items-start justify-between gap-2 px-2 pt-2 sm:flex-row sm:items-center lg:col-span-12">
+                    <p className="font-sans text-[12px] text-[#6E6587]">© {currentYear} Beta Narrative</p>
+                    <p className="font-sans text-[12px] text-[#6E6587]">Executive Brand Strategy</p>
                 </div>
             </div>
         </footer>

@@ -1,52 +1,61 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { useInView, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { animate, useInView, useReducedMotion } from 'framer-motion';
 
 interface AnimatedCounterProps {
     value: string;
     className?: string;
 }
 
+/**
+ * Counts a numeric value up from zero the first time it scrolls into view.
+ *
+ * State-driven (via framer's `animate`) rather than a manual spring writing to
+ * `textContent` — the previous spring approach could leave a stat stranded at
+ * "0+" on mobile if its in-view callback raced hydration. `animate` always
+ * lands exactly on the target, and `amount: 'some'` fires as soon as any part
+ * of the element is visible (including when it's already on screen at mount).
+ */
 export default function AnimatedCounter({ value, className = '' }: AnimatedCounterProps) {
     const ref = useRef<HTMLSpanElement>(null);
-    const inView = useInView(ref, { once: true, margin: '-50px' });
-    
-    // Parse the value string to extract the number and surrounding text
-    const numericMatch = value.match(/[\d.]+/);
-    const hasNumber = numericMatch !== null;
-    const numericValue = numericMatch ? parseFloat(numericMatch[0]) : 0;
-    const prefix = value.substring(0, numericMatch?.index || 0);
-    const suffix = value.substring((numericMatch?.index || 0) + (numericMatch?.[0].length || 0));
+    const inView = useInView(ref, { once: true });
+    const reduceMotion = useReducedMotion();
 
-    const motionValue = useMotionValue(0);
-    const springValue = useSpring(motionValue, {
-        damping: 30,
-        stiffness: 100,
-        mass: 1
-    });
+    // Split "4+" / "5×" / "20%" / "1.5k" into number + surrounding text.
+    const match = value.match(/[\d.]+/);
+    const hasNumber = match !== null;
+    const target = hasNumber ? parseFloat(match[0]) : 0;
+    const prefix = value.slice(0, match?.index ?? 0);
+    const suffix = value.slice((match?.index ?? 0) + (match?.[0].length ?? 0));
+    const decimals = hasNumber && match[0].includes('.') ? 1 : 0;
+
+    const [display, setDisplay] = useState(0);
 
     useEffect(() => {
-        if (inView && hasNumber) {
-            motionValue.set(numericValue);
+        if (!hasNumber || !inView) return;
+        if (reduceMotion) {
+            setDisplay(target);
+            return;
         }
-    }, [inView, motionValue, numericValue, hasNumber]);
-
-    useEffect(() => {
-        if (!hasNumber) return;
-        return springValue.on('change', (latest) => {
-            if (ref.current) {
-                const isInteger = Number.isInteger(numericValue) || numericValue === 0;
-                const formatted = isInteger ? Math.round(latest) : latest.toFixed(1);
-                ref.current.textContent = `${prefix}${formatted}${suffix}`;
-            }
+        const controls = animate(0, target, {
+            duration: 1.4,
+            ease: [0.16, 1, 0.3, 1],
+            onUpdate: (v) => setDisplay(v),
         });
-    }, [springValue, numericValue, prefix, suffix, hasNumber]);
+        return () => controls.stop();
+    }, [inView, hasNumber, target, reduceMotion]);
 
     // Non-numeric values (e.g. "BusinessDay") render as-is with no count-up.
     if (!hasNumber) {
         return <span className={className}>{value}</span>;
     }
 
-    return <span ref={ref} className={className}>{prefix}0{suffix}</span>;
+    return (
+        <span ref={ref} className={className}>
+            {prefix}
+            {display.toFixed(decimals)}
+            {suffix}
+        </span>
+    );
 }

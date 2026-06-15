@@ -1,8 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { useContent } from '@/context/ContentContext';
-import SectionLabel from '../SectionLabel';
+import { Kicker, Reveal, RevealGrid, TileReveal, tile } from './bento';
 
 export default function PainSection() {
     const { content } = useContent();
@@ -20,56 +19,51 @@ export default function PainSection() {
         ],
     };
 
-    const ease = [0.16, 1, 0.3, 1] as const;
-
     return (
-        <section id="problem" className="relative py-24 sm:py-32 px-5 sm:px-8 lg:px-12 bg-[#E9DFF8] border-t border-[#2A2342]/10">
-            <div className="max-w-[1400px] mx-auto">
-                {/* Split header */}
-                <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-12 lg:mb-16">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: '-100px' }}
-                        transition={{ duration: 0.6, ease }}
-                        className="lg:col-span-7"
-                    >
-                        <SectionLabel>{pain.sectionLabel}</SectionLabel>
-                        <h2 className="display text-[clamp(1.6rem,3.2vw,2.6rem)] text-[#2A2342] mt-6" style={{ lineHeight: 1.12 }}>
-                            {pain.title}{' '}
-                            <span className="text-[#E8721A]">{pain.titleEmphasis}</span>
-                        </h2>
-                    </motion.div>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: '-100px' }}
-                        transition={{ duration: 0.6, delay: 0.1, ease }}
-                        className="lg:col-span-5"
-                    >
-                        <p className="font-sans text-[15px] sm:text-base text-[#6F6783] leading-relaxed whitespace-pre-line">
-                            {pain.lead}
-                        </p>
-                    </motion.div>
+        <section
+            id="problem"
+            className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-28"
+        >
+            <div className="mx-auto w-full max-w-[1320px]">
+                {/* Header band: title tile + violet pull-quote tile */}
+                <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-12">
+                    <Reveal className="lg:col-span-7">
+                        <div className={`${tile.base} ${tile.surface} h-full p-7 sm:p-10`}>
+                            <Kicker>{pain.sectionLabel}</Kicker>
+                            <h2
+                                className="display mt-6 text-[clamp(1.7rem,3.4vw,2.7rem)] text-[#2A2342]"
+                                style={{ lineHeight: 1.12 }}
+                            >
+                                {pain.title}{' '}
+                                <span className="text-[#E8721A]">{pain.titleEmphasis}</span>
+                            </h2>
+                        </div>
+                    </Reveal>
+                    <Reveal delay={0.08} className="lg:col-span-5">
+                        <div className={`${tile.base} ${tile.violet} flex h-full items-center p-7 sm:p-10`}>
+                            <p className="font-sans text-[16px] leading-relaxed text-white/90 sm:text-[17px]">
+                                {pain.lead}
+                            </p>
+                        </div>
+                    </Reveal>
                 </div>
 
-                {/* Matrix */}
-                <div className="grid sm:grid-cols-2 border-t border-l border-[#2A2342]/10">
-                    {pain.items.map((item, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.06 * index, ease }}
-                            className="border-r border-b border-[#2A2342]/10 p-8 sm:p-10"
+                {/* Problem tiles — indexed bento cards */}
+                <RevealGrid className="mt-3 grid grid-cols-1 gap-3 sm:mt-4 sm:grid-cols-2 sm:gap-4">
+                    {pain.items.map((item, i) => (
+                        <TileReveal
+                            key={item}
+                            className={`${tile.base} ${tile.surface} ${tile.lift} flex items-start gap-5 p-7 sm:p-9`}
                         >
-                            <p className="font-sans text-[16px] sm:text-[17px] text-[#4A4163] leading-relaxed whitespace-pre-line">
+                            <span className="font-display text-[2rem] leading-none text-[#6B3FC0]/45 sm:text-[2.4rem]">
+                                {String(i + 1).padStart(2, '0')}
+                            </span>
+                            <p className="pt-1 font-sans text-[15.5px] leading-relaxed text-[#4A4163] sm:text-[16px]">
                                 {item}
                             </p>
-                        </motion.div>
+                        </TileReveal>
                     ))}
-                </div>
+                </RevealGrid>
             </div>
         </section>
     );

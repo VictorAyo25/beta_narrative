@@ -53,7 +53,7 @@ export default function AtelierSections() {
     return (
         <>
             {/* ============ HERO ============ */}
-            <section id="top" className="scroll-mt-24 py-20 sm:py-24 lg:py-28">
+            <section id="top" className="scroll-mt-24 py-14 sm:py-20 lg:py-28">
                 <Reveal>
                     {hero.eyebrow && <Eyebrow>{hero.eyebrow}</Eyebrow>}
                 </Reveal>
@@ -114,7 +114,7 @@ export default function AtelierSections() {
             {/* ============ PROBLEM ============ */}
             <section
                 id="problem"
-                className="scroll-mt-24 border-t border-[#2A2342]/12 py-20 sm:py-24 lg:py-28"
+                className="scroll-mt-24 border-t border-[#2A2342]/12 py-14 sm:py-20 lg:py-28"
             >
                 <Reveal>
                     <Eyebrow>{pain.sectionLabel}</Eyebrow>
@@ -148,7 +148,7 @@ export default function AtelierSections() {
             {/* ============ WHY ============ */}
             <section
                 id="why"
-                className="scroll-mt-24 border-t border-[#2A2342]/12 py-20 sm:py-24 lg:py-28"
+                className="scroll-mt-24 border-t border-[#2A2342]/12 py-14 sm:py-20 lg:py-28"
             >
                 <Reveal>
                     <Eyebrow>{value.sectionLabel}</Eyebrow>
@@ -194,7 +194,7 @@ export default function AtelierSections() {
             {/* ============ RESULTS ============ */}
             <section
                 id="results"
-                className="scroll-mt-24 border-t border-[#2A2342]/12 py-20 sm:py-24 lg:py-28"
+                className="scroll-mt-24 border-t border-[#2A2342]/12 py-14 sm:py-20 lg:py-28"
             >
                 <Reveal>
                     <Eyebrow>{results.sectionLabel}</Eyebrow>
@@ -229,7 +229,7 @@ export default function AtelierSections() {
             {/* ============ OFFER ============ */}
             <section
                 id="offer"
-                className="scroll-mt-24 border-t border-[#2A2342]/12 py-20 sm:py-24 lg:py-28"
+                className="scroll-mt-24 border-t border-[#2A2342]/12 py-14 sm:py-20 lg:py-28"
             >
                 <Reveal>
                     <Eyebrow>{offer.sectionLabel}</Eyebrow>
