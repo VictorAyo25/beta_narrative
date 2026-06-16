@@ -9,37 +9,38 @@ import Reveal from './Reveal';
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 // Bento placement + tinting recipes, applied by tile index for visual rhythm.
-// The first tile is the large feature; others fill the remaining cells.
+// Columns go 1 (mobile) -> 2 (tablet) -> 3 (desktop); spans are layered per
+// breakpoint so tiles never get too narrow for their stat to fit.
 const TILE_STYLES = [
-    // 0 — feature: violet-tinted, spans 2×2
+    // 0 — feature: full-width banner on tablet, big 2×2 block on desktop
     {
-        span: 'sm:col-span-2 sm:row-span-2',
+        span: 'sm:col-span-2 lg:row-span-2',
         wrap: 'bg-[#6B3FC0] border-[#6B3FC0]',
-        stat: 'text-white text-[2.6rem] sm:text-[3.4rem]',
+        stat: 'text-white text-[2.4rem] sm:text-[3rem] lg:text-[3.4rem]',
         desc: 'text-white/85',
         feature: true,
     },
-    // 1 — tall: surface
+    // 1 — tall on desktop, standard card on tablet
     {
-        span: 'sm:row-span-2',
+        span: 'lg:row-span-2',
         wrap: 'bg-[#F1EBFB] border-[#2A2342]/10',
-        stat: 'text-[#2A2342] text-[2rem] sm:text-[2.4rem]',
+        stat: 'text-[#2A2342] text-[1.9rem] sm:text-[2.1rem] lg:text-[2.3rem]',
         desc: 'text-[#4A4163]',
         feature: false,
     },
-    // 2 — wide accent: subtle orange
+    // 2 — accent: subtle orange
     {
-        span: 'sm:col-span-1',
+        span: '',
         wrap: 'bg-[#F5943A]/12 border-[#E8721A]/25',
-        stat: 'text-[#C05A0E] text-[1.9rem] sm:text-[2.2rem]',
+        stat: 'text-[#C05A0E] text-[1.8rem] sm:text-[2rem] lg:text-[2.2rem]',
         desc: 'text-[#4A4163]',
         feature: false,
     },
     // 3 — surface
     {
-        span: 'sm:col-span-1',
+        span: '',
         wrap: 'bg-[#F1EBFB] border-[#2A2342]/10',
-        stat: 'text-[#2A2342] text-[1.9rem] sm:text-[2.2rem]',
+        stat: 'text-[#2A2342] text-[1.8rem] sm:text-[2rem] lg:text-[2.2rem]',
         desc: 'text-[#4A4163]',
         feature: false,
     },
@@ -47,9 +48,9 @@ const TILE_STYLES = [
 
 // Fallback styling for any tiles beyond the curated four.
 const EXTRA_STYLE = {
-    span: 'sm:col-span-1',
+    span: '',
     wrap: 'bg-[#F1EBFB] border-[#2A2342]/10',
-    stat: 'text-[#2A2342] text-[1.9rem] sm:text-[2.2rem]',
+    stat: 'text-[#2A2342] text-[1.8rem] sm:text-[2rem] lg:text-[2.2rem]',
     desc: 'text-[#4A4163]',
     feature: false,
 } as const;
@@ -74,7 +75,7 @@ export default function SalonResults() {
                     </Reveal>
                 </div>
 
-                <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 auto-rows-[minmax(170px,auto)] gap-4 sm:gap-5">
+                <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[minmax(168px,auto)] gap-4 sm:gap-5">
                     {results.results.map((r, i) => {
                         const s = TILE_STYLES[i] ?? EXTRA_STYLE;
                         return (
@@ -94,7 +95,7 @@ export default function SalonResults() {
                                         </span>
                                     </>
                                 )}
-                                <p className={`font-fraunces font-light leading-none tracking-[-0.02em] ${s.feature ? 'mt-6' : ''} ${s.stat}`}>
+                                <p className={`font-fraunces font-light leading-[1.05] tracking-[-0.02em] break-words ${s.feature ? 'mt-6' : ''} ${s.stat}`}>
                                     {r.stat}
                                 </p>
                                 <p className={`mt-4 font-sans text-[14px] leading-relaxed ${s.desc}`}>
