@@ -2,15 +2,11 @@
 
 import { useContent } from '@/context/ContentContext';
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
 import Eyebrow from './Eyebrow';
 import Reveal from './Reveal';
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
 // Bento placement + tinting recipes, applied by tile index for visual rhythm.
-// Columns go 1 (mobile) -> 2 (tablet) -> 3 (desktop); spans are layered per
-// breakpoint so tiles never get too narrow for their stat to fit.
+// Columns step 1 (mobile) -> 2 (tablet) -> 3 (desktop); stats wrap rather than clip.
 const TILE_STYLES = [
     // 0 — feature: full-width banner on tablet, big 2×2 block on desktop
     {
@@ -81,21 +77,27 @@ export default function SalonResults() {
                         return (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 22 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                initial={{ opacity: 0, y: 30, scale: 0.96 }}
+                                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                                 viewport={{ once: true, margin: '-60px' }}
-                                transition={{ duration: 0.6, delay: 0.05 * i, ease: EASE }}
-                                className={`relative flex flex-col justify-between overflow-hidden rounded-[1.75rem] border p-7 sm:p-8 shadow-[0_22px_56px_-34px_rgba(42,35,66,0.5)] ${s.span} ${s.wrap}`}
+                                transition={{ type: 'spring', stiffness: 220, damping: 26, delay: 0.07 * i }}
+                                whileHover={{ y: -8, transition: { type: 'spring', stiffness: 300, damping: 20 } }}
+                                className={`group relative flex flex-col justify-between overflow-hidden rounded-[1.75rem] border p-7 shadow-[0_22px_56px_-34px_rgba(42,35,66,0.5)] transition-shadow duration-300 hover:shadow-[0_36px_80px_-36px_rgba(42,35,66,0.6)] sm:p-8 ${s.span} ${s.wrap}`}
                             >
                                 {s.feature && (
                                     <>
-                                        <div className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full bg-white/10 blur-2xl" />
-                                        <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 font-sans text-[11.5px] font-medium text-white/90">
-                                            <Sparkles size={12} /> Signature outcome
+                                        <motion.div
+                                            aria-hidden
+                                            className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full bg-white/10 blur-2xl"
+                                            animate={{ x: [0, 18, 0], y: [0, 14, 0] }}
+                                            transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+                                        />
+                                        <span className="inline-flex w-fit items-center rounded-full bg-white/15 px-3 py-1 font-sans text-[11.5px] font-medium text-white/90">
+                                            Signature outcome
                                         </span>
                                     </>
                                 )}
-                                <p className={`font-fraunces font-light leading-[1.05] tracking-[-0.02em] break-words ${s.feature ? 'mt-6' : ''} ${s.stat}`}>
+                                <p className={`font-fraunces font-light leading-[1.05] tracking-[-0.02em] break-words transition-transform duration-300 group-hover:translate-x-0.5 ${s.feature ? 'mt-6' : ''} ${s.stat}`}>
                                     {r.stat}
                                 </p>
                                 <p className={`mt-4 font-sans text-[14px] leading-relaxed ${s.desc}`}>
