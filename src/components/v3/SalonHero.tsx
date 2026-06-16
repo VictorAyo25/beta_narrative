@@ -6,6 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import { useContent } from '@/context/ContentContext';
 import { resolveCredentials } from '@/lib/credentials';
 import Eyebrow from './Eyebrow';
+import LinkedInIcon from './LinkedInIcon';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -86,7 +87,13 @@ export default function SalonHero() {
                     {/* glow behind the frame */}
                     <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2.75rem] bg-gradient-to-b from-[#C4A8E8]/40 to-[#F5943A]/15 blur-2xl" />
 
-                    <div className="relative overflow-hidden rounded-[2.5rem] border border-[#2A2342]/10 bg-[#F1EBFB] shadow-[0_40px_90px_-44px_rgba(42,35,66,0.55)]">
+                    <a
+                        href={value.profileLinkedin || '#'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${value.profileName || 'Favour Egbogun'} on LinkedIn`}
+                        className="group relative block overflow-hidden rounded-[2.5rem] border border-[#2A2342]/10 bg-[#F1EBFB] shadow-[0_40px_90px_-44px_rgba(42,35,66,0.55)]"
+                    >
                         <div className="relative aspect-[4/5] w-full">
                             <Image
                                 src={portrait}
@@ -94,21 +101,26 @@ export default function SalonHero() {
                                 fill
                                 priority
                                 sizes="(max-width: 640px) 90vw, 560px"
-                                className="object-cover"
+                                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                                 style={{ objectPosition: 'center 18%' }}
                             />
-                            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#2A2342]/35 to-transparent" />
+                            <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#2A2342]/45 to-transparent" />
                         </div>
 
-                        {value.profileName && (
-                            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-center">
-                                <p className="font-fraunces text-[20px] text-white">{value.profileName}</p>
+                        <div className="absolute bottom-5 left-6 right-6 flex items-end justify-between gap-4">
+                            <div>
+                                {value.profileName && (
+                                    <p className="font-fraunces text-[21px] leading-tight text-white">{value.profileName}</p>
+                                )}
                                 {value.profileRole && (
                                     <p className="font-sans text-[12.5px] text-white/80">{value.profileRole}</p>
                                 )}
                             </div>
-                        )}
-                    </div>
+                            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors group-hover:bg-[#E8721A]">
+                                <LinkedInIcon size={17} />
+                            </span>
+                        </div>
+                    </a>
 
                     {/* Credential chips — flank on large screens, stack below on mobile */}
                     {chips.length > 0 && (
