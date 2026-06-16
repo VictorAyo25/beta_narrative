@@ -91,7 +91,7 @@ export default function SalonOffer() {
     const { offer } = content;
 
     return (
-        <section id="offer" className="relative px-5 sm:px-8 py-24 sm:py-32 bg-[#E9DFF8]">
+        <section id="offer" className="relative px-5 sm:px-8 py-24 sm:py-32">
             <div className="mx-auto max-w-[1100px]">
                 <div className="mx-auto max-w-[640px] text-center">
                     <Reveal className="flex justify-center">

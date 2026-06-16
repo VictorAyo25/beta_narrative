@@ -59,7 +59,7 @@ export default function SalonResults() {
     const { results } = content;
 
     return (
-        <section id="results" className="relative px-5 sm:px-8 py-24 sm:py-32">
+        <section id="results" className="relative px-5 sm:px-8 py-24 sm:py-32 bg-[#E9DFF8]">
             <div className="mx-auto max-w-[1100px]">
                 <div className="mx-auto max-w-[640px] text-center">
                     <Reveal className="flex justify-center">

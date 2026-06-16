@@ -27,8 +27,8 @@ export default async function V3Page({
                 <SalonNav />
                 <main>
                     <SalonHero />
-                    <SalonProblem />
                     <SalonWhy />
+                    <SalonProblem />
                     <SalonResults />
                     <SalonOffer />
                     <ContactSection />

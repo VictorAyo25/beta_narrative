@@ -1,8 +1,6 @@
 'use client';
 
 import { useContent } from '@/context/ContentContext';
-import AnimatedCounter from '@/components/AnimatedCounter';
-import { resolveCredentials } from '@/lib/credentials';
 import Eyebrow from './Eyebrow';
 import Reveal from './Reveal';
 
@@ -10,7 +8,6 @@ export default function SalonWhy() {
     const { content } = useContent();
     const { value } = content;
     const paragraphs = value.body.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
-    const creds = resolveCredentials(value.credentials);
 
     return (
         <section id="why" className="relative px-5 sm:px-8 py-24 sm:py-32 bg-[#E9DFF8]">
@@ -33,24 +30,6 @@ export default function SalonWhy() {
                         ))}
                     </div>
                 </Reveal>
-
-                {creds.length > 0 && (
-                    <Reveal delay={0.15}>
-                        <div className="mt-10 grid grid-cols-1 gap-6 border-t border-[#2A2342]/12 pt-8 min-[480px]:grid-cols-3">
-                            {creds.map((c) => (
-                                <div key={c.label}>
-                                    <AnimatedCounter
-                                        value={c.number}
-                                        className="font-fraunces text-[2rem] sm:text-[2.3rem] leading-none text-[#6B3FC0]"
-                                    />
-                                    <p className="mt-2 font-sans text-[12.5px] leading-snug text-[#6E6588]">
-                                        {c.label}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                    </Reveal>
-                )}
             </div>
         </section>
     );
