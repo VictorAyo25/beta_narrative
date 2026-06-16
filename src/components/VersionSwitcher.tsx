@@ -20,7 +20,8 @@ export default function VersionSwitcher() {
                 Layout
             </span>
             {options.map((o) => {
-                const active = pathname === o.href;
+                const active =
+                    o.href === '/' ? pathname === '/' : pathname === o.href || pathname.startsWith(`${o.href}`);
                 return (
                     <Link
                         key={o.href}
