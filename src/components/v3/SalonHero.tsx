@@ -1,22 +1,20 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useContent } from '@/context/ContentContext';
+import AnimatedCounter from '@/components/AnimatedCounter';
 import { resolveCredentials } from '@/lib/credentials';
 import Eyebrow from './Eyebrow';
-import LinkedInIcon from './LinkedInIcon';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function SalonHero() {
     const { content } = useContent();
     const { hero, value } = content;
-    const portrait = value.profileImage || '/images/Favour.JPG';
 
-    // Up to three credential chips flanking the portrait.
-    const chips = resolveCredentials(value.credentials).slice(0, 3);
+    // Three headline credentials, shown as a quiet stat strip under the CTAs.
+    const stats = resolveCredentials(value.credentials).slice(0, 3);
 
     return (
         <section id="top" className="relative overflow-hidden px-5 sm:px-8 pt-36 sm:pt-40 pb-20 sm:pb-28">
@@ -40,7 +38,7 @@ export default function SalonHero() {
                     initial={{ opacity: 0, y: 22 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
-                    className="font-fraunces mx-auto mt-7 max-w-[15ch] text-[2.6rem] sm:text-[3.6rem] lg:text-[4.4rem] font-light leading-[1.04] tracking-[-0.02em] text-[#2A2342]"
+                    className="font-fraunces mx-auto mt-7 max-w-[16ch] text-[2.7rem] sm:text-[3.8rem] lg:text-[4.6rem] font-light leading-[1.04] tracking-[-0.02em] text-[#2A2342]"
                 >
                     {hero.title}{' '}
                     <span className="italic text-[#E8721A]">{hero.titleEmphasis}</span>{' '}
@@ -51,7 +49,7 @@ export default function SalonHero() {
                     initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.16, ease: EASE }}
-                    className="mx-auto mt-7 max-w-[600px] font-sans text-[16px] sm:text-[17px] leading-relaxed text-[#4A4163]"
+                    className="mx-auto mt-7 max-w-[620px] font-sans text-[16px] sm:text-[17px] leading-relaxed text-[#4A4163]"
                 >
                     {hero.subtitle}
                 </motion.p>
@@ -77,72 +75,27 @@ export default function SalonHero() {
                     </a>
                 </motion.div>
 
-                {/* Portrait + flanking credential chips */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.85, delay: 0.34, ease: EASE }}
-                    className="relative mx-auto mt-16 sm:mt-20 max-w-[560px]"
-                >
-                    {/* glow behind the frame */}
-                    <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2.75rem] bg-gradient-to-b from-[#C4A8E8]/40 to-[#F5943A]/15 blur-2xl" />
-
-                    <a
-                        href={value.profileLinkedin || '#'}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${value.profileName || 'Favour Egbogun'} on LinkedIn`}
-                        className="group relative block overflow-hidden rounded-[2.5rem] border border-[#2A2342]/10 bg-[#F1EBFB] shadow-[0_40px_90px_-44px_rgba(42,35,66,0.55)]"
+                {/* Credential stat strip */}
+                {stats.length > 0 && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 18 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.34, ease: EASE }}
+                        className="mx-auto mt-16 grid max-w-[680px] grid-cols-1 gap-6 border-t border-[#2A2342]/12 pt-9 min-[520px]:grid-cols-3"
                     >
-                        <div className="relative aspect-[4/5] w-full">
-                            <Image
-                                src={portrait}
-                                alt={value.profileName || 'Favour Egbogun'}
-                                fill
-                                priority
-                                sizes="(max-width: 640px) 90vw, 560px"
-                                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                                style={{ objectPosition: 'center 18%' }}
-                            />
-                            <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#2A2342]/45 to-transparent" />
-                        </div>
-
-                        <div className="absolute bottom-5 left-6 right-6 flex items-end justify-between gap-4">
-                            <div>
-                                {value.profileName && (
-                                    <p className="font-fraunces text-[21px] leading-tight text-white">{value.profileName}</p>
-                                )}
-                                {value.profileRole && (
-                                    <p className="font-sans text-[12.5px] text-white/80">{value.profileRole}</p>
-                                )}
+                        {stats.map((s) => (
+                            <div key={s.label}>
+                                <AnimatedCounter
+                                    value={s.number}
+                                    className="font-fraunces text-[2.4rem] sm:text-[2.7rem] leading-none text-[#6B3FC0]"
+                                />
+                                <p className="mx-auto mt-2 max-w-[20ch] font-sans text-[12.5px] leading-snug text-[#6E6588]">
+                                    {s.label}
+                                </p>
                             </div>
-                            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors group-hover:bg-[#E8721A]">
-                                <LinkedInIcon size={17} />
-                            </span>
-                        </div>
-                    </a>
-
-                    {/* Credential chips — flank on large screens, stack below on mobile */}
-                    {chips.length > 0 && (
-                        <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-3 lg:mt-0">
-                            {chips.map((c, i) => (
-                                <div
-                                    key={c.label}
-                                    className={`rounded-2xl border border-[#2A2342]/10 bg-[#F1EBFB]/85 backdrop-blur-sm px-4 py-3.5 text-center shadow-[0_16px_40px_-26px_rgba(42,35,66,0.5)] lg:absolute ${
-                                        i === 0
-                                            ? 'lg:-left-24 lg:top-10 lg:w-44 lg:text-left'
-                                            : i === 1
-                                            ? 'lg:-right-24 lg:top-1/3 lg:w-44 lg:text-right'
-                                            : 'lg:-left-20 lg:bottom-12 lg:w-44 lg:text-left'
-                                    }`}
-                                >
-                                    <p className="font-fraunces text-[26px] leading-none text-[#6B3FC0]">{c.number}</p>
-                                    <p className="mt-1.5 font-sans text-[11.5px] leading-snug text-[#6E6588]">{c.label}</p>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </motion.div>
+                        ))}
+                    </motion.div>
+                )}
             </div>
         </section>
     );
