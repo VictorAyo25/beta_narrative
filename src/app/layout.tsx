@@ -1,16 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import {
-  Space_Grotesk,
-  Space_Mono,
-  DM_Sans,
-  Fraunces,
-  Inter,
-  Cormorant_Garamond,
-  Syne,
-  Manrope,
-  Bricolage_Grotesque,
-  Plus_Jakarta_Sans,
-} from 'next/font/google';
+import { Space_Grotesk, Space_Mono, DM_Sans, Fraunces } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 
@@ -18,14 +7,12 @@ export const dynamic = 'force-dynamic';
 
 /* ---------------------------------------------------------------------------
    Type system
-   Each layout variant gets its own typographic voice so the five options read
-   as distinct designs rather than one design re-skinned. Fonts are loaded once
-   here as CSS variables; globals.css maps them onto each variant via a
-   `.theme-*` scope class (see "Per-variant type" there).
+   Fraunces (display) + DM Sans (body) drive the public site; Space Mono backs
+   structural labels and Space Grotesk backs the admin headings. Loaded once as
+   CSS variables and mapped on via globals.css.
    --------------------------------------------------------------------------- */
 
-// ── Shared structural type ──────────────────────────────────────────────
-// Space Mono — structural labels, kickers, index numbers (all variants).
+// Space Mono — structural labels (SectionLabel, admin) + index numbers.
 const spaceMono = Space_Mono({
   subsets: ['latin'],
   weight: ['400', '700'],
@@ -33,67 +20,26 @@ const spaceMono = Space_Mono({
   display: 'swap',
 });
 
-// ── v1 Editorial Grid — Swiss / structural ──────────────────────────────
-// Space Grotesk display + Inter body.
+// Space Grotesk — admin headings (.font-serif / default display).
 const grotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-grotesk',
   display: 'swap',
 });
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
 
-// ── v2 Atelier — elegant couture serif ──────────────────────────────────
-// Cormorant Garamond display + DM Sans body.
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-cormorant',
-  display: 'swap',
-});
+// DM Sans — body copy.
 const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
   display: 'swap',
 });
 
-// ── v3 Salon — warm literary serif ──────────────────────────────────────
-// Fraunces display + DM Sans body.
+// Fraunces — the Salon display serif (headlines, eyebrows).
 const fraunces = Fraunces({
   subsets: ['latin'],
   variable: '--font-fraunces',
   display: 'swap',
   style: ['normal', 'italic'],
-});
-
-// ── v4 Frame — contemporary gallery ─────────────────────────────────────
-// Syne display + Manrope body.
-const syne = Syne({
-  subsets: ['latin'],
-  variable: '--font-syne',
-  display: 'swap',
-});
-const manrope = Manrope({
-  subsets: ['latin'],
-  variable: '--font-manrope',
-  display: 'swap',
-});
-
-// ── v5 Spotlight — cinematic display ────────────────────────────────────
-// Bricolage Grotesque display + Plus Jakarta Sans body.
-const bricolage = Bricolage_Grotesque({
-  subsets: ['latin'],
-  variable: '--font-bricolage',
-  display: 'swap',
-});
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-jakarta',
-  display: 'swap',
 });
 
 // Viewport — viewportFit:'cover' lets layouts read env(safe-area-inset-*) so
@@ -151,14 +97,8 @@ export default async function RootLayout({
       className={[
         spaceMono.variable,
         grotesk.variable,
-        inter.variable,
-        cormorant.variable,
         dmSans.variable,
         fraunces.variable,
-        syne.variable,
-        manrope.variable,
-        bricolage.variable,
-        jakarta.variable,
       ].join(' ')}
     >
       <body className="font-sans bg-[#E1D3F2] text-[#4A4163] antialiased">
