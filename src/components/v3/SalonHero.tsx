@@ -3,18 +3,13 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useContent } from '@/context/ContentContext';
-import AnimatedCounter from '@/components/AnimatedCounter';
-import { resolveCredentials } from '@/lib/credentials';
 import Eyebrow from './Eyebrow';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function SalonHero() {
     const { content } = useContent();
-    const { hero, value } = content;
-
-    // Three headline credentials, shown as a quiet stat strip under the CTAs.
-    const stats = resolveCredentials(value.credentials).slice(0, 3);
+    const { hero } = content;
 
     return (
         <section id="top" className="relative overflow-hidden px-5 sm:px-8 pt-36 sm:pt-40 pb-20 sm:pb-28">
@@ -74,28 +69,6 @@ export default function SalonHero() {
                         See the results
                     </a>
                 </motion.div>
-
-                {/* Credential stat strip */}
-                {stats.length > 0 && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 18 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: 0.34, ease: EASE }}
-                        className="mx-auto mt-16 grid max-w-[680px] grid-cols-1 gap-6 border-t border-[#2A2342]/12 pt-9 min-[520px]:grid-cols-3"
-                    >
-                        {stats.map((s) => (
-                            <div key={s.label}>
-                                <AnimatedCounter
-                                    value={s.number}
-                                    className="font-fraunces text-[2.4rem] sm:text-[2.7rem] leading-none text-[#6B3FC0]"
-                                />
-                                <p className="mx-auto mt-2 max-w-[20ch] font-sans text-[12.5px] leading-snug text-[#6E6588]">
-                                    {s.label}
-                                </p>
-                            </div>
-                        ))}
-                    </motion.div>
-                )}
             </div>
         </section>
     );
