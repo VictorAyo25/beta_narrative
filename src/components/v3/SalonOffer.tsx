@@ -90,6 +90,12 @@ export default function SalonOffer() {
     const { content } = useContent();
     const { offer } = content;
 
+    // Lead with the Executive (premium) package, then the rest (e.g. Rising
+    // Professionals) — independent of the order the CMS returns.
+    const orderedOffers = [...offer.offers].sort(
+        (a, b) => Number(/executive/i.test(b.packageName)) - Number(/executive/i.test(a.packageName)),
+    );
+
     return (
         <section id="offer" className="relative px-5 sm:px-8 py-24 sm:py-32">
             <div className="mx-auto max-w-[1100px]">
@@ -106,9 +112,9 @@ export default function SalonOffer() {
                 </div>
 
                 <div className="mx-auto mt-14 grid max-w-[920px] grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6 items-start">
-                    {offer.offers.map((o, i) => (
+                    {orderedOffers.map((o, i) => (
                         <OfferCard
-                            key={i}
+                            key={o.packageName || i}
                             offer={o}
                             index={i}
                             highlighted={/executive/i.test(o.packageName)}
