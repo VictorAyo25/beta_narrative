@@ -2,8 +2,8 @@
 
 /* =========================================================================
    BETA NARRATIVE
-   Lilac paper canvas, aubergine ink, orange accent. Two public layouts share
-   these tokens: the Salon (Fraunces) at / and the Press (Newsreader) at /alt.
+   Lilac paper canvas, aubergine ink, orange accent. The public site runs the
+   Salon layout (Fraunces display + DM Sans body); the admin runs its own theme.
    ========================================================================= */
 
 :root {
@@ -28,10 +28,6 @@
   /* Hairlines */
   --line: rgba(42, 35, 66, 0.12);
   --line-strong: rgba(42, 35, 66, 0.18);
-
-  /* Elevation — two steps, nothing else */
-  --shadow-card: 0 18px 40px -32px rgba(42, 35, 66, 0.55);
-  --shadow-raised: 0 28px 62px -34px rgba(42, 35, 66, 0.5);
 
   /* Type */
   --font-display: var(--font-grotesk, 'Space Grotesk', sans-serif);
@@ -73,27 +69,18 @@ body {
   font-family: var(--font-display), sans-serif;
 }
 
-/* Display serifs, one per public layout */
+/* Fraunces — the Salon display serif */
 .font-fraunces {
   font-family: var(--font-fraunces), Georgia, serif;
 }
 
-.font-newsreader {
-  font-family: var(--font-newsreader), Georgia, serif;
-}
-
 /* =========================================================================
-   Layout type scopes
+   Salon type scope
    Shared components (.display, .font-display, .font-sans) read the core
-   variables; each layout root remaps them to its own voice.
+   variables; the page root remaps them to the Salon voice.
    ========================================================================= */
 .theme-salon {
   --font-display: var(--font-fraunces, Georgia, serif);
-  --font-body: var(--font-dm-sans, 'DM Sans', sans-serif);
-}
-
-.theme-press {
-  --font-display: var(--font-newsreader, Georgia, serif);
   --font-body: var(--font-dm-sans, 'DM Sans', sans-serif);
 }
 
