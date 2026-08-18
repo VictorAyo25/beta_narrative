@@ -21,31 +21,30 @@ export default function CalendlyEmbed({
 
     if (!url) return null;
 
-    // Clean up URL and build query params
-    // Calendly expects URL parameters for colors and prefill details
-    const cleanUrl = url.split('?')[0];
-    const params = new URLSearchParams();
+    // embed_domain needs the live hostname, and Calendly only posts booking
+    // events back to the parent when embed_domain/embed_type are present.
+    // This component only mounts client-side, after the form is submitted.
+    let embedUrl: string | null = null;
+    if (typeof window !== 'undefined') {
+        const params = new URLSearchParams({
+            embed_domain: window.location.hostname,
+            embed_type: 'Inline',
+            background_color: 'f6f2fc',
+            text_color: '2a2342',
+            primary_color: 'e8721a',
+            hide_landing_page_details: '1',
+            hide_gdpr_banner: '1',
+        });
 
-    // Custom aesthetics to match the site's design palette
-    params.append('background_color', 'f6f2fc'); // pale lilac card background
-    params.append('text_color', '2a2342');       // matching ink text #2A2342
-    params.append('primary_color', 'e8721a');    // matching orange accent #E8721A
-    params.append('hide_landing_page_details', '1');
-    params.append('hide_gdpr_banner', '1');
+        if (prefillName) params.append('name', prefillName);
+        if (prefillEmail) params.append('email', prefillEmail);
 
-    if (prefillName) {
-        params.append('name', prefillName);
+        embedUrl = `${url.split('?')[0]}?${params.toString()}`;
     }
-    if (prefillEmail) {
-        params.append('email', prefillEmail);
-    }
-
-    const embedUrl = `${cleanUrl}?${params.toString()}`;
 
     return (
         <div className={`relative w-full overflow-hidden ${className}`} style={{ height }}>
-            {/* Loading Skeleton */}
-            {isLoading && (
+            {(isLoading || !embedUrl) && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F1EBFB] border border-[#2A2342]/12 animate-pulse">
                     <div className="w-12 h-12 rounded-full border-2 border-[#E8721A]/20 border-t-[#E8721A] animate-spin mb-4" />
                     <p className="font-sans text-[13px] text-[#6E6587]">
@@ -54,15 +53,17 @@ export default function CalendlyEmbed({
                 </div>
             )}
 
-            <iframe
-                src={embedUrl}
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                onLoad={() => setIsLoading(false)}
-                className={`transition-opacity duration-500 ease-in-out ${isLoading ? 'opacity-0' : 'opacity-100'}`}
-                title="Schedule a consultation call"
-            />
+            {embedUrl && (
+                <iframe
+                    src={embedUrl}
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    onLoad={() => setIsLoading(false)}
+                    className={`transition-opacity duration-500 ease-in-out ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                    title="Schedule a consultation call"
+                />
+            )}
         </div>
     );
 }

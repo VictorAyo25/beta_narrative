@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -28,7 +28,7 @@ const journeyOptions = [
     { value: 'founder', label: 'Founder / Entrepreneur' },
 ];
 
-const STEPS = ['Profile', 'Schedule', 'Confirm'] as const;
+const STEPS = ['Your details', 'Pick a time'] as const;
 
 const inputClasses =
     'w-full px-5 py-4 rounded-md bg-[#E6DBF6] border border-[#2A2342]/12 text-sm text-[#2A2342] placeholder-[#6E6587] focus:border-[#E8721A] focus:bg-white/60 focus:outline-none transition-colors duration-200';
@@ -40,11 +40,20 @@ export default function ContactSection() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [submittedData, setSubmittedData] = useState<ContactFormData | null>(null);
     const [step, setStep] = useState<1 | 2 | 3>(1);
+    const [booked, setBooked] = useState(false);
+    // Payload of the last successful send, so going back and resubmitting
+    // unchanged details doesn't email Favour a second copy.
+    const lastSent = useRef<string | null>(null);
 
     useEffect(() => {
         const handleCalendlyEvent = (e: MessageEvent) => {
-            if (e.data.event === 'calendly.event_scheduled') {
-                setStep(3);
+            // Anything on the page can postMessage, including strings and null.
+            const fromCalendly =
+                e.origin === 'https://calendly.com' || e.origin.endsWith('.calendly.com');
+            if (!fromCalendly || typeof e.data !== 'object' || e.data === null) return;
+
+            if ((e.data as { event?: string }).event === 'calendly.event_scheduled') {
+                setBooked(true);
                 trackEvent('booking_complete');
             }
         };
@@ -66,7 +75,6 @@ export default function ContactSection() {
         formState: { errors },
         watch,
         setValue,
-        reset,
     } = useForm<ContactFormData>({
         resolver: zodResolver(contactSchema),
     });
@@ -75,6 +83,14 @@ export default function ContactSection() {
     const calendlyUrl = contact.calendlyUrl || 'https://calendly.com/egbogunfavour/30min';
 
     const onSubmit = async (data: ContactFormData) => {
+        const payload = JSON.stringify(data);
+
+        // Returning from step 2 without editing anything: no need to resend.
+        if (payload === lastSent.current) {
+            setStep(calendlyUrl ? 2 : 3);
+            return;
+        }
+
         setIsSubmitting(true);
         setSubmitStatus('idle');
         try {
@@ -86,15 +102,9 @@ export default function ContactSection() {
 
             if (response.ok) {
                 setSubmittedData(data);
-                setSubmitStatus('success');
+                lastSent.current = payload;
                 trackEvent('form_submit', `journey:${data.journey}`);
-                if (calendlyUrl) {
-                    setStep(2);
-                } else {
-                    setStep(3);
-                    trackEvent('booking_complete');
-                }
-                reset();
+                setStep(calendlyUrl ? 2 : 3);
             } else {
                 setSubmitStatus('error');
             }
@@ -145,8 +155,9 @@ export default function ContactSection() {
                             <div className="flex items-center justify-between">
                                 {STEPS.map((label, i) => {
                                     const stepNum = i + 1;
-                                    const isDone = step > stepNum;
-                                    const isActive = step === stepNum;
+                                    const reached = booked ? 3 : step;
+                                    const isDone = reached > stepNum;
+                                    const isActive = reached === stepNum;
                                     return (
                                         <div key={label} className="flex items-center gap-3">
                                             <div
@@ -282,9 +293,21 @@ export default function ContactSection() {
                                 transition={{ duration: 0.25, ease: 'easeInOut' }}
                                 className="text-center"
                             >
-                                <h3 className="display text-2xl text-[#2A2342] mb-2">Select your call slot</h3>
+                                <h3 className="display text-2xl text-[#2A2342] mb-2">
+                                    {booked ? 'Your call is booked' : 'Add a discovery call'}
+                                </h3>
                                 <p className="font-sans text-sm text-[#6E6587] max-w-md mx-auto leading-relaxed mb-6">
-                                    Thanks <span className="font-semibold text-[#E8721A]">{submittedData?.fullName}</span>! Choose a time below to finalize your discovery session.
+                                    {booked ? (
+                                        <>
+                                            Your application is with Favour and your call is confirmed. To move it,
+                                            use the reschedule link in your calendar invitation.
+                                        </>
+                                    ) : (
+                                        <>
+                                            Thanks <span className="font-semibold text-[#E8721A]">{submittedData?.fullName.split(' ')[0]}</span>,
+                                            your application is in. Pick a time below to talk it through, or apply without a call.
+                                        </>
+                                    )}
                                 </p>
                                 <CalendlyEmbed
                                     url={calendlyUrl}
@@ -293,12 +316,24 @@ export default function ContactSection() {
                                     height="650px"
                                     className="rounded-lg border border-[#2A2342]/12"
                                 />
-                                <button
-                                    onClick={() => setStep(1)}
-                                    className="mt-6 font-sans text-[13px] text-[#6E6587] hover:text-[#E8721A] flex items-center justify-center gap-1 mx-auto transition-colors"
-                                >
-                                    ← Edit profile details
-                                </button>
+                                {!booked && (
+                                    <div className="mt-6 flex flex-col items-center gap-3">
+                                        <button
+                                            type="button"
+                                            onClick={() => setStep(3)}
+                                            className="font-sans text-[13.5px] font-medium text-[#2A2342] underline underline-offset-4 decoration-[#2A2342]/25 hover:text-[#E8721A] hover:decoration-[#E8721A]/40 transition-colors"
+                                        >
+                                            I&apos;ll just apply for now
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => setStep(1)}
+                                            className="font-sans text-[13px] text-[#6E6587] hover:text-[#E8721A] transition-colors"
+                                        >
+                                            Edit my details
+                                        </button>
+                                    </div>
+                                )}
                             </motion.div>
                         )}
 
@@ -313,13 +348,22 @@ export default function ContactSection() {
                                 <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-5">
                                     <CheckCircle size={26} className="text-green-500" />
                                 </div>
-                                <h3 className="display text-2xl text-[#2A2342] mb-3">Application confirmed</h3>
+                                <h3 className="display text-2xl text-[#2A2342] mb-3">Application received</h3>
                                 <p className="font-sans text-sm text-[#6E6587] max-w-md mx-auto leading-relaxed mb-6">
-                                    Thank you, <span className="font-semibold text-[#E8721A]">{submittedData?.fullName}</span>. Your application details are secure, and your discovery call is officially booked!
+                                    Thank you, <span className="font-semibold text-[#E8721A]">{submittedData?.fullName.split(' ')[0]}</span>. Your application is with Favour, and she will follow up at <span className="text-[#2A2342]">{submittedData?.email}</span>.
                                 </p>
-                                <p className="font-sans text-[13px] text-[#6E6587] max-w-xs mx-auto leading-relaxed border-t border-[#2A2342]/[0.08] pt-5">
-                                    We have sent a calendar invitation and confirmation details to <span className="text-[#2A2342]">{submittedData?.email}</span>.
-                                </p>
+                                {calendlyUrl && (
+                                    <p className="font-sans text-[13px] text-[#6E6587] max-w-xs mx-auto leading-relaxed border-t border-[#2A2342]/[0.08] pt-5">
+                                        Would a call help?{' '}
+                                        <button
+                                            type="button"
+                                            onClick={() => setStep(2)}
+                                            className="font-medium text-[#E8721A] underline underline-offset-4 decoration-[#E8721A]/40 hover:text-[#C05A0E] transition-colors"
+                                        >
+                                            Pick a time
+                                        </button>
+                                    </p>
+                                )}
                             </motion.div>
                         )}
                     </AnimatePresence>
