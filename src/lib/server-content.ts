@@ -3,9 +3,8 @@ import { defaultSiteContent } from '@/lib/default-content';
 import { SiteContent } from '@/types';
 
 /**
- * Fetches the published site content (or the draft when `isPreview` is true)
- * from Firestore via the Admin SDK. Falls back to bundled defaults if Firestore
- * is unavailable. Shared by every public layout variant (/, /v2, /v3).
+ * Published site content, or the draft when `isPreview` is true. Falls back to
+ * the bundled defaults if Firestore is unavailable. Shared by / and /alt.
  */
 export async function getServerSiteContent(isPreview: boolean): Promise<SiteContent> {
   try {

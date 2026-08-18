@@ -3,9 +3,9 @@
 import { useContent } from '@/context/ContentContext';
 import { EyeOff, MessageSquareDashed, TrendingDown, SearchX, LucideIcon } from 'lucide-react';
 import Eyebrow from './Eyebrow';
-import Reveal from './Reveal';
+import Reveal from '../Reveal';
 
-// Cycled, in case the CMS adds more than four pain points.
+// Cycled if the CMS holds more than four pain points.
 const ICONS: LucideIcon[] = [EyeOff, MessageSquareDashed, TrendingDown, SearchX];
 
 export default function SalonProblem() {

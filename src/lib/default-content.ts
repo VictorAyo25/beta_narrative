@@ -1,9 +1,4 @@
-/**
- * Default Site Content
- * 
- * This is the initial content that will be loaded into Firestore
- * when the site is first set up. It's based on the original landing page.
- */
+/** Seed content for Firestore, and the fallback when Firestore is unreachable. */
 
 import { SiteContent } from '@/types';
 
@@ -13,8 +8,8 @@ export const defaultSiteContent: Omit<SiteContent, 'id' | 'updatedAt'> = {
         title: 'Your expertise is',
         titleEmphasis: 'undeniable.',
         titleHighlight: "Your visibility shouldn't lag behind.",
-        subtitle: 'Built for leaders ready to stop blending in and start being sought after — consistently, strategically, and on their own terms.',
-        ctaText: 'Build My Brand →',
+        subtitle: 'Built for leaders ready to stop blending in and start being sought after: consistently, strategically, and on their own terms.',
+        ctaText: 'Build My Brand',
     },
     pain: {
         sectionLabel: 'The Problem',
@@ -22,10 +17,10 @@ export const defaultSiteContent: Omit<SiteContent, 'id' | 'updatedAt'> = {
         titleEmphasis: "The internet doesn't know it.",
         lead: 'The leaders who get called to speak, consult, and serve on boards aren\'t always the most qualified. They\'re the most visible.',
         items: [
-            'You worry about sounding like every other executive — generic, forgettable, corporate.',
+            'You worry about sounding like every other executive: generic, forgettable, corporate.',
             "You post inconsistently, if at all, because you're unsure what to say or how to frame it.",
             "Your visibility doesn't reflect the weight of your experience and the value you carry.",
-            "You're ready for consultancy and speaking gigs — but the right people can't find you.",
+            "You're ready for consultancy and speaking gigs, but the right people can't find you.",
         ],
     },
     value: {
@@ -60,19 +55,19 @@ export const defaultSiteContent: Omit<SiteContent, 'id' | 'updatedAt'> = {
         results: [
             {
                 stat: '5× Reach',
-                description: 'A senior leader\'s LinkedIn reach grew from 2,000 to 10,000+ impressions per post within 90 days — attracting inbound opportunities from decision-makers and industry peers.',
+                description: 'A senior leader\'s LinkedIn reach grew from 2,000 to 10,000+ impressions per post within 90 days, attracting inbound opportunities from decision-makers and industry peers.',
             },
             {
                 stat: '+20% Engagement',
-                description: 'Ghost-written articles and op-eds drove a 20% LinkedIn engagement lift — turning followers into conversations that convert.',
+                description: 'Ghost-written articles and op-eds drove a 20% LinkedIn engagement lift, turning followers into conversations that convert.',
             },
             {
                 stat: 'BusinessDay',
-                description: 'Clients featured in national publications, positioning them as credible voices in their industries — not just practitioners.',
+                description: 'Clients featured in national publications, positioning them as credible voices in their industries, not just practitioners.',
             },
             {
                 stat: 'TV Features',
-                description: 'Visibility strategy has placed executives in broadcast conversations — widening reach far beyond LinkedIn.',
+                description: 'Visibility strategy has placed executives in broadcast conversations, widening reach far beyond LinkedIn.',
             },
         ],
     },

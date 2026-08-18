@@ -3,12 +3,11 @@
 import { useContent } from '@/context/ContentContext';
 import { motion } from 'framer-motion';
 import Eyebrow from './Eyebrow';
-import Reveal from './Reveal';
+import Reveal from '../Reveal';
 
-// Bento placement + tinting recipes, applied by tile index for visual rhythm.
-// Columns step 1 (mobile) -> 2 (tablet) -> 3 (desktop); stats wrap rather than clip.
+// Bento placement and tinting, applied by tile index.
 const TILE_STYLES = [
-    // 0 — feature: full-width banner on tablet, big 2×2 block on desktop
+    // 0 — feature tile
     {
         span: 'sm:col-span-2 lg:row-span-2',
         wrap: 'bg-[#6B3FC0] border-[#6B3FC0]',
@@ -16,7 +15,7 @@ const TILE_STYLES = [
         desc: 'text-white/85',
         feature: true,
     },
-    // 1 — tall on desktop, standard card on tablet
+    // 1 — tall on desktop
     {
         span: 'lg:row-span-2',
         wrap: 'bg-[#F1EBFB] border-[#2A2342]/10',
@@ -24,7 +23,7 @@ const TILE_STYLES = [
         desc: 'text-[#4A4163]',
         feature: false,
     },
-    // 2 — accent: subtle orange
+    // 2 — orange accent
     {
         span: '',
         wrap: 'bg-[#F5943A]/12 border-[#E8721A]/25',
@@ -42,7 +41,7 @@ const TILE_STYLES = [
     },
 ] as const;
 
-// Fallback styling for any tiles beyond the curated four.
+// Any tile past the curated four.
 const EXTRA_STYLE = {
     span: '',
     wrap: 'bg-[#F1EBFB] border-[#2A2342]/10',

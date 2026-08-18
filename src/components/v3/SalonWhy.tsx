@@ -4,12 +4,10 @@ import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
 import { resolveCredentials } from '@/lib/credentials';
 import Eyebrow from './Eyebrow';
-import Reveal from './Reveal';
+import Reveal from '../Reveal';
 import LinkedInIcon from './LinkedInIcon';
 
-// Where each credential chip floats relative to the portrait frame. Offsets stay
-// small on mobile (chips hug the frame edges, never leaving the viewport) and
-// open up on large screens. Same arrangement at every size.
+// Credential chip offsets around the portrait frame, per breakpoint.
 const CHIP_POSITION = [
     '-left-2 top-6 text-left sm:-left-4 lg:-left-7 lg:top-9',
     '-right-2 top-[32%] text-right sm:-right-4 lg:-right-9 lg:top-1/3',
@@ -27,7 +25,6 @@ export default function SalonWhy() {
         <section id="why" className="relative px-5 sm:px-8 py-24 sm:py-32">
             <div className="mx-auto max-w-[1100px]">
                 <div className="grid grid-cols-1 items-center gap-y-16 gap-x-12 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1fr)] lg:gap-x-20">
-                    {/* Portrait (LinkedIn link) with credential chips floating around it */}
                     <Reveal>
                         <div className="relative mx-auto w-full max-w-[420px]">
                             <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[2.25rem] bg-gradient-to-b from-[#C4A8E8]/35 to-transparent blur-2xl" />
@@ -65,7 +62,6 @@ export default function SalonWhy() {
                                 </div>
                             </a>
 
-                            {/* Floating credential chips */}
                             {chips.map((c, i) => (
                                 <div
                                     key={c.label}
@@ -78,7 +74,6 @@ export default function SalonWhy() {
                         </div>
                     </Reveal>
 
-                    {/* Copy */}
                     <div>
                         <Reveal>
                             <Eyebrow>{value.sectionLabel}</Eyebrow>

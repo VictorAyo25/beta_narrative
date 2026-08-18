@@ -1,22 +1,21 @@
 @import "tailwindcss";
 
 /* =========================================================================
-   BETA NARRATIVE — Swiss Grotesque Design System
-   Light paper canvas · structural grid · mono labels · solid orange blocks
+   BETA NARRATIVE
+   Lilac paper canvas, aubergine ink, orange accent. Two public layouts share
+   these tokens: the Salon (Fraunces) at / and the Press (Newsreader) at /alt.
    ========================================================================= */
 
 :root {
   /* Canvas — lilac */
   --paper: #E1D3F2;           /* primary background — soft lilac */
   --paper-alt: #E9DFF8;       /* alternating band — lighter lilac */
-  --paper-tint: #D5C4EC;      /* deeper lilac */
   --surface: #F1EBFB;         /* cards / panels — pale lilac (not white) */
 
   /* Ink — deep aubergine, softer than near-black */
   --ink: #2A2342;             /* headings / primary */
   --ink-body: #4A4163;        /* body copy */
   --ink-muted: #6E6588;       /* secondary */
-  --ink-faint: #6E6587;       /* tertiary / captions (AA on lilac) */
 
   /* Brand */
   --violet: #6B3FC0;
@@ -26,22 +25,19 @@
   --orange-light: #F5943A;
   --orange-dark: #C05A0E;
 
-  /* Hairlines — soft */
+  /* Hairlines */
   --line: rgba(42, 35, 66, 0.12);
-  --line-soft: rgba(42, 35, 66, 0.07);
   --line-strong: rgba(42, 35, 66, 0.18);
 
-  /* Legacy aliases */
-  --purple: #6B3FC0;
-  --ink-soft: #4A4163;
-  --warm-white: #2A2342;
-  --muted: #6E6588;
+  /* Elevation — two steps, nothing else */
+  --shadow-card: 0 18px 40px -32px rgba(42, 35, 66, 0.55);
+  --shadow-raised: 0 28px 62px -34px rgba(42, 35, 66, 0.5);
 
   /* Type */
   --font-display: var(--font-grotesk, 'Space Grotesk', sans-serif);
   --font-mono: var(--font-space-mono, 'Space Mono', monospace);
   --font-body: var(--font-dm-sans, 'DM Sans', sans-serif);
-  /* Back-compat: anything still using .font-serif gets the grotesque display */
+  /* .font-serif is admin-only and resolves to the grotesque display */
   --font-serif: var(--font-grotesk, 'Space Grotesk', sans-serif);
 }
 
@@ -72,24 +68,32 @@ body {
   font-family: var(--font-body), sans-serif;
 }
 
-/* keep old class working — maps to the grotesque display */
+/* Admin headings */
 .font-serif {
   font-family: var(--font-display), sans-serif;
 }
 
-/* Fraunces editorial serif — used by the Salon (/v3) layout */
+/* Display serifs, one per public layout */
 .font-fraunces {
   font-family: var(--font-fraunces), Georgia, serif;
 }
 
+.font-newsreader {
+  font-family: var(--font-newsreader), Georgia, serif;
+}
+
 /* =========================================================================
-   Salon type scope
-   The public site styles type through the core variables (.display,
-   .font-display, .font-sans, .kicker); .theme-salon remaps them to the Salon
-   voice (Fraunces display + DM Sans body) on the page root.
+   Layout type scopes
+   Shared components (.display, .font-display, .font-sans) read the core
+   variables; each layout root remaps them to its own voice.
    ========================================================================= */
 .theme-salon {
   --font-display: var(--font-fraunces, Georgia, serif);
+  --font-body: var(--font-dm-sans, 'DM Sans', sans-serif);
+}
+
+.theme-press {
+  --font-display: var(--font-newsreader, Georgia, serif);
   --font-body: var(--font-dm-sans, 'DM Sans', sans-serif);
 }
 
@@ -99,15 +103,6 @@ body {
   font-weight: 400;
   letter-spacing: -0.015em;
   line-height: 1.0;
-}
-
-/* Mono kicker / label */
-.kicker {
-  font-family: var(--font-mono), monospace;
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
 }
 
 ::selection {

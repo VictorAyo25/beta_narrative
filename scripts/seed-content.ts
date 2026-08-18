@@ -20,8 +20,8 @@ const defaultSiteContent = {
         title: 'Your expertise is',
         titleEmphasis: 'undeniable.',
         titleHighlight: "Your visibility shouldn't lag behind.",
-        subtitle: 'Built for leaders ready to stop blending in and start being sought after — consistently, strategically, and on their own terms.',
-        ctaText: 'Build My Brand →',
+        subtitle: 'Built for leaders ready to stop blending in and start being sought after: consistently, strategically, and on their own terms.',
+        ctaText: 'Build My Brand',
     },
     pain: {
         sectionLabel: 'The Problem',
@@ -29,17 +29,17 @@ const defaultSiteContent = {
         titleEmphasis: "The internet doesn't know it.",
         lead: 'The leaders who get called to speak, consult, and serve on boards aren\'t always the most qualified. They\'re the most visible.',
         items: [
-            'You worry about sounding like every other executive — generic, forgettable, corporate.',
+            'You worry about sounding like every other executive: generic, forgettable, corporate.',
             "You post inconsistently, if at all, because you're unsure what to say or how to frame it.",
             "Your visibility doesn't reflect the weight of your experience and the value you carry.",
-            "You're ready for consultancy and speaking gigs — but the right people can't find you.",
+            "You're ready for consultancy and speaking gigs, but the right people can't find you.",
         ],
     },
     value: {
         sectionLabel: 'Why Beta Narrative',
         title: 'Strategic visibility,',
         titleEmphasis: 'not just content.',
-        body: 'With a foundation in public relations and strategic communication, Beta Narrative positions leaders for the opportunities their calibre deserves. We work with C-suite executives at multinationals, crafting narratives tailored to their target audience — and building the architecture around it. Your audience, your pillars, your voice, your legacy.',
+        body: 'With a foundation in public relations and strategic communication, Beta Narrative positions leaders for the opportunities their calibre deserves. We work with C-suite executives at multinationals, crafting narratives tailored to their target audience, and building the architecture around it. Your audience, your pillars, your voice, your legacy.',
         credentials: [
             {
                 number: '4+',
@@ -63,19 +63,19 @@ const defaultSiteContent = {
         results: [
             {
                 stat: '5× Reach',
-                description: 'A senior leader grew their LinkedIn reach 5× within 90 days — attracting inbound from decision-makers and industry peers.',
+                description: 'A senior leader grew their LinkedIn reach 5× within 90 days, attracting inbound from decision-makers and industry peers.',
             },
             {
                 stat: '+20% Engagement',
-                description: 'Ghost-written articles and op-eds drove a 20% LinkedIn engagement lift — turning followers into conversations that convert.',
+                description: 'Ghost-written articles and op-eds drove a 20% LinkedIn engagement lift, turning followers into conversations that convert.',
             },
             {
                 stat: 'BusinessDay',
-                description: 'Clients featured in national publications, positioning them as credible voices in their industries — not just practitioners.',
+                description: 'Clients featured in national publications, positioning them as credible voices in their industries, not just practitioners.',
             },
             {
                 stat: 'TV Features',
-                description: 'Visibility strategy has placed executives in broadcast conversations — widening reach far beyond LinkedIn.',
+                description: 'Visibility strategy has placed executives in broadcast conversations, widening reach far beyond LinkedIn.',
             },
         ],
     },
@@ -109,7 +109,7 @@ const defaultSiteContent = {
             '3 professionally crafted articles (BusinessDay-ready)',
             '12 strategic LinkedIn posts shaped around your voice',
             'Branded graphics for your content',
-            'Executive bio — compelling, clear, conversion-ready',
+            'Executive bio: compelling, clear, conversion-ready',
             'Brand voice and tone guideline',
             'Monthly strategy sessions',
             'Narrative pillars and content structure strategy',

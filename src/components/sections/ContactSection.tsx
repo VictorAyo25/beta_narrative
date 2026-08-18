@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { useContent } from '@/context/ContentContext';
 import SectionLabel from '../SectionLabel';
 import { ContactFormData } from '@/types';
-import { CheckCircle, AlertCircle, ChevronDown, ChevronRight, Check } from 'lucide-react';
+import { CheckCircle, AlertCircle, ChevronDown, Check } from 'lucide-react';
 import CalendlyEmbed from '../CalendlyEmbed';
 import { trackEvent } from '@/lib/analytics';
 
@@ -255,10 +255,7 @@ export default function ContactSection() {
                                                 Submitting...
                                             </span>
                                         ) : (
-                                            <span className="flex items-center gap-2">
-                                                <span>Continue to Booking</span>
-                                                <ChevronRight size={15} />
-                                            </span>
+                                            <span>Continue to Booking</span>
                                         )}
                                     </button>
 

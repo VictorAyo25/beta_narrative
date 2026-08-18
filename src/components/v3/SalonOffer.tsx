@@ -2,15 +2,14 @@
 
 import { useContent } from '@/context/ContentContext';
 import { motion } from 'framer-motion';
+import { EASE } from '@/lib/motion';
 import { Check, Star } from 'lucide-react';
 import { OfferContent } from '@/types';
 import Eyebrow from './Eyebrow';
-import Reveal from './Reveal';
+import Reveal from '../Reveal';
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
+// The CMS stores package names in all caps.
 function toTitle(name: string): string {
-    // CMS stores package names ALL-CAPS; the Salon voice avoids shouting.
     return name
         .toLowerCase()
         .replace(/\b\w/g, (c) => c.toUpperCase());
@@ -90,8 +89,7 @@ export default function SalonOffer() {
     const { content } = useContent();
     const { offer } = content;
 
-    // Lead with the Executive (premium) package, then the rest (e.g. Rising
-    // Professionals) — independent of the order the CMS returns.
+    // Lead with the Executive package regardless of the order the CMS returns.
     const orderedOffers = [...offer.offers].sort(
         (a, b) => Number(/executive/i.test(b.packageName)) - Number(/executive/i.test(a.packageName)),
     );

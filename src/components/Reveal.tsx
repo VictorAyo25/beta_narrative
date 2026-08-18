@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
-
-const EASE = [0.16, 1, 0.3, 1] as const;
+import { EASE } from '@/lib/motion';
 
 interface RevealProps {
     children: ReactNode;
@@ -12,7 +11,7 @@ interface RevealProps {
     className?: string;
 }
 
-/** Tasteful, once-only scroll reveal used across the Salon layout. */
+/** Once-only scroll reveal. */
 export default function Reveal({ children, delay = 0, y = 22, className }: RevealProps) {
     return (
         <motion.div

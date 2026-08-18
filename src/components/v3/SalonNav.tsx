@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { EASE } from '@/lib/motion';
 
 const links = [
     { href: '#problem', label: 'The Problem' },
@@ -22,7 +23,6 @@ export default function SalonNav() {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
-    // Lock body scroll while the mobile menu is open.
     useEffect(() => {
         if (open) {
             const original = document.body.style.overflow;
@@ -38,7 +38,7 @@ export default function SalonNav() {
             <motion.nav
                 initial={{ opacity: 0, y: -16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.6, ease: EASE }}
                 className={`w-full max-w-3xl rounded-full border border-[#2A2342]/12 bg-[#F1EBFB]/80 backdrop-blur-xl transition-shadow duration-300 ${
                     scrolled
                         ? 'shadow-[0_18px_50px_-22px_rgba(42,35,66,0.45)]'
@@ -91,7 +91,7 @@ export default function SalonNav() {
                         initial={{ opacity: 0, y: -12 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -12 }}
-                        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 0.25, ease: EASE }}
                         className="md:hidden absolute top-[calc(76px_+_env(safe-area-inset-top))] inset-x-4 rounded-3xl border border-[#2A2342]/12 bg-[#F1EBFB]/95 backdrop-blur-xl shadow-[0_24px_60px_-24px_rgba(42,35,66,0.5)] p-3"
                     >
                         <nav className="flex flex-col">
