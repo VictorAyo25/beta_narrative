@@ -64,7 +64,7 @@ favour_website/
 
 - Node.js 18+ and npm
 - A Firebase project (https://console.firebase.google.com)
-- A Resend account (https://resend.com)
+- A Gmail account to send contact-form notifications from
 - A Google Cloud project with Sheets API enabled
 
 ### 2. Installation
@@ -88,12 +88,36 @@ cp .env.example .env.local
 7. Go to Project Settings > Service Accounts > Generate new private key
 8. Copy the service account values to `.env.local`
 
-### 4. Resend Setup
+### 4. Contact Email Setup
 
-1. Sign up at [Resend](https://resend.com)
-2. Create an API key
-3. Add the API key to `.env.local` as `RESEND_API_KEY`
-4. Set `CONTACT_EMAIL_TO` to your email address
+Application notifications are sent over SMTP with Nodemailer. They go out **from
+Favour's own Gmail account**, so an applicant reading the notification sees her
+address rather than a developer's.
+
+1. On `egbogunfavour@gmail.com`, turn on **2-Step Verification**
+   (Google Account > Security). App Passwords do not exist without it.
+2. Go to Google Account > Security > **App passwords**, create one named
+   `Beta Narrative site`, and copy the 16-character code.
+3. Set the values below. `GMAIL_SMTP_USER` doubles as the From address, so no
+   `MAIL_FROM_ADDRESS` is needed:
+
+   ```env
+   GMAIL_SMTP_USER=egbogunfavour@gmail.com
+   GMAIL_SMTP_PASSWORD=the_16_character_app_password
+   CONTACT_EMAIL_TO=egbogunfavour@gmail.com, second_inbox@example.com
+   MAIL_FROM_NAME=Beta Narrative
+   ```
+
+`CONTACT_EMAIL_TO` is a comma-separated list of everyone who should receive
+applications. `replyTo` is set to the applicant, so replying goes to them.
+
+If the App Password is ever revoked or regenerated, the form keeps returning
+success while notifications stop — the send happens after the response. Check
+the Vercel function logs if applications go quiet.
+
+**Using a different relay** (Brevo, Resend, Mailjet) instead of Gmail: set
+`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER` and `SMTP_PASSWORD`, plus
+`MAIL_FROM_ADDRESS` for an address that relay has verified. No code change.
 
 ### 5. Google Sheets Setup
 
@@ -124,9 +148,11 @@ FIREBASE_PROJECT_ID=your_project_id
 FIREBASE_CLIENT_EMAIL=your_service_account_email
 FIREBASE_PRIVATE_KEY="your_private_key"
 
-# Resend
-RESEND_API_KEY=your_resend_api_key
-CONTACT_EMAIL_TO=your_email@example.com
+# Contact email (Gmail SMTP)
+GMAIL_SMTP_USER=egbogunfavour@gmail.com
+GMAIL_SMTP_PASSWORD=gmail_app_password
+CONTACT_EMAIL_TO=egbogunfavour@gmail.com, second_inbox@example.com
+MAIL_FROM_NAME=Beta Narrative
 
 # Google Sheets
 GOOGLE_SHEETS_PRIVATE_KEY="your_google_private_key"

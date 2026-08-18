@@ -9,15 +9,21 @@
 import { NextRequest, NextResponse, after } from 'next/server';
 import nodemailer from 'nodemailer';
 
-// Initialize Gmail SMTP transporter
+// SMTP credentials. Defaults to Gmail; set SMTP_* to point at any other relay
+// (Brevo, Resend, Mailjet) without touching this file.
+const SMTP_USER = process.env.SMTP_USER || process.env.GMAIL_SMTP_USER;
+const SMTP_PASSWORD = process.env.SMTP_PASSWORD || process.env.GMAIL_SMTP_PASSWORD;
+
 async function getEmailTransporter() {
+    const port = Number(process.env.SMTP_PORT || 587);
+
     return nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false, // true for 465, false for other ports
+        host: process.env.SMTP_HOST || 'smtp.gmail.com',
+        port,
+        secure: port === 465,
         auth: {
-            user: process.env.GMAIL_SMTP_USER,
-            pass: process.env.GMAIL_SMTP_PASSWORD,
+            user: SMTP_USER,
+            pass: SMTP_PASSWORD,
         },
         // Fail fast instead of hanging if SMTP is unreachable/slow.
         connectionTimeout: 7000, // time to establish the TCP connection
@@ -68,6 +74,15 @@ async function logToGoogleSheets(data: {
     }
 }
 
+// Submitted values land in an HTML email, so escape them.
+function escapeHtml(value: string): string {
+    return value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
 // Send email notification via Gmail SMTP
 async function sendEmailNotification(data: {
     fullName: string;
@@ -108,24 +123,24 @@ async function sendEmailNotification(data: {
         <div class="content">
           <div class="field">
             <div class="label">Full Name</div>
-            <div class="value">${data.fullName}</div>
+            <div class="value">${escapeHtml(data.fullName)}</div>
           </div>
           <div class="field">
             <div class="label">Email</div>
-            <div class="value">${data.email}</div>
+            <div class="value">${escapeHtml(data.email)}</div>
           </div>
           <div class="field">
             <div class="label">Current Role</div>
-            <div class="value">${data.role}</div>
+            <div class="value">${escapeHtml(data.role)}</div>
           </div>
           <div class="field">
             <div class="label">Leadership Journey</div>
-            <div class="value">${journeyMap[data.journey] || data.journey}</div>
+            <div class="value">${escapeHtml(journeyMap[data.journey] || data.journey)}</div>
           </div>
           ${data.challenge ? `
           <div class="field">
             <div class="label">Visibility Challenge</div>
-            <div class="value">${data.challenge}</div>
+            <div class="value">${escapeHtml(data.challenge)}</div>
           </div>
           ` : ''}
         </div>
@@ -137,18 +152,25 @@ async function sendEmailNotification(data: {
     </html>
   `;
 
-    // Build recipient list - always include primary, plus additional recipients
-    const primaryRecipient = process.env.CONTACT_EMAIL_TO || process.env.GMAIL_SMTP_USER || '';
-    const additionalRecipients = ['egbogunfavour@gmail.com'];
+    // CONTACT_EMAIL_TO takes a comma-separated list; falls back to the SMTP account.
+    const recipients = (process.env.CONTACT_EMAIL_TO || SMTP_USER || '')
+        .split(',')
+        .map((address) => address.trim())
+        .filter(Boolean);
 
-    const allRecipients = [
-        primaryRecipient,
-        ...additionalRecipients
-    ].filter(Boolean).join(', ');
+    if (recipients.length === 0) {
+        throw new Error('No contact recipients configured (set CONTACT_EMAIL_TO).');
+    }
+
+    // A relay only honours a From address it has verified. Gmail silently
+    // rewrites anything else back to the authenticated account.
+    const fromAddress = process.env.MAIL_FROM_ADDRESS || SMTP_USER;
+    const fromName = process.env.MAIL_FROM_NAME || 'Beta Narrative';
 
     await transporter.sendMail({
-        from: `"Beta Narrative" <${process.env.GMAIL_SMTP_USER}>`,
-        to: allRecipients,
+        from: `"${fromName}" <${fromAddress}>`,
+        sender: SMTP_USER,
+        to: recipients.join(', '),
         subject: `New Application: ${data.fullName} - ${data.role}`,
         html: htmlContent,
         replyTo: data.email,
